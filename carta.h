@@ -14,6 +14,7 @@ public:
 	void setNumero(int N);
 	void setPalo(int P);
 	void imprimeCarta();
+	friend class jugador;
 };
 
 

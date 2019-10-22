@@ -7,10 +7,10 @@ public:
 
 	deck();// class constructor
 	~deck();// class destructor
-	void barajarInicial(carta c*); //aleatorización inicial del mazo
-	void barajar();//aleatorización del mazo cuando se empieza cada mano, intentando simular una aleatorización lo más real posible
-	void riffle();
-	void box();
-	void cut();
+	carta* barajarInicial(carta* c); //aleatorización inicial del mazo
+	carta* barajar(carta* c);//aleatorización del mazo cuando se empieza cada mano, intentando simular una aleatorización lo más real posible
+	carta* riffle(carta* c);
+	carta* box(carta* c);
+	carta* cut(carta* c);
 };
 

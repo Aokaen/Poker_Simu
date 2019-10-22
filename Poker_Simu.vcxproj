@@ -153,11 +153,13 @@
   <ItemGroup>
     <ClCompile Include="carta.cpp" />
     <ClCompile Include="deck.cpp" />
+    <ClCompile Include="jugador.cpp" />
     <ClCompile Include="Poker_Simu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="carta.h" />
     <ClInclude Include="deck.h" />
+    <ClInclude Include="jugador.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
