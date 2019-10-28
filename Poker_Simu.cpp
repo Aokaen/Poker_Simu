@@ -9,7 +9,11 @@
 using namespace std;
 int main()
 {
-	deck mazo;
 	
 }
 
+void iniciarPartida()
+{
+
+
+}

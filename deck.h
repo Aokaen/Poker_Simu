@@ -6,8 +6,10 @@ class deck :
 public:
 
 	deck();// class constructor
-	~deck();// class destructor
-	carta* barajar(carta* c); //aleatorización mazo
+	//deck(carta* c);// class conversor
+	~deck();
+	// class destructor
+	void barajar(carta* m); //aleatorización mazo
 
 };
 

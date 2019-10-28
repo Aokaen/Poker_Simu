@@ -16,7 +16,7 @@ void jugador::setMano(carta c1, carta c2)
 	mano[1] = c2;
 }
 
-void jugador::setDinero(int d)
+void jugador::setDinero(double d)
 {
 	dinero = d;
 }
@@ -35,7 +35,7 @@ carta* jugador::getMano()
 	return mano;
 }
 
-int jugador::getDinero()
+double jugador::getDinero()
 {
 	return dinero;
 }
@@ -43,4 +43,15 @@ int jugador::getDinero()
 double jugador::getValor()
 {
 	return valor_mano;
+}
+
+void jugador::setApuesta(double ap)
+{
+	apuesta = ap;
+	setDinero(dinero - ap);
+}
+
+double jugador::getApuesta()
+{
+	return apuesta;
 }
