@@ -1,0 +1,3 @@
+﻿  Mesa.cpp
+C:\Users\agmaestre\Downloads\Poker_Simu-master\Poker_Simu-master\Mesa.cpp(71,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+  Poker_Simu.vcxproj -> C:\Users\agmaestre\Downloads\Poker_Simu-master\Poker_Simu-master\Debug\Poker_Simu.exe
