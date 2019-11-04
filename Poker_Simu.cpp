@@ -247,6 +247,8 @@ double calcularJugada(carta* c) {
 	int num_aux[3] = { 1,1,1 }, palo_aux[3] = { 1,1,1 };
 	int n_rep = 0, p_rep = 0;
 	int k = 0;
+	bool escalera = false, color = false, segunda_pareja = false, trio = false, pareja = false, poker = false, tercera_pareja = false, segundo_trio = false, escalera_color=false, escalera_real = false;
+	
 	for(int i=0; i<5; i++)
 	{ 
 		int j = i + 1;
@@ -289,8 +291,116 @@ double calcularJugada(carta* c) {
 		}
 
 	}
+	k = 0;
+	do {
+	if(num_aux[k]==4)
+	{
+		poker = true;
+
+	}
+	else if (num_aux[k] == 3)
+	{
+		if (trio==true)
+		{
+			segundo_trio = true;
+		}
+		else
+		{
+			trio = true;
+		}
+	}
+	else if (num_aux[k] == 2)
+	{
+		if (pareja == true)
+		{
+			if (segunda_pareja == true)
+			{
+				tercera_pareja = true;
+			}
+			else
+			{
+				segunda_pareja = true;
+			}
+		}
+		else
+		{
+			pareja = true;
+		}
+	}
+	} while (num_aux[k] != 1);
+
+	k = 0;
+	do {
+		if (palo_aux[k] == 5)
+		{
+			color = true;
+		}
+	} while (palo_aux[k] != 1);
+
+	bool escalera_imposible = false;
+	int conteo_n_ok = 0, conteo_imp = 0,conteo_palo=0;
+	for (int i = 0; i < 5; i++)
+	{
+		if (c[i].getNumero() == (c[i + 1].getNumero()-1))
+		{
+			conteo_n_ok++;
+			if(c[i].getPalo() == c[i + 1].getPalo())
+			{
+				conteo_palo++;
+			}
+			else
+			{
+				conteo_palo = 0;
+			}
+		}
+		else
+		{
+			conteo_n_ok = 0;
+			conteo_imp++;
+			if(conteo_imp==3)
+			{
+				escalera_imposible = true;
+			}
+		}
+		if (conteo_n_ok == 5)
+		{escalera = true;
+		if (conteo_palo == 5)
+		{
+			escalera_color = true;
+			if (c[i].getNumero() == 10)
+			{
+				escalera_real = true;
+			}
+		}
+
+	}
+		if (c[0].getNumero() == 13)
+		{
+			if (c[3].getNumero() == 5 && c[4].getNumero() == 4 && c[5].getNumero() == 3 && c[6].getNumero() == 2)
+			{
+				escalera = true;
+			}
+		}
+
+		if (escalera_real == true)
+			jugada = 9;
+		else if (escalera_color == true)
+		{
+			jugada = 8;
+			for (int i = 0; i < 2; i++)
+			{
+				if (palo_aux[i] == 5)
+				{
+					k = 0;
+					do
+					{
+
+					} while ();
+				}
+			}
+
+		}
+
 
 	return jugada;
 }
-
-void imprimeJugada(double jugada, int a) {}
