@@ -43,19 +43,26 @@ void carta::imprimeCarta()
 		Palo_escrito = "Diamantes";
 	else if (palo == 4)
 		Palo_escrito = "Corazones";
+
 	if (numero == 1)
 		Numero_escrito = "As";
 	else if (numero == 11)
 		Numero_escrito = "Jota";
 	else if (numero == 12)
-		Numero_escrito == "Reina";
+		Numero_escrito = "Reina";
 	else if (numero == 13)
-		Numero_escrito == "Rey";
+		Numero_escrito = "Rey";
 	else
 	{
-		Numero_escrito = "" + numero;
+		Numero_escrito = to_string(numero);
 	}
 
 
-	cout << "La carta es " << Numero_escrito << " de " << Palo_escrito<< "." << "/n";
+	cout << "La carta es " << Numero_escrito << " de " << Palo_escrito<< "." << endl;
 }
+
+void carta::operator<<(carta c)
+{
+	imprimeCarta();
+}
+

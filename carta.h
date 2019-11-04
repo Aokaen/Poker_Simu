@@ -4,8 +4,8 @@
 class carta
 {
 protected:
-	int palo;
-	int numero;
+	int palo=0;
+	int numero=0;
 public:
 	carta();// class constructor
 	~carta();// class destructor
@@ -14,7 +14,9 @@ public:
 	void setNumero(int N);
 	void setPalo(int P);
 	void imprimeCarta();
+	void operator <<(carta c);
 	friend class jugador;
+	
 };
 
 
