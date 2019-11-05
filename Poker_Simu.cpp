@@ -381,7 +381,7 @@ double calcularJugada(carta* c) {
 				escalera = true;
 			}
 		}
-
+		bool encontrada = false;
 		if (escalera_real == true)
 			jugada = 9;
 		else if (escalera_color == true)
@@ -394,13 +394,79 @@ double calcularJugada(carta* c) {
 					k = 0;
 					do
 					{
-
-					} while ();
+						if (c[k].getPalo() == palo_aux[i])
+						{
+							jugada = jugada + c[k].getNumero()*0.01;
+							encontrada = true;
+						}
+						else
+							k++;
+					} while (encontrada == false);
 				}
 			}
 
 		}
+		else if (poker == true)
+		{
+			jugada = 7;
 
+			for (int i = 0; i < 2; i++)
+			{
+				if (num_aux[i] == 4)
+				{
+					
+				jugada = jugada + numero_rep[i] * 0.01;
+
+				}
+			}
+		}
+		else if (trio == true && pareja == true) //full house
+		{
+			jugada = 6;
+			for (int i = 0; i < 2; i++)
+			{
+				if (num_aux[i] == 3)
+				{
+
+					jugada = jugada + numero_rep[i] * 0.01;
+
+				}
+
+				else if (num_aux[i] == 2 && segunda_pareja == false)
+				{
+					jugada = jugada + numero_rep[i] * 0.0001;
+				}
+				else if (num_aux[i] == 2 && segunda_pareja == true)
+				{
+
+				}
+			}
+
+		}
+		else if (color == true && escalera_color == false)
+		{
+			jugada = 5;
+		}
+		else if (escalera == true && color == false)
+		{
+			jugada = 4;
+		}
+		else if (trio == true && pareja == false)
+		{
+			jugada = 3;
+		}
+		else if (pareja == true && segunda_pareja == true && trio == false)
+		{
+			jugada = 2;
+		}
+		else if (pareja == true && segunda_pareja == false && trio == false)
+		{
+			jugada = 1;
+		}
+		else
+		{
+			jugada = 0;
+		}
 
 	return jugada;
 }
