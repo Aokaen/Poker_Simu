@@ -1,3 +1,19 @@
-﻿  Mesa.cpp
-C:\Users\agmaestre\Downloads\Poker_Simu-master\Poker_Simu-master\Mesa.cpp(71,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-  Poker_Simu.vcxproj -> C:\Users\agmaestre\Downloads\Poker_Simu-master\Poker_Simu-master\Debug\Poker_Simu.exe
+﻿  Poker_Simu.cpp
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(17,2): error C3861: 'iniciarPartida': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(18,2): error C3861: 'jugarPartida': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(47,3): error C3861: 'apuestaInicial': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(48,11): error C3861: 'apostar': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(51,4): error C3861: 'pasarApuesta': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(55,12): error C3861: 'ronda': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(59,22): error C3861: 'jugadorGana': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(68,10): error C3867: 'jugador::getDinero': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(68,73): error C3867: 'jugador::getDinero': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(101,6): error C3861: 'verApuesta': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(109,8): error C3861: 'subirApuesta': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(189,8): error C3861: 'jugada': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(190,8): error C3861: 'jugada': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(210,17): error C3861: 'ordenarMano': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(211,17): error C3861: 'calcularJugada': no se encontró el identificador
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(220,26): error C3867: 'carta::getNumero': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(220,26): error C2446: ==': no hay conversión de 'int' en 'int (__thiscall carta::* )(void)'
+C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Poker_Simu.cpp(220,25): message : No hay conversiones de valores integrales a valores de puntero a miembro

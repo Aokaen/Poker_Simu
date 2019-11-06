@@ -66,7 +66,7 @@ void jugarPartida(Mesa T, carta* c) {
 							continuar = T.finRonda(T.Jugadores[1], T.Jugadores[0]);
 						}
 						if (T.Jugadores[0].getDinero == 0 || T.Jugadores[1].getDinero == 0)
-							continuar == false;
+							continuar = false;
 				}
 		}
 		} while (pasar == false && T.indiceRonda < 4);
@@ -215,7 +215,7 @@ double jugada(Mesa T, jugador j) {
 
 carta* ordenarMano(carta* c) {
 	carta aux;
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		if (c[i].getNumero == 1)
 		{
@@ -223,10 +223,10 @@ carta* ordenarMano(carta* c) {
 		}
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		int j = i + 1;
-		for (j; j < 6; j++)
+		for (j; j < 7; j++)
 		{
 			if (c[i].getNumero() < c[j].getNumero())
 			{
@@ -249,10 +249,10 @@ double calcularJugada(carta* c) {
 	int k = 0;
 	bool escalera = false, color = false, segunda_pareja = false, trio = false, pareja = false, poker = false, tercera_pareja = false, segundo_trio = false, escalera_color=false, escalera_real = false;
 	
-	for(int i=0; i<5; i++)
+	for(int i=0; i<6; i++)
 	{ 
 		int j = i + 1;
-		for (j; j < 6; j++)
+		for (j; j < 7; j++)
 		{
 			if (c[i].getNumero() == c[j].getNumero())
 			{
@@ -339,12 +339,12 @@ double calcularJugada(carta* c) {
 
 	bool escalera_imposible = false;
 	int conteo_n_ok = 0, conteo_imp = 0,conteo_palo=0;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
-		if (c[i].getNumero() == (c[i + 1].getNumero()-1))
+		if (c[i].getNumero() == (c[i + 1].getNumero() - 1))
 		{
 			conteo_n_ok++;
-			if(c[i].getPalo() == c[i + 1].getPalo())
+			if (c[i].getPalo() == c[i + 1].getPalo())
 			{
 				conteo_palo++;
 			}
@@ -357,23 +357,24 @@ double calcularJugada(carta* c) {
 		{
 			conteo_n_ok = 0;
 			conteo_imp++;
-			if(conteo_imp==3)
+			if (conteo_imp == 3)
 			{
 				escalera_imposible = true;
 			}
 		}
 		if (conteo_n_ok == 5)
-		{escalera = true;
-		if (conteo_palo == 5)
 		{
-			escalera_color = true;
-			if (c[i].getNumero() == 10)
+			escalera = true;
+			if (conteo_palo == 5)
 			{
-				escalera_real = true;
+				escalera_color = true;
+				if (c[i].getNumero() == 10)
+				{
+					escalera_real = true;
+				}
 			}
-		}
 
-	}
+		}
 		if (c[0].getNumero() == 13)
 		{
 			if (c[3].getNumero() == 5 && c[4].getNumero() == 4 && c[5].getNumero() == 3 && c[6].getNumero() == 2)
@@ -381,13 +382,14 @@ double calcularJugada(carta* c) {
 				escalera = true;
 			}
 		}
+	}
 		bool encontrada = false;
 		if (escalera_real == true)
 			jugada = 9;
 		else if (escalera_color == true)
 		{
 			jugada = 8;
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				if (palo_aux[i] == 5)
 				{
@@ -410,7 +412,7 @@ double calcularJugada(carta* c) {
 		{
 			jugada = 7;
 
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				if (num_aux[i] == 4)
 				{
@@ -423,7 +425,7 @@ double calcularJugada(carta* c) {
 		else if (trio == true && pareja == true) //full house
 		{
 			jugada = 6;
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				if (num_aux[i] == 3)
 				{
@@ -438,7 +440,18 @@ double calcularJugada(carta* c) {
 				}
 				else if (num_aux[i] == 2 && segunda_pareja == true)
 				{
-
+					k = 0;
+					do {
+						if (num_aux[k] == 2 && k != i)
+						{
+							if (numero_rep[i] > numero_rep[k])
+							{
+								jugada = jugada + numero_rep[i] * 0.0001;
+							}
+						}
+						else
+							k++;
+					} while (k<3);
 				}
 			}
 
@@ -446,26 +459,113 @@ double calcularJugada(carta* c) {
 		else if (color == true && escalera_color == false)
 		{
 			jugada = 5;
+			k = 1;
+			for (int i = 0; i < 3; i++)
+			{
+				if (palo_aux[i] == 5)
+				{
+					for (int j = 0; i < 7; i++)
+					{
+						if (c[j].getPalo() == palo_rep[i])
+						{
+							jugada = jugada + c[j].getNumero() * (10 ^ -k);
+							k++;
+						}
+					}
+				}
+			}
 		}
 		else if (escalera == true && color == false)
 		{
 			jugada = 4;
+			encontrada = false;
+			k = 0;
+			do
+			{
+				if (c[k].getNumero() == (c[k + 1].getNumero() - 1) && c[k].getNumero() == (c[k + 2].getNumero() - 2))
+				{
+					jugada = jugada + c[k].getNumero()*.01;
+					encontrada = true;
+				}
+				else
+					k++;
+			} while (encontrada == false);
+
 		}
-		else if (trio == true && pareja == false)
+		else if (trio == true )
 		{
 			jugada = 3;
+
+			if (segundo_trio == true)
+			{
+				if (numero_rep[0] > numero_rep[1])
+				{
+					jugada = jugada + numero_rep[0]*0.01;
+				}
+				else
+				{
+					jugada = jugada + numero_rep[1]*0.01;
+				}
+			}
+			
 		}
-		else if (pareja == true && segunda_pareja == true && trio == false)
+		else if (pareja == true && segunda_pareja == true) // doble pareja
 		{
 			jugada = 2;
+
+			if (tercera_pareja == true)
+			{
+				int alta=0, baja=0;
+				if (numero_rep[0] > numero_rep[1])
+				{
+					alta = numero_rep[0];
+					baja = numero_rep[1];
+				}
+				else
+				{
+					alta = numero_rep[1];
+					baja = numero_rep[0];
+				}
+
+				if (numero_rep[2] > alta)
+				{
+					jugada = jugada + numero_rep[2] * 0.01 + alta*0.0001;
+				}
+				else
+				{
+					if(numero_rep[2]>baja)
+						jugada = jugada + alta * 0.01 + numero_rep[2] * 0.0001;
+					else
+						jugada = jugada + alta * 0.01 + baja * 0.0001;
+				}
+
+			}
+			else if (tercera_pareja == false)
+			{
+					if (numero_rep[0] > numero_rep[1])
+					{
+						jugada = jugada + numero_rep[0] * 0.01 + numero_rep[1]*0.0001;
+					}
+					else
+					{
+						jugada = jugada + numero_rep[1] * 0.01+ numero_rep[0] * 0.0001;
+					}
+			}
 		}
-		else if (pareja == true && segunda_pareja == false && trio == false)
+		else if (pareja == true && segunda_pareja == false)
 		{
 			jugada = 1;
+
+			jugada = jugada + numero_rep[0]*0.01;
 		}
 		else
 		{
 			jugada = 0;
+
+			for (int i = 0; i < 5; i++)
+			{
+				jugada = jugada + (c[i].getNumero() * 10 ^ -(i + 1));
+			}
 		}
 
 	return jugada;
