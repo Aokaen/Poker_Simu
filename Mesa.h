@@ -7,9 +7,8 @@ public:
 	carta* Tablero;
 	carta* Quemada;
 	int indiceMazo, indiceTablero, indiceQuemada, indiceRonda;
-	int numeroJugadores;
-	double apuesta;
-	jugador Jugadores[2];
+	float apuesta;
+	
 	char tablero_juego[11][26];
 
 	Mesa();
@@ -23,9 +22,11 @@ public:
 	void entregarApuesta(jugador j);
 	bool finRonda(jugador winner, jugador loser);
 	void creaTablero();
-	void modificaTablero();
-	void imprimirTablero();
+	void modificaTablero(jugador* j);
+	void imprimirTablero(jugador* j);
 	char conversorNumero(carta c);
 	char conversorPalo(carta c);
+
+	friend class jugador;
 };
 

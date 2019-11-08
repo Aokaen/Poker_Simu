@@ -16,6 +16,7 @@ public:
 	void imprimeCarta();
 	void operator <<(carta c);
 	friend class jugador;
+	friend class Mesa;
 	
 };
 

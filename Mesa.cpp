@@ -10,20 +10,21 @@ Mesa::Mesa()
 {
 	Tablero = new carta[5];
 	Quemada = new carta[3];
+
+
 	indiceMazo = 0, indiceTablero = 0, indiceQuemada = 0, indiceRonda = 0;
-	numeroJugadores = 2;
 	apuesta = 0;
+
 	
 }
 Mesa::~Mesa()
 {
-	delete[] Tablero;
-	delete[] Quemada;
+
 }
 void Mesa::repartirCartas(jugador J, carta* Mazo)
 {
 
-	J.setMano(Mazo[indiceMazo], Mazo[indiceMazo + numeroJugadores]);
+	J.setMano(Mazo[indiceMazo], Mazo[indiceMazo + 2]); // size of Jugadores cuando haya mas de 2 jugadores
 	indiceMazo++;
 }
 
@@ -66,7 +67,7 @@ void Mesa::recogerApuesta(jugador j)
 
 void Mesa::entregarApuesta(jugador j)
 {
-	double dinero_act = j.getDinero();
+	float dinero_act = j.getDinero();
 	j.setDinero(dinero_act + apuesta);
 	apuesta = 0;
 }
@@ -100,7 +101,7 @@ bool Mesa::finRonda(jugador winner, jugador loser)
 
 carta* Mesa::crearMazo()
 {
-	carta mazo[52];
+	static carta mazo[52];
 
 	srand(time(NULL));
 	int p = 1;
@@ -118,7 +119,10 @@ carta* Mesa::crearMazo()
 		}
 
 	}
+
 	return mazo;
+
+
 }
 
 carta* Mesa::barajar(carta* mazo)
@@ -137,7 +141,7 @@ carta* Mesa::barajar(carta* mazo)
 void Mesa::creaTablero()
 {
 	//mano del oponente
-	tablero_juego[1][8] = '['; 
+	tablero_juego[1][8] = '[';
 	tablero_juego[1][11] = ']';
 	tablero_juego[1][12] = '[';
 	tablero_juego[1][15] = ']';
@@ -168,10 +172,9 @@ void Mesa::creaTablero()
 	tablero_juego[6][13] = ']';
 	tablero_juego[6][14] = '[';
 	tablero_juego[6][17] = ']';
-
 }
 
-void Mesa::modificaTablero()
+void Mesa::modificaTablero(jugador* Jugadores)
 {
 	carta* mano_aux = new carta[2];
 	carta* mano_aux2 = new carta[2];
@@ -221,9 +224,9 @@ void Mesa::modificaTablero()
 
 }
 
-void Mesa::imprimirTablero()
+void Mesa::imprimirTablero(jugador* Jugadores)
 {
-	system("cls");
+//	system("cls");
 
 	for (int i = 0; i < 11; i++)
 	{
@@ -262,7 +265,7 @@ char Mesa::conversorNumero(carta c)
 	}
 	else
 	{
-		salida = (char)c.getNumero();
+		salida = c.getNumero()+'0';
 	}
 	return salida;
 }
