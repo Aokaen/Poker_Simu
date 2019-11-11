@@ -1,1 +1,7 @@
-﻿  Poker_Simu.vcxproj -> D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Debug\Poker_Simu.exe
+﻿  Mesa.cpp
+  Poker_Simu.cpp
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Mesa.cpp(115,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(162,7): warning C4101: 'jugador_gana': variable local sin referencia
+  Generando código...
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(188,7): warning C4101: 'entrada': variable local sin referencia
+  Poker_Simu.vcxproj -> D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Debug\Poker_Simu.exe

@@ -16,7 +16,7 @@ carta* ordenarMano(carta* c) {
 	{
 		if (c[i].getNumero() == 1)
 		{
-			c[i].setNumero(13);
+			c[i].setNumero(14);
 		}
 	}
 
@@ -160,17 +160,19 @@ bool apostar(Mesa T, jugador* Jugadores)
 bool ronda(Mesa T, carta* c, jugador* J) {
 	bool pasar = false;
 	bool jugador_gana;
-	if (T.indiceRonda != 4 && T.indiceRonda !=0)
+	int auxRonda = T.getIndiceRonda();
+	int auxTablero = T.getIndiceTablero();
+	if (auxRonda != 4 && auxRonda !=0)
 	{
 		T.cartaQuemada(c);
 		T.cartaTablero(c);
 	}
 	T.modificaTablero(J);
 	T.imprimirTablero(J);
-	if (T.indiceRonda != 4 && T.indiceRonda != 0)
+	if (auxRonda != 4 && auxRonda != 0)
 	{
 		carta aux;
-		aux = T.Tablero[T.indiceTablero-1];
+		aux = T.Tablero[auxTablero-1];
 		aux.imprimeCarta();
 	}
 
@@ -184,15 +186,18 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 	bool pasar = false;
 	bool jugador_gana;
 	char entrada;
+	
 	do {
-		T.indiceRonda = 0;
-		T.indiceMazo = 0;
+		T.resetIndiceRonda();
+		T.resetIndiceMazo();
 		T.barajar(c);
-
-		Jugadores[0].setMano(c[T.indiceMazo], c[T.indiceMazo + 2]);
-		T.indiceMazo++;
-		Jugadores[1].setMano(c[T.indiceMazo], c[T.indiceMazo + 2]);
-		T.indiceMazo++;
+		int auxRonda = T.getIndiceRonda(), auxMazo = T.getIndiceMazo();
+		Jugadores[0].setMano(c[auxMazo], c[auxMazo + 2]);
+		auxMazo++;
+		T.upIndiceMazo();
+		Jugadores[1].setMano(c[auxMazo], c[auxMazo + 2]);
+		auxMazo++;
+		T.upIndiceMazo();
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -208,11 +213,11 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 			if (pasar == true)
 				continuar = pasarApuesta(T,Jugadores);
 			else {
-
-				T.indiceRonda++;
+				T.upIndiceRonda();
+				auxRonda++;
 			
 				pasar = ronda(T, c, Jugadores);
-				if (pasar == false && T.indiceRonda == 4)
+				if (pasar == false && auxRonda == 4)
 				{
 					cout << "Show-down" << endl;
 					jugador_gana = jugadorGana(T,Jugadores);
@@ -233,7 +238,7 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 					continuar = pasarApuesta(T, Jugadores);
 				}
 			}
-		} while (pasar == false && T.indiceRonda < 4);
+		} while (pasar == false && auxRonda < 4);
 	} while (continuar == true);
 
 
