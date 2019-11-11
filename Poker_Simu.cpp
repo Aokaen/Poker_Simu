@@ -94,13 +94,15 @@ bool pasarApuesta(Mesa T, jugador* Jugadores) {
 }
 void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
 	Jugadores[0].setApuesta(qty);
-	Jugadores[1].setApuesta(qty + 50); //A CAMBIAR CON LA NUEVA IMPLEMENTACION
+	//codigo a cambiar con la nueva implementacion
+	Jugadores[1].setApuesta(qty);
 }
 void verApuesta(Mesa T, jugador* Jugadores) {
 	Jugadores[0].setApuesta(Jugadores[1].getApuesta());
 }
 bool apostar(Mesa T, jugador* Jugadores)
 {
+
 	char entrada, entrada_apuesta;
 	bool pasar=false;
 	float entrada_cantidad;
@@ -129,12 +131,14 @@ bool apostar(Mesa T, jugador* Jugadores)
 						cin >> entrada_cantidad;
 						cout << endl;
 						if (entrada_cantidad > Jugadores[1].getApuesta())
+						{
 							subirApuesta(entrada_cantidad, T, Jugadores);
+						}
 						else
 						{
 							cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
 						}
-					} while (entrada_cantidad <= Jugadores[1].getApuesta());
+					} while (Jugadores[0].getApuesta() != Jugadores[1].getApuesta());
 
 				}
 				else
@@ -150,7 +154,7 @@ bool apostar(Mesa T, jugador* Jugadores)
 			cout << "Error. Introduzca A si quiere Apostar o P si quiere Pasar" << endl;
 		}
 
-	} while (entrada != 'Y' && entrada != 'N');
+	} while (entrada != 'P' && entrada != 'A');
 	return pasar;
 }
 bool ronda(Mesa T, carta* c, jugador* J) {
@@ -163,6 +167,13 @@ bool ronda(Mesa T, carta* c, jugador* J) {
 	}
 	T.modificaTablero(J);
 	T.imprimirTablero(J);
+	if (T.indiceRonda != 4 && T.indiceRonda != 0)
+	{
+		carta aux;
+		aux = T.Tablero[T.indiceTablero-1];
+		aux.imprimeCarta();
+	}
+
 	pasar = apostar(T,J);
 
 	return pasar;
@@ -195,10 +206,11 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 		pasar = ronda(T, c, Jugadores);
 		do {
 			if (pasar == true)
-				pasarApuesta(T,Jugadores);
+				continuar = pasarApuesta(T,Jugadores);
 			else {
 
 				T.indiceRonda++;
+			
 				pasar = ronda(T, c, Jugadores);
 				if (pasar == false && T.indiceRonda == 4)
 				{
@@ -215,6 +227,10 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 					}
 					if (Jugadores[0].getDinero() == 0 || Jugadores[1].getDinero() == 0)
 						continuar = false;
+				}
+				else if (pasar == true)
+				{
+					continuar = pasarApuesta(T, Jugadores);
 				}
 			}
 		} while (pasar == false && T.indiceRonda < 4);

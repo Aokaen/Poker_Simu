@@ -29,7 +29,7 @@ void Mesa::repartirCartas(jugador J, carta* Mazo)
 }
 
 void Mesa::cartaTablero(carta* Mazo)
-{
+{	
 	if (indiceRonda == 1)
 	{
 		for (int i = 0; i < 3; i++)
@@ -41,6 +41,7 @@ void Mesa::cartaTablero(carta* Mazo)
 	}
 	else
 	{
+		indiceTablero = indiceRonda+1;
 		Tablero[indiceTablero] = Mazo[indiceMazo];
 		indiceMazo++;
 		indiceTablero++;
@@ -226,7 +227,7 @@ void Mesa::modificaTablero(jugador* Jugadores)
 
 void Mesa::imprimirTablero(jugador* Jugadores)
 {
-//	system("cls");
+	system("cls");
 
 	for (int i = 0; i < 11; i++)
 	{
@@ -235,6 +236,12 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 			cout << tablero_juego[i][j];
 		}
 		cout << endl;
+	}
+	if (indiceRonda != 0&& indiceRonda != 4)
+	{
+		float apuesta = Jugadores[1].getApuesta();
+		apuesta = apuesta + 50;
+		Jugadores[1].setApuesta(apuesta);
 	}
 	cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
 	cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
@@ -262,6 +269,10 @@ char Mesa::conversorNumero(carta c)
 	else if (c.getNumero() == 13)
 	{
 		salida = 'K';
+	}
+	else if (c.getNumero() == 10)
+	{ 
+		salida = '0';
 	}
 	else
 	{
@@ -292,6 +303,4 @@ char Mesa::conversorPalo(carta c)
 
 	return salida;
 }
-
-
 

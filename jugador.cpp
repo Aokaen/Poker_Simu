@@ -371,7 +371,7 @@ float jugador::getValor()
 
 void jugador::setApuesta(float ap)
 {
-	apuesta = ap;
+	apuesta =  ap;
 	setDinero(dinero - ap);
 }
 

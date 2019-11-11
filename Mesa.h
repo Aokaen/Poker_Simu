@@ -27,6 +27,7 @@ public:
 	char conversorNumero(carta c);
 	char conversorPalo(carta c);
 
+
 	friend class jugador;
 };
 
