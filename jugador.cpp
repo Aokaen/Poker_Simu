@@ -26,6 +26,7 @@ void jugador::calcularValorJugada(carta* c)
 {
 	float jugada = 0.0;
 	int numero_rep[3] = { 0,0,0 };
+	int aux = 0;
 	int palo_rep[3]{ 0,0,0 };
 	int num_aux[3] = { 1,1,1 }, palo_aux[3] = { 1,1,1 };
 	int n_rep = 0, p_rep = 0;
@@ -41,6 +42,7 @@ void jugador::calcularValorJugada(carta* c)
 			{
 				k = 0;
 				do {
+					aux = c[i].getNumero();
 					if (c[i].getNumero() == numero_rep[k])
 					{
 						num_aux[k]++;
@@ -51,7 +53,7 @@ void jugador::calcularValorJugada(carta* c)
 						num_aux[k]++;
 					}
 					k++;
-				} while (numero_rep[k] != c[i].getNumero());
+				} while (numero_rep[k] != aux);
 
 			}
 			else if (c[i].getPalo() == c[j].getPalo())

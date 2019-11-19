@@ -162,19 +162,8 @@ bool ronda(Mesa T, carta* c, jugador* J) {
 	bool jugador_gana;
 	int auxRonda = T.getIndiceRonda();
 	int auxTablero = T.getIndiceTablero();
-	if (auxRonda != 4 && auxRonda !=0)
-	{
-		T.cartaQuemada(c);
-		T.cartaTablero(c);
-	}
 	T.modificaTablero(J);
 	T.imprimirTablero(J);
-	if (auxRonda != 4 && auxRonda != 0)
-	{
-		carta aux;
-		aux = T.Tablero[auxTablero-1];
-		aux.imprimeCarta();
-	}
 
 	pasar = apostar(T,J);
 
@@ -190,14 +179,9 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 	do {
 		T.resetIndiceRonda();
 		T.resetIndiceMazo();
-		T.barajar(c);
+		c= T.barajar(c);
 		int auxRonda = T.getIndiceRonda(), auxMazo = T.getIndiceMazo();
-		Jugadores[0].setMano(c[auxMazo], c[auxMazo + 2]);
-		auxMazo++;
-		T.upIndiceMazo();
-		Jugadores[1].setMano(c[auxMazo], c[auxMazo + 2]);
-		auxMazo++;
-		T.upIndiceMazo();
+		T.repartirCartas(Jugadores, c, T.Tablero, T.Quemada);
 
 		for (int i = 0; i < 2; i++)
 		{
@@ -210,32 +194,35 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 		apuestaInicial(T,Jugadores);
 		pasar = ronda(T, c, Jugadores);
 		do {
+
 			if (pasar == true)
 				continuar = pasarApuesta(T,Jugadores);
 			else {
 				T.upIndiceRonda();
 				auxRonda++;
-			
-				pasar = ronda(T, c, Jugadores);
-				if (pasar == false && auxRonda == 4)
+				if (T.getIndiceRonda() == 4)
 				{
-					cout << "Show-down" << endl;
-					jugador_gana = jugadorGana(T,Jugadores);
-					if (jugador_gana == true)
-					{
-						cout << "Jugador Gana" << endl;
-						continuar = T.finRonda(Jugadores[0], Jugadores[1]);
-					}
-					else
-					{
-						continuar = T.finRonda(Jugadores[1], Jugadores[0]);
-					}
-					if (Jugadores[0].getDinero() == 0 || Jugadores[1].getDinero() == 0)
-						continuar = false;
+						cout << "Show-down" << endl;
+						jugador_gana = jugadorGana(T, Jugadores);
+						if (jugador_gana == true)
+						{
+							cout << "Jugador Gana" << endl;
+							continuar = T.finRonda(Jugadores[0], Jugadores[1]);
+						}
+						else
+						{
+							continuar = T.finRonda(Jugadores[1], Jugadores[0]);
+						}
+						if (Jugadores[0].getDinero() == 0 || Jugadores[1].getDinero() == 0)
+							continuar = false;
+
 				}
-				else if (pasar == true)
-				{
-					continuar = pasarApuesta(T, Jugadores);
+				else {
+					pasar = ronda(T, c, Jugadores);
+				    if (pasar == true)
+					{
+						continuar = pasarApuesta(T, Jugadores);
+					}
 				}
 			}
 		} while (pasar == false && auxRonda < 4);

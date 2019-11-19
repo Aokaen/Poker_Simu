@@ -14,14 +14,30 @@ Mesa::~Mesa()
 {
 
 }
-void Mesa::repartirCartas(jugador J, carta* Mazo)
+void Mesa::repartirCartas(jugador* J, carta* Mazo, carta* tablero, carta* Quemada)
 {
-	int aux1 = 0, aux2 = 0;
-	aux1 = getIndiceMazo();
-	aux2 = getIndiceMazo() + 2;
+	int aux = 0;
+	aux = getIndiceMazo();
+	for (int i = 0; i < 2; i++) //cambiar el valor de i<2 cuando se añadan mas jugadores
+	{
+		J[i].setMano(Mazo[aux], Mazo[aux + 1]);
+		aux = aux + 2;
+	}
+	Quemada[0] = Mazo[aux];
+	aux++;
+	for (int i = 0; i < 3; i++)
+	{
+		tablero[i] = Mazo[aux];
+		aux++;
+	}
+	Quemada[1] = Mazo[aux];
+	aux++;
+	tablero[3] = Mazo[aux];
+	aux++;
+	Quemada[2] = Mazo[aux];
+	aux++;
+	tablero[4] = Mazo[aux];
 
-	J.setMano(Mazo[aux1], Mazo[aux2]); // size of Jugadores cuando haya mas de 2 jugadores
-	upIndiceMazo();
 }
 
 void Mesa::cartaTablero(carta* Mazo)
@@ -150,37 +166,37 @@ carta* Mesa::barajar(carta* mazo)
 void Mesa::creaTablero()
 {
 	//mano del oponente
-	tablero_juego[1][8] = '[';
-	tablero_juego[1][11] = ']';
-	tablero_juego[1][12] = '[';
-	tablero_juego[1][15] = ']';
+	tablero_juego[1][8] = '|';
+	tablero_juego[1][11] = '|';
+	tablero_juego[1][12] = '|';
+	tablero_juego[1][15] = '|';
 
 
 	//tu mano
-	tablero_juego[9][8] = '[';
-	tablero_juego[9][11] = ']';
-	tablero_juego[9][12] = '[';
-	tablero_juego[9][15] = ']';
+	tablero_juego[9][8] = '|';
+	tablero_juego[9][11] = '|';
+	tablero_juego[9][12] = '|';
+	tablero_juego[9][15] = '|';
 
 	//mesa de juego
-	tablero_juego[4][2] = '[';
-	tablero_juego[4][5] = ']';
-	tablero_juego[4][6] = '[';
-	tablero_juego[4][9] = ']';
-	tablero_juego[4][10] = '[';
-	tablero_juego[4][13] = ']';
-	tablero_juego[4][14] = '[';
-	tablero_juego[4][17] = ']';
-	tablero_juego[4][18] = '[';
-	tablero_juego[4][21] = ']';
+	tablero_juego[4][2] = '|';
+	tablero_juego[4][5] = '|';
+	tablero_juego[4][6] = '|';
+	tablero_juego[4][9] = '|';
+	tablero_juego[4][10] = '|';
+	tablero_juego[4][13] = '|';
+	tablero_juego[4][14] = '|';
+	tablero_juego[4][17] = '|';
+	tablero_juego[4][18] = '|';
+	tablero_juego[4][21] = '|';
 
 	//quemadas
-	tablero_juego[6][6] = '[';
-	tablero_juego[6][9] = ']';
-	tablero_juego[6][10] = '[';
-	tablero_juego[6][13] = ']';
-	tablero_juego[6][14] = '[';
-	tablero_juego[6][17] = ']';
+	tablero_juego[6][6] = '|';
+	tablero_juego[6][9] = '|';
+	tablero_juego[6][10] = '|';
+	tablero_juego[6][13] = '|';
+	tablero_juego[6][14] = '|';
+	tablero_juego[6][17] = '|';
 }
 
 void Mesa::modificaTablero(jugador* Jugadores)
@@ -261,6 +277,7 @@ void Mesa::modificaTablero(jugador* Jugadores)
 void Mesa::imprimirTablero(jugador* Jugadores)
 {
 	system("cls");
+	cout << "RONDA" << getIndiceRonda() << endl;
 	int auxRonda = getIndiceRonda();
 	for (int i = 0; i < 11; i++)
 	{
@@ -305,7 +322,7 @@ char Mesa::conversorNumero(carta c)
 	}
 	else if (c.getNumero() == 10)
 	{ 
-		salida = '0';
+		salida = 'X';
 	}
 	else
 	{

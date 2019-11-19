@@ -17,7 +17,7 @@ public:
 	~Mesa();
 	carta* crearMazo();
 	carta* barajar(carta* c);
-	void repartirCartas(jugador j, carta* mazo);
+	void repartirCartas(jugador* j, carta* mazo, carta* tablero, carta* Quemada);
 	void cartaTablero(carta* mazo);
 	void cartaQuemada(carta* mazo);
 	void recogerApuesta(jugador j);
