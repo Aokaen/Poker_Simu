@@ -7,6 +7,15 @@ protected:
 		carta* mejor_jugada = new carta[5];
 		float dinero=0, apuesta = 0;
 		float valor_mano=0;
+		bool Escalera_Real_posible;
+		bool poker_posible;
+		bool escalera_color_posible;
+		bool full_posible;
+		bool escalera_posible;
+		bool color_posible;
+		bool trio_posible;
+		bool doble_pareja_posible;
+		bool pareja_posible;
 public:
 	jugador();
 	~jugador();
@@ -19,7 +28,12 @@ public:
 	//void setValor(float i); una vez implementada la heuristica
 	float getApuesta();
 	void setApuesta(float ap);
-	void calcularValorJugada(carta* c);
+	//void calcularValorJugada(carta* c);
+	void resetear_bool();
+	void ValorManoInicial();
+	void ValorManoR1(carta* c);
+	void ValorManoR2(carta* c);
+	void ValorManoR3(carta* c);
 	void imprimeMano();
 
 
