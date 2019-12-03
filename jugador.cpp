@@ -430,7 +430,7 @@ void jugador::ValorManoInicial() { // Chen formula
 	}
 
 
-	if (gap = 0)
+	if (gap == 0)
 	{
 		aux = aux * 2;
 		if (c_alta > 11)
@@ -450,7 +450,7 @@ void jugador::ValorManoInicial() { // Chen formula
 	{
 		aux = aux - gap;
 	}
-	else if (gap = 3)
+	else if (gap == 3)
 	{
 		aux = aux - 4;
 	}
@@ -469,14 +469,168 @@ void jugador::ValorManoInicial() { // Chen formula
 	valor_mano = aux;
 }
 void jugador::ValorManoR1(carta* c) {
-	mejor_jugada[0] = mano[0];
-	mejor_jugada[1] = mano[1];
-	mejor_jugada[2] = c[0];
-	mejor_jugada[3] = c[1];
-	mejor_jugada[4] = c[2];
-	int max_num_rep = 1;
-	bool segunda_par = false;
-	int max_pal_rep = 1;
+	
+	carta* jugada = new carta[5];
+	
+	jugada[0] = mano[0];
+	jugada[1] = mano[1];
+	jugada[2] = c[0];
+	jugada[3] = c[1];
+	jugada[4] = c[2];
+	carta aux;
+	int rep_max_n = 1;
+	int n_reps = 0;
+	int num_rep = 0;
+	int rep_max_p = 1;
+	int p_reps = 0;
+	int pal_rep = 0;
+	bool escalera = true;
+	bool color = false;
+	int gap_max = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (jugada[i].getNumero() == 1)
+		{
+			jugada[i].setNumero(14);
+		}
+		for (int k = i+1; k < 5; k++)
+		{
+			if (jugada[k].getNumero() == 1)
+			{
+				jugada[k].setNumero(14);
+			}
+
+			if (jugada[i].getNumero() < jugada[k].getNumero())
+			{
+				aux = jugada[i];
+				jugada[i] =jugada[k];
+				jugada[k] = aux;
+			}
+		}
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		mejor_jugada[i] = jugada[i];
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int k = i + 1; k < 5; k++)
+		{
+			if (mejor_jugada[i].getNumero() == mejor_jugada[k].getNumero())
+			{
+				if (mejor_jugada[i].getNumero() == num_rep)
+				{
+					rep_max_n++;
+				}
+				else
+				{
+					num_rep = mejor_jugada[i].getNumero();
+					n_reps++;
+
+				}
+
+
+			}
+			else if (jugada[i].getPalo() == jugada[k].getPalo())
+			{
+				if (mejor_jugada[i].getPalo() == pal_rep)
+				{
+					rep_max_p++;
+				}
+				else
+				{
+					pal_rep = mejor_jugada[i].getPalo();
+					p_reps++;
+
+				}
+			}
+		}
+	}
+	
+	for (int i = 0; i < 4; i++)
+	{
+		int gap = 0;
+		gap = mejor_jugada[i].getNumero() - mejor_jugada[i + 1].getNumero();
+		if (gap != 1)
+		{
+			if (escalera == true)
+			{
+				escalera = false;
+			}
+		}
+		if (gap > gap_max)
+		{
+			gap_max = gap;
+		}
+	}
+
+	
+	//jugadas imposibles genericas
+	if (rep_max_n == 1)
+	{
+		poker_posible = false;
+		full_posible = false;
+	}
+	if (rep_max_p <= 2)
+	{
+		escalera_color_posible = false;
+		Escalera_Real_posible = false;
+		color_posible = false;
+	}
+	else if (rep_max_p == 5)
+	{
+		color = true;
+	}
+
+	// jugadas imposibles condicionales y jugadas peores
+
+	if (rep_max_n == 4)
+	{
+		 Escalera_Real_posible=false;
+		 escalera_color_posible = false;
+		 full_posible = false;
+		 escalera_posible = false;
+		 color_posible = false;
+		 trio_posible = false;
+		 doble_pareja_posible = false;
+		 pareja_posible = false;
+		 valor_mano = 7 + (mejor_jugada[0].getNumero() * 0.01);
+	}
+	else if (rep_max_n == 3)
+	{
+		doble_pareja_posible = false;
+		pareja_posible = false;
+		if (gap_max > 4)
+		{
+			Escalera_Real_posible = false;
+			escalera_color_posible = false;
+			escalera_posible = false;
+		}
+		if (rep_max_p == 2)
+		{
+			color_posible = false;
+		}
+		if (n_reps == 2)
+		{
+			Escalera_Real_posible = false;
+			escalera_color_posible = false;
+			escalera_posible = false;
+			color_posible = false;
+			trio_posible = false;
+			doble_pareja_posible = false;
+			pareja_posible = false;
+			valor_mano = 6 + (mejor_jugada[0].getNumero() * 0.01)+ (mejor_jugada[3].getNumero() * 0.0001);
+		}
+		else
+		{
+			valor_mano = 3 + (mejor_jugada[0].getNumero() * 0.01) + (mejor_jugada[3].getNumero() * 0.0001) + (mejor_jugada[4].getNumero() * 0.000001);
+		}
+
+	}
+	else if (rep_max_n==2)
+	{ }
 
 	
 }
