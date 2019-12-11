@@ -630,7 +630,13 @@ void jugador::ValorManoR1(carta* c) {
 
 	}
 	else if (rep_max_n==2)
-	{ }
+	{
+		if (n_reps == 2)
+		{
+			pareja_posible = false;
+			valor_mano = 2
+		}
+	}
 
 	
 }
