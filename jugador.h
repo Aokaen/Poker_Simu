@@ -34,7 +34,7 @@ public:
 	void ValorManoR1(carta* c);
 	void ValorManoR2(carta* c);
 	void ValorManoR3(carta* c);
-	void calcularValorJugada();
+	float calcularValorJugada(carta* c);
 	void imprimeMano();
 
 
