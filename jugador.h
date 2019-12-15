@@ -6,7 +6,9 @@ protected:
 		carta* mano = new carta[2];
 		carta* mejor_jugada = new carta[5];
 		float dinero=0, apuesta = 0;
-		float valor_mano=0;
+		float valor_jugada=0;
+		float valor_mano = 0;
+		int tipo_jugada = -1;
 		bool Escalera_Real_posible;
 		bool poker_posible;
 		bool escalera_color_posible;

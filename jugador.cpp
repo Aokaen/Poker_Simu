@@ -131,6 +131,7 @@ void jugador::ValorManoInicial() { // Chen formula
 
 	aux = roundf(aux);
 
+	valor_jugada = aux;
 	valor_mano = aux;
 }
 void jugador::ValorManoR1(carta* c) {
@@ -171,7 +172,7 @@ void jugador::ValorManoR1(carta* c) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	valor_mano = calcularValorJugada(mejor_jugada);
+	valor_jugada = calcularValorJugada(mejor_jugada);
 	
 }
 void jugador::ValorManoR2(carta* c) {
@@ -211,7 +212,7 @@ void jugador::ValorManoR2(carta* c) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	valor_mano = calcularValorJugada(mejor_jugada);
+	valor_jugada = calcularValorJugada(mejor_jugada);
 
 }
 void jugador::ValorManoR3(carta* c) {
@@ -252,7 +253,7 @@ void jugador::ValorManoR3(carta* c) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	valor_mano = calcularValorJugada(mejor_jugada);
+	valor_jugada = calcularValorJugada(mejor_jugada);
 
 }
 
@@ -269,7 +270,7 @@ float jugador::getDinero()
 
 float jugador::getValor()
 {
-	return valor_mano;
+	return valor_jugada;
 }
 
 void jugador::setApuesta(float ap)
@@ -295,7 +296,109 @@ void jugador::imprimeMano()
 float jugador::calcularValorJugada(carta* c)
 {
 	int tamano = sizeof(c);
+	float jugada = 0.0;
+	int n_rep_n = 0;
+	int num_rep[3] = { 0,0,0 };
+	int num_rep_veces[3] = { 1,1,1 };
+	int n_rep_p = 0;
+	int n_palos = 0;
+	int p_rep[2] = { 0,0 };
+	int p_rep_veces[2] = { 1,1 };
+	int k = 0;
+	int seguidos = 1;
 
+	for (int i = 0; i < tamano-1; i++)
+	{
+		for (int j = i + 1; j < tamano; j++)
+		{
+			if (c[i].getNumero() == c[j].getNumero())
+			{
+				if (n_rep_n == 0)
+				{
+					n_rep_n++;
+					num_rep[0] = c[i].getNumero();
+					num_rep_veces[0] = 2;
+				}
+				else
+				{
+					for (int l = 0; l < n_rep_n+1; l++)
+					{
+						if (c[i].getNumero() == num_rep[l])
+						{
+							num_rep_veces[l] = num_rep_veces[l] + 1;
+						}
+						else if (num_rep[l] == 0)
+						{
+							n_rep_n++;
+							num_rep[l] = c[i].getNumero();
+							num_rep_veces[l] = 2;
+						}
+					}
+				}
+			}
+			else if (c[i].getPalo() == c[j].getPalo())
+			{
+				if (n_rep_p == 0)
+				{
+					n_rep_p++;
+					p_rep[0] = c[i].getPalo();
+					p_rep_veces[0] = 2;
+				}
+				else
+				{
+					for (int l = 0; l < n_rep_p + 1; l++)
+					{
+						if (c[i].getPalo() == p_rep[l])
+						{
+							p_rep_veces[l] = p_rep_veces[l] + 1;
+						}
+						else if (p_rep[l] == 0)
+						{
+							n_rep_p++;
+							p_rep[l] = c[i].getPalo();
+							p_rep_veces[l] = 2;
+						}
+					}
+				}
+			}
+			
+		}
+
+		if (c[i].getNumero() == c[i + 1].getNumero() + 1)
+		{
+			seguidos++;
+		}
+		else
+		{
+			if (seguidos != 5)
+			{
+				seguidos = 1;
+			}
+		}
+	}
+
+	if (tamano == 5)
+	{
+		if (n_rep_n == 0)
+		{
+			poker_posible = false;
+			full_posible = false;
+		}
+		else if (n_rep_n == 1)
+		{
+
+		}
+	}
+	else if (tamano == 6)
+	{
+
+	}
+	else if (tamano == 7)
+	{
+
+	}
+
+	
 
 }
 
@@ -631,7 +734,7 @@ float jugador::calcularValorJugada(carta* c)
 //		}
 //	}
 //
-//	valor_mano=jugada;
+//	valor_jugada=jugada;
 //}
 
 //int rep_max_n = 1;
@@ -725,7 +828,7 @@ float jugador::calcularValorJugada(carta* c)
 	//	 trio_posible = false;
 	//	 doble_pareja_posible = false;
 	//	 pareja_posible = false;
-	//	 valor_mano = 7 + (mejor_jugada[1].getNumero() * 0.01);
+	//	 valor_jugada = 7 + (mejor_jugada[1].getNumero() * 0.01);
 	//}
 	//else if (rep_max_n == 3)
 	//{
@@ -750,12 +853,12 @@ float jugador::calcularValorJugada(carta* c)
 	//		trio_posible = false;
 	//		doble_pareja_posible = false;
 	//		pareja_posible = false;
-	//		valor_mano = 6 + (mejor_jugada[0].getNumero() * 0.01)+ (mejor_jugada[3].getNumero() * 0.0001);
+	//		valor_jugada = 6 + (mejor_jugada[0].getNumero() * 0.01)+ (mejor_jugada[3].getNumero() * 0.0001);
 	//	}
 	//	else
 	//	{
 	//		//corregir, no es correcto ni garantizado que ese sea el orden
-	//		valor_mano = 3 + (mejor_jugada[0].getNumero() * 0.01) + (mejor_jugada[3].getNumero() * 0.0001) + (mejor_jugada[4].getNumero() * 0.000001);
+	//		valor_jugada = 3 + (mejor_jugada[0].getNumero() * 0.01) + (mejor_jugada[3].getNumero() * 0.0001) + (mejor_jugada[4].getNumero() * 0.000001);
 	//	}
 
 	//}
@@ -786,7 +889,7 @@ float jugador::calcularValorJugada(carta* c)
 	//				}
 	//			}
 	//		}
-	//		valor_mano = 2 + valor1 * 0.01 + valor2 * 0.0001 + valorn * 0.000001;
+	//		valor_jugada = 2 + valor1 * 0.01 + valor2 * 0.0001 + valorn * 0.000001;
 	//		
 	//	}
 	//	else
