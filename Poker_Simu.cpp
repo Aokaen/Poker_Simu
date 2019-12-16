@@ -38,19 +38,7 @@ carta* ordenarMano(carta* c) {
 	return c;
 }
 float jugada(Mesa T, jugador j) {
-	float valor_jugada;
-	carta* jugada_final = new carta[7];
-	carta* mano_final = new carta[2];
-	for (int i = 0; i < 4; i++)
-	{
-		jugada_final[i] = T.Tablero[i];
-
-	}
-	mano_final = j.getMano();
-	jugada_final[5] = mano_final[0];
-	jugada_final[6] = mano_final[1];
-	jugada_final = ordenarMano(jugada_final);
-	j.calcularValorJugada(jugada_final);
+	float valor_jugada = 0;
 	valor_jugada = j.getValor();
 	return valor_jugada;
 }
@@ -157,6 +145,49 @@ bool apostar(Mesa T, jugador* Jugadores)
 	} while (entrada != 'P' && entrada != 'A');
 	return pasar;
 }
+
+void calcularValorjugador(Mesa T, jugador* J, int Ronda)
+	{
+	if (Ronda == 0)
+	{
+		J[0].ValorManoInicial();
+		J[1].ValorManoInicial();
+	}
+	else if (Ronda == 1)
+	{
+		carta* aux = new carta[3];
+		for (int i = 0; i < 3; i++)
+		{
+			aux[i] = T.Tablero[i];
+		}
+
+		J[0].ValorManoR1(aux);
+		J[1].ValorManoR1(aux);
+	}
+	else if (Ronda == 2)
+	{
+		carta* aux = new carta[4];
+		for (int i = 0; i < 4; i++)
+		{
+			aux[i] = T.Tablero[i];
+		}
+
+		J[0].ValorManoR2(aux);
+		J[1].ValorManoR2(aux);
+	}
+	else if (Ronda == 3)
+	{
+		carta* aux = new carta[5];
+		for (int i = 0; i < 5; i++)
+		{
+			aux[i] = T.Tablero[i];
+		}
+
+		J[0].ValorManoR3(aux);
+		J[1].ValorManoR3(aux);
+	}
+
+}
 bool ronda(Mesa T, carta* c, jugador* J) {
 	bool pasar = false;
 	bool jugador_gana;
@@ -164,6 +195,9 @@ bool ronda(Mesa T, carta* c, jugador* J) {
 	int auxTablero = T.getIndiceTablero();
 	T.modificaTablero(J);
 	T.imprimirTablero(J);
+	calcularValorjugador(T,J,auxRonda);
+
+	cout << "Valor Jugada: "<<J->getValor() << endl;
 
 	pasar = apostar(T,J);
 
@@ -192,6 +226,8 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 	//	T.repartirCartas(T.Jugadores[1], c);
 		T.modificaTablero(Jugadores);
 		apuestaInicial(T,Jugadores);
+		//Jugadores[0].ValorManoInicial();
+		//Jugadores[1].ValorManoInicial();
 		pasar = ronda(T, c, Jugadores);
 		do {
 
@@ -203,6 +239,8 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 				if (T.getIndiceRonda() == 4)
 				{
 						cout << "Show-down" << endl;
+						T.modificaTablero(Jugadores);
+						T.imprimirTablero(Jugadores);
 						jugador_gana = jugadorGana(T, Jugadores);
 						if (jugador_gana == true)
 						{
@@ -218,6 +256,9 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 
 				}
 				else {
+					{
+
+					}
 					pasar = ronda(T, c, Jugadores);
 				    if (pasar == true)
 					{
