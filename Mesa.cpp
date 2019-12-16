@@ -208,6 +208,15 @@ void Mesa::modificaTablero(jugador* Jugadores)
 	
 	if (indiceRonda == 0)
 	{
+		for (int i = 0; i < 11; i++)
+		{
+			for (int j = 0; j < 26; j++)
+			{
+				tablero_juego[i][j]=' ';
+			}
+			
+		}
+
 		tablero_juego[9][9] = conversorNumero(mano_aux[0]);
 		tablero_juego[9][10] = conversorPalo(mano_aux[0]);
 		tablero_juego[9][13] = conversorNumero(mano_aux[1]);

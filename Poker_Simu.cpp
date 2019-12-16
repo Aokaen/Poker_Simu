@@ -216,7 +216,6 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 		c= T.barajar(c);
 		int auxRonda = T.getIndiceRonda(), auxMazo = T.getIndiceMazo();
 		T.repartirCartas(Jugadores, c, T.Tablero, T.Quemada);
-
 		for (int i = 0; i < 2; i++)
 		{
 			cout << "jugador" << i << endl;
@@ -267,6 +266,7 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 				}
 			}
 		} while (pasar == false && auxRonda < 4);
+		system("cls");
 	} while (continuar == true);
 
 
