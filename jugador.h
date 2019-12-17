@@ -38,6 +38,7 @@ public:
 	//void setValor(float i); una vez implementada la heuristica
 	float getApuesta();
 	void setApuesta(float ap);
+	void resetApuesta();
 	void valorNumericoMano();
 	void resetear_bool();
 	void ValorManoInicial();

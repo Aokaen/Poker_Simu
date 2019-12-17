@@ -22,7 +22,7 @@ public:
 	void cartaQuemada(carta* mazo);
 	void recogerApuesta(jugador j);
 	void entregarApuesta(jugador j);
-	bool finRonda(jugador winner, jugador loser);
+	void finRonda(jugador winner, jugador loser);
 	void creaTablero();
 	void modificaTablero(jugador* j);
 	void imprimirTablero(jugador* j);
@@ -42,6 +42,8 @@ public:
 	int getIndiceRonda();
 	void setapuesta(float f);
 	float getapuesta();
+	void resetapuesta();
+	bool continuar();
 
 
 	friend class jugador;

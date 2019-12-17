@@ -82,25 +82,36 @@ void Mesa::cartaQuemada(carta* Mazo)
 	upIndiceMazo(); 
 	upIndiceQuemada();
 }
+void Mesa::setapuesta(float f)
+{
+	apuesta = apuesta + f;
+	cout << "Apuesta total: " << apuesta << endl;
+}
 
+void Mesa::resetapuesta()
+{
+	apuesta = 0;
+}
+float Mesa::getapuesta()
+{
+	return apuesta;
+}
 void Mesa::recogerApuesta(jugador j)
 {
-	float auxApuesta = j.getApuesta();
-	setapuesta(auxApuesta);
-	j.setApuesta(0);
+	float Apuesta = j.getApuesta();
+	setapuesta(Apuesta);
+	j.resetApuesta();
 }
 
 void Mesa::entregarApuesta(jugador j)
 {
 	float dinero_act = j.getDinero(), auxApuesta= getapuesta();
 	j.setDinero(dinero_act + auxApuesta);
-	setapuesta(0);
+	resetapuesta();
 }
 
-bool Mesa::finRonda(jugador winner, jugador loser)
+void Mesa::finRonda(jugador winner, jugador loser)
 {
-	bool salida=true;
-	char entrada;
 	recogerApuesta(winner);
 	recogerApuesta(loser);
 	entregarApuesta(winner);
@@ -108,6 +119,14 @@ bool Mesa::finRonda(jugador winner, jugador loser)
 	resetIndiceQuemada();
 	resetIndiceRonda();
 	resetIndiceTablero();
+}
+
+bool Mesa::continuar()
+{
+	char entrada;
+	bool salida;
+
+
 	cout << "¿Desea continuar jugando?(Y/N)" << endl;
 	do {
 		cin >> entrada;
@@ -117,7 +136,7 @@ bool Mesa::finRonda(jugador winner, jugador loser)
 			salida = false;
 		else
 		{
-			cout << "Error. Introduzca Y si quiere seguir jugando o N para finalizar"<<endl;
+			cout << "Error. Introduzca Y si quiere seguir jugando o N para finalizar" << endl;
 		}
 	} while ((entrada == 'Y' || entrada == 'y') && (entrada == 'N' || entrada == 'n'));
 
@@ -305,6 +324,7 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 	cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
 	cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
 	cout << "Dinero actual en juego:" << Jugadores[0].getApuesta() + Jugadores[1].getApuesta() << endl;
+	cout << "Apuesta total: " << getapuesta() << endl;
 
 
 }
@@ -412,12 +432,3 @@ int Mesa::getIndiceRonda()
 	return indiceRonda;
 }
 
-void Mesa::setapuesta(float f)
-{
-	apuesta = f;
-}
-
-float Mesa::getapuesta()
-{
-	return apuesta;
-}

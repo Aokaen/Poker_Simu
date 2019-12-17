@@ -45,7 +45,7 @@ void jugador::resetear_bool() {
 }
 void jugador::ValorManoInicial() { // Chen formula
 	float aux = 0;
-	int c_alta = 0, gap = -1;
+	float c_alta = 0, gap = -1;
 
 	if (mano[0].getNumero() == 1 || mano[1].getNumero() == 1)
 	{
@@ -114,7 +114,7 @@ void jugador::ValorManoInicial() { // Chen formula
 	}
 	else if (gap == 1)
 	{
-		aux = aux - gap;
+		aux = aux ;
 		if (c_alta > 11)
 		{
 			aux++;
@@ -122,9 +122,13 @@ void jugador::ValorManoInicial() { // Chen formula
 	}
 	else if (gap == 2)
 	{
-		aux = aux - gap;
+		aux = aux - 1;
 	}
 	else if (gap == 3)
+	{
+		aux = aux - 2;
+	}
+	else if (gap == 4)
 	{
 		aux = aux - 4;
 	}
@@ -284,8 +288,15 @@ float jugador::getValor()
 
 void jugador::setApuesta(float ap)
 {
+	
+	float diferencia = ap - apuesta;
 	apuesta = ap;
-	setDinero(dinero - ap);
+	setDinero(dinero - diferencia);
+}
+
+void jugador::resetApuesta()
+{
+	apuesta = 0;
 }
 
 float jugador::getApuesta()

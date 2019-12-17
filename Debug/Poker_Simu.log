@@ -1,4 +1,1 @@
-﻿  Poker_Simu.cpp
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(193,7): warning C4101: 'jugador_gana': variable local sin referencia
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(211,7): warning C4101: 'entrada': variable local sin referencia
-  Poker_Simu.vcxproj -> D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Debug\Poker_Simu.exe
+﻿  Poker_Simu.vcxproj -> C:\Users\agmaestre\Downloads\Poker_Simu-master (1)\Poker_Simu-master\Debug\Poker_Simu.exe
