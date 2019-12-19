@@ -1,5 +1,6 @@
 #pragma once
 #include "carta.h"
+
 class jugador
 {
 protected:

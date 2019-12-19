@@ -1,6 +1,7 @@
 #pragma once
 #include "carta.h"
 #include "jugador.h"
+
 class Mesa
 {
 protected:
@@ -20,7 +21,7 @@ public:
 	void repartirCartas(jugador* j, carta* mazo, carta* tablero, carta* Quemada);
 	void cartaTablero(carta* mazo);
 	void cartaQuemada(carta* mazo);
-	void recogerApuesta(jugador j);
+	//void recogerApuesta(jugador j);
 	void entregarApuesta(jugador j);
 	void finRonda(jugador winner, jugador loser);
 	void creaTablero();

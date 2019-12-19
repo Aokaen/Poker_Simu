@@ -96,12 +96,12 @@ float Mesa::getapuesta()
 {
 	return apuesta;
 }
-void Mesa::recogerApuesta(jugador j)
-{
-	float Apuesta = j.getApuesta();
-	setapuesta(Apuesta);
-	j.resetApuesta();
-}
+//void Mesa::recogerApuesta(jugador j)
+//{
+//	float Apuesta = j.getApuesta();
+//	setapuesta(Apuesta);
+//	j.resetApuesta();
+//}
 
 void Mesa::entregarApuesta(jugador j)
 {
@@ -112,13 +112,21 @@ void Mesa::entregarApuesta(jugador j)
 
 void Mesa::finRonda(jugador winner, jugador loser)
 {
-	recogerApuesta(winner);
-	recogerApuesta(loser);
+	
+	float dinero_total = 0;
+	dinero_total = winner.getApuesta() + loser.getApuesta();
+	winner.resetApuesta();
+	loser.resetApuesta();
+	//recogerApuesta(winner);
+	//recogerApuesta(loser);
 	entregarApuesta(winner);
 	resetIndiceMazo();
 	resetIndiceQuemada();
 	resetIndiceRonda();
 	resetIndiceTablero();
+	
+
+	
 }
 
 bool Mesa::continuar()
@@ -184,6 +192,15 @@ carta* Mesa::barajar(carta* mazo)
 
 void Mesa::creaTablero()
 {
+
+	for (int i = 0; i < 11; i++)
+	{
+		for (int j = 0; j < 26; j++)
+		{
+			tablero_juego[i][j] = ' ';
+		}
+
+	}
 	//mano del oponente
 	tablero_juego[1][8] = '|';
 	tablero_juego[1][11] = '|';
