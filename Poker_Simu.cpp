@@ -61,12 +61,12 @@ void apuestaInicial(Mesa T, jugador* Jugadores) {
 	if (bid > Jugadores[0].getDinero())
 	{
 		cout << "ALL IN JUGADOR" << endl;
-		Jugadores[0].setApuesta(Jugadores[0].getDinero());//A cambiar con la nueva implementacion (All in)
+		Jugadores[0].setApuesta(Jugadores[0].getDinero());
 	}
 	else if (bid > Jugadores[1].getDinero())
 	{
 		cout << "ALL IN OPONENTE" << endl;
-		Jugadores[1].setApuesta(Jugadores[1].getDinero());//A cambiar con la nueva implementacion (All in)
+		Jugadores[1].setApuesta(Jugadores[1].getDinero());
 	}
 	else
 	{

@@ -114,12 +114,15 @@ void Mesa::finRonda(jugador winner, jugador loser)
 {
 	
 	float dinero_total = 0;
-	dinero_total = winner.getApuesta() + loser.getApuesta();
+	//dinero_total = winner.getApuesta() + loser.getApuesta();
+	dinero_total = apuesta + winner.getDinero();
 	winner.resetApuesta();
 	loser.resetApuesta();
 	//recogerApuesta(winner);
 	//recogerApuesta(loser);
-	entregarApuesta(winner);
+	//entregarApuesta(winner);
+	winner.setDinero(dinero_total);
+	resetapuesta();
 	resetIndiceMazo();
 	resetIndiceQuemada();
 	resetIndiceRonda();
