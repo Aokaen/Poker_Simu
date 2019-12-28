@@ -84,7 +84,7 @@ void Mesa::cartaQuemada(carta* Mazo)
 }
 void Mesa::setapuesta(float f)
 {
-	apuesta = apuesta + f;
+	apuesta = f;
 	cout << "Apuesta total: " << apuesta << endl;
 }
 
@@ -113,15 +113,10 @@ void Mesa::entregarApuesta(jugador j)
 void Mesa::finRonda(jugador winner, jugador loser)
 {
 	
-	float dinero_total = 0;
-	//dinero_total = winner.getApuesta() + loser.getApuesta();
-	dinero_total = apuesta + winner.getDinero();
+	float total = winner.getDinero() + getapuesta();
+	winner.setDinero(total);
 	winner.resetApuesta();
 	loser.resetApuesta();
-	//recogerApuesta(winner);
-	//recogerApuesta(loser);
-	//entregarApuesta(winner);
-	winner.setDinero(dinero_total);
 	resetapuesta();
 	resetIndiceMazo();
 	resetIndiceQuemada();
@@ -319,7 +314,6 @@ void Mesa::modificaTablero(jugador* Jugadores)
 		tablero_juego[4][19] = conversorNumero(Tablero[4]);
 		tablero_juego[4][20] = conversorPalo(Tablero[4]);
 	}
-
 }
 
 void Mesa::imprimirTablero(jugador* Jugadores)
@@ -335,7 +329,7 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 		}
 		cout << endl;
 	}
-	if (auxRonda != 0&& auxRonda != 4)
+	if (auxRonda != 0 && auxRonda != 4)
 	{
 		float apuesta = Jugadores[1].getApuesta();
 		apuesta = apuesta + 50;
@@ -347,6 +341,13 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 	cout << "Apuesta total: " << getapuesta() << endl;
 
 
+}
+
+void Mesa::CalculaApuestaTotal(jugador* J)
+{
+	float total = 0;
+	total = J[0].getApuesta() + J[1].getApuesta();
+	setapuesta(total);
 }
 
 

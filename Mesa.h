@@ -43,6 +43,7 @@ public:
 	int getIndiceRonda();
 	void setapuesta(float f);
 	float getapuesta();
+	void CalculaApuestaTotal(jugador* J);
 	void resetapuesta();
 	bool continuar();
 

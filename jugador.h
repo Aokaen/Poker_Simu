@@ -49,5 +49,7 @@ public:
 	float calcularValorJugada(carta* c);
 	void imprimeMano();
 
+	friend class Mesa;
+
 
 };
