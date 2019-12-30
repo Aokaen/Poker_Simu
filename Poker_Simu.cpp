@@ -61,12 +61,12 @@ void apuestaInicial(Mesa T, jugador* Jugadores) {
 	if (bid > Jugadores[0].getDinero())
 	{
 		cout << "ALL IN JUGADOR" << endl;
-		Jugadores[0].setApuesta(Jugadores[0].getDinero());//A cambiar con la nueva implementacion (All in)
+		Jugadores[0].setApuesta(Jugadores[0].getDinero());
 	}
 	else if (bid > Jugadores[1].getDinero())
 	{
 		cout << "ALL IN OPONENTE" << endl;
-		Jugadores[1].setApuesta(Jugadores[1].getDinero());//A cambiar con la nueva implementacion (All in)
+		Jugadores[1].setApuesta(Jugadores[1].getDinero());
 	}
 	else
 	{
@@ -83,16 +83,48 @@ bool pasarApuesta(Mesa T, jugador* Jugadores) {
 	continuar = T.continuar();
 	return continuar;
 }
+
+bool comprobarDinero(jugador* J)
+{
+	if (J[0].getApuesta() == J[1].getApuesta())
+		
+	{
+		return true;
+	}
+	else if (J[0].getDinero() == 0 || J[1].getDinero() <= 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+
+}
 void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
-	Jugadores[0].setApuesta(qty);
+	if (qty > Jugadores[0].getDinero())
+	{
+		Jugadores[0].setApuesta(Jugadores[0].getDinero());
+	}
+	else
+	{
+		Jugadores[0].setApuesta(qty);
+	}
 	//codigo a cambiar con la nueva implementacion
 	Jugadores[1].setApuesta(qty);
-	T.setapuesta(qty + qty);
+	
 }
 void verApuesta(Mesa T, jugador* Jugadores) {
-	Jugadores[0].setApuesta(Jugadores[1].getApuesta());
-	float suma = Jugadores[1].getApuesta() + Jugadores[0].getApuesta();
-	T.setapuesta(suma);
+	if (Jugadores[1].getApuesta() > Jugadores[0].getDinero())
+	{
+		Jugadores[0].setApuesta(Jugadores[0].getDinero());
+	}
+	else
+	{
+		Jugadores[0].setApuesta(Jugadores[1].getApuesta());
+	}
+	
 }
 bool apostar(Mesa T, jugador* Jugadores)
 {
@@ -100,6 +132,9 @@ bool apostar(Mesa T, jugador* Jugadores)
 	char entrada, entrada_apuesta;
 	bool pasar=false;
 	float entrada_cantidad;
+	float total = 0;
+	bool apuesta_ok = false;
+	
 	do {
 		cout << "¿Desea Apostar (A) o Pasar (P)?" << endl;
 		cin >> entrada;
@@ -118,7 +153,10 @@ bool apostar(Mesa T, jugador* Jugadores)
 				}
 				cin >> entrada_apuesta;
 				if (entrada_apuesta == 'V')
+				{
 					verApuesta(T, Jugadores);
+					apuesta_ok = comprobarDinero(Jugadores);
+				}
 				else if (entrada_apuesta == 'S')
 				{
 					do {
@@ -128,22 +166,24 @@ bool apostar(Mesa T, jugador* Jugadores)
 						if (entrada_cantidad > Jugadores[1].getApuesta())
 						{
 							subirApuesta(entrada_cantidad, T, Jugadores);
+							apuesta_ok = comprobarDinero(Jugadores);
 						}
 						else
 						{
 							cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
 						}
-					} while (Jugadores[0].getApuesta() != Jugadores[1].getApuesta());
+					} while (apuesta_ok==false);
 
 				}
+
 				else
 				{
 					cout << "Error. Introduzca V si quiere Ver la apuesta o S para subir la apuesta" << endl;
 				}
+			
 
-
-			} while (Jugadores[1].getApuesta() != Jugadores[0].getApuesta());
-			T.setapuesta(Jugadores[1].getApuesta() + Jugadores[0].getApuesta());
+			} while (apuesta_ok==false);
+			
 			
 		}
 		else
@@ -152,7 +192,15 @@ bool apostar(Mesa T, jugador* Jugadores)
 		}
 
 	} while (entrada != 'P' && entrada != 'A');
+	
 	return pasar;
+	int auxRonda = T.getIndiceRonda();
+	if (auxRonda != 0 && auxRonda != 4)
+	{
+		float apuesta = Jugadores[1].getApuesta();
+		apuesta = apuesta + 50;
+		Jugadores[1].setApuesta(apuesta);
+	}
 }
 
 void calcularValorjugador(Mesa T, jugador* J, int Ronda)
@@ -219,6 +267,7 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 	bool pasar = false;
 	bool jugador_gana;
 	char entrada;
+	float money = 0;
 	
 	do {
 		T.resetIndiceRonda();
@@ -231,15 +280,13 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 			cout << "jugador" << i << endl;
 			Jugadores[i].imprimeMano();
 		}
-	//	T.repartirCartas(T.Jugadores[0], c);
-	//	T.repartirCartas(T.Jugadores[1], c);
+
 		T.modificaTablero(Jugadores);
 		apuestaInicial(T,Jugadores);
-		//Jugadores[0].ValorManoInicial();
-		//Jugadores[1].ValorManoInicial();
 		pasar = ronda(T, c, Jugadores);
 		do {
-
+			money = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
+			T.setapuesta(money);
 			if (pasar == true)
 				continuar = pasarApuesta(T,Jugadores);
 			else {
@@ -247,9 +294,10 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 				auxRonda++;
 				if (T.getIndiceRonda() == 4)
 				{
-						cout << "Show-down" << endl;
+						
 						T.modificaTablero(Jugadores);
 						T.imprimirTablero(Jugadores);
+						cout << "Show-down" << endl;
 						jugador_gana = jugadorGana(T, Jugadores);
 						if (jugador_gana == true)
 						{
@@ -280,9 +328,12 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 					{
 						continuar = pasarApuesta(T, Jugadores);
 					}
+					
 				}
 			}
+
 		} while (pasar == false && auxRonda < 4);
+
 		system("cls");
 	} while (continuar == true);
 

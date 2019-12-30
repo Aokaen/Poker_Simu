@@ -1,5 +1,6 @@
 #pragma once
 #include "carta.h"
+
 class jugador
 {
 protected:
@@ -47,6 +48,8 @@ public:
 	void ValorManoR3(carta* c);
 	float calcularValorJugada(carta* c);
 	void imprimeMano();
+
+	friend class Mesa;
 
 
 };

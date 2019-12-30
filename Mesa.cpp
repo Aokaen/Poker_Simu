@@ -84,7 +84,7 @@ void Mesa::cartaQuemada(carta* Mazo)
 }
 void Mesa::setapuesta(float f)
 {
-	apuesta = apuesta + f;
+	apuesta = f;
 	cout << "Apuesta total: " << apuesta << endl;
 }
 
@@ -96,12 +96,12 @@ float Mesa::getapuesta()
 {
 	return apuesta;
 }
-void Mesa::recogerApuesta(jugador j)
-{
-	float Apuesta = j.getApuesta();
-	setapuesta(Apuesta);
-	j.resetApuesta();
-}
+//void Mesa::recogerApuesta(jugador j)
+//{
+//	float Apuesta = j.getApuesta();
+//	setapuesta(Apuesta);
+//	j.resetApuesta();
+//}
 
 void Mesa::entregarApuesta(jugador j)
 {
@@ -112,13 +112,19 @@ void Mesa::entregarApuesta(jugador j)
 
 void Mesa::finRonda(jugador winner, jugador loser)
 {
-	recogerApuesta(winner);
-	recogerApuesta(loser);
-	entregarApuesta(winner);
+	
+	float total = winner.getDinero() + getapuesta();
+	winner.setDinero(total);
+	winner.resetApuesta();
+	loser.resetApuesta();
+	resetapuesta();
 	resetIndiceMazo();
 	resetIndiceQuemada();
 	resetIndiceRonda();
 	resetIndiceTablero();
+	
+
+	
 }
 
 bool Mesa::continuar()
@@ -184,6 +190,15 @@ carta* Mesa::barajar(carta* mazo)
 
 void Mesa::creaTablero()
 {
+
+	for (int i = 0; i < 11; i++)
+	{
+		for (int j = 0; j < 26; j++)
+		{
+			tablero_juego[i][j] = ' ';
+		}
+
+	}
 	//mano del oponente
 	tablero_juego[1][8] = '|';
 	tablero_juego[1][11] = '|';
@@ -299,7 +314,6 @@ void Mesa::modificaTablero(jugador* Jugadores)
 		tablero_juego[4][19] = conversorNumero(Tablero[4]);
 		tablero_juego[4][20] = conversorPalo(Tablero[4]);
 	}
-
 }
 
 void Mesa::imprimirTablero(jugador* Jugadores)
@@ -315,7 +329,7 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 		}
 		cout << endl;
 	}
-	if (auxRonda != 0&& auxRonda != 4)
+	if (auxRonda != 0 && auxRonda != 4)
 	{
 		float apuesta = Jugadores[1].getApuesta();
 		apuesta = apuesta + 50;
@@ -327,6 +341,13 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 	cout << "Apuesta total: " << getapuesta() << endl;
 
 
+}
+
+void Mesa::CalculaApuestaTotal(jugador* J)
+{
+	float total = 0;
+	total = J[0].getApuesta() + J[1].getApuesta();
+	setapuesta(total);
 }
 
 
