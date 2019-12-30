@@ -76,7 +76,14 @@ void apuestaInicial(Mesa T, jugador* Jugadores) {
 }
 bool pasarApuesta(Mesa T, jugador* Jugadores) {
 	bool continuar;
+	float money = 0;
+	float apuesta = 0;
 	cout << "El oponente ha ganado" << endl;
+	apuesta = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
+	money = apuesta + Jugadores[1].getDinero();
+	Jugadores[1].setDinero(money);
+	Jugadores[1].resetApuesta();
+	Jugadores[0].resetApuesta();
 	T.finRonda(Jugadores[1], Jugadores[0]);
 	cout << "Dinero actual jugador: " << Jugadores[0].getDinero() << endl;
 	cout << "Dinero actual oponente: " << Jugadores[1].getDinero() << endl;
@@ -103,7 +110,7 @@ bool comprobarDinero(jugador* J)
 
 }
 void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
-	if (qty > Jugadores[0].getDinero())
+	if (qty >= Jugadores[0].getDinero())
 	{
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
 	}
@@ -285,8 +292,8 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 		apuestaInicial(T,Jugadores);
 		pasar = ronda(T, c, Jugadores);
 		do {
-			money = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
-			T.setapuesta(money);
+			//money = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
+			//T.apuesta = money;
 			if (pasar == true)
 				continuar = pasarApuesta(T,Jugadores);
 			else {
@@ -302,6 +309,10 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 						if (jugador_gana == true)
 						{
 							cout << "Jugador Gana" << endl;
+							money = T.apuesta + Jugadores[0].getDinero();
+							Jugadores[0].setDinero(money);
+							Jugadores[0].resetApuesta();
+							Jugadores[1].resetApuesta();
 							T.finRonda(Jugadores[0], Jugadores[1]);
 							cout << "Dinero actual jugador: " << Jugadores[0].getDinero() << endl;
 							cout << "Dinero actual oponente: " << Jugadores[1].getDinero() << endl;
@@ -310,6 +321,10 @@ void jugarPartida(Mesa T, carta* c, jugador* Jugadores) {
 						else
 						{
 							cout << "Oponente Gana" << endl;
+							money = T.apuesta + Jugadores[1].getDinero();
+							Jugadores[1].setDinero(money);
+							Jugadores[0].resetApuesta();
+							Jugadores[1].resetApuesta();
 							T.finRonda(Jugadores[1], Jugadores[0]);
 							cout << "Dinero actual jugador: " << Jugadores[0].getDinero() << endl;
 							cout << "Dinero actual oponente: " << Jugadores[1].getDinero() << endl;

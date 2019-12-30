@@ -6,11 +6,11 @@ class Mesa
 {
 protected:
 	int indiceMazo = 0, indiceTablero = 0, indiceQuemada = 0, indiceRonda = 0;
-	float apuesta = 0;
+	
 public:
 	carta* Tablero = new carta[5];
 	carta* Quemada = new carta[3];
-	
+	float apuesta = 0;
 	
 	char tablero_juego[11][26];
 
@@ -41,10 +41,10 @@ public:
 	void resetIndiceRonda();
 	void upIndiceRonda();
 	int getIndiceRonda();
-	void setapuesta(float f);
-	float getapuesta();
+	//void setapuesta(float f);
+	//float getapuesta();
 	void CalculaApuestaTotal(jugador* J);
-	void resetapuesta();
+	//void resetapuesta();
 	bool continuar();
 
 

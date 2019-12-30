@@ -82,20 +82,20 @@ void Mesa::cartaQuemada(carta* Mazo)
 	upIndiceMazo(); 
 	upIndiceQuemada();
 }
-void Mesa::setapuesta(float f)
-{
-	apuesta = f;
-	cout << "Apuesta total: " << apuesta << endl;
-}
-
-void Mesa::resetapuesta()
-{
-	apuesta = 0;
-}
-float Mesa::getapuesta()
-{
-	return apuesta;
-}
+//void Mesa::setapuesta(float f)
+//{
+//	apuesta = f;
+//	cout << "Apuesta total: " << apuesta << endl;
+//}
+//
+//void Mesa::resetapuesta()
+//{
+//	apuesta = 0;
+//}
+//float Mesa::getapuesta()
+//{
+//	return apuesta;
+//}
 //void Mesa::recogerApuesta(jugador j)
 //{
 //	float Apuesta = j.getApuesta();
@@ -105,19 +105,20 @@ float Mesa::getapuesta()
 
 void Mesa::entregarApuesta(jugador j)
 {
-	float dinero_act = j.getDinero(), auxApuesta= getapuesta();
-	j.setDinero(dinero_act + auxApuesta);
-	resetapuesta();
+	float dinero_act = j.getDinero(); // auxApuesta = getapuesta();
+	j.setDinero(dinero_act + apuesta);
+	apuesta = 0;
 }
 
 void Mesa::finRonda(jugador winner, jugador loser)
 {
 	
-	float total = winner.getDinero() + getapuesta();
-	winner.setDinero(total);
-	winner.resetApuesta();
-	loser.resetApuesta();
-	resetapuesta();
+	//float total = winner.getDinero() + apuesta;
+	//float actual = winner.getDinero();
+	//winner.dinero = actual + total;
+	//winner.resetApuesta();
+	//loser.resetApuesta();
+	apuesta = 0;//resetapuesta();
 	resetIndiceMazo();
 	resetIndiceQuemada();
 	resetIndiceRonda();
@@ -314,13 +315,23 @@ void Mesa::modificaTablero(jugador* Jugadores)
 		tablero_juego[4][19] = conversorNumero(Tablero[4]);
 		tablero_juego[4][20] = conversorPalo(Tablero[4]);
 	}
+    
+    if (indiceRonda != 0 && indiceRonda != 4)
+    {
+        float apuesta = Jugadores[1].getApuesta();
+        apuesta = apuesta + 50;
+        Jugadores[1].setApuesta(apuesta);
+    }
+    
+    float apuestaTotal = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
+    //setapuesta(apuestaTotal);
+	apuesta = apuestaTotal;
 }
 
 void Mesa::imprimirTablero(jugador* Jugadores)
 {
 	system("cls");
 	cout << "RONDA" << getIndiceRonda() << endl;
-	int auxRonda = getIndiceRonda();
 	for (int i = 0; i < 11; i++)
 	{
 		for (int j = 0; j < 26; j++)
@@ -329,25 +340,18 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 		}
 		cout << endl;
 	}
-	if (auxRonda != 0 && auxRonda != 4)
-	{
-		float apuesta = Jugadores[1].getApuesta();
-		apuesta = apuesta + 50;
-		Jugadores[1].setApuesta(apuesta);
-	}
 	cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
 	cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
 	cout << "Dinero actual en juego:" << Jugadores[0].getApuesta() + Jugadores[1].getApuesta() << endl;
-	cout << "Apuesta total: " << getapuesta() << endl;
-
-
+	cout << "Apuesta total: " << apuesta << endl;
 }
 
 void Mesa::CalculaApuestaTotal(jugador* J)
 {
 	float total = 0;
 	total = J[0].getApuesta() + J[1].getApuesta();
-	setapuesta(total);
+	//setapuesta(total);
+	apuesta = total;
 }
 
 
