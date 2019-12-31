@@ -148,15 +148,15 @@ void jugador::ValorManoInicial() { // Chen formula
 	valor_mano = aux;
 	valorNumericoMano();
 }
-void jugador::ValorManoR1(carta* c) {
+void jugador::ValorManoR1(Mesa T) {
 
 	carta* jugada = new carta[5];
 
 	jugada[0] = mano[0];
 	jugada[1] = mano[1];
-	jugada[2] = c[0];
-	jugada[3] = c[1];
-	jugada[4] = c[2];
+	jugada[2] = T.Tablero[0];
+	jugada[3] = T.Tablero[1];
+	jugada[4] = T.Tablero[2];
 
 	carta aux;
 
@@ -188,36 +188,30 @@ void jugador::ValorManoR1(carta* c) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	
-
-	
-	
-
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i<5; i++)
 	{
-		c[i].imprimeCarta();
+		jugada[i].imprimeCarta();
 	}
-
-	valor_mano = calcularValorJugada(mejor_jugada);
+	valor_mano = calcularValorJugada(jugada,5);
 
 }
-void jugador::ValorManoR2(carta* c) {
+void jugador::ValorManoR2(Mesa T) {
 	carta* jugada = new carta[6];
 	jugada[0] = mano[0];
 	jugada[1] = mano[1];
-	jugada[2] = c[0];
-	jugada[3] = c[1];
-	jugada[4] = c[2];
-	jugada[5] = c[3];
+	jugada[2] = T.Tablero[0];
+	jugada[3] = T.Tablero[1];
+	jugada[4] = T.Tablero[2];
+	jugada[5] = T.Tablero[3];
 	carta aux;
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (jugada[i].getNumero() == 1)
 		{
 			jugada[i].setNumero(14);
 		}
-		for (int k = i + 1; k < 5; k++)
+		for (int k = i + 1; k < 6; k++)
 		{
 			if (jugada[k].getNumero() == 1)
 			{
@@ -233,32 +227,36 @@ void jugador::ValorManoR2(carta* c) {
 		}
 	}
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		mejor_jugada[i] = jugada[i];
 	}
 
-	valor_mano = calcularValorJugada(mejor_jugada);
+	for (int i = 0; i < 6; i++)
+	{
+		jugada[i].imprimeCarta();
+	}
+	valor_mano = calcularValorJugada(jugada,6);
 
 }
-void jugador::ValorManoR3(carta* c) {
+void jugador::ValorManoR3(Mesa T) {
 	carta* jugada = new carta[7];
 	jugada[0] = mano[0];
 	jugada[1] = mano[1];
-	jugada[2] = c[0];
-	jugada[3] = c[1];
-	jugada[4] = c[2];
-	jugada[5] = c[3];
-	jugada[6] = c[4];
+	jugada[2] = T.Tablero[0];
+	jugada[3] = T.Tablero[1];
+	jugada[4] = T.Tablero[2];
+	jugada[5] = T.Tablero[3];
+	jugada[6] = T.Tablero[4];
 	carta aux;
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		if (jugada[i].getNumero() == 1)
 		{
 			jugada[i].setNumero(14);
 		}
-		for (int k = i + 1; k < 5; k++)
+		for (int k = i + 1; k < 7; k++)
 		{
 			if (jugada[k].getNumero() == 1)
 			{
@@ -274,12 +272,12 @@ void jugador::ValorManoR3(carta* c) {
 		}
 	}
 
-	for (int i = 0; i < 5; i++)
+	
+	for (int i = 0; i < 7; i++)
 	{
-		mejor_jugada[i] = jugada[i];
+		jugada[i].imprimeCarta();
 	}
-
-	valor_mano = calcularValorJugada(mejor_jugada);
+	valor_mano = calcularValorJugada(jugada,7);
 
 }
 
@@ -326,10 +324,10 @@ void jugador::imprimeMano()
 }
 
 
-float jugador::calcularValorJugada(carta* c)
+float jugador::calcularValorJugada(carta* c, int i)
 {
 	float jugada = 0;
-	int tamano = sizeof(c);
+	int tamano = 0;
 	int n_rep_n = 0;
 	int n_rep_p = 0;
 	int n_rep[3] = { 0,0,0 };
@@ -339,8 +337,9 @@ float jugador::calcularValorJugada(carta* c)
 	int k = 0;
 	int seguidos = 1;
 	
+	tamano = i;
 
-
+	std::cout << "size of: " << tamano << std::endl;
 
 
 
