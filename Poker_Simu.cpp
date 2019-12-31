@@ -219,36 +219,24 @@ void calcularValorjugador(Mesa T, jugador* J, int Ronda)
 	}
 	else if (Ronda == 1)
 	{
-		carta* aux = new carta[3];
-		for (int i = 0; i < 3; i++)
-		{
-			aux[i] = T.Tablero[i];
-		}
-
-		J[0].ValorManoR1(aux);
-		J[1].ValorManoR1(aux);
+		cout << " jugador: " << endl;
+		J[0].ValorManoR1(T.Tablero);
+		cout << " oponente: " << endl;
+		J[1].ValorManoR1(T.Tablero);
 	}
 	else if (Ronda == 2)
 	{
-		carta* aux = new carta[4];
-		for (int i = 0; i < 4; i++)
-		{
-			aux[i] = T.Tablero[i];
-		}
-
-		J[0].ValorManoR2(aux);
-		J[1].ValorManoR2(aux);
+		cout << " jugador: " << endl;
+		J[0].ValorManoR2(T.Tablero);
+		cout << " oponente: " << endl;
+		J[1].ValorManoR2(T.Tablero);
 	}
 	else if (Ronda == 3)
 	{
-		carta* aux = new carta[5];
-		for (int i = 0; i < 5; i++)
-		{
-			aux[i] = T.Tablero[i];
-		}
-
-		J[0].ValorManoR3(aux);
-		J[1].ValorManoR3(aux);
+		cout << " jugador: " << endl;
+		J[0].ValorManoR3(T.Tablero);
+		cout << " oponente: " << endl;
+		J[1].ValorManoR3(T.Tablero);
 	}
 
 }

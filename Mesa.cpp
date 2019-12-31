@@ -4,6 +4,8 @@
 #include <array>
 #include <string>
 #include <time.h>
+#include <random>
+#include <chrono>
 using namespace std;
 
 Mesa::Mesa()
@@ -178,12 +180,14 @@ carta* Mesa::crearMazo()
 
 carta* Mesa::barajar(carta* mazo)
 {
-	srand(NULL); //sustituir por semirandom
+	
+	unsigned semilla = std::chrono::system_clock::now().time_since_epoch().count();
+	std::minstd_rand srng(semilla);
 
 	int N = 52;
 	for (int i = N - 1; i > 0; i--)
 	{
-		int r = rand() % (i + 1);
+		int r = srng() % (i + 1);
 		std::swap(mazo[i], mazo[r]);
 	}
 	return mazo;

@@ -5,9 +5,9 @@ class jugador
 {
 protected:
 	carta* mano = new carta[2];
-	carta* mejor_jugada = new carta[5];
+	
 	float apuesta = 0;
-	float valor_mano = 0;
+	
 	float valor_num_mano = 0;
 	bool Escalera_Real_posible;
 	bool poker_posible;
@@ -28,6 +28,8 @@ protected:
 	bool doble_pareja_obtenida;
 	bool pareja_obtenida;
 public:
+	carta* mejor_jugada = new carta[5];
+	float valor_mano = 0;
 	float dinero = 0;
 	jugador();
 	~jugador();

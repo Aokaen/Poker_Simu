@@ -44,7 +44,7 @@ void carta::imprimeCarta()
 	else if (palo == 4)
 		Palo_escrito = "Corazones";
 
-	if (numero == 1)
+	if (numero == 1 || numero == 14)
 		Numero_escrito = "As";
 	else if (numero == 11)
 		Numero_escrito = "Jota";
