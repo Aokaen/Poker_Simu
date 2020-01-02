@@ -188,10 +188,7 @@ void jugador::ValorManoR1(Mesa T) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	for (int i = 0; i<5; i++)
-	{
-		jugada[i].imprimeCarta();
-	}
+	
 	valor_mano = calcularValorJugada(jugada,5);
 
 }
@@ -232,10 +229,7 @@ void jugador::ValorManoR2(Mesa T) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	for (int i = 0; i < 6; i++)
-	{
-		jugada[i].imprimeCarta();
-	}
+	
 	valor_mano = calcularValorJugada(jugada,6);
 
 }
@@ -273,10 +267,7 @@ void jugador::ValorManoR3(Mesa T) {
 	}
 
 	
-	for (int i = 0; i < 7; i++)
-	{
-		jugada[i].imprimeCarta();
-	}
+	
 
 	valor_mano = calcularValorJugada(jugada,7);
 
@@ -356,23 +347,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 	bool up = false;
 	tamano = i;
 
-	if (tamano == 7)
-	{
-		c[0].setNumero(14);
-		c[1].setNumero(13);
-		c[2].setNumero(12);
-		c[3].setNumero(11);
-		c[4].setNumero(10);
-		c[5].setNumero(9);
-		c[6].setNumero(5);
-		c[0].setPalo(4);
-		c[1].setPalo(1);
-		c[2].setPalo(1);
-		c[3].setPalo(1);
-		c[4].setPalo(1);
-		c[5].setPalo(1);
-		c[6].setPalo(1);
-	}
 
 	
 
@@ -595,6 +569,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 	int carta_trio = 0;
 	int carta_pareja = 0;
 	int c_alta_escalera = 0;
+	int c_alta_escalera_color = 0;
 	int palo_color = 0;
 	int c_c[7] = { 0,0,0,0,0,0,0 };
 	int c_alta_doble = 0, c_baja_doble = 0;
@@ -607,30 +582,31 @@ float jugador::calcularValorJugada(carta* c, int i)
 
 	if (n_rep_n == 1)
 	{
-		pareja_obtenida = true;
+		
+
 		if (n_aparicion[0] == 2)
 		{
+			pareja_obtenida = true;
 			carta_pareja = n_rep[0];
 		}
 		else if (n_aparicion[0] == 3)
 		{
 			trio_obtenida = true;
-			pareja_obtenida = false;
 			carta_trio = n_rep[0];
 		}
 		else if (n_aparicion[0] == 4)
 		{
 			poker_obtenida = true;
-			pareja_obtenida = false;
 			carta_poker = n_rep[0];
 		}
 	}
 	else if (n_rep_n == 2)
 	{
-		doble_pareja_obtenida = true;
+		
 		{
 			if (n_aparicion[0] == 2 && n_aparicion[1] == 2)
 			{
+				doble_pareja_obtenida = true;
 				if (n_rep[0] > n_rep[1])
 				{
 					c_alta_doble = n_rep[0];
@@ -645,14 +621,12 @@ float jugador::calcularValorJugada(carta* c, int i)
 			else if (n_aparicion[0] == 3 && n_aparicion[1] == 2)
 			{
 				full_obtenida = true;
-				doble_pareja_obtenida = false;
 				carta_trio = n_rep[0];
 				carta_pareja = n_rep[1];
 			}
 			else if (n_aparicion[0] == 2 && n_aparicion[1] == 3)
 			{
 				full_obtenida = true;
-				doble_pareja_obtenida = false;
 				carta_trio = n_rep[1];
 				carta_pareja = n_rep[0];
 			}
@@ -776,7 +750,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 		for (int i = 0; i < tamano - 1; i++)
 		{
 			gap_aux = (c[i].getNumero() - c[i + 1].getNumero());
-			if (gap_aux == 1 && k_e < 4)
+			if (gap_aux == 1 && k_e < 6)
 			{
 				escalera[k_e] = c[i].getNumero();
 				escalera[k_e + 1] = c[i + 1].getNumero();
@@ -806,18 +780,20 @@ float jugador::calcularValorJugada(carta* c, int i)
 			escalera[2] = 4;
 			escalera[3] = 3;
 			escalera[4] = 2;
+			c_alta_escalera = escalera[0];
 		}
+		
 	}
 
 	if (escalera_obtenida == true && color_obtenida == true)
 	{
 		for (int i = 0; i < 7; i++)
 		{
-			for (int k = 0; k < 7; k++)
+			for (int j = 0; j < 7; j++)
 			{
-				if (c_c[k] == escalera[i])
+				if (c_c[j] == escalera[i])
 				{
-					if(c_c[k]!=0)
+					if(c_c[j]!=0)
 					conteo++;
 				}
 			}
@@ -830,6 +806,18 @@ float jugador::calcularValorJugada(carta* c, int i)
 
 	if (escalera_color_obtenida == true)
 	{
+		for (int i = 0; i < 7; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (c_c[j] == escalera[i])
+				{
+					if (c_alta_escalera_color == 0)
+						c_alta_escalera_color = c_c[j];
+
+				}
+			}
+		}
 		for (int i = 0; i < 5; i++)
 		{
 			if (escalera[i] == escalera_real[i])
@@ -843,15 +831,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 		}
 	}
 
-	std::cout << "Escalera real: " << Escalera_Real_obtenida << std::endl;
-	std::cout << "poker: "<< poker_obtenida << std::endl;
-	std::cout << "escalera_color: " << escalera_color_obtenida << std::endl;
-	std::cout << "Full: "<<full_obtenida << std::endl;
-	std::cout << "Escalera: "<<escalera_obtenida << std::endl;
-	std::cout << "Color: "<<color_obtenida << std::endl;
-	std::cout << "Trio: "<<trio_obtenida << std::endl;
-	std::cout << "Doble Pareja: "<<doble_pareja_obtenida << std::endl;
-	std::cout << "Pareja: "<<pareja_obtenida << std::endl;
 
 
 	//calculo de valor de jugada
@@ -862,7 +841,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 	}
 	else if (escalera_color_obtenida == true)
 	{
-		jugada = 8 + c_alta_escalera * 0.01 + valor_num_mano * 0.01;
+		jugada = 8 + c_alta_escalera_color * 0.01 + valor_num_mano * 0.01;
 	}
 	else if (poker_obtenida == true)
 	{
@@ -897,7 +876,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 		jugada = 0 + valor_num_mano;
 	}
 
-	std::cout << "valor jugada en función: " << jugada << std::endl;
 	return jugada;
 
 	

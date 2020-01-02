@@ -10,6 +10,18 @@
 
 using namespace std;
 
+bool AllIn(jugador j, float qty) {
+	float dinero = j.getDinero();
+	if (dinero <= qty)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 carta* ordenarMano(carta* c) {
 	carta aux;
 	for (int i = 0; i < 7; i++)
@@ -47,7 +59,8 @@ bool jugadorGana(Mesa T, jugador* Jugadores) {
 	float Jug = 0, opo = 0;
 	Jug = jugada(T, Jugadores[0]);
 	opo = jugada(T, Jugadores[1]);
-
+	cout << "Valor jugada Jugador: " << Jug << endl;
+	cout << "Valor jugada Oponente: " << opo << endl;
 	if (Jug > opo)
 		return true;
 	else
@@ -58,20 +71,27 @@ void apuestaInicial(Mesa T, jugador* Jugadores) {
 	cout << "Introduzca el valor inicial de la apuesta:";
 	cin >> bid;
 	cout << endl;
-	if (bid > Jugadores[0].getDinero())
+	bool All_In_jug = false, All_In_Opo = false;
+	All_In_jug = AllIn(Jugadores[0], bid);
+	All_In_Opo = AllIn(Jugadores[1], bid);
+
+	if (All_In_jug == true)
 	{
 		cout << "ALL IN JUGADOR" << endl;
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
 	}
-	else if (bid > Jugadores[1].getDinero())
+	else
+	{
+		Jugadores[0].setApuesta(bid);
+	}
+	 if (All_In_Opo == true)
 	{
 		cout << "ALL IN OPONENTE" << endl;
 		Jugadores[1].setApuesta(Jugadores[1].getDinero());
 	}
 	else
 	{
-		Jugadores[0].setApuesta(bid);
-		Jugadores[1].setApuesta(bid * 2);// A CAMBIAR CON LA NUEVA IMPLEMENTACION
+		Jugadores[1].setApuesta(bid * 2);// A CAMBIAR CON LA IMPLEMENTACION DE ML
 	}
 }
 bool pasarApuesta(Mesa T, jugador* Jugadores) {
@@ -93,12 +113,12 @@ bool pasarApuesta(Mesa T, jugador* Jugadores) {
 
 bool comprobarDinero(jugador* J)
 {
+
 	if (J[0].getApuesta() == J[1].getApuesta())
-		
 	{
 		return true;
 	}
-	else if (J[0].getDinero() == 0 || J[1].getDinero() <= 0)
+	else if (J[0].getDinero() == 0 || J[1].getDinero() == 0)
 	{
 		return true;
 	}
@@ -110,21 +130,53 @@ bool comprobarDinero(jugador* J)
 
 }
 void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
-	if (qty >= Jugadores[0].getDinero())
+	bool AllInopo = false;
+	bool AllInjug = false;
+	AllInjug = AllIn(Jugadores[0], qty);
+	AllInopo = AllIn(Jugadores[1], qty);
+	if (Jugadores[0].getDinero() == 0)
 	{
+		cout << "Jugador no puede apostar, está en All In" << endl;
+	}
+	else if (AllInjug==true)
+	{
+		cout << "ALL IN JUGADOR" << endl;
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
 	}
 	else
 	{
 		Jugadores[0].setApuesta(qty);
 	}
+	
+	if (Jugadores[1].getDinero() == 0)
+	{
+		cout << "Oponente no puede apostar, está en All In" << endl;
+	}
+	
 	//codigo a cambiar con la nueva implementacion
-	Jugadores[1].setApuesta(qty);
+	else if (AllInopo == true)
+	{
+		cout << "ALL IN OPONENTE" << endl;
+		Jugadores[1].setApuesta(Jugadores[1].getDinero());
+	}
+	else
+	{
+		Jugadores[1].setApuesta(qty);
+	}
 	
 }
-void verApuesta(Mesa T, jugador* Jugadores) {
-	if (Jugadores[1].getApuesta() > Jugadores[0].getDinero())
+void verApuesta(Mesa T, jugador* Jugadores) { // A retocar con la implementacion de R
+	bool AllInjug = false;
+	float qty = Jugadores[1].getApuesta();
+	AllInjug = AllIn(Jugadores[0], qty);
+	
+	if (Jugadores[0].getDinero() == 0)
 	{
+		cout << "Jugador no puede apostar, está en All In" << endl;
+	}
+	else if (AllInjug==true)
+	{
+		cout << "ALL IN JUGADOR" << endl;
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
 	}
 	else
@@ -219,23 +271,18 @@ void calcularValorjugador(Mesa T, jugador* J, int Ronda)
 	}
 	else if (Ronda == 1)
 	{
-		cout << " jugador: " << endl;
 		J[0].ValorManoR1(T);
-		cout << " oponente: " << endl;
 		J[1].ValorManoR1(T);
 	}
 	else if (Ronda == 2)
 	{
-		cout << " jugador: " << endl;
+		
 		J[0].ValorManoR2(T);
-		cout << " oponente: " << endl;
 		J[1].ValorManoR2(T);
 	}
 	else if (Ronda == 3)
 	{
-		cout << " jugador: " << endl;
 		J[0].ValorManoR3(T);
-		cout << " oponente: " << endl;
 		J[1].ValorManoR3(T);
 	}
 
