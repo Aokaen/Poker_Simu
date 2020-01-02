@@ -220,23 +220,23 @@ void calcularValorjugador(Mesa T, jugador* J, int Ronda)
 	else if (Ronda == 1)
 	{
 		cout << " jugador: " << endl;
-		J[0].ValorManoR1(T.Tablero);
+		J[0].ValorManoR1(T);
 		cout << " oponente: " << endl;
-		J[1].ValorManoR1(T.Tablero);
+		J[1].ValorManoR1(T);
 	}
 	else if (Ronda == 2)
 	{
 		cout << " jugador: " << endl;
-		J[0].ValorManoR2(T.Tablero);
+		J[0].ValorManoR2(T);
 		cout << " oponente: " << endl;
-		J[1].ValorManoR2(T.Tablero);
+		J[1].ValorManoR2(T);
 	}
 	else if (Ronda == 3)
 	{
 		cout << " jugador: " << endl;
-		J[0].ValorManoR3(T.Tablero);
+		J[0].ValorManoR3(T);
 		cout << " oponente: " << endl;
-		J[1].ValorManoR3(T.Tablero);
+		J[1].ValorManoR3(T);
 	}
 
 }

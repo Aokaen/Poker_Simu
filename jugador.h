@@ -1,5 +1,6 @@
 #pragma once
 #include "carta.h"
+#include "Mesa.h"
 
 class jugador
 {
@@ -30,6 +31,9 @@ protected:
 public:
 	carta* mejor_jugada = new carta[5];
 	float valor_mano = 0;
+	float valor_mano_r1 = 0;
+	float valor_mano_r2 = 0;
+	float valor_mano_r3 = 0;
 	float dinero = 0;
 	jugador();
 	~jugador();
@@ -46,10 +50,11 @@ public:
 	void valorNumericoMano();
 	void resetear_bool();
 	void ValorManoInicial();
-	void ValorManoR1(carta* c);
-	void ValorManoR2(carta* c);
-	void ValorManoR3(carta* c);
-	float calcularValorJugada(carta* c);
+	void ValorManoR1(Mesa T);
+	void ValorManoR2(Mesa T);
+	void ValorManoR3(Mesa T);
+	float calcularValorJugada(carta* c, int i);
+	void reseteo_obtenidas();
 	void imprimeMano();
 
 	friend class Mesa;
