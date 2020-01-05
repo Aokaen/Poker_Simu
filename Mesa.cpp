@@ -322,9 +322,12 @@ void Mesa::modificaTablero(jugador* Jugadores)
     
     if (indiceRonda != 0 && indiceRonda != 4)
     {
-        float apuesta = Jugadores[1].getApuesta();
-        apuesta = apuesta + 50;
-        Jugadores[1].setApuesta(apuesta);
+		if (Jugadores[1].getAll() == false)
+		{
+			float apuesta = Jugadores[1].getApuesta();
+			apuesta = apuesta + 50;
+			Jugadores[1].setApuesta(apuesta);
+		}
     }
     
     float apuestaTotal = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();

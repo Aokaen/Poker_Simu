@@ -28,6 +28,7 @@ protected:
 	bool trio_obtenida;
 	bool doble_pareja_obtenida;
 	bool pareja_obtenida;
+	bool AllIn;
 public:
 	carta* mejor_jugada = new carta[5];
 	float valor_mano = 0;
@@ -35,6 +36,7 @@ public:
 	float valor_mano_r2 = 0;
 	float valor_mano_r3 = 0;
 	float dinero = 0;
+	
 	jugador();
 	~jugador();
 	void setMano(carta c1, carta c2);
@@ -56,6 +58,8 @@ public:
 	float calcularValorJugada(carta* c, int i);
 	void reseteo_obtenidas();
 	void imprimeMano();
+	bool getAll();
+	void setAll(bool b);
 
 	friend class Mesa;
 

@@ -10,15 +10,17 @@
 
 using namespace std;
 
-bool AllIn(jugador j, float qty) {
+void AllIn(jugador j, float qty) {
 	float dinero = j.getDinero();
-	if (dinero <= qty)
+	float apuesta = j.getApuesta();
+	float diferencia = qty - apuesta;
+	if (dinero <= diferencia)
 	{
-		return true;
+		j.setAll(true);
 	}
 	else
 	{
-		return false;
+		j.setAll(false);
 	}
 }
 
@@ -71,11 +73,12 @@ void apuestaInicial(Mesa T, jugador* Jugadores) {
 	cout << "Introduzca el valor inicial de la apuesta:";
 	cin >> bid;
 	cout << endl;
-	bool All_In_jug = false, All_In_Opo = false;
-	All_In_jug = AllIn(Jugadores[0], bid);
-	All_In_Opo = AllIn(Jugadores[1], bid);
+	AllIn(Jugadores[0], bid);
+	AllIn(Jugadores[1], bid);
+	bool AllInJugador = Jugadores[0].getAll();
+	bool AllInOponente = Jugadores[1].getAll();
 
-	if (All_In_jug == true)
+	if (AllInJugador == true)
 	{
 		cout << "ALL IN JUGADOR" << endl;
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
@@ -84,7 +87,7 @@ void apuestaInicial(Mesa T, jugador* Jugadores) {
 	{
 		Jugadores[0].setApuesta(bid);
 	}
-	 if (All_In_Opo == true)
+	 if (AllInOponente == true)
 	{
 		cout << "ALL IN OPONENTE" << endl;
 		Jugadores[1].setApuesta(Jugadores[1].getDinero());
@@ -130,15 +133,13 @@ bool comprobarDinero(jugador* J)
 
 }
 void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
-	bool AllInopo = false;
-	bool AllInjug = false;
-	AllInjug = AllIn(Jugadores[0], qty);
-	AllInopo = AllIn(Jugadores[1], qty);
-	if (Jugadores[0].getDinero() == 0)
-	{
-		cout << "Jugador no puede apostar, está en All In" << endl;
-	}
-	else if (AllInjug==true)
+	
+	AllIn(Jugadores[0], qty);
+	AllIn(Jugadores[1], qty);
+	bool AllInJugador = Jugadores[0].getAll();
+	bool AllInOponente = Jugadores[1].getAll();
+
+	if (AllInJugador==true)
 	{
 		cout << "ALL IN JUGADOR" << endl;
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
@@ -148,13 +149,10 @@ void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
 		Jugadores[0].setApuesta(qty);
 	}
 	
-	if (Jugadores[1].getDinero() == 0)
-	{
-		cout << "Oponente no puede apostar, está en All In" << endl;
-	}
+	
 	
 	//codigo a cambiar con la nueva implementacion
-	else if (AllInopo == true)
+	if (AllInOponente == true)
 	{
 		cout << "ALL IN OPONENTE" << endl;
 		Jugadores[1].setApuesta(Jugadores[1].getDinero());
@@ -166,15 +164,15 @@ void subirApuesta(float qty, Mesa T, jugador* Jugadores) {
 	
 }
 void verApuesta(Mesa T, jugador* Jugadores) { // A retocar con la implementacion de R
-	bool AllInjug = false;
 	float qty = Jugadores[1].getApuesta();
-	AllInjug = AllIn(Jugadores[0], qty);
+	AllIn(Jugadores[0], qty);
+	bool AllInJugador = Jugadores[0].getAll();
 	
 	if (Jugadores[0].getDinero() == 0)
 	{
 		cout << "Jugador no puede apostar, está en All In" << endl;
 	}
-	else if (AllInjug==true)
+	else if (AllInJugador==true)
 	{
 		cout << "ALL IN JUGADOR" << endl;
 		Jugadores[0].setApuesta(Jugadores[0].getDinero());
@@ -193,6 +191,9 @@ bool apostar(Mesa T, jugador* Jugadores)
 	float entrada_cantidad;
 	float total = 0;
 	bool apuesta_ok = false;
+	bool AllInJugador = Jugadores[0].getAll();
+	bool AllInOponente = Jugadores[1].getAll();
+	
 	
 	do {
 		cout << "¿Desea Apostar (A) o Pasar (P)?" << endl;
@@ -205,42 +206,70 @@ bool apostar(Mesa T, jugador* Jugadores)
 		{
 			pasar = false;
 			do {
-				if (Jugadores[1].getApuesta() > Jugadores[0].getApuesta())
+				if (AllInJugador == true)
 				{
-
-					cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
+					cout << "El jugador no puede apostar, ya que ha hecho All In" << endl;
+					apuesta_ok = comprobarDinero(Jugadores);
 				}
-				cin >> entrada_apuesta;
-				if (entrada_apuesta == 'V')
+				else if (AllInOponente == true)
 				{
+					cout << "El jugador no puede apostar, ya que el oponente ha hecho All In" << endl;
 					verApuesta(T, Jugadores);
 					apuesta_ok = comprobarDinero(Jugadores);
 				}
-				else if (entrada_apuesta == 'S')
-				{
-					do {
-						cout << "Introduzca la nueva apuesta:";
-						cin >> entrada_cantidad;
-						cout << endl;
-						if (entrada_cantidad > Jugadores[1].getApuesta())
-						{
-							subirApuesta(entrada_cantidad, T, Jugadores);
-							apuesta_ok = comprobarDinero(Jugadores);
-						}
-						else
-						{
-							cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
-						}
-					} while (apuesta_ok==false);
+				else{
+					if (Jugadores[1].getApuesta() > Jugadores[0].getApuesta())
+					{
+
+						cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
+					}
+					cin >> entrada_apuesta;
+					if (entrada_apuesta == 'V')
+					{
+						verApuesta(T, Jugadores);
+						apuesta_ok = comprobarDinero(Jugadores);
+					}
+					else if (entrada_apuesta == 'S')
+					{
+						do {
+							if (AllInJugador== true)
+							{
+								cout << "El jugador no puede apostar, ya que ha hecho All In" << endl;
+								apuesta_ok = comprobarDinero(Jugadores);
+							}
+							else if (AllInOponente == true)
+							{
+								cout << "El jugador no puede apostar, ya que el oponente ha hecho All In" << endl;
+								verApuesta(T, Jugadores);
+								apuesta_ok = comprobarDinero(Jugadores);
+								
+							}
+							else
+							{
+								cout << "Introduzca la nueva apuesta:";
+								cin >> entrada_cantidad;
+								cout << endl;
+								if (entrada_cantidad > Jugadores[1].getApuesta())
+								{
+									subirApuesta(entrada_cantidad, T, Jugadores);
+									apuesta_ok = comprobarDinero(Jugadores);
+								}
+								else
+								{
+									cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
+								}
+							}
+						} while (apuesta_ok == false);
+
+					}
+
+					else
+					{
+						cout << "Error. Introduzca V si quiere Ver la apuesta o S para subir la apuesta" << endl;
+					}
 
 				}
-
-				else
-				{
-					cout << "Error. Introduzca V si quiere Ver la apuesta o S para subir la apuesta" << endl;
-				}
-			
-
+				
 			} while (apuesta_ok==false);
 			
 			

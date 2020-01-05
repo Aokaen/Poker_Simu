@@ -5,7 +5,7 @@
 
 jugador::jugador()
 {
-
+	AllIn = false;
 }
 jugador::~jugador()
 {
@@ -305,6 +305,16 @@ void jugador::resetApuesta()
 float jugador::getApuesta()
 {
 	return apuesta;
+}
+
+void jugador::setAll(bool v)
+{
+	AllIn = v;
+}
+
+bool jugador::getAll() 
+{
+	return AllIn;
 }
 
 void jugador::imprimeMano()
