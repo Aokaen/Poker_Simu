@@ -63,6 +63,6 @@ void carta::imprimeCarta()
 
 void carta::operator<<(carta c)
 {
-	imprimeCarta();
+	c.imprimeCarta();
 }
 

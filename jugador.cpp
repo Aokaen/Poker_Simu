@@ -108,15 +108,15 @@ void jugador::ValorManoInicial() { // Chen formula
 	if (gap == 0)
 	{
 		aux = aux * 2;
-		if (c_alta > 11)
+		if (c_alta <= 11)
 		{
-			aux++;
+			aux= 5;
 		}
 	}
 	else if (gap == 1)
 	{
 		aux = aux ;
-		if (c_alta > 11)
+		if (c_alta < 11)
 		{
 			aux++;
 		}
@@ -124,6 +124,10 @@ void jugador::ValorManoInicial() { // Chen formula
 	else if (gap == 2)
 	{
 		aux = aux - 1;
+		if (c_alta < 11)
+		{
+			aux++;
+		}
 	}
 	else if (gap == 3)
 	{
@@ -143,7 +147,7 @@ void jugador::ValorManoInicial() { // Chen formula
 		aux = aux + 2;
 	}
 
-	aux = roundf(aux);
+	
 
 	valor_mano = aux;
 	valorNumericoMano();
@@ -296,7 +300,15 @@ void jugador::setApuesta(float ap)
 	apuesta = ap;
 	setDinero(dinero - diferencia);
 }
+void jugador::setApuestaInicial(float ap)
+{
+	apuestaInicial = ap;
+}
 
+float jugador::getApuestaInicial()
+{
+	return apuestaInicial;
+}
 void jugador::resetApuesta()
 {
 	apuesta = 0;
@@ -356,9 +368,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 	int seguidos = 1;
 	bool up = false;
 	tamano = i;
-
-
-	
 
 	for (int i = 0; i < tamano - 1; i++)
 	{
@@ -433,24 +442,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 	}
 
 	
-	//std::cout << "Palo: " << std::endl;
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	std::cout << "Numero: " << n_rep[i] << std::endl;
-	//	std::cout << "Veces: " << n_aparicion[i] << std::endl;
-	//}
 
-	//std::cout << "Colores: " << std::endl;
-
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	std::cout << "Palo: " << palos[i] <<std::endl;
-	//	std::cout << "veces: " << n_palos[i] <<std::endl;
-	//}
-
-	//std::cout << "Cartas seguidas: " << seguidos << std::endl;
-
-	//eliminación de jugadas posibles
 	for (int i = 0; i < 4; i++)
 	{
 		if (n_palos[i] > 1)
@@ -785,11 +777,12 @@ float jugador::calcularValorJugada(carta* c, int i)
 		if (c[6].getNumero() == 2 && c[5].getNumero() == 3 && c[4].getNumero() == 4 && c[3].getNumero() == 5)
 		{
 			escalera_obtenida = true;
-			escalera[0] = 14;
-			escalera[1] = 5;
-			escalera[2] = 4;
-			escalera[3] = 3;
-			escalera[4] = 2;
+			escalera[0] = 5;
+			escalera[1] = 4;
+			escalera[2] = 3;
+			escalera[3] = 2;
+			escalera[4] = 14;
+			
 			c_alta_escalera = escalera[0];
 		}
 		
@@ -841,6 +834,9 @@ float jugador::calcularValorJugada(carta* c, int i)
 		}
 	}
 
+	float kicker = 0;
+	k = 0;
+	int j = 0;
 
 
 	//calculo de valor de jugada
@@ -851,39 +847,98 @@ float jugador::calcularValorJugada(carta* c, int i)
 	}
 	else if (escalera_color_obtenida == true)
 	{
-		jugada = 8 + c_alta_escalera_color * 0.01 + valor_num_mano * 0.01;
+		jugada = 8 + c_alta_escalera_color * 0.01;
 	}
 	else if (poker_obtenida == true)
 	{
-		jugada = 7 + carta_poker * 0.01 + valor_num_mano * 0.01;
+		do {
+			if (c[k].getNumero() != carta_poker)
+			{
+				kicker = c[k].getNumero();
+			}
+			else
+			{
+				k++;
+			}
+		} while (kicker == 0);
+		jugada = 7 + carta_poker * 0.01 + kicker * 0.0001;
 	}
 	else if (full_obtenida == true)
 	{
-		jugada = 6 + carta_trio * 0.01 + carta_pareja * 0.0001 + valor_num_mano * 0.0001;
+		jugada = 6 + carta_trio * 0.01 + carta_pareja * 0.0001;
 	}
 	else if (color_obtenida == true)
 	{
-		jugada = 5 + c_c[0] * 0.01 + c_c[1] * 0.0001 + c_c[2] * 0.000001 + c_c[3] * 0.00000001 + c_c[4] * 0.0000000001 + valor_num_mano * 0.0000000001;
+		jugada = 5 + c_c[0] * 0.01 + c_c[1] * 0.0001 + c_c[2] * 0.000001 + c_c[3] * 0.00000001 + c_c[4] * 0.0000000001;
 	}
 	else if (escalera_obtenida == true)
 	{
-		jugada = 4 + c_alta_escalera * 0.01 + valor_num_mano * 0.01;
+		jugada = 4 + c_alta_escalera * 0.01;
 	}
 	else if (trio_obtenida == true)
 	{
-		jugada = 3 + carta_trio * 0.01 + valor_num_mano * 0.01;
+		do {
+			if (c[k].getNumero() != carta_trio)
+			{
+				if (j == 0)
+				{
+					kicker = kicker + c[k].getNumero() * 0.0001;
+				}
+				if (j == 1)
+				{
+					kicker = kicker + c[k].getNumero() * 0.000001;
+				}
+				j++;
+			}
+			
+				k++;
+		} while (j < 2);
+		jugada = 3 + carta_trio * 0.01 + kicker ;
 	}
 	else if (doble_pareja_obtenida == true)
 	{
-		jugada = 2 + c_alta_doble * 0.01 + c_baja_doble * 0.0001 + valor_num_mano * 0.0001;
+		do {
+			if (c[k].getNumero() != c_alta_doble && c[k].getNumero() != c_baja_doble)
+			{
+				kicker = c[k].getNumero();
+			}
+			else
+			{
+				k++;
+			}
+		} while (kicker == 0);
+		jugada = 2 + c_alta_doble * 0.01 + c_baja_doble * 0.0001 + kicker * 0.000001;
 	}
 	else if (pareja_obtenida == true)
 	{
-		jugada = 1 + carta_pareja * 0.01 + valor_num_mano * 0.01;
+		do {
+			do {
+				if (c[k].getNumero() != carta_pareja)
+				{
+					if (j == 0)
+					{
+						kicker = kicker + c[k].getNumero()*0.0001;
+					}
+					if (j == 1)
+					{
+						kicker = kicker + c[k].getNumero() * 0.000001;
+					}
+					if (j == 2)
+					{
+						kicker = kicker + c[k].getNumero() * 0.00000001;
+					}
+					j++;
+				}
+
+				k++;
+			} while (j < 3);
+
+		} while (kicker == 0);
+		jugada = 1 + carta_pareja * 0.01 + kicker;
 	}
 	else
 	{
-		jugada = 0 + valor_num_mano;
+		jugada = 0 + c[0].getNumero()*0.01 + c[1].getNumero() * 0.0001 + c[2].getNumero() * 0.000001 + c[3].getNumero() * 0.00000001 + c[4].getNumero() * 0.0000000001;
 	}
 
 	return jugada;

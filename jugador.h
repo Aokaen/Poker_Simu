@@ -8,6 +8,7 @@ protected:
 	carta* mano = new carta[2];
 	
 	float apuesta = 0;
+	float apuestaInicial = 0;
 	
 	float valor_num_mano = 0;
 	bool Escalera_Real_posible;
@@ -48,6 +49,8 @@ public:
 	//void setValor(float i); una vez implementada la heuristica
 	float getApuesta();
 	void setApuesta(float ap);
+	void setApuestaInicial(float ap);
+	float getApuestaInicial();
 	void resetApuesta();
 	void valorNumericoMano();
 	void resetear_bool();

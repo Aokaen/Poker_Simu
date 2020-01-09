@@ -112,7 +112,7 @@ void Mesa::entregarApuesta(jugador j)
 	apuesta = 0;
 }
 
-void Mesa::finRonda(jugador winner, jugador loser)
+void Mesa::finRonda()
 {
 	
 	//float total = winner.getDinero() + apuesta;
@@ -383,7 +383,7 @@ char Mesa::conversorNumero(carta c)
 	}
 	else if (c.getNumero() == 10)
 	{ 
-		salida = 'X';
+		salida = 'T';
 	}
 	else
 	{

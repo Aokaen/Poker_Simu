@@ -23,7 +23,7 @@ public:
 	void cartaQuemada(carta* mazo);
 	//void recogerApuesta(jugador j);
 	void entregarApuesta(jugador j);
-	void finRonda(jugador winner, jugador loser);
+	void finRonda();
 	void creaTablero();
 	void modificaTablero(jugador* j);
 	void imprimirTablero(jugador* j);
