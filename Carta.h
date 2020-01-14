@@ -22,7 +22,7 @@ public:
 	void imprimirCarta();
     
 	void operator <<(Carta c);
-	friend class jugador;
+	friend class Jugador;
 	friend class Mesa;
     
 };

@@ -23,36 +23,42 @@ public:
     
 	Carta* crearMazo();
 	Carta* barajar(Carta* c);
-    
 	void repartirCartas(Jugador* j, Carta* mazo, Carta* tablero, Carta* Quemada);
-	void cartaTablero(Carta* mazo);
-	void cartaQuemada(Carta* mazo);
-	//void recogerApuesta(jugador j);
-	void entregarApuesta(Jugador j);
-	void finRonda();
+
 	void creaTablero();
 	void modificaTablero(Jugador* j);
 	void imprimirTablero(Jugador* j);
-	char conversorNumero(Carta c);
-	char conversorPalo(Carta c);
+
+	void cartaTablero(Carta* mazo);
+	void cartaQuemada(Carta* mazo);
+	
+	void entregarApuesta(Jugador j);
+	void finRonda();
+
+
 	void resetIndiceTablero();
 	void upIndiceTablero();
 	int getIndiceTablero();
+
 	void resetIndiceMazo();
 	void upIndiceMazo();
 	int getIndiceMazo();
+
 	void resetIndiceQuemada();
 	void upIndiceQuemada();
 	int getIndiceQuemada();
+
 	void resetIndiceRonda();
 	void upIndiceRonda();
 	int getIndiceRonda();
-	//void setapuesta(float f);
-	//float getapuesta();
+
 	void CalculaApuestaTotal(Jugador* J);
-	//void resetapuesta();
+
 	bool continuar();
 
-	friend class jugador;
+	char conversorNumero(Carta c);
+	char conversorPalo(Carta c);
+
+	friend class Jugador;
     
 };

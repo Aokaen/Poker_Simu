@@ -13,6 +13,8 @@ Carta::~Carta()
 {
 }
 
+// Numero de carta
+
 int Carta::getNumero()
 {
     return numero;
@@ -23,6 +25,8 @@ void Carta::setNumero(int N)
 	numero = N;
 }
 
+// Palo de carta
+
 int Carta::getPalo()
 {
     return palo;
@@ -32,6 +36,8 @@ void Carta::setPalo(int P)
 {
 	palo = P;
 }
+
+//Funcion para imprimir el valor y el palo de una carta
 
 void Carta::imprimirCarta()
 {
@@ -77,7 +83,9 @@ void Carta::imprimirCarta()
 	cout << "La carta es " << numero_escrito << " de " << palo_escrito << "." << endl;
 }
 
-void Carta::operator<<(Carta c)
+//Sobrecarga de operador << para imprimir una carta
+
+void Carta::operator<<(Carta c) 
 {
 	c.imprimirCarta();
 }

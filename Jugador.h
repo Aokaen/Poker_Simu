@@ -24,6 +24,8 @@ protected:
 	bool trio_posible;
 	bool doble_pareja_posible;
 	bool pareja_posible;
+
+
 	bool escalera_real_obtenida;
 	bool poker_obtenida;
 	bool escalera_color_obtenida;
@@ -33,6 +35,7 @@ protected:
 	bool trio_obtenida;
 	bool doble_pareja_obtenida;
 	bool pareja_obtenida;
+
 	bool AllIn;
     
 public:
@@ -43,6 +46,7 @@ public:
 	float valor_mano_r1 = 0;
 	float valor_mano_r2 = 0;
 	float valor_mano_r3 = 0;
+
 	float dinero = 0;
 	
 	Jugador();
@@ -71,7 +75,6 @@ public:
 	void resetApuesta();
     void resetObtenidas();
 
-	void valorNumericoMano();
 	void valorManoInicial();
 	void valorManoR1(Mesa T);
 	void valorManoR2(Mesa T);

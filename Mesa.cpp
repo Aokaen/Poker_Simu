@@ -20,11 +20,12 @@ Mesa::~Mesa()
 
 }
 
+
 void Mesa::repartirCartas(Jugador* J, Carta* Mazo, Carta* tablero, Carta* Quemada)
 {
 	int aux = 0;
 	aux = getIndiceMazo();
-	for (int i = 0; i < 2; i++) //cambiar el valor de i<2 cuando se añadan mas jugadores
+	for (int i = 0; i < 2; i++) 
 	{
 		J[i].setMano(Mazo[aux], Mazo[aux + 1]);
 		aux = aux + 2;

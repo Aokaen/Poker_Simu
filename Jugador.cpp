@@ -130,44 +130,8 @@ void Jugador::resetObtenidas()
 
 // Valores
 
-void Jugador::valorNumericoMano()
-{
-    int c_alta = 0;
-    int c_baja = 0;
 
-    if (mano[0].getNumero() == mano[1].getNumero())
-    {
-        c_alta = mano[0].getNumero();
-        c_baja = mano[0].getNumero();
-    }
-    
-    if (mano[0].getNumero() == 1)
-    {
-        c_alta = 14;
-        c_baja = mano[1].getNumero();
-    }
-    else if (mano[1].getNumero() == 1)
-    {
-        c_alta = 14;
-        c_baja = mano[0].getNumero();
-    }
-    else {
-        if (mano[0].getNumero() > mano[1].getNumero())
-        {
-            c_alta = mano[0].getNumero();
-            c_baja = mano[1].getNumero();
-        }
-        else
-        {
-            c_alta = mano[1].getNumero();
-            c_baja = mano[0].getNumero();
-        }
-    }
-    
-    valor_num_mano = c_alta * 0.01 + c_baja * 0.0001;
-}
-
-void Jugador::valorManoInicial() // Chen formula
+void Jugador::valorManoInicial() // Calculo del valor de la Mano inicial según la fórmula de Chen
 {
 	float aux = 0;
 	float c_alta = 0, gap = -1;
@@ -272,10 +236,10 @@ void Jugador::valorManoInicial() // Chen formula
 	}
 
 	valor_mano = aux;
-	valorNumericoMano();
+	
 }
 
-void Jugador::valorManoR1(Mesa T)
+void Jugador::valorManoR1(Mesa T) // Calculo del valor de la mano en el Flop
 {
 	Carta* jugada = new Carta[5];
 
@@ -316,7 +280,7 @@ void Jugador::valorManoR1(Mesa T)
 	valor_mano = calcularValorJugada(jugada,5);
 }
 
-void Jugador::valorManoR2(Mesa T)
+void Jugador::valorManoR2(Mesa T) // Calculo del valor de la mano en el Turn
 {
 	Carta* jugada = new Carta[6];
 	jugada[0] = mano[0];
@@ -357,7 +321,7 @@ void Jugador::valorManoR2(Mesa T)
 	valor_mano = calcularValorJugada(jugada,6);
 }
 
-void Jugador::valorManoR3(Mesa T)
+void Jugador::valorManoR3(Mesa T)// Calculo del valor de la mano en el River
 {
 	Carta* jugada = new Carta[7];
 	jugada[0] = mano[0];
@@ -394,7 +358,7 @@ void Jugador::valorManoR3(Mesa T)
 	valor_mano = calcularValorJugada(jugada,7);
 }
 
-float Jugador::calcularValorJugada(Carta* c, int i)
+float Jugador::calcularValorJugada(Carta* c, int i) //Funcion del calculo del valor de la jugada
 {
 	float jugada = 0;
 	int tamano = 0;
@@ -404,15 +368,13 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 	int n_rep_p = 0;
 	int p_max = 1;
 	int n_rep[3] = { 0,0,0 };
-	//int p_rep[3] = { 0,0,0 };
 	int n_aparicion[3] = { 1,1,1 };
-	//int p_aparicion[3] = { 1,1,1 };
 	int k = 0;
 	int seguidos = 1;
 	bool up = false;
 	tamano = i;
     
-    // -
+    // Determinar los numeros repetidos y si hay escalera o no
 
 	for (int i = 0; i < tamano - 1; i++)
 	{
@@ -461,7 +423,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // -
+    // Determinar el numero de cartas de cada palo
 
 	for (int i = 0; i < tamano; i++)
 	{
@@ -483,7 +445,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
 
-    // -
+    // Determinar el palo de mas repetido
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -497,7 +459,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
 
-    // -
+    // Descartar jugadas posibles
 
 	if (tamano == 5)
 	{
@@ -607,7 +569,9 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-	// Mejor jugada actual
+	// Calculo de la puntuacion de la jugada actual
+
+	//inicializacion de las variables y reset de los bools de jugadas obtenidas
     
 	int carta_poker = 0;
 	int carta_trio = 0;
@@ -625,7 +589,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
     
 	resetObtenidas();
     
-    // -
+    // Determinar que jugada se ha obtenido segun las cartas repetidas (Pareja, trio, doble pareja, full house o poker), cada caso indica el numero de cartas distintas repetidas
 
 	if (n_rep_n == 1)
 	{
@@ -754,7 +718,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // -
+    // Comprueba si alguno de los palos llega a tener minimo 5 cartas de ese palo
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -765,7 +729,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // -
+    // Se crea un array con los valores ordenados del palo de Color
 
 	if (color_obtenida == true)
 	{
@@ -791,7 +755,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // -
+    // En el caso de que haya escalera, se crea un array con los valores numericos de la escalera y se determina el valor mas alto de la escalera
 
 	if (seguidos >= 5)
 	{
@@ -819,9 +783,15 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 		c_alta_escalera = escalera[0];
 	}
+	// Caso concreto de la escalera baja (5432A)
 	else if (c[0].getNumero() == 14)
 	{
-		if (c[6].getNumero() == 2 && c[5].getNumero() == 3 && c[4].getNumero() == 4 && c[3].getNumero() == 5)
+		int a=0, b=0, h=0, d=0;
+		a = tamano - 1;
+		b = tamano - 2;
+		h = tamano - 3;
+		d = tamano - 4;
+		if (c[a].getNumero() == 2 && c[b].getNumero() == 3 && c[h].getNumero() == 4 && c[d].getNumero() == 5)
 		{
 			escalera_obtenida = true;
 			escalera[0] = 5;
@@ -833,7 +803,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // -
+    // Si se da que hay escalera y color a la vez, comprobar si hay una escalera de color
 
 	if (escalera_obtenida == true && color_obtenida == true)
 	{
@@ -854,7 +824,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // -
+    // Si se da el caso de una escalera de color, comprobar si hay escalera real
 
 	if (escalera_color_obtenida == true)
 	{
@@ -883,7 +853,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 		}
 	}
     
-    // Cálculo de valor de jugada
+    // Cálculo de valor numerico de jugada
 
 	float kicker = 0;
 	k = 0;
@@ -891,7 +861,7 @@ float Jugador::calcularValorJugada(Carta* c, int i)
 
 	if (escalera_real_obtenida == true)
 	{
-		jugada = 9 + valor_num_mano;
+		jugada = 9;
 	}
 	else if (escalera_color_obtenida == true)
 	{
