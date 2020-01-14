@@ -1,68 +1,83 @@
-#include "carta.h"
+#include "Carta.h"
+
 #include <iostream>
 #include <string>
+
 using namespace std;
 
-carta::carta()
+Carta::Carta()
 {
 }
 
-carta::~carta()
+Carta::~Carta()
 {
 }
 
-void carta::setNumero(int N)
+int Carta::getNumero()
+{
+    return numero;
+}
+
+void Carta::setNumero(int N)
 {
 	numero = N;
 }
 
-void carta::setPalo(int P)
+int Carta::getPalo()
+{
+    return palo;
+}
+
+void Carta::setPalo(int P)
 {
 	palo = P;
 }
 
-int carta::getNumero()
+void Carta::imprimirCarta()
 {
-	return numero;
+    string numero_escrito;
+
+    switch (numero)
+    {
+        case 1:
+            numero_escrito = "As";
+            break;
+        case 11:
+            numero_escrito = "Jota";
+            break;
+        case 12:
+            numero_escrito = "Reina";
+            break;
+        case 13:
+            numero_escrito = "Rey";
+            break;
+        case 14:
+            numero_escrito = "As";
+            break;
+    }
+    
+	string palo_escrito;
+    
+    switch (palo)
+    {
+        case 1:
+            palo_escrito = "Treboles";
+            break;
+        case 2:
+            palo_escrito = "Picas";
+            break;
+        case 3:
+            palo_escrito = "Diamantes";
+            break;
+        case 4:
+            palo_escrito = "Corazones";
+            break;
+    }
+
+	cout << "La carta es " << numero_escrito << " de " << palo_escrito << "." << endl;
 }
 
-int carta::getPalo()
+void Carta::operator<<(Carta c)
 {
-	return palo;
+	c.imprimirCarta();
 }
-
-void carta::imprimeCarta()
-{
-	string Palo_escrito;
-	string Numero_escrito;
-	if (palo == 1)
-		Palo_escrito = "Treboles";
-	else if (palo == 2)
-		Palo_escrito = "Picas";
-	else if (palo == 3)
-		Palo_escrito = "Diamantes";
-	else if (palo == 4)
-		Palo_escrito = "Corazones";
-
-	if (numero == 1 || numero == 14)
-		Numero_escrito = "As";
-	else if (numero == 11)
-		Numero_escrito = "Jota";
-	else if (numero == 12)
-		Numero_escrito = "Reina";
-	else if (numero == 13)
-		Numero_escrito = "Rey";
-	else
-	{
-		Numero_escrito = to_string(numero);
-	}
-
-
-	cout << "La carta es " << Numero_escrito << " de " << Palo_escrito<< "." << endl;
-}
-
-void carta::operator<<(carta c)
-{
-	c.imprimeCarta();
-}
-

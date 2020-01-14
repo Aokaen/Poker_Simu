@@ -1,23 +1,28 @@
 #pragma once
 
-
-class carta
+class Carta
 {
+    
 protected:
+    
 	int palo=0;
 	int numero=0;
+    
 public:
-	carta();// class constructor
-	~carta();// class destructor
-	int getNumero();//función para obtener el número de la carta
-	int getPalo();// función para obtener el palo de la carta
-	void setNumero(int N);
+    
+	Carta();
+	~Carta();
+    
+	int getNumero();
+    void setNumero(int N);
+
+	int getPalo();
 	void setPalo(int P);
-	void imprimeCarta();
-	void operator <<(carta c);
+    
+	void imprimirCarta();
+    
+	void operator <<(Carta c);
 	friend class jugador;
 	friend class Mesa;
-	
+    
 };
-
-

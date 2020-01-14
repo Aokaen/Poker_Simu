@@ -1,31 +1,96 @@
-#include "jugador.h"
-#include "carta.h"
+#include "Jugador.h"
+
+#include "Carta.h"
+#include "Mesa.h"
+
 #include <math.h>
 #include <iostream>
 
-jugador::jugador()
+Jugador::Jugador()
 {
 	AllIn = false;
 }
-jugador::~jugador()
+
+Jugador::~Jugador()
 {
 
 }
 
-void jugador::setMano(carta c1, carta c2)
+// Mano
+
+Carta* Jugador::getMano()
+{
+    return mano;
+}
+
+void Jugador::setMano(Carta c1, Carta c2)
 {
 	mano[0] = c1;
 	mano[1] = c2;
 }
 
-void jugador::setDinero(float d)
+// Dinero
+
+float Jugador::getDinero()
+{
+    return dinero;
+}
+
+void Jugador::setDinero(float d)
 {
 	dinero = d;
 }
 
-void jugador::resetear_bool() {
+// Valor
 
-	Escalera_Real_posible = true;
+float Jugador::getValor()
+{
+    return valor_mano;
+}
+
+// Apuesta
+
+float Jugador::getApuesta()
+{
+    return apuesta;
+}
+
+void Jugador::setApuesta(float ap)
+{
+    float diferencia = ap - apuesta;
+    apuesta = ap;
+    setDinero(dinero - diferencia);
+}
+
+// Apuesta inicial
+
+float Jugador::getApuestaInicial()
+{
+    return apuestaInicial;
+}
+
+void Jugador::setApuestaInicial(float ap)
+{
+    apuestaInicial = ap;
+}
+
+// AllIn
+
+bool Jugador::getAllIn()
+{
+    return AllIn;
+}
+
+void Jugador::setAllIn(bool v)
+{
+    AllIn = v;
+}
+
+// Resets
+
+void Jugador::resetBool()
+{
+	escalera_real_posible = true;
 	poker_posible = true;
 	escalera_color_posible = true;
 	full_posible = true;
@@ -34,7 +99,7 @@ void jugador::resetear_bool() {
 	trio_posible = true;
 	doble_pareja_posible = true;
 	pareja_posible = true;
-	Escalera_Real_obtenida = false;
+	escalera_real_obtenida = false;
 	poker_obtenida = false;
 	escalera_color_obtenida = false;
 	full_obtenida = false;
@@ -44,7 +109,66 @@ void jugador::resetear_bool() {
 	doble_pareja_obtenida = false;
 	pareja_obtenida = false;
 }
-void jugador::ValorManoInicial() { // Chen formula
+
+void Jugador::resetApuesta()
+{
+    apuesta = 0;
+}
+
+void Jugador::resetObtenidas()
+{
+    escalera_real_obtenida = false;
+    poker_obtenida = false;
+    escalera_color_obtenida = false;
+    full_obtenida = false;
+    escalera_obtenida = false;
+    color_obtenida = false;
+    trio_obtenida = false;
+    doble_pareja_obtenida = false;
+    pareja_obtenida = false;
+}
+
+// Valores
+
+void Jugador::valorNumericoMano()
+{
+    int c_alta = 0;
+    int c_baja = 0;
+
+    if (mano[0].getNumero() == mano[1].getNumero())
+    {
+        c_alta = mano[0].getNumero();
+        c_baja = mano[0].getNumero();
+    }
+    
+    if (mano[0].getNumero() == 1)
+    {
+        c_alta = 14;
+        c_baja = mano[1].getNumero();
+    }
+    else if (mano[1].getNumero() == 1)
+    {
+        c_alta = 14;
+        c_baja = mano[0].getNumero();
+    }
+    else {
+        if (mano[0].getNumero() > mano[1].getNumero())
+        {
+            c_alta = mano[0].getNumero();
+            c_baja = mano[1].getNumero();
+        }
+        else
+        {
+            c_alta = mano[1].getNumero();
+            c_baja = mano[0].getNumero();
+        }
+    }
+    
+    valor_num_mano = c_alta * 0.01 + c_baja * 0.0001;
+}
+
+void Jugador::valorManoInicial() // Chen formula
+{
 	float aux = 0;
 	float c_alta = 0, gap = -1;
 
@@ -55,7 +179,8 @@ void jugador::ValorManoInicial() { // Chen formula
 		{
 			gap = 0;
 		}
-		else {
+		else
+        {
 			if (mano[0].getNumero() == 1)
 			{
 				gap = 14 - mano[1].getNumero();
@@ -76,7 +201,6 @@ void jugador::ValorManoInicial() { // Chen formula
 		c_alta = mano[1].getNumero();
 		gap = mano[1].getNumero() - mano[0].getNumero();
 	}
-
 	else
 	{
 		c_alta = mano[0].getNumero();
@@ -147,14 +271,13 @@ void jugador::ValorManoInicial() { // Chen formula
 		aux = aux + 2;
 	}
 
-	
-
 	valor_mano = aux;
 	valorNumericoMano();
 }
-void jugador::ValorManoR1(Mesa T) {
 
-	carta* jugada = new carta[5];
+void Jugador::valorManoR1(Mesa T)
+{
+	Carta* jugada = new Carta[5];
 
 	jugada[0] = mano[0];
 	jugada[1] = mano[1];
@@ -162,7 +285,7 @@ void jugador::ValorManoR1(Mesa T) {
 	jugada[3] = T.Tablero[1];
 	jugada[4] = T.Tablero[2];
 
-	carta aux;
+	Carta aux;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -176,7 +299,6 @@ void jugador::ValorManoR1(Mesa T) {
 			{
 				jugada[k].setNumero(14);
 			}
-
 			if (jugada[i].getNumero() < jugada[k].getNumero())
 			{
 				aux = jugada[i];
@@ -185,26 +307,26 @@ void jugador::ValorManoR1(Mesa T) {
 			}
 		}
 	}
-
 	
 	for (int i = 0; i < 5; i++)
 	{
 		mejor_jugada[i] = jugada[i];
 	}
-
 	
 	valor_mano = calcularValorJugada(jugada,5);
-
 }
-void jugador::ValorManoR2(Mesa T) {
-	carta* jugada = new carta[6];
+
+void Jugador::valorManoR2(Mesa T)
+{
+	Carta* jugada = new Carta[6];
 	jugada[0] = mano[0];
 	jugada[1] = mano[1];
 	jugada[2] = T.Tablero[0];
 	jugada[3] = T.Tablero[1];
 	jugada[4] = T.Tablero[2];
 	jugada[5] = T.Tablero[3];
-	carta aux;
+    
+	Carta aux;
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -218,7 +340,6 @@ void jugador::ValorManoR2(Mesa T) {
 			{
 				jugada[k].setNumero(14);
 			}
-
 			if (jugada[i].getNumero() < jugada[k].getNumero())
 			{
 				aux = jugada[i];
@@ -233,12 +354,12 @@ void jugador::ValorManoR2(Mesa T) {
 		mejor_jugada[i] = jugada[i];
 	}
 
-	
 	valor_mano = calcularValorJugada(jugada,6);
-
 }
-void jugador::ValorManoR3(Mesa T) {
-	carta* jugada = new carta[7];
+
+void Jugador::valorManoR3(Mesa T)
+{
+	Carta* jugada = new Carta[7];
 	jugada[0] = mano[0];
 	jugada[1] = mano[1];
 	jugada[2] = T.Tablero[0];
@@ -246,7 +367,8 @@ void jugador::ValorManoR3(Mesa T) {
 	jugada[4] = T.Tablero[2];
 	jugada[5] = T.Tablero[3];
 	jugada[6] = T.Tablero[4];
-	carta aux;
+    
+	Carta aux;
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -260,7 +382,6 @@ void jugador::ValorManoR3(Mesa T) {
 			{
 				jugada[k].setNumero(14);
 			}
-
 			if (jugada[i].getNumero() < jugada[k].getNumero())
 			{
 				aux = jugada[i];
@@ -270,88 +391,10 @@ void jugador::ValorManoR3(Mesa T) {
 		}
 	}
 
-	
-	
-
 	valor_mano = calcularValorJugada(jugada,7);
-
 }
 
-
-carta* jugador::getMano()
-{
-	return mano;
-}
-
-float jugador::getDinero()
-{
-	return dinero;
-}
-
-float jugador::getValor()
-{
-	return valor_mano;
-}
-
-void jugador::setApuesta(float ap)
-{
-	
-	float diferencia = ap - apuesta;
-	apuesta = ap;
-	setDinero(dinero - diferencia);
-}
-void jugador::setApuestaInicial(float ap)
-{
-	apuestaInicial = ap;
-}
-
-float jugador::getApuestaInicial()
-{
-	return apuestaInicial;
-}
-void jugador::resetApuesta()
-{
-	apuesta = 0;
-}
-
-float jugador::getApuesta()
-{
-	return apuesta;
-}
-
-void jugador::setAll(bool v)
-{
-	AllIn = v;
-}
-
-bool jugador::getAll() 
-{
-	return AllIn;
-}
-
-void jugador::imprimeMano()
-
-{
-	mano[0].imprimeCarta();
-	mano[1].imprimeCarta();
-
-}
-
-void jugador::reseteo_obtenidas()
-{
-	Escalera_Real_obtenida = false;
-	poker_obtenida = false;
-	escalera_color_obtenida = false;
-	full_obtenida = false;
-	escalera_obtenida = false;
-	color_obtenida = false;
-	trio_obtenida = false;
-	doble_pareja_obtenida = false;
-	pareja_obtenida = false;
-}
-
-
-float jugador::calcularValorJugada(carta* c, int i)
+float Jugador::calcularValorJugada(Carta* c, int i)
 {
 	float jugada = 0;
 	int tamano = 0;
@@ -368,6 +411,8 @@ float jugador::calcularValorJugada(carta* c, int i)
 	int seguidos = 1;
 	bool up = false;
 	tamano = i;
+    
+    // -
 
 	for (int i = 0; i < tamano - 1; i++)
 	{
@@ -400,8 +445,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 					else
 						k++;
 				} while (up==false);
-
-				
 			}
 		}
 		
@@ -416,11 +459,10 @@ float jugador::calcularValorJugada(carta* c, int i)
 				seguidos = 1;
 			}
 		}
-
-
 	}
+    
+    // -
 
-	
 	for (int i = 0; i < tamano; i++)
 	{
 		if (c[i].getPalo() == palos[0])
@@ -441,7 +483,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 		}
 	}
 
-	
+    // -
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -455,6 +497,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 		}
 	}
 
+    // -
 
 	if (tamano == 5)
 	{
@@ -463,12 +506,11 @@ float jugador::calcularValorJugada(carta* c, int i)
 			poker_posible = false;
 			full_posible = false;
 		}
-
 		if (n_rep_p == 2)
 		{
 			color_posible = false;
 			escalera_color_posible = false;
-			Escalera_Real_posible = false;
+			escalera_real_posible = false;
 		}
 	}
 	else if (tamano == 6)
@@ -500,18 +542,17 @@ float jugador::calcularValorJugada(carta* c, int i)
 		{
 			poker_posible = false;
 		}
-
 		if (n_rep_p >= 2)
 		{
 			color_posible = false;
 			escalera_color_posible = false;
-			Escalera_Real_posible = false;
+			escalera_real_posible = false;
 		}
 		else if (n_rep_p == 1 && p_max < 4)
 		{
 			color_posible = false;
 			escalera_color_posible = false;
-			Escalera_Real_posible = false;
+			escalera_real_posible = false;
 		}
 	}
 	else if (tamano == 7)
@@ -520,7 +561,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 		{
 			escalera_color_posible = false;
 			escalera_posible = false;
-			Escalera_Real_posible = false;
+			escalera_real_posible = false;
 		}
 		if (n_rep_n == 0)
 		{
@@ -549,12 +590,11 @@ float jugador::calcularValorJugada(carta* c, int i)
 		{
 			poker_posible = false;
 		}
-
 		if (n_rep_p == 3)
 		{
 			color_posible = false;
 			escalera_color_posible = false;
-			Escalera_Real_posible = false;
+			escalera_real_posible = false;
 		}
 		else
 		{
@@ -562,11 +602,13 @@ float jugador::calcularValorJugada(carta* c, int i)
 			{
 				color_posible = false;
 				escalera_color_posible = false;
-				Escalera_Real_posible = false;
+				escalera_real_posible = false;
 			}
 		}
 	}
-	//mejor jugada actual
+    
+	// Mejor jugada actual
+    
 	int carta_poker = 0;
 	int carta_trio = 0;
 	int carta_pareja = 0;
@@ -580,12 +622,13 @@ float jugador::calcularValorJugada(carta* c, int i)
 	int escalera[7] = { 0,0,0,0,0,0,0 };
 	int escalera_real[5] = { 14,13,12,11,10 };
 	int conteo = 0, conteo_real = 0;
-	reseteo_obtenidas();
+    
+	resetObtenidas();
+    
+    // -
 
 	if (n_rep_n == 1)
 	{
-		
-
 		if (n_aparicion[0] == 2)
 		{
 			pareja_obtenida = true;
@@ -604,7 +647,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 	}
 	else if (n_rep_n == 2)
 	{
-		
 		{
 			if (n_aparicion[0] == 2 && n_aparicion[1] == 2)
 			{
@@ -645,7 +687,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 					carta_trio = n_rep[1];
 					carta_pareja = n_rep[0];
 				}
-
 			}
 			else if (n_aparicion[0] == 4 || n_aparicion[1] == 4)
 			{
@@ -659,7 +700,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 					carta_poker = n_rep[1];
 				}
 			}
-
 		}
 	}
 	else if (n_rep_n == 3)
@@ -713,6 +753,8 @@ float jugador::calcularValorJugada(carta* c, int i)
 			}
 		}
 	}
+    
+    // -
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -722,6 +764,9 @@ float jugador::calcularValorJugada(carta* c, int i)
 			palo_color = palos[i];
 		}
 	}
+    
+    // -
+
 	if (color_obtenida == true)
 	{
 		for (int i = 0; i < tamano; i++)
@@ -745,6 +790,8 @@ float jugador::calcularValorJugada(carta* c, int i)
 			}
 		}
 	}
+    
+    // -
 
 	if (seguidos >= 5)
 	{
@@ -782,11 +829,11 @@ float jugador::calcularValorJugada(carta* c, int i)
 			escalera[2] = 3;
 			escalera[3] = 2;
 			escalera[4] = 14;
-			
 			c_alta_escalera = escalera[0];
 		}
-		
 	}
+    
+    // -
 
 	if (escalera_obtenida == true && color_obtenida == true)
 	{
@@ -806,6 +853,8 @@ float jugador::calcularValorJugada(carta* c, int i)
 			escalera_color_obtenida = true;
 		}
 	}
+    
+    // -
 
 	if (escalera_color_obtenida == true)
 	{
@@ -830,20 +879,19 @@ float jugador::calcularValorJugada(carta* c, int i)
 		}
 		if (conteo_real == 5)
 		{
-			Escalera_Real_obtenida = true;
+			escalera_real_obtenida = true;
 		}
 	}
+    
+    // Cálculo de valor de jugada
 
 	float kicker = 0;
 	k = 0;
 	int j = 0;
 
-
-	//calculo de valor de jugada
-	if (Escalera_Real_obtenida == true)
+	if (escalera_real_obtenida == true)
 	{
 		jugada = 9 + valor_num_mano;
-		
 	}
 	else if (escalera_color_obtenida == true)
 	{
@@ -890,8 +938,7 @@ float jugador::calcularValorJugada(carta* c, int i)
 				}
 				j++;
 			}
-			
-				k++;
+            k++;
 		} while (j < 2);
 		jugada = 3 + carta_trio * 0.01 + kicker ;
 	}
@@ -932,7 +979,6 @@ float jugador::calcularValorJugada(carta* c, int i)
 
 				k++;
 			} while (j < 3);
-
 		} while (kicker == 0);
 		jugada = 1 + carta_pareja * 0.01 + kicker;
 	}
@@ -942,45 +988,10 @@ float jugador::calcularValorJugada(carta* c, int i)
 	}
 
 	return jugada;
-
-	
 }
 
-
-
-
-
-void jugador::valorNumericoMano() {
-	int c_alta = 0;
-	int c_baja = 0;
-
-	if (mano[0].getNumero() == mano[1].getNumero())
-	{
-		c_alta = mano[0].getNumero();
-		c_baja = mano[0].getNumero();
-	}
-	if (mano[0].getNumero() == 1)
-	{
-		c_alta = 14;
-		c_baja = mano[1].getNumero();
-	}
-	else if (mano[1].getNumero() == 1)
-	{
-		c_alta = 14;
-		c_baja = mano[0].getNumero();
-	}
-	else {
-		if (mano[0].getNumero() > mano[1].getNumero())
-		{
-			c_alta = mano[0].getNumero();
-			c_baja = mano[1].getNumero();
-		}
-		else
-		{
-			c_alta = mano[1].getNumero();
-			c_baja = mano[0].getNumero();
-		}
-	}
-	valor_num_mano = c_alta * 0.01 + c_baja * 0.0001;
+void Jugador::imprimirMano()
+{
+    mano[0].imprimirCarta();
+    mano[1].imprimirCarta();
 }
-
