@@ -1,4 +1,5 @@
 #include "Mesa.h"
+
 #include <stdlib.h>
 #include <iostream>
 #include <array>
@@ -6,17 +7,20 @@
 #include <time.h>
 #include <random>
 #include <chrono>
+
 using namespace std;
 
 Mesa::Mesa()
 {
 	
 }
+
 Mesa::~Mesa()
 {
 
 }
-void Mesa::repartirCartas(jugador* J, carta* Mazo, carta* tablero, carta* Quemada)
+
+void Mesa::repartirCartas(Jugador* J, Carta* Mazo, Carta* tablero, Carta* Quemada)
 {
 	int aux = 0;
 	aux = getIndiceMazo();
@@ -39,10 +43,9 @@ void Mesa::repartirCartas(jugador* J, carta* Mazo, carta* tablero, carta* Quemad
 	Quemada[2] = Mazo[aux];
 	aux++;
 	tablero[4] = Mazo[aux];
-
 }
 
-void Mesa::cartaTablero(carta* Mazo)
+void Mesa::cartaTablero(Carta* Mazo)
 {
 	int auxRonda = 0, auxTablero = 0, auxMazo = 0;
 	auxRonda = getIndiceRonda();
@@ -67,13 +70,12 @@ void Mesa::cartaTablero(carta* Mazo)
 	}
 }
 
-void Mesa::cartaQuemada(carta* Mazo)
+void Mesa::cartaQuemada(Carta* Mazo)
 {
 	int auxRonda = 0, auxQuemada = 0, auxMazo = 0;
 	auxRonda = getIndiceRonda();
 	auxQuemada = getIndiceQuemada();
 	auxMazo = getIndiceMazo();
-
 	if(auxRonda==1)
 	{
 		upIndiceMazo();
@@ -84,6 +86,7 @@ void Mesa::cartaQuemada(carta* Mazo)
 	upIndiceMazo(); 
 	upIndiceQuemada();
 }
+
 //void Mesa::setapuesta(float f)
 //{
 //	apuesta = f;
@@ -105,7 +108,7 @@ void Mesa::cartaQuemada(carta* Mazo)
 //	j.resetApuesta();
 //}
 
-void Mesa::entregarApuesta(jugador j)
+void Mesa::entregarApuesta(Jugador j)
 {
 	float dinero_act = j.getDinero(); // auxApuesta = getapuesta();
 	j.setDinero(dinero_act + apuesta);
@@ -114,7 +117,6 @@ void Mesa::entregarApuesta(jugador j)
 
 void Mesa::finRonda()
 {
-	
 	//float total = winner.getDinero() + apuesta;
 	//float actual = winner.getDinero();
 	//winner.dinero = actual + total;
@@ -125,18 +127,14 @@ void Mesa::finRonda()
 	resetIndiceQuemada();
 	resetIndiceRonda();
 	resetIndiceTablero();
-	
-
-	
 }
 
 bool Mesa::continuar()
 {
 	char entrada;
-	bool salida;
+    bool salida = false;
 
-
-	cout << "¿Desea continuar jugando?(Y/N)" << endl;
+	cout << "Desea continuar jugando?(Y/N)" << endl;
 	do {
 		cin >> entrada;
 		if (entrada == 'Y' || entrada == 'y')
@@ -152,9 +150,9 @@ bool Mesa::continuar()
 	return salida;
 }
 
-carta* Mesa::crearMazo()
+Carta* Mesa::crearMazo()
 {
-	static carta mazo[52];
+	static Carta mazo[52];
 
 	srand(time(NULL));
 	int p = 1;
@@ -170,17 +168,13 @@ carta* Mesa::crearMazo()
 			p++;
 			n = 1;
 		}
-
 	}
 
 	return mazo;
-
-
 }
 
-carta* Mesa::barajar(carta* mazo)
+Carta* Mesa::barajar(Carta* mazo)
 {
-	
 	unsigned semilla = std::chrono::system_clock::now().time_since_epoch().count();
 	std::minstd_rand srng(semilla);
 
@@ -190,26 +184,25 @@ carta* Mesa::barajar(carta* mazo)
 		int r = srng() % (i + 1);
 		std::swap(mazo[i], mazo[r]);
 	}
+    
 	return mazo;
 }
 
 void Mesa::creaTablero()
 {
-
 	for (int i = 0; i < 11; i++)
 	{
 		for (int j = 0; j < 26; j++)
 		{
 			tablero_juego[i][j] = ' ';
 		}
-
 	}
+    
 	//mano del oponente
 	tablero_juego[1][8] = '|';
 	tablero_juego[1][11] = '|';
 	tablero_juego[1][12] = '|';
 	tablero_juego[1][15] = '|';
-
 
 	//tu mano
 	tablero_juego[9][8] = '|';
@@ -238,10 +231,10 @@ void Mesa::creaTablero()
 	tablero_juego[6][17] = '|';
 }
 
-void Mesa::modificaTablero(jugador* Jugadores)
+void Mesa::modificaTablero(Jugador* Jugadores)
 {
-	carta* mano_aux = new carta[2];
-	carta* mano_aux2 = new carta[2];
+	Carta* mano_aux = new Carta[2];
+	Carta* mano_aux2 = new Carta[2];
 	mano_aux=Jugadores[0].getMano();
 	mano_aux2 = Jugadores[1].getMano();
 	
@@ -255,7 +248,6 @@ void Mesa::modificaTablero(jugador* Jugadores)
 			}
 			
 		}
-
 		tablero_juego[9][9] = conversorNumero(mano_aux[0]);
 		tablero_juego[9][10] = conversorPalo(mano_aux[0]);
 		tablero_juego[9][13] = conversorNumero(mano_aux[1]);
@@ -322,7 +314,7 @@ void Mesa::modificaTablero(jugador* Jugadores)
     
     if (indiceRonda != 0 && indiceRonda != 4)
     {
-		if (Jugadores[1].getAll() == false)
+		if (Jugadores[1].getAllIn() == false)
 		{
 			float apuesta = Jugadores[1].getApuesta();
 			apuesta = apuesta + 50;
@@ -335,10 +327,11 @@ void Mesa::modificaTablero(jugador* Jugadores)
 	apuesta = apuestaTotal;
 }
 
-void Mesa::imprimirTablero(jugador* Jugadores)
+void Mesa::imprimirTablero(Jugador* Jugadores)
 {
 	system("cls");
 	cout << "RONDA" << getIndiceRonda() << endl;
+    
 	for (int i = 0; i < 11; i++)
 	{
 		for (int j = 0; j < 26; j++)
@@ -347,13 +340,14 @@ void Mesa::imprimirTablero(jugador* Jugadores)
 		}
 		cout << endl;
 	}
+    
 	cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
 	cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
 	cout << "Dinero actual en juego:" << Jugadores[0].getApuesta() + Jugadores[1].getApuesta() << endl;
 	cout << "Apuesta total: " << apuesta << endl;
 }
 
-void Mesa::CalculaApuestaTotal(jugador* J)
+void Mesa::CalculaApuestaTotal(Jugador* J)
 {
 	float total = 0;
 	total = J[0].getApuesta() + J[1].getApuesta();
@@ -361,106 +355,100 @@ void Mesa::CalculaApuestaTotal(jugador* J)
 	apuesta = total;
 }
 
-
-char Mesa::conversorNumero(carta c) 
+char Mesa::conversorNumero(Carta c)
 {
-	char salida;
-	if (c.getNumero() == 1)
-	{
-		salida = 'A';
-	}
-	else if (c.getNumero() == 11)
-	{
-		salida = 'J';
-	}
-	else if (c.getNumero() == 12)
-	{
-		salida = 'Q';
-	}
-	else if (c.getNumero() == 13)
-	{
-		salida = 'K';
-	}
-	else if (c.getNumero() == 10)
-	{ 
-		salida = 'T';
-	}
-	else
-	{
-		salida = c.getNumero()+'0';
-	}
-	return salida;
+    int numero = c.getNumero();
+    
+    switch (numero) {
+        case 1:
+            return 'A';
+        case 10:
+            return 'T';
+        case 11:
+            return 'J';
+        case 12:
+            return 'Q';
+        case 13:
+            return 'K';
+        default:
+            return numero+'0';
+    }
 }
 
-char Mesa::conversorPalo(carta c)
+char Mesa::conversorPalo(Carta c)
 {
-	char salida=0;
+    int palo = c.getPalo();
 
-	switch (c.getPalo())
-	{
+	switch (palo) {
 	case 1:
-		salida = 'T';
-		break;
+		return 'T';
 	case 2:
-		salida = 'P';
-		break;
+		return 'P';
 	case 3:
-		salida = 'D';
-		break;
+		return 'D';
 	case 4:
-		salida = 'C';
-		break;
+		return 'C';
+    default:
+        return '-';
 	}
-
-	return salida;
 }
 
 void Mesa::resetIndiceTablero()
 {
 	indiceTablero = 0;
 }
+
 void Mesa::upIndiceTablero()
 {
 	indiceTablero++;
 }
+
 int Mesa::getIndiceTablero()
 {
 	return indiceTablero;
 }
+
 void Mesa::resetIndiceMazo()
 {
 	indiceMazo = 0;
 }
+
 void Mesa::upIndiceMazo()
 {
 	indiceMazo++;
 }
+
 int Mesa::getIndiceMazo()
 {
 	return indiceMazo;
 }
+
 void Mesa::resetIndiceQuemada()
 {
 	indiceQuemada = 0;
 }
+
 void Mesa::upIndiceQuemada()
 {
 	indiceQuemada++;
 }
+
 int Mesa::getIndiceQuemada()
 {
 	return indiceQuemada;
 }
+
 void Mesa::resetIndiceRonda()
 {
 	indiceRonda = 0;
 }
+
 void Mesa::upIndiceRonda()
 {
 	indiceRonda++;
 }
+
 int Mesa::getIndiceRonda()
 {
 	return indiceRonda;
 }
-

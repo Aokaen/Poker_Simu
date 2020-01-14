@@ -1,34 +1,40 @@
 #pragma once
-#include "carta.h"
-#include "jugador.h"
+
+#include "Carta.h"
+#include "Jugador.h"
 
 class Mesa
 {
+
 protected:
+    
 	int indiceMazo = 0, indiceTablero = 0, indiceQuemada = 0, indiceRonda = 0;
 	
 public:
-	carta* Tablero = new carta[5];
-	carta* Quemada = new carta[3];
+    
+	Carta* Tablero = new Carta[5];
+	Carta* Quemada = new Carta[3];
+    
 	float apuesta = 0;
-	
 	char tablero_juego[11][26];
 
 	Mesa();
 	~Mesa();
-	carta* crearMazo();
-	carta* barajar(carta* c);
-	void repartirCartas(jugador* j, carta* mazo, carta* tablero, carta* Quemada);
-	void cartaTablero(carta* mazo);
-	void cartaQuemada(carta* mazo);
+    
+	Carta* crearMazo();
+	Carta* barajar(Carta* c);
+    
+	void repartirCartas(Jugador* j, Carta* mazo, Carta* tablero, Carta* Quemada);
+	void cartaTablero(Carta* mazo);
+	void cartaQuemada(Carta* mazo);
 	//void recogerApuesta(jugador j);
-	void entregarApuesta(jugador j);
+	void entregarApuesta(Jugador j);
 	void finRonda();
 	void creaTablero();
-	void modificaTablero(jugador* j);
-	void imprimirTablero(jugador* j);
-	char conversorNumero(carta c);
-	char conversorPalo(carta c);
+	void modificaTablero(Jugador* j);
+	void imprimirTablero(Jugador* j);
+	char conversorNumero(Carta c);
+	char conversorPalo(Carta c);
 	void resetIndiceTablero();
 	void upIndiceTablero();
 	int getIndiceTablero();
@@ -43,11 +49,10 @@ public:
 	int getIndiceRonda();
 	//void setapuesta(float f);
 	//float getapuesta();
-	void CalculaApuestaTotal(jugador* J);
+	void CalculaApuestaTotal(Jugador* J);
 	//void resetapuesta();
 	bool continuar();
 
-
 	friend class jugador;
+    
 };
-
