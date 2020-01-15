@@ -8,7 +8,7 @@
 
 Jugador::Jugador()
 {
-	AllIn = false;
+	//AllIn = false;
 }
 
 Jugador::~Jugador()
@@ -76,15 +76,15 @@ void Jugador::setApuestaInicial(float ap)
 
 // AllIn
 
-bool Jugador::getAllIn()
-{
-    return AllIn;
-}
-
-void Jugador::setAllIn(bool v)
-{
-    AllIn = v;
-}
+//bool Jugador::getAllIn()
+//{
+//    return AllIn;
+//}
+//
+//void Jugador::setAllIn(bool v)
+//{
+//    AllIn = v;
+//}
 
 // Resets
 

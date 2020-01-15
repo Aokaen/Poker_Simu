@@ -36,7 +36,7 @@ protected:
 	bool doble_pareja_obtenida;
 	bool pareja_obtenida;
 
-	bool AllIn;
+	//bool AllIn;
     
 public:
     
@@ -68,8 +68,8 @@ public:
     float getApuestaInicial();
 	void setApuestaInicial(float ap);
     
-    bool getAllIn();
-    void setAllIn(bool b);
+   // bool getAllIn();
+   // void setAllIn(bool b);
     
     void resetBool();
 	void resetApuesta();

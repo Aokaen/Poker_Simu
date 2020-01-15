@@ -323,7 +323,15 @@ void Mesa::imprimirTablero(Jugador* Jugadores)
 	}
 
 	cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
+	if (Jugadores[0].getDinero() == 0)
+	{
+		cout << "JUGADOR HA HECHO ALL IN" << endl;
+	}
 	cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
+	if (Jugadores[1].getDinero() == 0)
+	{
+		cout << "OPONENTE HA HECHO ALL IN" << endl;
+	}
 	cout << "Apuesta total: " << apuesta << endl;
 }
 
@@ -353,15 +361,15 @@ bool Mesa::continuar()
 	cout << "Desea continuar jugando?(Y/N)" << endl;
 	do {
 		cin >> entrada;
-		if (entrada == 'Y' || entrada == 'y')
+		if (entrada == 'Y')
 			salida = true;
-		else if (entrada == 'N' || entrada == 'n')
+		else if (entrada == 'N')
 			salida = false;
 		else
 		{
 			cout << "Error. Introduzca Y si quiere seguir jugando o N para finalizar" << endl;
 		}
-	} while ((entrada == 'Y' || entrada == 'y') && (entrada == 'N' || entrada == 'n'));
+	} while ((entrada != 'Y') && (entrada != 'N'));
 
 	return salida;
 }
@@ -372,16 +380,19 @@ void Mesa::actualizarApuesta(Jugador* Jugadores)
 { // Funcion a EDITAR cuando se implemente el algoritmo
 	if (indiceRonda != 0 && indiceRonda != 4)
 	{
-		if (Jugadores[1].getAllIn() == false)
+		if (Jugadores[1].getDinero() >50)
 		{
 			float apuesta = Jugadores[1].getApuesta();
 			apuesta = apuesta + 50;
 			Jugadores[1].setApuesta(apuesta);
 		}
-		else
+		else if (Jugadores[1].getDinero() <= 50)
 		{
-			cout << "Oponente en All In" << endl;
+			float apuesta = Jugadores[1].getApuesta();
+			apuesta = apuesta + Jugadores[1].getDinero();
+			Jugadores[1].setApuesta(apuesta);
 		}
+
 	}
 
 	float apuestaTotal = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
