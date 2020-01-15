@@ -960,6 +960,8 @@ float Jugador::calcularValorJugada(Carta* c, int i) //Funcion del calculo del va
 	return jugada;
 }
 
+//Imprimir por pantalla la mano del jugador
+
 void Jugador::imprimirMano()
 {
     mano[0].imprimirCarta();
