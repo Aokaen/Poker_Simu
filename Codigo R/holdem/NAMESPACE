@@ -1,0 +1,8 @@
+# Remove the previous line if you edit this file
+
+# Export all names
+exportPattern(".")
+
+#import global variables
+importFrom("graphics", "locator", "plot", "text")
+importFrom("stats", "runif")
