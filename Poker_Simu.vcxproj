@@ -151,15 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Algoritmo.cpp" />
     <ClCompile Include="carta.cpp" />
     <ClCompile Include="jugador.cpp" />
+    <ClCompile Include="Mazo.cpp" />
     <ClCompile Include="Mesa.cpp" />
     <ClCompile Include="Poker_Simu.cpp" />
+    <ClCompile Include="random.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algoritmo.h" />
     <ClInclude Include="carta.h" />
     <ClInclude Include="jugador.h" />
+    <ClInclude Include="Mazo.h" />
     <ClInclude Include="Mesa.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

@@ -48,6 +48,7 @@ public:
 	float valor_mano_r3 = 0;
 
 	float dinero = 0;
+	int turno = 0;
 	
 	Jugador();
 	~Jugador();

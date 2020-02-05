@@ -7,12 +7,12 @@
 #include <time.h>
 #include <random>
 #include <chrono>
-
+#include "Mazo.h"
 using namespace std;
 
 Mesa::Mesa()
 {
-	
+
 }
 
 Mesa::~Mesa()
@@ -56,7 +56,7 @@ int Mesa::getIndiceTablero()
 	return indiceTablero;
 }
 
-// IndiceMazo
+/*// IndiceMazo
 
 void Mesa::resetIndiceMazo()
 {
@@ -72,7 +72,7 @@ int Mesa::getIndiceMazo()
 {
 	return indiceMazo;
 }
-
+*/
 // IndiceQuemada
 
 void Mesa::resetIndiceQuemada()
@@ -91,9 +91,9 @@ int Mesa::getIndiceQuemada()
 }
 
 // Funciones del mazo de cartas
-
+/*
 // Crea un array de 52 elementos y les asigna un Numero y un Palo
-Carta* Mesa::crearMazo() 
+Carta* Mesa::crearMazo()
 {
 	static Carta mazo[52];
 
@@ -162,53 +162,8 @@ void Mesa::repartirCartas(Jugador* J, Carta* Mazo, Carta* tablero, Carta* Quemad
 	tablero[4] = Mazo[aux];
 }
 
+*/
 
-
-// Añadir carta al array Tablero
-
-void Mesa::cartaTablero(Carta* Mazo)
-{
-	int auxRonda = 0, auxTablero = 0, auxMazo = 0;
-	auxRonda = getIndiceRonda();
-	auxTablero = getIndiceTablero();
-	auxMazo = getIndiceMazo();
-	if (auxRonda == 1)
-	{
-		for (int i = 0; i < 3; i++)
-		{
-			Tablero[auxTablero] = Mazo[auxMazo];
-			auxMazo++;
-			upIndiceMazo();
-			auxTablero++;
-			upIndiceTablero();
-		}
-	}
-	else
-	{
-		Tablero[auxTablero] = Mazo[auxMazo];
-		upIndiceMazo();
-		upIndiceTablero();
-	}
-}
-
-// Añadir carta al array Quemada
-
-void Mesa::cartaQuemada(Carta* Mazo)
-{
-	int auxRonda = 0, auxQuemada = 0, auxMazo = 0;
-	auxRonda = getIndiceRonda();
-	auxQuemada = getIndiceQuemada();
-	auxMazo = getIndiceMazo();
-	if(auxRonda==1)
-	{
-		upIndiceMazo();
-		upIndiceMazo();
-		//valido unicamente para 2 jugadores
-	}
-	Quemada[auxQuemada] = Mazo[auxMazo];
-	upIndiceMazo(); 
-	upIndiceQuemada();
-}
 
 
 // Funciones de representacion gráfica del tablero
@@ -228,18 +183,18 @@ void Mesa::modificaTablero(Jugador* Jugadores)
 {
 	Carta* mano_aux = new Carta[2];
 	Carta* mano_aux2 = new Carta[2];
-	mano_aux=Jugadores[0].getMano();
+	mano_aux = Jugadores[0].getMano();
 	mano_aux2 = Jugadores[1].getMano();
-	
+
 	if (indiceRonda == 0)
 	{
 		for (int i = 0; i < 11; i++)
 		{
 			for (int j = 0; j < 26; j++)
 			{
-				tablero_juego[i][j]=' ';
+				tablero_juego[i][j] = ' ';
 			}
-			
+
 		}
 		tablero_juego[9][9] = conversorNumero(mano_aux[0]);
 		tablero_juego[9][10] = conversorPalo(mano_aux[0]);
@@ -304,8 +259,8 @@ void Mesa::modificaTablero(Jugador* Jugadores)
 		tablero_juego[4][19] = conversorNumero(Tablero[4]);
 		tablero_juego[4][20] = conversorPalo(Tablero[4]);
 	}
-    
-    
+
+
 }
 
 void Mesa::imprimirTablero(Jugador* Jugadores)
@@ -344,10 +299,10 @@ void Mesa::entregarApuesta(Jugador j)
 	apuesta = 0;
 }
 
-void Mesa::finRonda()
+void Mesa::finRonda(Mazo m)
 {
 	apuesta = 0;
-	resetIndiceMazo();
+	m.resetIndiceMazo();
 	resetIndiceQuemada();
 	resetIndiceRonda();
 	resetIndiceTablero();
@@ -375,12 +330,12 @@ bool Mesa::continuar()
 }
 
 // Funciones de modificacion del valor Apuesta
-
+/**/
 void Mesa::actualizarApuesta(Jugador* Jugadores)
 { // Funcion a EDITAR cuando se implemente el algoritmo
-	if (indiceRonda != 0 && indiceRonda != 4)
+	/*if (indiceRonda != 0 && indiceRonda != 4)
 	{
-		if (Jugadores[1].getDinero() >50)
+		if (Jugadores[1].getDinero() > 50)
 		{
 			float apuesta = Jugadores[1].getApuesta();
 			apuesta = apuesta + 50;
@@ -394,7 +349,7 @@ void Mesa::actualizarApuesta(Jugador* Jugadores)
 		}
 
 	}
-
+	*/
 	float apuestaTotal = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
 	apuesta = apuestaTotal;
 
@@ -411,27 +366,27 @@ void Mesa::CalculaApuestaTotal(Jugador* J)
 
 char Mesa::conversorNumero(Carta c)
 {
-    int numero = c.getNumero();
-    
-    switch (numero) {
-        case 1:
-            return 'A';
-        case 10:
-            return 'T';
-        case 11:
-            return 'J';
-        case 12:
-            return 'Q';
-        case 13:
-            return 'K';
-        default:
-            return numero+'0';
-    }
+	int numero = c.getNumero();
+
+	switch (numero) {
+	case 1:
+		return 'A';
+	case 10:
+		return 'T';
+	case 11:
+		return 'J';
+	case 12:
+		return 'Q';
+	case 13:
+		return 'K';
+	default:
+		return numero + '0';
+	}
 }
 
 char Mesa::conversorPalo(Carta c)
 {
-    int palo = c.getPalo();
+	int palo = c.getPalo();
 
 	switch (palo) {
 	case 1:
@@ -442,8 +397,7 @@ char Mesa::conversorPalo(Carta c)
 		return 'D';
 	case 4:
 		return 'C';
-    default:
-        return '-';
+	default:
+		return '-';
 	}
 }
-
