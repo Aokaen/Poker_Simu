@@ -10,6 +10,11 @@
 #include "Algoritmo.h"
 #include <cstdlib>
 #include "random.h"
+#include <fstream>
+#include <curl/curl.h>
+#include <ctime>
+#include <datetimeapi.h>
+
 #define NUM 2
 
 using namespace std;
@@ -185,13 +190,11 @@ bool apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 	float cantidad_alg = 0;
 	int checking = 0;
 
-	//bool AllInJugador = Jugadores[0].getAllIn();
-	//bool AllInOponente = Jugadores[1].getAllIn();
 	if (Jugadores[0].getDinero() == 0 || Jugadores[1].getDinero() == 0)
 	{
 		checkposible = false;
 	}
-	if (Jugadores[0].getDinero() != Jugadores[1].getDinero() )
+	if (Jugadores[0].getApuesta() != Jugadores[1].getApuesta() )
 	{
 		checkposible = false;
 	}
@@ -548,7 +551,7 @@ bool apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 			if (Jugadores[0].turno == 0)
 			{
 				//Acción del jugador
-				cout << "¿Desea Seguir la apuesta (C), Subir la Apuesta (S) o Pasar (P)?" << endl;
+				cout << "¿Desea seguir la apuesta (C), Subir la Apuesta (S) o Pasar (P)?" << endl;
 				cin >> entrada;
 				if (entrada == 'P')
 				{
@@ -955,7 +958,787 @@ bool ronda(Mesa T, Mazo c, Jugador* J,Algoritmo alg) {
 	return pasar;
 
 }
-void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido, Algoritmo alg) {
+bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, Algoritmo alg1, Algoritmo alg2, int n_actual, int n_total)
+{
+
+	//Funcion que efectua la accion de "Pasar" la apuesta en el modo Algoritmo
+
+	bool continuar;
+	float money = 0;
+	float apuesta = 0;
+	apuesta = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
+	if (alg1.pasa == true)
+	{
+		money = apuesta + Jugadores[1].getDinero();
+		Jugadores[1].setDinero(money);
+		Jugadores[1].resetApuesta();
+		Jugadores[0].resetApuesta();
+	}
+	else if (alg2.pasa == true)
+	{
+		money = apuesta + Jugadores[0].getDinero();
+		Jugadores[0].setDinero(money);
+		Jugadores[1].resetApuesta();
+		Jugadores[0].resetApuesta();
+	}
+	T.finRonda(c);
+	if (n_actual >= n_total)
+	{
+		continuar = false;
+	}
+	else
+	{
+		continuar = true;
+	}
+	return continuar;
+}
+bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, string acciones)
+{
+	bool pasar = false;
+	float total = 0;
+	bool apuesta_ok = false;
+	bool apuestaFin = false;
+	bool checkposible = true;
+	int accion = -1;
+	float cantidad_alg = 0;
+	int checking = 0;
+	
+	if (Jugadores[0].getDinero() == 0 || Jugadores[1].getDinero() == 0)
+	{
+		checkposible = false;
+	}
+	if (Jugadores[0].getApuesta() != Jugadores[1].getApuesta())
+	{
+		checkposible = false;
+	}
+
+	do {
+
+
+		if (checkposible == false)
+		{
+			if (Jugadores[0].turno == 0)
+			{ //EN EDICION
+				//Acción del algoritmo
+				if (Jugadores[0].getDinero() == 0)
+				{
+					apuestaFin = true;
+					pasar = false;
+					alg1.accion = 0;
+				}
+				else if (Jugadores[1].getDinero() == 0)
+				{
+
+					float diferencia = 0;
+					diferencia = Jugadores[1].getApuesta() - Jugadores[0].getApuesta();
+					do {
+						float help = Jugadores[0].getDinero();
+						if (diferencia >= help)
+						{
+							cout << "¿Desea Ver el All in del oponente haciendo un All in (V) o Pasar (P)?" << endl;
+						}
+						else
+						{
+							cout << "¿Desea Ver el All in del oponente (V) o Pasar (P)?" << endl;
+						}
+						cin >> entrada;
+
+						if (entrada == 'V')
+						{
+							verApuesta(T, Jugadores);
+							pasar = false;
+
+						}
+						else if (entrada == 'P')
+						{
+							pasar = true;
+						}
+						else
+						{
+							cout << "Error. Introduzca V si quiere Ver el All in o P si quiere Pasar" << endl;
+
+						}
+					} while (entrada != 'P' && entrada != 'V');
+					apuestaFin = true;
+				}
+				else
+				{
+					do {
+
+						cout << "¿Desea Apostar (A) o Pasar (P)?" << endl;
+						cin >> entrada;
+						if (entrada == 'P')
+						{
+							pasar = true;
+							apuestaFin = true;
+						}
+						else if (entrada == 'A')
+						{
+							pasar = false;
+							do {
+								cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
+								cin >> entrada_apuesta;
+								if (entrada_apuesta == 'V')
+								{
+									verApuesta(T, Jugadores);
+									apuestaFin = true;
+
+								}
+								else if (entrada_apuesta == 'S')
+								{
+									do {
+
+										cout << "Introduzca la nueva apuesta:";
+										cin >> entrada_cantidad;
+										cout << endl;
+										if (entrada_cantidad > Jugadores[1].getApuesta())
+										{
+											float diferencia = entrada_cantidad - Jugadores[0].getApuesta();
+
+											if (diferencia >= Jugadores[0].getDinero())
+											{
+												cout << "All In" << endl;
+												float qty = Jugadores[0].getApuesta() + Jugadores[0].getDinero();
+												subirApuesta(qty, T, Jugadores);
+											}
+											else
+											{
+												subirApuesta(entrada_cantidad, T, Jugadores);
+											}
+
+											apuesta_ok = true;
+										}
+										else
+										{
+											cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
+										}
+
+									} while (apuesta_ok == false);
+
+								}
+
+								else
+								{
+									cout << "Error. Introduzca V si quiere Ver la apuesta o S para subir la apuesta" << endl;
+								}
+							} while (entrada_apuesta != 'S' && entrada_apuesta != 'V');
+
+						}
+						else
+						{
+							cout << "Error. Introduzca A si quiere Apostar o P si quiere Pasar" << endl;
+						}
+
+					} while (entrada != 'P' && entrada != 'A');
+				}
+
+				if (T.getIndiceRonda() == 0 && Jugadores[0].getApuesta() != Jugadores[1].getApuesta())
+				{//Accion del algoritmo
+					alg.obtenerTriple(Jugadores, T);
+					accion = alg.obtenerAccion();
+					if (accion == 0)
+					{
+						cout << "Algoritmo Pasa" << endl;
+						alg.pasa = true;
+						apuestaFin = true;
+					}
+					else if (accion == 1)
+					{
+						cout << "Algoritmo Ve la apuesta" << endl;
+						verApuestaAlg(T, Jugadores);
+						apuestaFin = true;
+					}
+					else if (accion == 2)
+					{
+
+						random r;
+						int randn = r.nrandomPorcent();
+						cantidad_alg = Jugadores[1].getApuestaInicial() * 2;
+						cantidad_alg = Jugadores[0].getApuesta() + (cantidad_alg * randn);
+						float diferencia_alg = cantidad_alg - Jugadores[1].getApuesta();
+
+						if (diferencia_alg >= Jugadores[1].getDinero())
+						{
+							cout << "All In Algoritmo" << endl;
+							float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
+							subirApuestaAlg(qty, T, Jugadores);
+						}
+						else
+						{
+							cout << "Algoritmo Sube la Apuesta en: " << cantidad_alg << endl;
+							cantidad_alg = cantidad_alg + Jugadores[1].getApuesta();
+							subirApuestaAlg(cantidad_alg, T, Jugadores);
+						}
+						cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
+						if (Jugadores[0].getDinero() == 0)
+						{
+							cout << "JUGADOR HA HECHO ALL IN" << endl;
+						}
+						cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
+						if (Jugadores[1].getDinero() == 0)
+						{
+							cout << "OPONENTE HA HECHO ALL IN" << endl;
+						}
+						T.actualizarApuesta(Jugadores);
+						cout << "Apuesta total: " << T.apuesta << endl;
+
+
+					}
+				}
+			}
+			else
+			{
+				//Accion del algoritmo
+				alg.obtenerTriple(Jugadores, T);
+				accion = alg.obtenerAccion();
+				if (accion == 0)
+				{
+					cout << "Algoritmo Pasa" << endl;
+					alg.pasa = true;
+					apuestaFin = true;
+				}
+				else if (accion == 1)
+				{
+					cout << "Algoritmo Ve la apuesta" << endl;
+					verApuestaAlg(T, Jugadores);
+					apuestaFin = true;
+				}
+				else if (accion == 2)
+				{
+
+					random r;
+					int randn = r.nrandomPorcent();
+					cantidad_alg = Jugadores[1].getApuestaInicial() * 2;
+					cantidad_alg = Jugadores[0].getApuesta() + (cantidad_alg * randn);
+					float diferencia_alg = cantidad_alg - Jugadores[1].getApuesta();
+
+					if (diferencia_alg >= Jugadores[1].getDinero())
+					{
+						cout << "All In Algoritmo" << endl;
+						float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
+						subirApuestaAlg(qty, T, Jugadores);
+					}
+					else
+					{
+						cout << "Algoritmo Sube la Apuesta en: " << cantidad_alg << endl;
+						cantidad_alg = cantidad_alg + Jugadores[1].getApuesta();
+						subirApuestaAlg(cantidad_alg, T, Jugadores);
+					}
+					cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
+					if (Jugadores[0].getDinero() == 0)
+					{
+						cout << "JUGADOR HA HECHO ALL IN" << endl;
+					}
+					cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
+					if (Jugadores[1].getDinero() == 0)
+					{
+						cout << "OPONENTE HA HECHO ALL IN" << endl;
+					}
+					T.actualizarApuesta(Jugadores);
+					cout << "Apuesta total: " << T.apuesta << endl;
+
+					//Acción del jugador
+					if (Jugadores[0].getDinero() == 0)
+					{
+						cout << "El jugador no puede apostar, ya que ha hecho All In" << endl;
+						cout << "Pulse cualquier tecla para continuar..." << endl;
+						char inside;
+						cin >> inside;
+						apuestaFin = true;
+						pasar = false;
+					}
+					else if (Jugadores[1].getDinero() == 0)
+					{
+						cout << "El Oponente ha hecho All in." << endl;
+						float diferencia = 0;
+						diferencia = Jugadores[1].getApuesta() - Jugadores[0].getApuesta();
+						do {
+							float help = Jugadores[0].getDinero();
+							if (diferencia >= help)
+							{
+								cout << "¿Desea Ver el All in del oponente haciendo un All in (V) o Pasar (P)?" << endl;
+							}
+							else
+							{
+								cout << "¿Desea Ver el All in del oponente (V) o Pasar (P)?" << endl;
+							}
+							cin >> entrada;
+
+							if (entrada == 'V')
+							{
+								verApuesta(T, Jugadores);
+								pasar = false;
+
+							}
+							else if (entrada == 'P')
+							{
+								pasar = true;
+							}
+							else
+							{
+								cout << "Error. Introduzca V si quiere Ver el All in o P si quiere Pasar" << endl;
+
+							}
+						} while (entrada != 'P' && entrada != 'V');
+						apuestaFin = true;
+					}
+					else
+					{
+						do {
+
+							cout << "¿Desea Apostar (A) o Pasar (P)?" << endl;
+							cin >> entrada;
+							if (entrada == 'P')
+							{
+								pasar = true;
+								apuestaFin = true;
+							}
+							else if (entrada == 'A')
+							{
+								pasar = false;
+								do {
+									cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
+									cin >> entrada_apuesta;
+									if (entrada_apuesta == 'V')
+									{
+										verApuesta(T, Jugadores);
+										apuestaFin = true;
+
+									}
+									else if (entrada_apuesta == 'S')
+									{
+										do {
+
+											cout << "Introduzca la nueva apuesta:";
+											cin >> entrada_cantidad;
+											cout << endl;
+											if (entrada_cantidad > Jugadores[1].getApuesta())
+											{
+												float diferencia = entrada_cantidad - Jugadores[0].getApuesta();
+
+												if (diferencia >= Jugadores[0].getDinero())
+												{
+													cout << "All In" << endl;
+													float qty = Jugadores[0].getApuesta() + Jugadores[0].getDinero();
+													subirApuesta(qty, T, Jugadores);
+												}
+												else
+												{
+													subirApuesta(entrada_cantidad, T, Jugadores);
+												}
+
+												apuesta_ok = true;
+											}
+											else
+											{
+												cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
+											}
+
+										} while (apuesta_ok == false);
+
+									}
+
+									else
+									{
+										cout << "Error. Introduzca V si quiere Ver la apuesta o S para subir la apuesta" << endl;
+									}
+								} while (entrada_apuesta != 'S' && entrada_apuesta != 'V');
+
+							}
+							else
+							{
+								cout << "Error. Introduzca A si quiere Apostar o P si quiere Pasar" << endl;
+							}
+
+						} while (entrada != 'P' && entrada != 'A');
+					}
+
+				}
+			}
+		}
+
+		else
+		{
+			if (Jugadores[0].turno == 0)
+			{
+				//Acción del jugador
+				cout << "¿Desea seguir la apuesta (C), Subir la Apuesta (S) o Pasar (P)?" << endl;
+				cin >> entrada;
+				if (entrada == 'P')
+				{
+					pasar = true;
+					apuestaFin = true;
+				}
+				else if (entrada == 'S')
+				{
+					checkposible = false;
+					bool apuesta_subida = false;
+					float entrada_subida = 0;
+					do {
+
+						cout << "Introduzca la nueva apuesta:";
+						cin >> entrada_subida;
+						cout << endl;
+						if (entrada_subida > Jugadores[1].getApuesta())
+						{
+							float diferencia = entrada_subida - Jugadores[0].getApuesta();
+
+							if (diferencia >= Jugadores[0].getDinero())
+							{
+								cout << "All In" << endl;
+								float qty = Jugadores[0].getApuesta() + Jugadores[0].getDinero();
+								subirApuesta(qty, T, Jugadores);
+							}
+							else
+							{
+								subirApuesta(entrada_subida, T, Jugadores);
+							}
+
+							apuesta_subida = true;
+						}
+						else
+						{
+							cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
+						}
+
+					} while (apuesta_subida == false);
+				}
+				else if (entrada == 'C')
+				{
+					if (checking == 0)
+					{
+						checking = 1;
+					}
+					else
+					{
+						checking = 0;
+						apuestaFin = true;
+						cout << "Ambos siguen la apuesta" << endl;
+					}
+				}
+				//Accion del algoritmo
+
+				alg.obtenerTriple(Jugadores, T);
+				accion = alg.obtenerAccion();
+				if (accion == 0)
+				{
+					cout << "Algoritmo Pasa" << endl;
+					alg.pasa = true;
+					apuestaFin = true;
+				}
+				else if (accion == 1)
+				{
+					if (checking == 1)
+					{
+						checking = 0;
+						apuestaFin = true;
+						cout << "Ambos siguen la apuesta" << endl;
+					}
+					else
+					{
+						cout << "Algoritmo Ve la apuesta" << endl;
+						verApuestaAlg(T, Jugadores);
+						apuestaFin = true;
+					}
+				}
+				else if (accion == 2)
+				{
+					checkposible = false;
+					random r;
+					int randn = r.nrandomPorcent();
+					cantidad_alg = Jugadores[1].getApuestaInicial() * 2;
+					cantidad_alg = Jugadores[0].getApuesta() + (cantidad_alg * randn);
+					float diferencia_alg = cantidad_alg - Jugadores[1].getApuesta();
+
+					if (diferencia_alg >= Jugadores[1].getDinero())
+					{
+						cout << "All In Algoritmo" << endl;
+						float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
+						subirApuestaAlg(qty, T, Jugadores);
+					}
+					else
+					{
+						cout << "Algoritmo Sube la Apuesta en: " << cantidad_alg << endl;
+						cantidad_alg = cantidad_alg + Jugadores[1].getApuesta();
+						subirApuestaAlg(cantidad_alg, T, Jugadores);
+					}
+					cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
+					if (Jugadores[0].getDinero() == 0)
+					{
+						cout << "JUGADOR HA HECHO ALL IN" << endl;
+					}
+					cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
+					if (Jugadores[1].getDinero() == 0)
+					{
+						cout << "OPONENTE HA HECHO ALL IN" << endl;
+					}
+					T.actualizarApuesta(Jugadores);
+					cout << "Apuesta total: " << T.apuesta << endl;
+				}
+			}
+			else
+			{
+				//Accion del algoritmo
+
+				alg.obtenerTriple(Jugadores, T);
+				accion = alg.obtenerAccion();
+				if (accion == 0)
+				{
+					cout << "Algoritmo Pasa" << endl;
+					alg.pasa = true;
+					apuestaFin = true;
+				}
+				else if (accion == 1)
+				{
+					if (checking == 1)
+					{
+						checking = 0;
+						apuestaFin = true;
+						cout << "Ambos siguen la apuesta" << endl;
+					}
+					else
+					{
+						cout << "Algoritmo Ve la apuesta" << endl;
+						verApuestaAlg(T, Jugadores);
+						apuestaFin = true;
+					}
+				}
+				else if (accion == 2)
+				{
+					checkposible = false;
+					random r;
+					int randn = r.nrandomPorcent();
+					cantidad_alg = Jugadores[1].getApuestaInicial() * 2;
+					cantidad_alg = Jugadores[0].getApuesta() + (cantidad_alg * randn);
+					float diferencia_alg = cantidad_alg - Jugadores[1].getApuesta();
+
+					if (diferencia_alg >= Jugadores[1].getDinero())
+					{
+						cout << "All In Algoritmo" << endl;
+						float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
+						subirApuestaAlg(qty, T, Jugadores);
+					}
+					else
+					{
+						cout << "Algoritmo Sube la Apuesta en: " << cantidad_alg << endl;
+						cantidad_alg = cantidad_alg + Jugadores[1].getApuesta();
+						subirApuestaAlg(cantidad_alg, T, Jugadores);
+					}
+
+					cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
+					if (Jugadores[0].getDinero() == 0)
+					{
+						cout << "JUGADOR HA HECHO ALL IN" << endl;
+					}
+					cout << "Apuesta actual oponente:" << Jugadores[1].getApuesta() << endl;
+					if (Jugadores[1].getDinero() == 0)
+					{
+						cout << "OPONENTE HA HECHO ALL IN" << endl;
+					}
+					T.actualizarApuesta(Jugadores);
+					cout << "Apuesta total: " << T.apuesta << endl;
+				}
+				//Acción del jugador
+
+				if (Jugadores[0].getApuesta() == Jugadores[1].getApuesta())
+				{
+					cout << "¿Desea Seguir la apuesta (C), Subir la Apuesta (S) o Pasar (P)?" << endl;
+					cin >> entrada;
+					if (entrada == 'P')
+					{
+						pasar = true;
+						apuestaFin = true;
+					}
+					else if (entrada == 'S')
+					{
+						checkposible = false;
+						bool apuesta_subida = false;
+						float entrada_subida = 0;
+						do {
+
+							cout << "Introduzca la nueva apuesta:";
+							cin >> entrada_subida;
+							cout << endl;
+							if (entrada_subida > Jugadores[1].getApuesta())
+							{
+								float diferencia = entrada_subida - Jugadores[0].getApuesta();
+
+								if (diferencia >= Jugadores[0].getDinero())
+								{
+									cout << "All In" << endl;
+									float qty = Jugadores[0].getApuesta() + Jugadores[0].getDinero();
+									subirApuesta(qty, T, Jugadores);
+								}
+								else
+								{
+									subirApuesta(entrada_subida, T, Jugadores);
+								}
+
+								apuesta_subida = true;
+							}
+							else
+							{
+								cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
+							}
+
+						} while (apuesta_subida == false);
+					}
+					else if (entrada == 'C')
+					{
+						if (checking == 0)
+						{
+							checking = 1;
+						}
+						else
+						{
+							checking = 0;
+							apuestaFin = true;
+							cout << "Ambos siguen la apuesta" << endl;
+						}
+					}
+				}
+				else
+				{
+					//Acción del jugador
+					if (Jugadores[0].getDinero() == 0)
+					{
+						cout << "El jugador no puede apostar, ya que ha hecho All In" << endl;
+						cout << "Pulse cualquier tecla para continuar..." << endl;
+						char inside;
+						cin >> inside;
+						apuestaFin = true;
+						pasar = false;
+					}
+					else if (Jugadores[1].getDinero() == 0)
+					{
+						cout << "El Oponente ha hecho All in." << endl;
+						float diferencia = 0;
+						diferencia = Jugadores[1].getApuesta() - Jugadores[0].getApuesta();
+						do {
+							float help = Jugadores[0].getDinero();
+							if (diferencia >= help)
+							{
+								cout << "¿Desea Ver el All in del oponente haciendo un All in (V) o Pasar (P)?" << endl;
+							}
+							else
+							{
+								cout << "¿Desea Ver el All in del oponente (V) o Pasar (P)?" << endl;
+							}
+							cin >> entrada;
+
+							if (entrada == 'V')
+							{
+								verApuesta(T, Jugadores);
+								pasar = false;
+
+							}
+							else if (entrada == 'P')
+							{
+								pasar = true;
+							}
+							else
+							{
+								cout << "Error. Introduzca V si quiere Ver el All in o P si quiere Pasar" << endl;
+
+							}
+						} while (entrada != 'P' && entrada != 'V');
+						apuestaFin = true;
+					}
+					else
+					{
+						do {
+
+							cout << "¿Desea Apostar (A) o Pasar (P)?" << endl;
+							cin >> entrada;
+							if (entrada == 'P')
+							{
+								pasar = true;
+								apuestaFin = true;
+							}
+							else if (entrada == 'A')
+							{
+								pasar = false;
+								do {
+									cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
+									cin >> entrada_apuesta;
+									if (entrada_apuesta == 'V')
+									{
+										verApuesta(T, Jugadores);
+										apuestaFin = true;
+
+									}
+									else if (entrada_apuesta == 'S')
+									{
+										do {
+
+											cout << "Introduzca la nueva apuesta:";
+											cin >> entrada_cantidad;
+											cout << endl;
+											if (entrada_cantidad > Jugadores[1].getApuesta())
+											{
+												float diferencia = entrada_cantidad - Jugadores[0].getApuesta();
+
+												if (diferencia >= Jugadores[0].getDinero())
+												{
+													cout << "All In" << endl;
+													float qty = Jugadores[0].getApuesta() + Jugadores[0].getDinero();
+													subirApuesta(qty, T, Jugadores);
+												}
+												else
+												{
+													subirApuesta(entrada_cantidad, T, Jugadores);
+												}
+
+												apuesta_ok = true;
+											}
+											else
+											{
+												cout << "Error. Debe introducir una cantidad superior a la apuesta de su oponente" << endl;
+											}
+
+										} while (apuesta_ok == false);
+
+									}
+
+									else
+									{
+										cout << "Error. Introduzca V si quiere Ver la apuesta o S para subir la apuesta" << endl;
+									}
+								} while (entrada_apuesta != 'S' && entrada_apuesta != 'V');
+
+							}
+							else
+							{
+								cout << "Error. Introduzca A si quiere Apostar o P si quiere Pasar" << endl;
+							}
+
+						} while (entrada != 'P' && entrada != 'A');
+					}
+
+				}
+			}
+		}
+
+	} while (apuestaFin == false);
+
+	return pasar;
+}
+bool rondaAlg(Mesa T, Mazo c, Jugador* J, Algoritmo alg1, Algoritmo alg2, string acciones)
+{
+	// Funcionamiento de cada Ronda para el modo Algoritmo y lanza la funcion apostar del modo Algoritmo
+	bool pasar = false;
+	bool jugador_gana;
+	int auxRonda = T.getIndiceRonda();
+	int auxTablero = T.getIndiceTablero();
+	T.actualizarApuesta(J);
+	calcularValorjugador(T, J, auxRonda);
+	pasar = apostarAlg(T, J, alg1, alg2, acciones);
+
+	return pasar;
+
+}
+
+void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido, Algoritmo alg, float apuestaInicial) {
 	// Funcion que controla el flujo de las rondas de juego
 
 	bool continuar = true;
@@ -963,8 +1746,12 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 	int jugador_gana=-1; //1 jugador gana, 2 oponente gana, 0 empate
 	char entrada;
 	float money = 0;
-	float apuestainicialjugador = Jugadores[0].getApuestaInicial();
-	float apuestainicialoponente = Jugadores[1].getApuestaInicial();
+	float apuestainicialjugador0 = Jugadores[0].getApuestaInicial();
+	float apuestainicialjugador1 = Jugadores[1].getApuestaInicial();
+	bool primeraPartida = true;
+	int aux = -1;
+	float apuestaaux = 0;
+	alg.tipo = 4;
 	if (jugador == true)
 	{
 		do {
@@ -972,8 +1759,20 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 			c.resetIndiceMazo();
 			c.barajar();
 			int auxRonda = T.getIndiceRonda();
-			Jugadores[0].setApuesta(apuestainicialjugador);
-			Jugadores[1].setApuesta(apuestainicialoponente);
+
+			if (primeraPartida == false)
+			{
+				aux = Jugadores[0].turno;
+				Jugadores[0].turno = Jugadores[1].turno;
+				Jugadores[1].turno = aux;
+
+				apuestaaux = apuestainicialjugador0;
+				apuestainicialjugador0 = apuestainicialjugador1;
+				apuestainicialjugador1 = apuestaaux;
+			}
+
+			Jugadores[0].setApuesta(apuestainicialjugador0);
+			Jugadores[1].setApuesta(apuestainicialjugador1);
 			c.repartirCartas(T, Jugadores);
 			
 
@@ -1086,6 +1885,8 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 					continuar == true;
 				}
 			}
+
+			primeraPartida = false;
 		} while (continuar == true);
 
 		cout << "Fin de la partida" << endl;
@@ -1100,29 +1901,181 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 	}
 	else
 	{
-		//EDITAR
-		cout << "CODIGO EN PROCESO" << endl;
-		cout << "Algorimo elegido" << endl;
-		if (elegido == 1)
+	Algoritmo algOpo; //Jugador[1]
+	algOpo.tipo = elegido;
+	fstream registro("log.txt");
+	int n = 0;
+	string acciones;
+	int n_veces=0;
+	cout << "Introducir el numero de iteracciones deseadas:";
+	cin >> n_veces;
+	cout << endl;
+	Carta* manoAux = new Carta[2];
+	Carta* mesaAux = new Carta[5];
+	if (!registro.is_open())
+	{
+		registro.open("log.txt", ios::out);
+	}
+	char formato[30];
+	int status;
+
+		do {
+			n = n + 1;
+			system("cls");
+			T.resetIndiceRonda();
+			c.resetIndiceMazo();
+			c.barajar();
+			int auxRonda = T.getIndiceRonda();
+
+			if (primeraPartida == false)
+			{
+				aux = Jugadores[0].turno;
+				Jugadores[0].turno = Jugadores[1].turno;
+				Jugadores[1].turno = aux;
+
+				apuestaaux = apuestainicialjugador0;
+				apuestainicialjugador0 = apuestainicialjugador1;
+				apuestainicialjugador1 = apuestaaux;
+			}
+
+			Jugadores[0].setApuesta(apuestainicialjugador0);
+			Jugadores[1].setApuesta(apuestainicialjugador1);
+			c.repartirCartas(T, Jugadores);
+			T.actualizarApuesta(Jugadores);
+			status = GetTimeFormatA(LOCALE_CUSTOM_DEFAULT,
+				TIME_FORCE24HOURFORMAT, NULL, NULL, formato, 30);
+			registro << "Iteraccion: " << n << " Timelog: " << status << endl;
+			manoAux = Jugadores[0].getMano();
+			registro << "Mano Algoritmo: " << T.conversorNumero(manoAux[0]) << T.conversorPalo(manoAux[0]) << " " << T.conversorNumero(manoAux[1]) << T.conversorPalo(manoAux[1]) << endl;
+			manoAux = Jugadores[1].getMano();
+			registro << "Mano Algoritmo elegido: " << T.conversorNumero(manoAux[0]) << T.conversorPalo(manoAux[0]) << " " << T.conversorNumero(manoAux[1]) << T.conversorPalo(manoAux[1]) << endl;
+			pasar = rondaAlg(T, c, Jugadores, alg,algOpo, acciones); // Preflop 
+			registro << "Preflop" << endl;
+			registro << acciones << endl;
+
+			do {
+				
+				if (pasar == true)
+					continuar = pasarApuestaAlg(T, Jugadores,c, alg, algOpo, n, n_veces);
+				else {
+					T.upIndiceRonda();
+					auxRonda++;
+					if (T.getIndiceRonda() == 4)
+					{
+
+						T.modificaTablero(Jugadores);
+						T.actualizarApuesta(Jugadores);
+						T.imprimirTablero(Jugadores);
+
+						cout << "Show-down" << endl;
+						jugador_gana = jugadorGana(T, Jugadores);
+						if (jugador_gana == 1)
+						{
+							cout << "Jugador Gana" << endl;
+							money = T.apuesta + Jugadores[0].getDinero();
+							Jugadores[0].setDinero(money);
+							Jugadores[0].resetApuesta();
+							Jugadores[1].resetApuesta();
+							T.finRonda(c);
+							cout << "Dinero actual jugador: " << Jugadores[0].getDinero() << endl;
+							cout << "Dinero actual oponente: " << Jugadores[1].getDinero() << endl;
+							if(Jugadores[0].getDinero() <= 0 || Jugadores[1].getDinero() <= 0)
+							{
+								continuar = false;
+							}
+							else
+							{
+								continuar = T.continuar();
+							}
+						}
+						else if (jugador_gana == 2)
+						{
+							cout << "Oponente Gana" << endl;
+							money = T.apuesta + Jugadores[1].getDinero();
+							Jugadores[1].setDinero(money);
+							Jugadores[0].resetApuesta();
+							Jugadores[1].resetApuesta();
+							T.finRonda(c);
+							cout << "Dinero actual jugador: " << Jugadores[0].getDinero() << endl;
+							cout << "Dinero actual oponente: " << Jugadores[1].getDinero() << endl;
+							if (Jugadores[0].getDinero() <= 0 || Jugadores[1].getDinero() <= 0)
+							{
+								continuar = false;
+							}
+							else
+							{
+								continuar = T.continuar();
+							}
+						}
+						else if (jugador_gana == 0)
+						{
+							float money_jug = 0, money_opo = 0;
+							cout << "EMPATE" << endl;
+							money = T.apuesta / 2;
+							money_jug = money + Jugadores[0].getDinero();
+							money_opo = money + Jugadores[1].getDinero();
+							Jugadores[0].setDinero(money_jug);
+							Jugadores[1].setDinero(money_opo);
+							Jugadores[0].resetApuesta();
+							Jugadores[1].resetApuesta();
+							T.finRonda(c);
+							cout << "Dinero actual jugador: " << Jugadores[0].getDinero() << endl;
+							cout << "Dinero actual oponente: " << Jugadores[1].getDinero() << endl;
+							if (Jugadores[0].getDinero() <= 0 || Jugadores[1].getDinero() <= 0)
+							{
+								continuar = false;
+							}
+							else
+							{
+								continuar = T.continuar();
+							}
+						}
+						
+					}
+					else {
+						{
+
+						}
+						pasar = ronda(T, c, Jugadores,alg); //Flop, turn y river
+						if (pasar == true)
+						{
+							continuar = pasarApuesta(T, Jugadores,c);
+						}
+
+					}
+				}
+				
+			} while (pasar == false && auxRonda < 4);
+
+			if (continuar == true)
+			{
+				system("cls");
+			} 
+
+			if (continuar == false)
+			{
+				if (Jugadores[0].getDinero() > 0 && Jugadores[1].getDinero() > 0)
+				{
+					continuar == true;
+				}
+			}
+
+			primeraPartida = false;
+		} while (continuar == true);
+
+		cout << "Fin de la partida" << endl;
+		if (Jugadores[0].getDinero() == 0)
 		{
-			cout << "Maniaco" << endl;
+			cout << "El jugador ha perdido" << endl;
 		}
-		else if (elegido == 2)
+		else if (Jugadores[1].getDinero() == 0)
 		{
-			cout << "Roca" << endl;
-		}
-		else if (elegido == 3)
-		{
-			cout << "Calling Stations" << endl;
-		}
-		else
-		{
-			cout << "Random" << endl;
+			cout << "El oponente ha perdido" << endl;
 		}
 	}
 
 }
-void apuestaInicial(Mesa T, Jugador* Jugadores) {
+float apuestaInicial(Mesa T, Jugador* Jugadores) {
 
 	//Funcion para determinar la apuesta que se va a definir como Ciega Grande y, por tanto, a ciega pequeña
 
@@ -1136,31 +2089,35 @@ void apuestaInicial(Mesa T, Jugador* Jugadores) {
 	if (coin == 0)
 	{
 		Jugadores[0].turno = 0;
+		Jugadores[1].turno = 1;
 		Jugadores[0].setApuestaInicial(bid / 2);
 		Jugadores[1].setApuestaInicial(bid);
 	}
 	else if (coin == 1)
 	{
 		Jugadores[0].turno = 1;
+		Jugadores[1].turno = 0;
 		Jugadores[1].setApuestaInicial(bid / 2);
 		Jugadores[0].setApuestaInicial(bid);
 
 	}
+	return bid;
 }
-void iniciarPartida(Mesa T, Mazo c, Jugador* Jugadores)
+float iniciarPartida(Mesa T, Mazo c, Jugador* Jugadores)
 {
 	// Funcion de iniciar los valores de la partida: introduccion del valor del dinero inicial,
 	// la apuesta inicial e inicializa el tablero de juego
 
 	float dinero = 0;
+	float bidini = 0;
 
 	cout << "Introduce cantidad inicial de dinero para los jugadores:" << endl;
 	cin >> dinero;
 	Jugadores[0].setDinero(dinero);
 	Jugadores[1].setDinero(dinero);
 	T.creaTablero();
-	apuestaInicial(T, Jugadores);
-
+	bid=apuestaInicial(T, Jugadores);
+	return bidini;
 }
 bool SeleccionarModo()
 { // Funcion para determinar si el algoritmo se va a enfrentar a un jugador o a uno de los algoritmos predefinidos
@@ -1173,13 +2130,15 @@ bool SeleccionarModo()
 		cout << endl;
 		if (entrada == 'J')
 		{
-			return true;
 			ok = true;
+			return true;
+			
 		}
 		else if (entrada == 'A')
 		{
-			return false;
 			ok = true;
+			return false;
+			
 		}
 		else
 		{
@@ -1191,15 +2150,16 @@ bool SeleccionarModo()
 
 int SeleccionarAlgoritmo() 
 {
-	//Funcion para seleccionar el algoritmo a jugar contra en caso de seleccionar el modo algoritmo
+	//Funcion para seleccionar el algoritmo contra el que jugará el algoritmo en el modo Algoritmo
 	char entrada;
 	bool ok = false;
 	do {
 		cout << "Algoritmos" << endl;
 		cout << "1-Maniaco: Jugador agresivo, con fuertes subidas de manos y muchos faroles puros con manos malas" << endl;
 		cout << "2-Roca: Jugador pasivo, juega sobre seguro, rara vez hace faroles" << endl;
-		cout << "3- Calling Station: Jugador que juega de manera arriesgada, pero pasivamente, viendo apuestas con manos que no deberia" << endl;
-		cout << "4-Aleatorio: Se elige aleatoriamente uno de los otros 3" << endl;
+		cout << "3-Calling Station: Jugador que juega de manera arriesgada, pero pasivamente, viendo apuestas con manos que no deberia" << endl;
+		cout << "4-Algoritmo contra sí mismo: En caso de querer que el algoritmo se enfrente a sí mismo" << endl;
+		cout << "5-Aleatorio: Se elige aleatoriamente uno de las otras 4 opciones" << endl;
 		cout << "Introduzca el numero del algoritmo elegido: ";
 		cin >> entrada;
 		cout<< endl;
@@ -1223,9 +2183,14 @@ int SeleccionarAlgoritmo()
 			return 4;
 			ok = true;
 		}
+		else if (entrada == '5')
+		{
+			return 5;
+			ok = true;
+		}
 		else
 		{
-			cout << "Error. Por favor, introduzca uno de los indices de los algoritmos (1 a 4)" << endl;
+			cout << "Error. Por favor, introduzca uno de los indices de las opciones (1 a 5)" << endl;
 		}
 	} while (ok == false);
 }
@@ -1244,9 +2209,10 @@ int main()
 	{
 		parametro = SeleccionarAlgoritmo();
 	}
+	float bidaux = 0;
 
-	iniciarPartida(Tablero, deck, Jugadores);
-	jugarPartida(Tablero, deck, Jugadores, jugador, parametro, alg);
+	bidaux=iniciarPartida(Tablero, deck, Jugadores);
+	jugarPartida(Tablero, deck, Jugadores, jugador, parametro, alg, bidaux);
 
 	system("PAUSE");
 }

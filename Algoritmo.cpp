@@ -49,3 +49,18 @@ void Algoritmo::obtenerTriple(Jugador* J, Mesa M)
 }
 void Algoritmo::reseteo()
 {}
+
+char Algoritmo::conversorAccion()
+{
+	switch (accion)
+	{
+	case 0:
+		return 'P';
+	case 1:
+		return 'V';
+	case 2: 
+		return 'S';
+	default:
+		break;
+	}
+}
