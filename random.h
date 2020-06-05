@@ -3,6 +3,6 @@ class random
 {
 public:
 	float nrandomPorcent();
-	float randomN(int n);
+	int randomN(int n);
 
 };

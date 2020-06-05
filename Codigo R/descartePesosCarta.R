@@ -8,11 +8,11 @@ for(i in 1:n_mazo)
 {
 	if(mazo[i,1]>carta[1])
 	{	
-	mano<-rbind(mazo[i,],carta)
+	mano<-rbind(as.numeric(mazo[i,]),carta)
 	}
 	else
 	{
-	mano<-rbind(carta,mazo[i,])
+	mano<-rbind(carta,as.numeric(mazo[i,]))
 	}
 	datos<-modificaPesos(mano,datos,0)
 }

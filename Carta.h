@@ -20,8 +20,7 @@ public:
 	void setPalo(int P);
     
 	void imprimirCarta();
-    
-	void operator <<(Carta c);
+ 
 	friend class Jugador;
 	friend class Mesa;
     

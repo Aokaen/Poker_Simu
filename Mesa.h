@@ -29,6 +29,7 @@ public:
 	void upIndiceMazo();
 	int getIndiceMazo();
 	*/
+	bool modoJ;
 
 	void creaTablero();
 	void modificaTablero(Jugador* j);

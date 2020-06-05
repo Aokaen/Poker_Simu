@@ -2,15 +2,16 @@
 
 actualizaPesos<-function(accion,pesos,triple)
 {
-if(accion=="P")
+  columna<-0
+if(accion==0)
 {
 	columna=1
 }
-if(accion=="V")
+if(accion==1)
 {
 	columna=2
 }
-if(accion=="S")
+if(accion==2)
 {
 	columna=3
 }

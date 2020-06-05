@@ -1,6 +1,6 @@
 #Funcion para el calculo del potencial de la mano
 
-calcularPotencial<-function(mano,Mesa,mazo,pesos)
+calcularPotencial<-function(mano,mesa,mazo,pesos)
 {
 VPT<-c(0,0,0)
 VP<-matrix(0,nrow=3, ncol=3)
@@ -12,11 +12,12 @@ n_manos<-nrow(combinaciones)
 for(i in 1:n_manos)
 {
 	mano_op<-fijarMano(combinaciones[i,1],combinaciones[i,2],combinaciones[i,3],combinaciones[i,4])
-	jugada_op=ordenarCartas(mano_op,Mesa)
+	jugada_op=ordenarCartas(mano_op,mesa)
 	valor_op<-calcularJugada(jugada_op)
-	peso_mano<-Leer(mano_op,pesos)
+	peso_mano<-leerPesos(mano_op,pesos)
 	mazoaux<-descarteCartas(mano_op,mazo)
 	n_mazoaux<-nrow(mazoaux)
+	colnames(mazoaux)<-NULL
 	if(valor_op>valorjugador)
 	{
 		x=1
@@ -29,11 +30,12 @@ for(i in 1:n_manos)
 	{
 		x=3
 	}
-	VPT[x]<-VPT[x]+peso_mano
-
+	
+  
 	for(j in 1:n_mazoaux)
 	{
-	mesaaux<-rbind(mesa,mazoaux[j,])
+	  VPT[x]<-VPT[x]+peso_mano
+	mesaaux<-rbind(mesa,c(as.numeric(mazoaux[j,1]),as.numeric(mazoaux[j,2])))
 	jugada_aux<-ordenarCartas(mano,mesaaux)
 	jugada_op_aux<-ordenarCartas(mano_op,mesaaux)
 	valorjugador_aux<-calcularJugada(jugada_aux)
@@ -54,8 +56,19 @@ for(i in 1:n_manos)
 	}
 	
 }
+if(VPT[1]==0)
+{
+  PotPositivo=0
+}else{
 PotPositivo<-VP[1,2]/VPT[1]
+}
+if(VPT[3]==0)
+{
+  PotNegativo=0
+}else{
 PotNegativo<-VP[3,1]/VPT[3]
+}
+
 Pot<-c(PotPositivo,PotNegativo)
 
 return(Pot)

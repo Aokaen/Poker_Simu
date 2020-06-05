@@ -9,7 +9,7 @@ n_mazo=nrow(mazo)
 hj<-c(0,0,0)
 for (i in 1:n_mazo)
 {
-	mesaaux<-rbind(mesa,mazo[i,])
+	mesaaux<-rbind(mesa,c(as.numeric(mazo[i,1]),as.numeric(mazo[i,2])))
 	jugada_aux<-ordenarCartas(mano,mesaaux)
 	valorjugador_aux<-calcularJugada(jugada_aux)
 	if(valorjugador<valorjugador_aux)

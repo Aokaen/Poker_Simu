@@ -1,0 +1,10 @@
+It: 1 Time: 9//Mano Alg: 7T AT Mano patron: QC AP//R0//
+It: 2 Time: 9//Mano Alg: KT 6D Mano patron: 7T KD//R0//
+It: 3 Time: 9//Mano Alg: KD 4D Mano patron: TC 6C//R0//
+It: 4 Time: 9//Mano Alg: 8C 3D Mano patron: KD TC//R0//R1 Mesa: QD Mesa: TT Mesa: JP
+It: 5 Time: 9//Mano Alg: 7T TC Mano patron: 2P 3T//R0//
+It: 6 Time: 9//Mano Alg: 8D 4P Mano patron: 6D 4D//R0//R1 Mesa: KT Mesa: JP Mesa: 3D
+It: 7 Time: 9//Mano Alg: KT JC Mano patron: AC TD//R0//
+It: 8 Time: 9//Mano Alg: 5D 6P Mano patron: 5C QT//R0//
+It: 9 Time: 9//Mano Alg: JD 7T Mano patron: KD 8D//R0//
+It: 10 Time: 9//Mano Alg: 5P AT Mano patron: 6T JT//R0//

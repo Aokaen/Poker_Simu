@@ -23,7 +23,7 @@ float random::nrandomPorcent()
 
 }
 
-float random::randomN(int n)
+int random::randomN(int n)
 {
 	t = KISS%n;
 	return t;

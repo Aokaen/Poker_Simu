@@ -4,7 +4,7 @@ calculoOddsBote<-function(ap_jugador,ap_oponente)
 {
 diferencia=ap_oponente-ap_jugador
 pot=ap_oponente+ap_jugador+diferencia
-OddBote=diferencia/bote
+OddBote=diferencia/pot
 return(OddBote)
 }
 

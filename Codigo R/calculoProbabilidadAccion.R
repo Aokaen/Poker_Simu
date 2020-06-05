@@ -1,46 +1,102 @@
 #Funcion para calcular cada probabilidad de accion del oponente
 
-calculoProbabilidadAccion<-function(mesa,mazo,triple)
+calculoProbabilidadAccion<-function(mesa,mazo,triple,ronda)
 {
-inferior=0
-superior=0
-igual=0
-combinaciones<-combinaMazo(mazo)
-n_manos<-nrow(combinaciones)
-for(i in 1:n_manos)
+prob<-read.csv("prob.csv",header=TRUE,row.names = NULL)
+if(ronda==1)
 {
-	valor<-c(0,0,0)
-	mano_op<-fijarMano(combinaciones[i,1],combinaciones[i,2],combinaciones[i,3],combinaciones[i,4])
-	jugada_op=ordenarCartas(mano_op,mesa)
-	valor_op<-calcularJugada(jugada_op)
-	mazoaux<-descarteCartas(mano_op,mazo)
-	comb_aux<-combinaMazo(mazoaux)
-	n_manos_aux<-nrow(comb_aux)
-	for(j in 1:n_manos_aux)
-	{
-		mano_aux<-fijarMano(comb_aux[j,1],comb_aux[j,2],comb_aux[j,3],comb_aux[j,4])
-		jugada_aux<-ordenarCartas(mano_aux,mesa)
-		valor_aux<-calcularJugada(jugada_aux)
-		if(valor_op>valor_aux)
-		{
-			superior=superior+1
-		}
-		if(valor_op==valor_aux)
-		{
-			igual=igual+1
-		}
-		if(valor_op<valor_aux)
-		{
-			inferior=inferior+1
-		}
-	}
-	total=superior+igual+inferior
-	valor[1]=superior/total #pasar
-	valor[2]=igual/total#ver
-	valor[3]=inferior/total#subir
-	triple<-modificaTriple(mano_op,triple,valor)
+  data<-read.csv("tablaspreflop.csv",header=TRUE,row.names = NULL)
+}
+else
+{
+  data<-read.csv("tablaspostflop.csv",header=TRUE,row.names = NULL)
+}
+combina<-combinaMazo(mazo)
+n<-nrow(combina)
 
+for(i in 1:n)
+{
+  mano_op<-fijarMano(combina[i,1],combina[i,2],combina[i,3],combina[i,4])
+  value<-0
 
+ if(prob[1,1]>prob[2,1])
+ {
+   if(prob[1,1]>prob[3,1])
+   {
+     if(ronda==1)
+     {
+       valor_op<-chenFormula(mano_op)
+       if(valor_op>=3.5)
+       {
+         value=data[1,]
+       }
+       else
+       {
+         value=data[2,]
+       }
+     }
+     else
+     {
+       value=data[1,]
+     }
+   }
+ }
+  
+  if(prob[2,1]>prob[1,1])
+  {
+    if(prob[2,1]>prob[3,1])
+    {
+      if(ronda==1)
+      {
+        valor_op<-chenFormula(mano_op)
+        if(valor_op>=12)
+        {
+          value=data[3,]
+        }
+        else if(valor_op>=7)
+        {
+          value=data[4,]
+        }
+        else
+        {
+          value=data[5,]
+        }
+      }
+      else
+      {
+        jugada_op=ordenarCartas(mano_op,mesa)
+        valor_op<-calcularJugada(jugada_op)
+        if(valor_op>=7)
+        {
+          value=data[2,]
+        }
+        else if(valor_op>=2)
+        {
+          value=data[3,]
+        }
+        else
+        {
+          value=data[4,]
+        }
+      }
+    }
+  }
+  if(prob[3,1]>prob[2,1])
+  {
+    if(prob[3,1]>prob[1,1])
+    {
+      if(ronda==1)
+      {
+        
+          value=data[6,]
+      }
+      else
+      {
+        value=data[5,]
+      }
+    }
+}
+triple<-modificaTriple(mano_op,triple,value)
 }
 	
 return (triple)
