@@ -31,6 +31,7 @@ return(salida)
 #* @get /preflop
 function(mn1,mp1,mn2,mp2,a){ #*mni=numero de la carta i; mpi=palo de la carta i; a=accion (0= pass, 1= ver, 2= subir)
 mano<-fijarMano(mn1,mp1,mn2,mp2)
+a<-strtoi(a)
 mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
 mazo<-descarteCartas(mano,mazo)
 pesos<-cargaPesos()
@@ -51,16 +52,17 @@ return(salida)
 #* @param a accion
 #* @get /preflopact
 function(a){
-pesos<-cargaPesos()
-triple<-cargaTriple()
-mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
-mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
-salida<-calculaProbPreflop(mano,mazo,a)
-triple<-calculoProbabilidadAccion(mesa,mazo, triple,1)
-pesos<-actualizaPesos(a,pesos,triple)
-write.csv(pesos, "data.csv",row.names = TRUE)
-write.csv(triple,"triple.csv",row.names = TRUE)
-return(salida)
+  a<-strtoi(a)
+  pesos<-cargaPesos()
+  triple<-cargaTriple()
+  mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
+  mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
+  salida<-calculaProbPreflop(mano,mazo,a)
+  triple<-calculoProbabilidadAccion(mesa,mazo, triple,1)
+  pesos<-actualizaPesos(a,pesos,triple)
+  write.csv(pesos, "data.csv",row.names = TRUE)
+  write.csv(triple,"triple.csv",row.names = TRUE)
+  return(salida)
 }
 
 #*Funcion para el flop siendo mano inicial
@@ -78,6 +80,8 @@ mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
 mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
 pesos<-cargaPesos()
 triple<-cargaTriple()
+aa<-strtoi(aa)
+ao<-strtoi(ao)
 mesa<-fijarMesaFlop(mn1,mp1,mn2,mp2,mn3,mp3)
 mazo<-descarteCartas(mesa,mazo)
 pesos<-descartePesosFlop(mesa,mazo,pesos)
@@ -108,6 +112,9 @@ mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
 mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
 pesos<-cargaPesos()
 triple<-cargaTriple()
+aa<-strtoi(aa)
+ao<-strtoi(ao)
+a<-strtoi(a)
 mesa<-fijarMesaFlop(mn1,mp1,mn2,mp2,mn3,mp3)
 mazo<-descarteCartas(mesa,mazo)
 pesos<-descartePesosFlop(mesa,mazo,pesos)
@@ -131,6 +138,9 @@ function(a,aa,ao){
     mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
   mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
   mesa<-read.csv("mesa.csv",header=TRUE, sep=",", row.names=NULL)
+  aa<-strtoi(aa)
+  ao<-strtoi(ao)
+  a<-strtoi(a)
   pesos<-cargaPesos()
   triple<-cargaTriple()
   pesos<-actualizaPesos(a,pesos,triple)
@@ -153,6 +163,8 @@ function(mn,mp,aa,ao){
   triple<-cargaTriple()
   mesa<-fijarMesaPostflop(mesa,mn,mp)
   mazo<-descarteCartas(mesa,mazo)
+  aa<-strtoi(aa)
+  ao<-strtoi(ao)
   carta<-mesa[4,]
   pesos<-descartePesosCarta(carta,mazo,pesos)
   triple<-descarteTripleCarta(carta,mazo,triple)
@@ -177,6 +189,9 @@ function(mn,mp,aa,ao,a){
   mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
   mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
   mesa<-read.csv("mesa.csv",header=TRUE, sep=",", row.names=NULL)
+  aa<-strtoi(aa)
+  ao<-strtoi(ao)
+  a<-strtoi(a)
   pesos<-cargaPesos()
   triple<-cargaTriple()
   mesa<-fijarMesaPostflop(mesa,mn,mp)
@@ -228,6 +243,7 @@ function(mn,mp,a){
   mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
   mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
   mesa<-read.csv("mesa.csv",header=TRUE, sep=",", row.names=NULL)
+  a<-strtoi(a)
   pesos<-cargaPesos()
   triple<-cargaTriple()
   mesa<-fijarMesaPostflop(mesa,mn,mp)
@@ -253,6 +269,7 @@ function(a){
   mano<-read.csv("mano.csv",header=TRUE, sep=",", row.names=NULL)
   mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
   mesa<-read.csv("mesa.csv",header=TRUE, sep=",", row.names=NULL)
+  a<-strtoi(a)
   pesos<-cargaPesos()
   triple<-cargaTriple()
   pesos<-actualizaPesos(a,pesos,triple)
@@ -260,6 +277,15 @@ function(a){
   write.csv(pesos, "data.csv",row.names = TRUE)
   return(salida)
 }
+
+#* Funcion para comunicar al algoritmo que su adversario ha pasado
+#* @param r ronda
+#* @get /pass
+function(r){
+  r<-strtoi(r)
+  pasar(r)
+}
+
 
 
 #* Funcion para resetar/inicializar los valores de mazo, pesos y triple

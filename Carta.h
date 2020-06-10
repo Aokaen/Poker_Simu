@@ -23,5 +23,6 @@ public:
  
 	friend class Jugador;
 	friend class Mesa;
+	friend class Algoritmo;
     
 };

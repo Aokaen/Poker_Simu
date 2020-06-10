@@ -1,28 +1,32 @@
 ﻿  Poker_Simu.cpp
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(412,18): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(413,56): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(414,49): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(429,33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(524,54): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(525,47): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(540,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(858,56): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(859,49): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(872,33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(924,54): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(925,47): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(940,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1203,7): warning C4101: 'jugador_gana': variable local sin referencia
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1378,44): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1411,43): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1448,43): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1574,43): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1607,42): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1645,42): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1671,7): warning C4101: 'jugador_gana': variable local sin referencia
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1903,22): warning C4805: '==': combinación no segura del tipo 'int' y el tipo 'bool' en la operación
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1939,35): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1984,24): warning C4805: '==': combinación no segura del tipo 'int' y el tipo 'bool' en la operación
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2092): warning C4715: 'SeleccionarModo': no todas las rutas de acceso de control devuelven un valor
-D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2134): warning C4715: 'SeleccionarAlgoritmo': no todas las rutas de acceso de control devuelven un valor
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(466,18): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(467,56): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(468,49): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(483,33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(578,54): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(579,47): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(594,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(912,56): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(913,49): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(926,33): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(978,54): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(979,47): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(994,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1257,7): warning C4101: 'jugador_gana': variable local sin referencia
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1438,44): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1471,43): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1508,43): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1634,43): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1667,42): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1705,42): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1731,7): warning C4101: 'jugador_gana': variable local sin referencia
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1968,41): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1972,41): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(1997,42): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2011,42): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2016,35): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2068,43): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2072,43): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2190): warning C4715: 'SeleccionarModo': no todas las rutas de acceso de control devuelven un valor
+D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Poker_Simu.cpp(2232): warning C4715: 'SeleccionarAlgoritmo': no todas las rutas de acceso de control devuelven un valor
   Poker_Simu.vcxproj -> D:\alvar\Documents\TFG\Nueva carpeta\Poker_Simu\Debug\Poker_Simu.exe

@@ -75,5 +75,6 @@ public:
 	void imprimirMano();
 
 	friend class Mesa;
+	friend class Algoritmo;
 
 };

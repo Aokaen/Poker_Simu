@@ -6,9 +6,7 @@ prob<-read.csv("prob.csv",header=TRUE,row.names = NULL)
 if(ronda==1)
 {
   data<-read.csv("tablaspreflop.csv",header=TRUE,row.names = NULL)
-}
-else
-{
+}else{
   data<-read.csv("tablaspostflop.csv",header=TRUE,row.names = NULL)
 }
 combina<-combinaMazo(mazo)

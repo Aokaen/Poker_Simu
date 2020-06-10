@@ -1,10 +1,28 @@
-It: 1 Time: 9//Mano Alg: 7T AT Mano patron: QC AP//R0//
-It: 2 Time: 9//Mano Alg: KT 6D Mano patron: 7T KD//R0//
-It: 3 Time: 9//Mano Alg: KD 4D Mano patron: TC 6C//R0//
-It: 4 Time: 9//Mano Alg: 8C 3D Mano patron: KD TC//R0//R1 Mesa: QD Mesa: TT Mesa: JP
-It: 5 Time: 9//Mano Alg: 7T TC Mano patron: 2P 3T//R0//
-It: 6 Time: 9//Mano Alg: 8D 4P Mano patron: 6D 4D//R0//R1 Mesa: KT Mesa: JP Mesa: 3D
-It: 7 Time: 9//Mano Alg: KT JC Mano patron: AC TD//R0//
-It: 8 Time: 9//Mano Alg: 5D 6P Mano patron: 5C QT//R0//
-It: 9 Time: 9//Mano Alg: JD 7T Mano patron: KD 8D//R0//
-It: 10 Time: 9//Mano Alg: 5P AT Mano patron: 6T JT//R0//
+LOG TEST
+It: 1//Time: 9//Mano Alg: 7T AT Mano patron: QC AP//R0// J1V J2S12.000000 J1S22.000000 J2S27.000000 J1P//Algoritmo Pasa//J1LJ2W//-22.000000
+It: 2//Time: 9//Mano Alg: 8T JP Mano patron: 5P 3T//R0// J2P//Patron Pasa//J1WJ2L//+5.000000
+It: 3//Time: 9//Mano Alg: 6C TC Mano patron: JD KP//R0// J1P//Algoritmo Pasa//J1LJ2W//-5.000000
+It: 4//Time: 9//Mano Alg: QT AC Mano patron: 3T KC//R0// J2S20.000000 J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 5//Time: 9//Mano Alg: 5T 4T Mano patron: 8P TP//R0// J1V J2S11.000000 J1P//Algoritmo Pasa//J1LJ2W//-5.000000
+It: 6//Time: 9//Mano Alg: 3T QP Mano patron: TP 5P//R0// J2P//Patron Pasa//J1WJ2L//+5.000000
+It: 7//Time: 9//Mano Alg: 4T 5D Mano patron: TD 2D//R0// J1V J2V//R1// Mesa: KP AD QDIt: 1//Time: 8//Mano Alg: 7T AT Mano patron: QC AP//R0// J1V J2S12.000000 J1S22.000000 J2S27.000000 J1P//Algoritmo Pasa//J1LJ2W//-22.000000
+It: 2//Time: 8//Mano Alg: 8T JP Mano patron: 5P 3T//R0// J2P//Patron Pasa//J1WJ2L//+5.000000
+It: 3//Time: 8//Mano Alg: 6C TC Mano patron: JD KP//R0// J1P//Algoritmo Pasa//J1LJ2W//-5.000000
+It: 4//Time: 8//Mano Alg: QT AC Mano patron: 3T KC//R0// J2S20.000000 J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 5//Time: 8//Mano Alg: 5T 4T Mano patron: 8P TP//R0// J1V J2S11.000000 J1P//Algoritmo Pasa//J1LJ2W//-5.000000
+It: 6//Time: 8//Mano Alg: 3T QP Mano patron: TP 5P//R0// J2P//Patron Pasa//J1WJ2L//+5.000000
+It: 7//Time: 8//Mano Alg: 4T 5D Mano patron: TD 2D//R0// J1V J2V//R1// Mesa: KP AD QD J1V J2S13.000000 J1P//Algoritmo Pasa//J1LJ2W//-5.000000
+It: 8//Time: 8//Mano Alg: 9T 8D Mano patron: KC 9P//R0// J2S26.000000 J1V//R1// Mesa: 4T 9C JTIt: 1//Time: 8//Mano Alg: 7T AT Mano patron: QC AP//R0// J1V J2S2.000000 J1S4.000000 J2S5.000000 J1P//Algoritmo Pasa//J1LJ2W//-4.000000
+It: 2//Time: 8//Mano Alg: 8T JP Mano patron: 5P 3T//R0// J2P//Patron Pasa//J1WJ2L//+1.000000
+It: 3//Time: 8//Mano Alg: 6C TC Mano patron: JD KP//R0// J1P//Algoritmo Pasa//J1LJ2W//-1.000000
+It: 4//Time: 8//Mano Alg: QT AC Mano patron: 3T KC//R0// J2S4.000000 J1P//Algoritmo Pasa//J1LJ2W//-2.000000
+It: 5//Time: 8//Mano Alg: 5T 4T Mano patron: 8P TP//R0// J1V J2S2.000000 J1P//Algoritmo Pasa//J1LJ2W//-1.000000
+It: 6//Time: 8//Mano Alg: 3T QP Mano patron: TP 5P//R0// J2P//Patron Pasa//J1WJ2L//+1.000000
+It: 7//Time: 8//Mano Alg: 4T 5D Mano patron: TD 2D//R0// J1V J2V//R1// Mesa: KP AD QD J1V J2S2.000000 J1P//Algoritmo Pasa//J1LJ2W//-1.000000
+It: 8//Time: 8//Mano Alg: 9T 8D Mano patron: KC 9P//R0// J2S5.000000 J1V//R1// Mesa: 4T 9C JT J2S8.000000 J1S10.000000 J2S13.000000 J1S15.000000 J2P//Patron Pasa//J1WJ2L//+13.000000
+It: 9//Time: 8//Mano Alg: 3D AT Mano patron: KD 8D//R0// J1V J2S2.000000 J1P//Algoritmo Pasa//J1LJ2W//-1.000000
+It: 10//Time: 8//Mano Alg: 5C 9D Mano patron: QT 2C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-2.000000
+It: 11//Time: 8//Mano Alg: 4C TD Mano patron: 3T 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-1.000000
+It: 12//Time: 8//Mano Alg: TD 5C Mano patron: 6T 9C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-2.000000
+It: 13//Time: 8//Mano Alg: AD KC Mano patron: QD 7C//R0// J1S5.000000 J2V//R1// Mesa: 4T AC JC J1S8.000000 J2S9.000000 J1S11.000000 J2S12.000000 J1S14.000000 J2S15.000000 J1S17.000000 J2S18.000000 J1S20.000000 J2S21.000000 J1S24.000000 J2S25.000000 J1S28.000000 J2V//R2// Mesa: 4T AC JC TP J1S30.000000 J2S31.000000 J1S33.000000 J2S34.000000 J1S37.000000 J2V//R3// Mesa: 4T AC JC TP 6C J1S40.000000 J2S41.000000 J1S44.000000 J2S45.000000 J1V//Showdown// J1WJ2L//+45.000000
+It: 14//Time: 8//Mano Alg: TP TD Mano patron: 3D 3P//R0//

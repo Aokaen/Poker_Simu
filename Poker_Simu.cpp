@@ -117,7 +117,7 @@ void verApuesta(Mesa T, Jugador* Jugadores) {
 	if (Jugadores[0].getDinero()<= diffJug)
 	{
 		cout << "ALL IN JUGADOR" << endl;
-		Jugadores[0].setApuesta(Jugadores[0].getDinero());
+		Jugadores[0].setApuesta(Jugadores[0].getDinero()+ Jugadores[0].getApuesta());
 	}
 	else if (diffJug>=0)
 	{
@@ -125,7 +125,61 @@ void verApuesta(Mesa T, Jugador* Jugadores) {
 	}
 	
 }
+void registro(string acciones, bool fin_linea)
+{
+	fstream registro;
+	int k = 0;
+	string lineaFinal;
+	registro.open("log.txt", ios::in | ios::out);
+	
+	if (!registro.is_open())
+	{
+		registro.open("log.txt", ios::in | ios::out);
+	}
+	else {
+		registro.seekg(-1, ios_base::end);
+		bool bucle = true;
+		while (bucle)
+		{
+			char ch;
+			registro.get(ch);
+			int auxiliar = (int)registro.tellg();
+			if (auxiliar <= 1)
+			{
+				registro.seekg(0);
+				bucle = false;
+			}
+			else if (ch == '\n')
+			{
+				bucle = false;
+			}
+			else
+			{
+				registro.seekg(-2, ios_base::cur);
+			}
+		}
+		k = (int)registro.tellg();
+		getline(registro, lineaFinal);
+		registro.close();
+	}
 
+	registro.open("log.txt", ios::in | ios::out);
+	if (registro.is_open())
+	{
+		registro.seekp(k, ios_base::beg);
+		string grabar=lineaFinal.append(acciones);
+		if (fin_linea == true)
+		{
+			registro << grabar << endl;
+		}
+		else
+		{
+			registro << grabar;
+		}
+		registro.close();
+	}
+	
+}
 void verApuestaAlg(Mesa T, Jugador* Jugadores) { 
 	//Funcion que efectua la accion de "Ver" la apuesta del algoritmo
 	float diffAlg = 0;
@@ -135,7 +189,7 @@ void verApuestaAlg(Mesa T, Jugador* Jugadores) {
 		if (Jugadores[1].getDinero() <= diffAlg)
 		{
 			cout << "ALL IN AlGORITMO" << endl;
-			Jugadores[1].setApuesta(Jugadores[1].getDinero());
+			Jugadores[1].setApuesta(Jugadores[1].getDinero()+ Jugadores[1].getApuesta());
 		}
 		else if (diffAlg>=0)
 		{
@@ -150,7 +204,7 @@ void verApuestaAlg(Mesa T, Jugador* Jugadores) {
 			if (Jugadores[1].getDinero() <= diffAlg)
 			{
 				cout << "ALL IN PATRON" << endl;
-				Jugadores[1].setApuesta(Jugadores[1].getDinero());
+				Jugadores[1].setApuesta(Jugadores[1].getDinero()+ Jugadores[1].getApuesta());
 			}
 			else if (diffAlg>=0)
 			{
@@ -163,7 +217,7 @@ void verApuestaAlg(Mesa T, Jugador* Jugadores) {
 			if (Jugadores[0].getDinero() <= diffAlg)
 			{
 				cout << "ALL IN ALGORITMO" << endl;
-				Jugadores[0].setApuesta(Jugadores[0].getDinero());
+				Jugadores[0].setApuesta(Jugadores[0].getDinero()+Jugadores[0].getApuesta());
 			}
 			else
 			{
@@ -1216,7 +1270,7 @@ int ronda(Mesa T, Mazo c, Jugador* J,Algoritmo alg) {
 	return salida;
 
 }
-bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, Algoritmo alg1, Algoritmo alg2, int n_actual, int n_total)
+bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, int pasa, int n_actual, int n_total)
 {
 
 	//Funcion que efectua la accion de "Pasar" la apuesta en el modo Algoritmo
@@ -1224,23 +1278,30 @@ bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, Algoritmo alg1, Algorit
 	bool continuar;
 	float money = 0;
 	float apuesta = 0;
+	float beneficio = 0;
+	string log;
 	apuesta = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
-	if (alg1.pasa == true)
+	if (pasa == 2)
 	{
-		alg1.pasa = false;
-		money = apuesta + Jugadores[1].getDinero();
-		Jugadores[1].setDinero(money);
-		Jugadores[1].resetApuesta();
-		Jugadores[0].resetApuesta();
-	}
-	else if (alg2.pasa == true)
-	{
-		alg2.pasa = false;
+		
+		beneficio = apuesta - Jugadores[0].getApuesta();
+		log =log + "//Patron Pasa//" + "J1WJ2L" + "//+" + to_string(beneficio);
 		money = apuesta + Jugadores[0].getDinero();
 		Jugadores[0].setDinero(money);
 		Jugadores[1].resetApuesta();
 		Jugadores[0].resetApuesta();
 	}
+	else if (pasa == 1)
+	{
+		
+		beneficio = Jugadores[0].getApuesta();
+		log = log + "//Algoritmo Pasa//" + "J1LJ2W" + "//-" + to_string(beneficio);
+		money = apuesta + Jugadores[1].getDinero();
+		Jugadores[1].setDinero(money);
+		Jugadores[1].resetApuesta();
+		Jugadores[0].resetApuesta();
+	}
+	registro(log, true);
 	T.finRonda(c);
 	if (n_actual >= n_total)
 	{
@@ -1252,18 +1313,17 @@ bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, Algoritmo alg1, Algorit
 	}
 	return continuar;
 }
-bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, string acciones)
+int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 {
-	bool pasar = false;
+	int pasar = 0;
 	float total = 0;
 	bool apuesta_ok = false;
 	bool apuestaFin = false;
 	bool accionprevia = false;
-	
+	string acciones_ronda;
 	float cantidad_alg = 0;
 	float incremento = 0;
 	int accion1 = -1, accion2 = -1;
-	
 	do {
 
 		if (Jugadores[0].turno == 0)
@@ -1271,10 +1331,10 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 			if (Jugadores[0].getDinero() == 0) //algoritmo no puede apostar
 			{
 				apuestaFin = true;
-				pasar = false;
+				pasar = 0;
 				alg1.accion = 1;
-				acciones = acciones + " J1C";
-				cout << "Jugador 1 CHECK ALL IN" << endl; // TEST
+				acciones_ronda = acciones_ronda + " J1C";
+				
 
 			}
 			else if (Jugadores[1].getDinero() == 0 && Jugadores[1].getApuesta() != 0)
@@ -1289,11 +1349,11 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 					
 					if (alg1.accion == 0)
 					{
-						pasar = true;
+						pasar = 1;
 						alg1.pasa = true;
 						apuestaFin = true;
-						acciones = acciones + " J1P";
-						cout << "Jugador 1 Pasa" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J1P";
+						
 					}
 					else
 					{
@@ -1314,8 +1374,8 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 						}
 
 						apuestaFin = true;
-						acciones = acciones + " J1V" + to_string(subidaalg);
-						cout << "Jugador 1 Ve ALL IN" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J1V" + to_string(subidaalg);
+						
 					}
 				}
 
@@ -1325,26 +1385,26 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 			{
 				if (accionprevia == false)
 				{
-					alg1.accion = alg1.accion=alg1.obtenerAccion(Jugadores[0],T);
+					alg1.accion =alg1.obtenerAccion(Jugadores[0],T);
 				}
 				else
 				{
-					alg1.accion = alg1.accion = alg1.obtenerAccionAct(Jugadores[0],T,alg2.accion);
+					alg1.accion = alg1.obtenerAccionAct(Jugadores[0],T,alg2.accion);
 				}
 
 				if (alg1.accion == 0)
 				{
-					pasar = true;
+					pasar = 1;
 					alg1.pasa = true;
 					apuestaFin = true;
-					acciones = acciones + " J1P";
-					cout << "Jugador 1 Pasa" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J1P";
+					
 				}
 
 				else if (alg1.accion == 1)
 				{
-					acciones = acciones + " J1V";
-					cout << "Jugador 1 Ve" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J1V";
+					
 					if (accionprevia == false)
 					{
 						accionprevia = true;
@@ -1358,19 +1418,19 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 
 						if (accion2 == 0)
 						{
-							pasar = true;
+							pasar = 2;
 							alg2.pasa = true;
 							apuestaFin = true;
-							acciones = acciones + " J2P";
-							cout << "Jugador 2 Pasa" << endl; // TEST
+							acciones_ronda = acciones_ronda + " J2P";
+							
 
 						}
 						else if (accion2 == 1)
 						{
 							apuestaFin = true;
 
-							acciones = acciones + " J2V";
-							cout << "Jugador 2 Ve" << endl; // TEST
+							acciones_ronda = acciones_ronda + " J2V";
+							
 						}
 						else if (accion2 == 2)
 						{
@@ -1381,8 +1441,8 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 							{
 								cantidad_subida = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
 							}
-							acciones = acciones + " J2S" + to_string(cantidad_subida);
-							cout << "Jugador 2 Sube" << endl; // TEST
+							acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
+							
 							//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
 							Jugadores[1].setApuesta(cantidad_subida);
 							accionprevia = true;
@@ -1414,9 +1474,9 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 					{
 						cantidad_subida2 = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
 					}
+					Jugadores[0].setApuesta(cantidad_subida2);
+					acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida2);
 					
-					acciones = acciones + " J1S" + to_string(cantidad_subida2);
-					cout << "Jugador 1 SUBE" << endl; // TEST
 					//actualizarinfoalg2
 					accion1 = alg1.accion;
 					if (accionprevia == false)
@@ -1428,19 +1488,19 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 
 					if (accion2 == 0)
 					{
-						pasar = true;
+						pasar = 2;
 						alg2.pasa = true;
 						apuestaFin = true;
-						acciones = acciones + " J2P";
-						cout << "Jugador 2 Pasa" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J2P";
+						
 
 					}
 					else if (accion2 == 1)
 					{
 						apuestaFin = true;
 						verApuestaAlg(T, Jugadores);
-						acciones = acciones + " J2V";
-						cout << "Jugador 2 Ve" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J2V";
+						
 					}
 					else if (accion2 == 2)
 					{
@@ -1451,8 +1511,8 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 						{
 							cantidad_subida = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
 						}
-						acciones = acciones + " J2S" + to_string(cantidad_subida);
-						cout << "Jugador 2 Sube" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
+						
 						//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
 						Jugadores[1].setApuesta(cantidad_subida);
 						accionprevia = true;
@@ -1468,10 +1528,10 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 		if (Jugadores[1].getDinero() == 0) //algoritmo 2 no puede apostar
 		{
 			apuestaFin = true;
-			pasar = false;
+			pasar = 0;
 			alg2.accion = 1;
-			acciones = acciones + " J2C";
-			cout << "Jugador 2 Check ALL IN" << endl; // TEST
+			acciones_ronda = acciones_ronda + " J2C";
+			
 
 		}
 		else if (Jugadores[0].getDinero() == 0 && Jugadores[0].getApuesta() != 0)
@@ -1485,11 +1545,11 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 				alg2.accion = alg2.obtenerAccionSegundo(Jugadores[1],T,2);
 				if (alg2.accion == 0)
 				{
-					pasar = true;
+					pasar = 2;
 					alg2.pasa = true;
 					apuestaFin = true;
-					acciones = acciones + " J2P";
-					cout << "Jugador 2 Pasa" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J2P";
+					
 				}
 				else
 				{
@@ -1510,8 +1570,8 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 					}
 
 					apuestaFin = true;
-					acciones = acciones + " J2V" + to_string(subidaalg);
-					cout << "Jugador 2 Ve ALL IN" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J2V" + to_string(subidaalg);
+					
 				}
 			}
 
@@ -1530,17 +1590,17 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 
 			if (alg2.accion == 0)
 			{
-				pasar = true;
+				pasar = 2;
 				alg2.pasa = true;
 				apuestaFin = true;
-				acciones = acciones + " J2P";
-				cout << "Jugador 2 Pasa" << endl; // TEST
+				acciones_ronda = acciones_ronda + " J2P";
+				
 			}
 
 			else if (alg2.accion == 1)
 			{
-				acciones = acciones + " J2V";
-				cout << "Jugador 2 Ve" << endl; // TEST
+				acciones_ronda = acciones_ronda + " J2V";
+				
 				if (accionprevia == false)
 				{
 					accionprevia = true;
@@ -1554,19 +1614,19 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 
 					if (accion1 == 0)
 					{
-						pasar = true;
+						pasar = 1;
 						alg1.pasa = true;
 						apuestaFin = true;
-						acciones = acciones + " J1P";
-						cout << "Jugador 1 Pasa" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J1P";
+						
 
 					}
 					else if (accion1 == 1)
 					{
 						apuestaFin = true;
 
-						acciones = acciones + " J1V";
-						cout << "Jugador 1 Ve" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J1V";
+						
 					}
 					else if (accion1 == 2)
 					{
@@ -1577,8 +1637,8 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 						{
 							cantidad_subida = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
 						}
-						acciones = acciones + " J1S" + to_string(cantidad_subida);
-						cout << "Jugador 1 Sube" << endl; // TEST
+						acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
+						
 						//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
 						Jugadores[0].setApuesta(cantidad_subida);
 						accionprevia = true;
@@ -1610,9 +1670,9 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 				{
 					cantidad_subida2 = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
 				}
-
-				acciones = acciones + " J2S" + to_string(cantidad_subida2);
-				cout << "Jugador 2 Sube" << endl; // TEST
+				Jugadores[1].setApuesta(cantidad_subida2);
+				acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida2);
+				
 				//actualizarinfoalg2
 				accion2 = alg2.accion;
 				if (accionprevia == false)
@@ -1625,19 +1685,19 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 
 				if (accion1 == 0)
 				{
-					pasar = true;
+					pasar = 1;
 					alg1.pasa = true;
 					apuestaFin = true;
-					acciones = acciones + " J1P";
-					cout << "Jugador 1 Pasa" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J1P";
+					
 
 				}
 				else if (accion1 == 1)
 				{
 					apuestaFin = true;
 					verApuestaAlg(T, Jugadores);
-					acciones = acciones + " J1V";
-					cout << "Jugador 1 Ve" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J1V";
+					
 				}
 				else if (accion1 == 2)
 				{
@@ -1648,8 +1708,8 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 					{
 						cantidad_subida = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
 					}
-					acciones = acciones + " J1S" + to_string(cantidad_subida);
-					cout << "Jugador 1 Sube" << endl; // TEST
+					acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
+					
 					//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
 					Jugadores[0].setApuesta(cantidad_subida);
 					accionprevia = true;
@@ -1661,19 +1721,19 @@ bool apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2, stri
 		}
 
 	} while (apuestaFin == false);
-
+	registro(acciones_ronda, false);
 	return pasar;
 }
-bool rondaAlg(Mesa T, Mazo c, Jugador* J, Algoritmo alg1, Algoritmo alg2, string acciones)
+int rondaAlg(Mesa T, Mazo c, Jugador* J, Algoritmo alg1, Algoritmo alg2)
 {
 	// Funcionamiento de cada Ronda para el modo Algoritmo y lanza la funcion apostar del modo Algoritmo
-	bool pasar = false;
+	int pasar = 0;
 	bool jugador_gana;
 	int auxRonda = T.getIndiceRonda();
 	int auxTablero = T.getIndiceTablero();
 	
 	calcularValorjugador(T, J, auxRonda);
-	pasar = apostarAlg(T, J, alg1, alg2, acciones);
+	pasar = apostarAlg(T, J, alg1, alg2);
 	T.actualizarApuesta(J);
 	return pasar;
 
@@ -1844,7 +1904,7 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 	T.modoJ = false;
 	Algoritmo algOpo; //Jugador[1]
 	algOpo.tipo = elegido;
-	fstream registro("log.txt");
+	
 	int n = 0;
 	string acciones;
 	int n_veces=0;
@@ -1854,19 +1914,19 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 	Carta* manoAux = new Carta[2];
 	Carta* mesaAux = new Carta[5];
 	string log;
-	
+	bool fin_linea;
 	char formato[30];
 	int status;
+	int beneficio_total = 0, victorias = 0;
 	string cadena_aux;
 	int p = -1;
 
-	if (!registro.is_open())
-	{
-		registro.open("log.txt", ios::out);
-	}
+	
 		do {
 			p = n;
 			n = n + 1;
+			
+			fin_linea = false;
 			//system("cls");
 			T.resetIndiceRonda();
 			c.resetIndiceMazo();
@@ -1890,18 +1950,32 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 			T.actualizarApuesta(Jugadores);
 			status = GetTimeFormatA(LOCALE_CUSTOM_DEFAULT,
 				TIME_FORCE24HOURFORMAT, NULL, NULL, formato, 30);
-			log = "It: " + to_string(n) + " Time: " + to_string(status)+"//";
+			log = "It: " + to_string(n) + "//Time: " + to_string(status)+"//";
 			manoAux = Jugadores[0].getMano();
 			log = log + "Mano Alg: "+ T.conversorNumero(manoAux[0]) + T.conversorPalo(manoAux[0]) + " " + T.conversorNumero(manoAux[1]) + T.conversorPalo(manoAux[1]);
 			manoAux = Jugadores[1].getMano();
 			log = log + " Mano patron: " + T.conversorNumero(manoAux[0]) + T.conversorPalo(manoAux[0]) + " " + T.conversorNumero(manoAux[1]) + T.conversorPalo(manoAux[1])+"//";
-			pasar = rondaAlg(T, c, Jugadores, alg,algOpo, acciones); // Preflop 
-			log = log+ "R0" + acciones+"//";
-
+			log = log + "R0" + acciones + "//";
+			registro(log, fin_linea);
+			pasar = rondaAlg(T, c, Jugadores, alg,algOpo); // Preflop 
+			
 			do {
 				
-				if (pasar == true)
-					continuar = pasarApuestaAlg(T, Jugadores,c, alg, algOpo, n, n_veces);
+				if (pasar != 0)
+				{
+					if (pasar == 1)
+					{
+						beneficio_total = beneficio_total - Jugadores[0].getApuesta();
+					}
+					else if (pasar == 2)
+					{
+						beneficio_total = beneficio_total + Jugadores[1].getApuesta();
+						victorias++;
+						int indice_aux = T.getIndiceRonda() + 1;
+						alg.pasar(indice_aux);
+					}
+					continuar = pasarApuestaAlg(T, Jugadores, c, pasar, n, n_veces);
+				}
 				else {
 					T.upIndiceRonda();
 					auxRonda++;
@@ -1910,34 +1984,39 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 						float beneficio = 0;
 						T.actualizarApuesta(Jugadores);
 						
-						log = log + "Showdown";
+						log = "//Showdown//";
 						jugador_gana = jugadorGana(T, Jugadores);
 						if (jugador_gana == 1)
 						{
 							beneficio = T.apuesta - Jugadores[0].getApuesta();
-							log = log + " " + "J1WJ2L" + "+" + to_string(beneficio);
+							log = log + " " + "J1WJ2L" + "//+" + to_string(beneficio);
 							money = T.apuesta + Jugadores[0].getDinero();
 							Jugadores[0].setDinero(money);
 							Jugadores[0].resetApuesta();
 							Jugadores[1].resetApuesta();
 							T.finRonda(c);
+							fin_linea = true;
+							beneficio_total = beneficio_total + beneficio;
+							victorias++;
 							
 						}
 						else if (jugador_gana == 2)
 						{
 							beneficio = Jugadores[0].getApuesta();
-							log = log + " " + "J1LJ2W" + "-" + to_string(beneficio);
+							log = log + " " + "J1LJ2W" + "//-" + to_string(beneficio);
 							money = T.apuesta + Jugadores[1].getDinero();
 							Jugadores[1].setDinero(money);
 							Jugadores[0].resetApuesta();
 							Jugadores[1].resetApuesta();
 							T.finRonda(c);
+							fin_linea = true;
+							beneficio_total = beneficio_total - beneficio;
 							
 						}
 						else if (jugador_gana == 0)
 						{
 							beneficio = T.apuesta * .5 - Jugadores[0].getApuesta();
-							log= log + " " + "J1TJ2T" + "=" + to_string(beneficio);
+							log= log + " " + "J1TJ2T" + "//=" + to_string(beneficio);
 							float money_jug = 0, money_opo = 0;
 							money = T.apuesta / 2;
 							money_jug = money + Jugadores[0].getDinero();
@@ -1947,50 +2026,63 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 							Jugadores[0].resetApuesta();
 							Jugadores[1].resetApuesta();
 							T.finRonda(c);
+							fin_linea = true;
 							
 						}
+						registro(log, fin_linea);
 						
 					}
 					else {
 						Carta* array_aux = new Carta[5];
 						array_aux = T.Tablero;
-						log = log + "R" + to_string(T.getIndiceRonda());
+						log = "//R" + to_string(T.getIndiceRonda())+"//";
 						if (T.getIndiceRonda() == 1)
 						{
 							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[0]) + T.conversorPalo(array_aux[0]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[1]) + T.conversorPalo(array_aux[1]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[2]) + T.conversorPalo(array_aux[2]);
+							log = log + " " + T.conversorNumero(array_aux[1]) + T.conversorPalo(array_aux[1]);
+							log = log + " " + T.conversorNumero(array_aux[2]) + T.conversorPalo(array_aux[2]);
 							
 						}
 						if (T.getIndiceRonda() == 2)
 						{
 							log = log+ " " + "Mesa: " + T.conversorNumero(array_aux[0]) + T.conversorPalo(array_aux[0]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[1]) + T.conversorPalo(array_aux[1]);
-							log= log + " " + "Mesa: " + T.conversorNumero(array_aux[2]) + T.conversorPalo(array_aux[2]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[3]) + T.conversorPalo(array_aux[3]);
+							log = log + " " + T.conversorNumero(array_aux[1]) + T.conversorPalo(array_aux[1]);
+							log= log + " " +  T.conversorNumero(array_aux[2]) + T.conversorPalo(array_aux[2]);
+							log = log + " " + T.conversorNumero(array_aux[3]) + T.conversorPalo(array_aux[3]);
 							
 						}
 						if (T.getIndiceRonda() == 3)
 						{
 							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[0]) + T.conversorPalo(array_aux[0]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[1]) + T.conversorPalo(array_aux[1]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[2]) + T.conversorPalo(array_aux[2]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[3]) + T.conversorPalo(array_aux[3]);
-							log = log + " " + "Mesa: " + T.conversorNumero(array_aux[4]) + T.conversorPalo(array_aux[4]);
+							log = log + " "  + T.conversorNumero(array_aux[1]) + T.conversorPalo(array_aux[1]);
+							log = log + " "  + T.conversorNumero(array_aux[2]) + T.conversorPalo(array_aux[2]);
+							log = log + " "  + T.conversorNumero(array_aux[3]) + T.conversorPalo(array_aux[3]);
+							log = log + " " + T.conversorNumero(array_aux[4]) + T.conversorPalo(array_aux[4]);
 
 						}
-						
-						pasar = rondaAlg(T, c, Jugadores, alg, algOpo, acciones); //Flop, turn y river
-						if (pasar == true)
+						registro(log, fin_linea);
+						pasar = rondaAlg(T, c, Jugadores, alg, algOpo); //Flop, turn y river
+						if (pasar !=0)
 						{
 							
-							continuar = pasarApuestaAlg(T, Jugadores, c, alg, algOpo, n, n_veces);
+							if (pasar == 1)
+							{
+								beneficio_total = beneficio_total - Jugadores[0].getApuesta();
+							}
+							else if (pasar == 2)
+							{
+								beneficio_total = beneficio_total + Jugadores[1].getApuesta();
+								victorias++;
+								int indice_aux = T.getIndiceRonda() + 1;
+								alg.pasar(indice_aux);
+							}
+							continuar = pasarApuestaAlg(T, Jugadores, c, pasar, n, n_veces);
 						}
 
 					}
 				}
 				
-			} while (pasar == false && auxRonda < 4);
+			} while (pasar == 0 && auxRonda < 4);
 
 
 			if (continuar == true)
@@ -1998,6 +2090,15 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 				if (Jugadores[0].getDinero() == 0 || Jugadores[1].getDinero() == 0)
 				{
 					continuar = false;
+					if (Jugadores[0].getDinero() == 0)
+					{
+					log = "Algoritmo Pierde";
+					}
+					else if (Jugadores[1].getDinero() == 0)
+					{
+					log = "Patrón Pierde";
+					}
+					registro(log, true);
 				}
 			}
 
@@ -2005,15 +2106,16 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 			if (n >= n_veces)
 			{
 				continuar = false;
+				log = "Numero de Iteraciones alcanzado";
+				registro(log, true);
 			}
-			registro << log << endl;
+			
+			alg.reseteo();
 		} while (continuar == true);
-
-
-		if (registro.is_open())
-		{
-			registro.close();
-		}
+		
+		log = "Victorias: " + to_string(victorias) + "Beneficio total: " + to_string(beneficio_total);
+		registro(log, true);
+		
 	}
 
 
@@ -2028,7 +2130,7 @@ float apuestaInicial(Mesa T, Jugador* Jugadores) {
 	cout << endl;
 	random r;
 	int coin = r.randomN(2);
-	coin = 0;//TESTING
+	
 	if (coin == 0)
 	{
 		Jugadores[0].turno = 0;
@@ -2143,6 +2245,7 @@ int main()
 	int parametro = 0;
 	jugador = SeleccionarModo();
 	Algoritmo alg;
+	alg.reseteo();
 	if (jugador == false)
 	{
 		parametro = SeleccionarAlgoritmo();

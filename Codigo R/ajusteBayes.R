@@ -26,11 +26,37 @@ roca<-(pr*pra)/(pr*pra + (1-pr)*(pma+pca))
 calling<-(pc*pca)/(pc*pca + (1-pc)*(pra+pma))
 dif<-0
 sum<-0
- 
-if(maniaco>roca)
+if(maniaco == 1)
+{
+  mb=1
+  rb=0
+  cb=0
+}
+else if(maniaco>roca && maniaco>calling)
   {
-  if(maniaco>calling)
-  {
+  mb=1
+  rb=0
+  cb=0
+}
+
+else if(roca==1)
+{mb=0
+rb=1
+cb=0}
+else if(roca>maniaco&&roca>calling)
+{mb=0
+rb=1
+cb=0}
+else if(calling==1)
+{mb=0
+rb=0
+cb=1}
+else if(calling>roca && calling>maniaco)
+{mb=0
+rb=0
+cb=1}
+if(mb==1)
+{
     if(ronda == 1)
     {
       if(valorJugada>6)
@@ -66,11 +92,8 @@ if(maniaco>roca)
     roca=(roca/sum)*dif
     calling=(calling/sum)*dif
   }
-}
-if(roca>maniaco)
+if(rb==1)
 {
-  if(roca>calling)
-  {
       if(accion==2)
       {
         if(ronda==1)
@@ -114,12 +137,10 @@ if(roca>maniaco)
     sum=maniaco+calling
     maniaco=(maniaco/sum)*dif
     calling=(calling/sum)*dif
-    }
+    
 }
-if(calling>roca)
+if(cb==1)
 {
-  if(calling>maniaco)
-  {
     if(ronda == 1)
     {
       if(valorJugada>5)
@@ -154,7 +175,6 @@ if(calling>roca)
     sum=roca+maniaco
     roca=(roca/sum)*dif
     maniaco=(maniaco/sum)*dif
-  }
 }
 prob[1,1]<-maniaco
 prob[2,1]<-roca

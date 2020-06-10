@@ -17,6 +17,7 @@ public:
 	void obtenerTripleAccion(Jugador J, Mesa M, int accionprevia);
 	void obtenerTripleAct(Jugador J, Mesa M,int accionprevia);
 	void reseteo();//Reseteo de fin de ronda
+	void pasar(int ronda);//Funcion para enviar que el oponente ha pasado al algoritmo
 	int obtenerSubida(float apuesta,float apuesta_ini);
 
 

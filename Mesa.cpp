@@ -379,6 +379,8 @@ char Mesa::conversorNumero(Carta c)
 		return 'Q';
 	case 13:
 		return 'K';
+	case 14:
+		return 'A';
 	default:
 		return numero + '0';
 	}
