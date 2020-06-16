@@ -203,80 +203,887 @@ void Algoritmo::obtenerTriple(Jugador J, Mesa M)
 	}
 	else
 	{
+	Carta* mano_aux = new Carta[2];
+	mano_aux = J.getMano();
+	int carta_alta = 0;
+	int carta_baja = 0;
+	if (mano_aux[0].getNumero() > mano_aux[1].getNumero())
+	{
+		carta_alta = mano_aux[0].getNumero();
+		carta_baja = mano_aux[1].getNumero();
+	}
+	else if (mano_aux[0].getNumero() < mano_aux[1].getNumero())
+	{
+		carta_alta = mano_aux[1].getNumero();
+		carta_baja = mano_aux[0].getNumero();
+	}
+	else
+	{
+		carta_alta = mano_aux[0].getNumero();
+		carta_baja = mano_aux[1].getNumero();
+	}
+
+	if (carta_baja == 1)
+	{
+		int aux = carta_alta;
+		carta_alta = carta_baja;
+		carta_baja = aux;
+	}
 	switch (tipo)
 	{
 	case 1:
 		if (M.getIndiceRonda() == 0)
 		{
-			if (J.valor_mano >= 3.5)
+			if (J.valor_mano >= 12)
+			{
+				triple[0] = 0;
+				triple[1] = 0.05;
+				triple[2] = 0.95;
+			}
+			else if (J.valor_mano >= 10)
+			{
+				triple[0] = 0.025;
+				triple[1] = 0.075;
+				triple[2] = 0.9;
+			}
+			else if (J.valor_mano >= 9)
 			{
 				triple[0] = 0.05;
 				triple[1] = 0.1;
 				triple[2] = 0.85;
 			}
+			else if (J.valor_mano == 8)
+			{
+				if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+				{
+					if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+					{
+						triple[0] = 0.05;
+						triple[1] = 0.1;
+						triple[2] = 0.85;
+					}
+					else
+					{
+						triple[0] = 0.075;
+						triple[1] = 0.125;
+						triple[2] = 0.8;
+					}
+
+				}
+				else
+				{
+					triple[0] = 0.075;
+					triple[1] = 0.125;
+					triple[2] = 0.8;
+				}
+
+			}
+			else if (J.valor_mano > 6)
+			{
+				triple[0] = 0.1;
+				triple[1] = 0.15;
+				triple[2] = 0.75;
+			}
+			else if (J.valor_mano == 6)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+					{
+						triple[0] = 0.1;
+						triple[1] = 0.15;
+						triple[2] = 0.75;
+					}
+					else
+					{
+						triple[0] = 0.125;
+						triple[1] = 0.175;
+						triple[2] = 0.7;
+					}
+				}
+				else
+				{
+					triple[0] = 0.125;
+					triple[1] = 0.175;
+					triple[2] = 0.7;
+				}
+
+			}
+			else if (J.valor_mano == 5.5)
+			{
+				triple[0] = 0.125;
+				triple[1] = 0.175;
+				triple[2] = 0.7;
+			}
+			else if (J.valor_mano == 5)
+			{
+				if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+				{
+					if (carta_alta == 5)
+					{
+						triple[0] = 0.125;
+						triple[1] = 0.175;
+						triple[2] = 0.7;
+					}
+					else
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+				}
+				else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (carta_alta == 9 && carta_baja == 6)
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+					else
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+				}
+				else
+				{
+					if ((14 - carta_baja) > 5)
+					{
+						triple[0] = 0.20;
+						triple[1] = 0.25;
+						triple[2] = 0.55;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+			}
+			else if (J.valor_mano == 4.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.60;
+				}
+				else if ((carta_alta - carta_baja) == 1)
+				{
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.60;
+				}
+				else
+				{
+					triple[0] = 0.20;
+					triple[1] = 0.25;
+					triple[2] = 0.55;
+				}
+			}
+			else if (J.valor_mano == 4)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta + carta_baja) == 20)
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.20;
+						triple[1] = 0.25;
+						triple[2] = 0.55;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+			}
+			else if (J.valor_mano == 3.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.20;
+						triple[1] = 0.25;
+						triple[2] = 0.55;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+			}
 			else
 			{
-				triple[0] = 0.2;
+				triple[0] = 0.20;
 				triple[1] = 0.25;
 				triple[2] = 0.55;
 			}
 		}
 		else
 		{
-			triple[0] = 0.05;
-			triple[1] = 0.15;
-			triple[2] = 0.8;
+			int value = trunc(J.valor_mano);
+			switch (value)
+			{
+			case 9:
+				triple[0] = 0;
+				triple[1] = 0.05;
+				triple[2] = 0.95;
+				break;
+			case 8:
+				triple[0] = 0.025;
+				triple[1] = 0.075;
+				triple[2] = 0.9;
+				break;
+			case 7:
+				triple[0] = 0.05;
+				triple[1] = 0.1;
+				triple[2] = 0.85;
+				break;
+			case 6:
+				triple[0] = 0.075;
+				triple[1] = 0.125;
+				triple[2] = 0.8;
+				break;
+			case 5:
+				triple[0] = 0.1;
+				triple[1] = 0.15;
+				triple[2] = 0.75;
+				break;
+			case 4:
+				triple[0] = 0.125;
+				triple[1] = 0.175;
+				triple[2] = 0.7;
+				break;
+			case 3:
+				triple[0] = 0.15;
+				triple[1] = 0.2;
+				triple[2] = 0.65;
+				break;
+			case 2:
+				triple[0] = 0.175;
+				triple[1] = 0.225;
+				triple[2] = 0.6;
+				break;
+			case 1:
+				triple[0] = 0.2;
+				triple[1] = 0.25;
+				triple[2] = 0.55;
+				break;
+			case 0:
+				triple[0] = 0.225;
+				triple[1] = 0.275;
+				triple[2] = 0.5;
+				break;
+			}
+			break;
 		}
-		break;
+
 	case 2:
 		if (M.getIndiceRonda() == 0)
 		{
 			if (J.valor_mano >= 12)
 			{
 				triple[0] = 0;
-				triple[1] = 0.1;
-				triple[2] = 0.9;
+				triple[1] = 0.01;
+				triple[2] = 0.99;
 			}
-			else if(J.valor_mano>=7)
+			else if (J.valor_mano >= 10)
 			{
-				triple[0] = 0.05;
-				triple[1] = 0.9;
-				triple[2] = 0.05;
+				triple[0] = 0.01546875;
+				triple[1] = 0.2265625;
+				triple[2] = 0.75796875;
+			}
+			else if (J.valor_mano >= 9)
+			{
+				triple[0] = 0.061875;
+				triple[1] = 0.38125;
+				triple[2] = 0.556875;
+			}
+			else if (J.valor_mano == 8)
+			{
+				if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+				{
+					if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+					{
+						triple[0] = 0.061875;
+						triple[1] = 0.38125;
+						triple[2] = 0.556875;
+					}
+					else
+					{
+						triple[0] = 0.13921875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.38671875;
+					}
+
+				}
+				else
+				{
+					triple[0] = 0.13921875;
+					triple[1] = 0.4740625;
+					triple[2] = 0.38671875;
+				}
+
+			}
+			else if (J.valor_mano > 6)
+			{
+				triple[0] = 0.2475;
+				triple[1] = 0.505;
+				triple[2] = 0.2475;
+			}
+			else if (J.valor_mano == 6)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+					{
+						triple[0] = 0.2475;
+						triple[1] = 0.505;
+						triple[2] = 0.2475;
+					}
+					else
+					{
+						triple[0] = 0.38671875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.13921875;
+					}
+				}
+				else
+				{
+					triple[0] = 0.38671875;
+					triple[1] = 0.4740625;
+					triple[2] = 0.13921875;
+				}
+
+			}
+			else if (J.valor_mano == 5.5)
+			{
+				triple[0] = 0.38671875;
+				triple[1] = 0.4740625;
+				triple[2] = 0.13921875;
+			}
+			else if (J.valor_mano == 5)
+			{
+				if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+				{
+					if (carta_alta == 5)
+					{
+						triple[0] = 0.38671875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.13921875;
+					}
+					else
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+				}
+				else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (carta_alta == 9 && carta_baja == 6)
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+					else
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+				}
+				else
+				{
+					if ((14 - carta_baja) > 5)
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+			}
+			else if (J.valor_mano == 4.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					triple[0] = 0.75796875;
+					triple[1] = 0.2265625;
+					triple[2] = 0.01546875;
+				}
+				else if ((carta_alta - carta_baja) == 1)
+				{
+					triple[0] = 0.75796875;
+					triple[1] = 0.2265625;
+					triple[2] = 0.01546875;
+				}
+				else
+				{
+					triple[0] = 0.99;
+					triple[1] = 0.01;
+					triple[2] = 0;
+				}
+			}
+			else if (J.valor_mano == 4)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta + carta_baja) == 20)
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+			}
+			else if (J.valor_mano == 3.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
 			}
 			else
 			{
-				triple[0] = 0.9;
-				triple[1] = 0.1;
+				triple[0] = 0.99;
+				triple[1] = 0.01;
 				triple[2] = 0;
 			}
 		}
 		else
 		{
-			if (J.valor_mano >= 7)
+			int value = trunc(J.valor_mano);
+			switch (value)
+			{
+			case 9:
+				triple[0] = 0;
+				triple[1] = 0.01;
+				triple[2] = 0.99;
+				break;
+			case 8:
+				triple[0] = 0.01222222;
+				triple[1] = 0.20555556;
+				triple[2] = 0.78222222;
+				break;
+			case 7:
+				triple[0] = 0.04888889;
+				triple[1] = 0.35222222;
+				triple[2] = 0.59888889;
+				break;
+			case 6:
+				triple[0] = 0.11;
+				triple[1] = 0.45;
+				triple[2] = 0.44;
+				break;
+			case 5:
+				triple[0] = 0.19555556;
+				triple[1] = 0.49888889;
+				triple[2] = 0.30555556;
+				break;
+			case 4:
+				triple[0] = 0.30555556;
+				triple[1] = 0.49888889;
+				triple[2] = 0.19555556;
+				break;
+			case 3:
+				triple[0] = 0.44;
+				triple[1] = 0.45;
+				triple[2] = 0.11;
+				break;
+			case 2:
+				triple[0] = 0.59888889;
+				triple[1] = 0.35222222;
+				triple[2] = 0.04888889;
+				break;
+			case 1:
+				triple[0] = 0.78222222;
+				triple[1] = 0.20555556;
+				triple[2] = 0.01222222;
+				break;
+			case 0:
+				triple[0] = 0.99;
+				triple[1] = 0.01;
+				triple[2] = 0;
+				break;
+			}
+			break;
+		}
+	case 3:
+		if (M.getIndiceRonda() == 0)
+		{
+			if (J.valor_mano >= 12)
 			{
 				triple[0] = 0;
-				triple[1] = 0.1;
-				triple[2] = 0.9;
+				triple[1] = 0.85;
+				triple[2] = 0.15;
 			}
-			else if (J.valor_mano >= 2)
+			else if (J.valor_mano >= 10)
 			{
-				triple[0] = 0.05;
-				triple[1] = 0.9;
-				triple[2] = 0.05;
+				triple[0] = 0.0375;
+				triple[1] = 0.825;
+				triple[2] = 0.1375;
+			}
+			else if (J.valor_mano >= 9)
+			{
+				triple[0] = 0.075;
+				triple[1] = 0.8;
+				triple[2] = 0.125;
+			}
+			else if (J.valor_mano == 8)
+			{
+				if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+				{
+					if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+					{
+						triple[0] = 0.075;
+						triple[1] = 0.8;
+						triple[2] = 0.125;
+					}
+					else
+					{
+						triple[0] = 0.1125;
+						triple[1] = 0.775;
+						triple[2] = 0.1125;
+					}
+
+				}
+				else
+				{
+					triple[0] = 0.1125;
+					triple[1] = 0.775;
+					triple[2] = 0.1125;
+				}
+
+			}
+			else if (J.valor_mano > 6)
+			{
+				triple[0] = 0.15;
+				triple[1] = 0.75;
+				triple[2] = 0.1;
+			}
+			else if (J.valor_mano == 6)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.75;
+						triple[2] = 0.1;
+					}
+					else
+					{
+						triple[0] = 0.1875;
+						triple[1] = 0.725;
+						triple[2] = 0.0875;
+					}
+				}
+				else
+				{
+					triple[0] = 0.1875;
+					triple[1] = 0.725;
+					triple[2] = 0.0875;
+				}
+
+			}
+			else if (J.valor_mano == 5.5)
+			{
+				triple[0] = 0.1875;
+				triple[1] = 0.725;
+				triple[2] = 0.0875;
+			}
+			else if (J.valor_mano == 5)
+			{
+				if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+				{
+					if (carta_alta == 5)
+					{
+						triple[0] = 0.1875;
+						triple[1] = 0.725;
+						triple[2] = 0.0875;
+					}
+					else
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+				}
+				else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (carta_alta == 9 && carta_baja == 6)
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+					else
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+				}
+				else
+				{
+					if ((14 - carta_baja) > 5)
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+			}
+			else if (J.valor_mano == 4.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					triple[0] = 0.2625;
+					triple[1] = 0.675;
+					triple[2] = 0.0625;
+				}
+				else if ((carta_alta - carta_baja) == 1)
+				{
+					triple[0] = 0.2625;
+					triple[1] = 0.675;
+					triple[2] = 0.0625;
+				}
+				else
+				{
+					triple[0] = 0.3;
+					triple[1] = 0.65;
+					triple[2] = 0.05;
+				}
+			}
+			else if (J.valor_mano == 4)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta + carta_baja) == 20)
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+			}
+			else if (J.valor_mano == 3.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
 			}
 			else
 			{
-				triple[0] = 0.9;
-				triple[1] = 0.1;
-				triple[2] = 0;
+				triple[0] = 0.3;
+				triple[1] = 0.65;
+				triple[2] = 0.05;
 			}
 		}
-		break;
-	case 3:
-		triple[0] = 0.25;
-		triple[1] = 0.7;
-		triple[2] = 0.05;
-		break;
+		else
+		{
+			int value = trunc(J.valor_mano);
+			switch (value)
+			{
+			case 9:
+				triple[0] = 0;
+				triple[1] = 0.85;
+				triple[2] = 0.15;
+				break;
+			case 8:
+				triple[0] = 0.0375;
+				triple[1] = 0.825;
+				triple[2] = 0.1375;
+				break;
+			case 7:
+				triple[0] = 0.075;
+				triple[1] = 0.8;
+				triple[2] = 0.125;
+				break;
+			case 6:
+				triple[0] = 0.1125;
+				triple[1] = 0.775;
+				triple[2] = 0.1125;
+				break;
+			case 5:
+				triple[0] = 0.15;
+				triple[1] = 0.75;
+				triple[2] = 0.1;
+				break;
+			case 4:
+				triple[0] = 0.1875;
+				triple[1] = 0.725;
+				triple[2] = 0.0875;
+				break;
+			case 3:
+				triple[0] = 0.225;
+				triple[1] = 0.7;
+				triple[2] = 0.075;
+				break;
+			case 2:
+				triple[0] = 0.2625;
+				triple[1] = 0.675;
+				triple[2] = 0.0625;
+				break;
+			case 1:
+				triple[0] = 0.3;
+				triple[1] = 0.65;
+				triple[2] = 0.05;
+				break;
+			case 0:
+				triple[0] = 0.3375;
+				triple[1] = 0.625;
+				triple[2] = 0.0375;
+				break;
+			}
+			break;
+		}
 	}
 	}
 }
@@ -469,80 +1276,887 @@ void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
 	}
 	else
 	{
+	Carta* mano_aux = new Carta[2];
+	mano_aux = J.getMano();
+	int carta_alta = 0;
+	int carta_baja = 0;
+	if (mano_aux[0].getNumero() > mano_aux[1].getNumero())
+	{
+		carta_alta = mano_aux[0].getNumero();
+		carta_baja = mano_aux[1].getNumero();
+	}
+	else if (mano_aux[0].getNumero() < mano_aux[1].getNumero())
+	{
+		carta_alta = mano_aux[1].getNumero();
+		carta_baja = mano_aux[0].getNumero();
+	}
+	else
+	{
+		carta_alta = mano_aux[0].getNumero();
+		carta_baja = mano_aux[1].getNumero();
+	}
+
+	if (carta_baja == 1)
+	{
+		int aux = carta_alta;
+		carta_alta = carta_baja;
+		carta_baja = aux;
+	}
 	switch (tipo)
 	{
 	case 1:
 		if (M.getIndiceRonda() == 0)
 		{
-			if (J.valor_mano >= 3.5)
+			if (J.valor_mano >= 12)
+			{
+				triple[0] = 0;
+				triple[1] = 0.05;
+				triple[2] = 0.95;
+			}
+			else if(J.valor_mano >= 10)
+			{
+				triple[0] = 0.025;
+				triple[1] = 0.075;
+				triple[2] = 0.9;
+			}
+			else if (J.valor_mano >= 9)
 			{
 				triple[0] = 0.05;
 				triple[1] = 0.1;
 				triple[2] = 0.85;
 			}
+			else if (J.valor_mano ==8)
+			{
+				if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+				{
+					if(mano_aux[0].getPalo() == mano_aux[1].getPalo())
+					{ 
+						triple[0] = 0.05;
+						triple[1] = 0.1;
+						triple[2] = 0.85;
+					}
+					else
+					{
+						triple[0] = 0.075;
+						triple[1] = 0.125;
+						triple[2] = 0.8;
+					}
+					
+				}
+				else
+				{
+					triple[0] = 0.075;
+					triple[1] = 0.125;
+					triple[2] = 0.8;
+				}
+				
+			}
+			else if (J.valor_mano > 6)
+			{
+				triple[0] = 0.1;
+				triple[1] = 0.15;
+				triple[2] = 0.75;
+			}
+			else if (J.valor_mano == 6)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+					{
+						triple[0] = 0.1;
+						triple[1] = 0.15;
+						triple[2] = 0.75;
+					}
+					else
+					{
+						triple[0] = 0.125;
+						triple[1] = 0.175;
+						triple[2] = 0.7;
+					}
+				}
+				else
+				{
+					triple[0] = 0.125;
+					triple[1] = 0.175;
+					triple[2] = 0.7;
+				}
+
+			}
+			else if (J.valor_mano == 5.5)
+			{
+				triple[0] = 0.125;
+				triple[1] = 0.175;
+				triple[2] = 0.7;
+			}
+			else if (J.valor_mano == 5)
+			{
+				if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+				{
+					if (carta_alta == 5)
+					{
+						triple[0] = 0.125;
+						triple[1] = 0.175;
+						triple[2] = 0.7;
+					}
+					else
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+				}
+				else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (carta_alta == 9 && carta_baja == 6)
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+					else
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+				}
+				else
+				{
+					if ((14-carta_baja)>5)
+					{
+						triple[0] = 0.20;
+						triple[1] = 0.25;
+						triple[2] = 0.55;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+			}
+			else if (J.valor_mano == 4.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.60;
+				}
+				else if ((carta_alta - carta_baja) == 1)
+				{
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.60;
+				}
+				else
+				{
+					triple[0] = 0.20;
+					triple[1] = 0.25;
+					triple[2] = 0.55;
+				}
+			}
+			else if (J.valor_mano == 4)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta + carta_baja) == 20)
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.20;
+						triple[2] = 0.65;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.20;
+						triple[1] = 0.25;
+						triple[2] = 0.55;
+					}
+					else
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+				}
+			}
+			else if (J.valor_mano==3.5)
+			{ 
+			if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+			{
+				if ((carta_alta - carta_baja) == 2)
+				{
+					triple[0] = 0.15;
+					triple[1] = 0.20;
+					triple[2] = 0.65;
+				}
+				else
+				{
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.60;
+				}
+			}
 			else
 			{
-				triple[0] = 0.2;
+				if ((carta_alta - carta_baja) == 2)
+				{
+					triple[0] = 0.20;
+					triple[1] = 0.25;
+					triple[2] = 0.55;
+				}
+				else
+				{
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.60;
+				}
+			}
+			}
+			else
+			{
+				triple[0] = 0.20;
 				triple[1] = 0.25;
 				triple[2] = 0.55;
-			}
+			 }
 		}
 		else
 		{
+		int value = trunc(J.valor_mano);
+		switch (value)
+		{
+		case 9:
+			triple[0] = 0;
+			triple[1] = 0.05;
+			triple[2] = 0.95;
+			break;
+		case 8:
+			triple[0] = 0.025;
+			triple[1] = 0.075;
+			triple[2] = 0.9;
+			break;
+		case 7:
 			triple[0] = 0.05;
-			triple[1] = 0.15;
+			triple[1] = 0.1;
+			triple[2] = 0.85;
+			break;
+		case 6:
+			triple[0] = 0.075;
+			triple[1] = 0.125;
 			triple[2] = 0.8;
+			break;
+		case 5:
+			triple[0] = 0.1;
+			triple[1] = 0.15;
+			triple[2] = 0.75;
+			break;
+		case 4:
+			triple[0] = 0.125;
+			triple[1] = 0.175;
+			triple[2] = 0.7;
+			break;
+		case 3:
+			triple[0] = 0.15;
+			triple[1] = 0.2;
+			triple[2] = 0.65;
+			break;
+		case 2:
+			triple[0] = 0.175;
+			triple[1] = 0.225;
+			triple[2] = 0.6;
+			break;
+		case 1:
+			triple[0] = 0.2;
+			triple[1] = 0.25;
+			triple[2] = 0.55;
+			break;
+		case 0:
+			triple[0] = 0.225;
+			triple[1] = 0.275;
+			triple[2] = 0.5;
+			break;
 		}
 		break;
+		}
+		
 	case 2:
 		if (M.getIndiceRonda() == 0)
 		{
 			if (J.valor_mano >= 12)
 			{
 				triple[0] = 0;
-				triple[1] = 0.1;
-				triple[2] = 0.9;
+				triple[1] = 0.01;
+				triple[2] = 0.99;
 			}
-			else if (J.valor_mano >= 7)
+			else if (J.valor_mano >= 10)
 			{
-				triple[0] = 0.05;
-				triple[1] = 0.9;
-				triple[2] = 0.05;
+				triple[0] = 0.01546875;
+				triple[1] = 0.2265625;
+				triple[2] = 0.75796875;
+			}
+			else if (J.valor_mano >= 9)
+			{
+				triple[0] = 0.061875;
+				triple[1] = 0.38125;
+				triple[2] = 0.556875;
+			}
+			else if (J.valor_mano == 8)
+			{
+				if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+				{
+					if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+					{
+						triple[0] = 0.061875;
+						triple[1] = 0.38125;
+						triple[2] = 0.556875;
+					}
+					else
+					{
+						triple[0] = 0.13921875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.38671875;
+					}
+
+				}
+				else
+				{
+					triple[0] = 0.13921875;
+					triple[1] = 0.4740625;
+					triple[2] = 0.38671875;
+				}
+
+			}
+			else if (J.valor_mano > 6)
+			{
+				triple[0] = 0.2475;
+				triple[1] = 0.505;
+				triple[2] = 0.2475;
+			}
+			else if (J.valor_mano == 6)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+					{
+						triple[0] = 0.2475;
+						triple[1] = 0.505;
+						triple[2] = 0.2475;
+					}
+					else
+					{
+						triple[0] = 0.38671875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.13921875;
+					}
+				}
+				else
+				{
+					triple[0] = 0.38671875;
+					triple[1] = 0.4740625;
+					triple[2] = 0.13921875;
+				}
+
+			}
+			else if (J.valor_mano == 5.5)
+			{
+				triple[0] = 0.38671875;
+				triple[1] = 0.4740625;
+				triple[2] = 0.13921875;
+			}
+			else if (J.valor_mano == 5)
+			{
+				if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+				{
+					if (carta_alta == 5)
+					{
+						triple[0] = 0.38671875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.13921875;
+					}
+					else
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+				}
+				else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (carta_alta == 9 && carta_baja == 6)
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+					else
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+				}
+				else
+				{
+					if ((14 - carta_baja) > 5)
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+			}
+			else if (J.valor_mano == 4.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					triple[0] = 0.75796875;
+					triple[1] = 0.2265625;
+					triple[2] = 0.01546875;
+				}
+				else if ((carta_alta - carta_baja) == 1)
+				{
+					triple[0] = 0.75796875;
+					triple[1] = 0.2265625;
+					triple[2] = 0.01546875;
+				}
+				else
+				{
+					triple[0] = 0.99;
+					triple[1] = 0.01;
+					triple[2] = 0;
+				}
+			}
+			else if (J.valor_mano == 4)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta + carta_baja) == 20)
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+			}
+			else if (J.valor_mano == 3.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.556875;
+						triple[1] = 0.38125;
+						triple[2] = 0.061875;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+					else
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+				}
 			}
 			else
 			{
-				triple[0] = 0.9;
-				triple[1] = 0.1;
-				triple[2] = 0;
+			triple[0] = 0.99;
+			triple[1] = 0.01;
+			triple[2] = 0;
 			}
 		}
 		else
 		{
-			if (J.valor_mano >= 7)
+			int value = trunc(J.valor_mano);
+			switch (value)
+			{
+			case 9:
+				triple[0] = 0;
+				triple[1] = 0.01;
+				triple[2] = 0.99;
+				break;
+			case 8:
+				triple[0] = 0.01222222;
+				triple[1] = 0.20555556;
+				triple[2] = 0.78222222;
+				break;
+			case 7:
+				triple[0] = 0.04888889;
+				triple[1] = 0.35222222;
+				triple[2] = 0.59888889;
+				break;
+			case 6:
+				triple[0] = 0.11;
+				triple[1] = 0.45;
+				triple[2] = 0.44;
+				break;
+			case 5:
+				triple[0] = 0.19555556;
+				triple[1] = 0.49888889;
+				triple[2] = 0.30555556;
+				break;
+			case 4:
+				triple[0] = 0.30555556;
+				triple[1] = 0.49888889;
+				triple[2] = 0.19555556;
+				break;
+			case 3:
+				triple[0] = 0.44;
+				triple[1] = 0.45;
+				triple[2] = 0.11;
+				break;
+			case 2:
+				triple[0] = 0.59888889;
+				triple[1] = 0.35222222;
+				triple[2] = 0.04888889;
+				break;
+			case 1:
+				triple[0] = 0.78222222;
+				triple[1] = 0.20555556;
+				triple[2] = 0.01222222;
+				break;
+			case 0:
+				triple[0] = 0.99;
+				triple[1] = 0.01;
+				triple[2] = 0;
+				break;
+			}
+			break;
+		}
+	case 3:
+		if (M.getIndiceRonda() == 0)
+		{
+			if (J.valor_mano >= 12)
 			{
 				triple[0] = 0;
-				triple[1] = 0.1;
-				triple[2] = 0.9;
+				triple[1] = 0.85;
+				triple[2] = 0.15;
 			}
-			else if (J.valor_mano >= 2)
+			else if (J.valor_mano >= 10)
 			{
-				triple[0] = 0.05;
-				triple[1] = 0.9;
-				triple[2] = 0.05;
+				triple[0] = 0.0375;
+				triple[1] = 0.825;
+				triple[2] = 0.1375;
+			}
+			else if (J.valor_mano >= 9)
+			{
+				triple[0] = 0.075;
+				triple[1] = 0.8;
+				triple[2] = 0.125;
+			}
+			else if (J.valor_mano == 8)
+			{
+				if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+				{
+					if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+					{
+						triple[0] = 0.075;
+						triple[1] = 0.8;
+						triple[2] = 0.125;
+					}
+					else
+					{
+						triple[0] = 0.1125;
+						triple[1] = 0.775;
+						triple[2] = 0.1125;
+					}
+
+				}
+				else
+				{
+					triple[0] = 0.1125;
+					triple[1] = 0.775;
+					triple[2] = 0.1125;
+				}
+
+			}
+			else if (J.valor_mano > 6)
+			{
+				triple[0] = 0.15;
+				triple[1] = 0.75;
+				triple[2] = 0.1;
+			}
+			else if (J.valor_mano == 6)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+					{
+						triple[0] = 0.15;
+						triple[1] = 0.75;
+						triple[2] = 0.1;
+					}
+					else
+					{
+						triple[0] = 0.1875;
+						triple[1] = 0.725;
+						triple[2] = 0.0875;
+					}
+				}
+				else
+				{
+					triple[0] = 0.1875;
+					triple[1] = 0.725;
+					triple[2] = 0.0875;
+				}
+
+			}
+			else if (J.valor_mano == 5.5)
+			{
+				triple[0] = 0.1875;
+				triple[1] = 0.725;
+				triple[2] = 0.0875;
+			}
+			else if (J.valor_mano == 5)
+			{
+				if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+				{
+					if (carta_alta == 5)
+					{
+						triple[0] = 0.1875;
+						triple[1] = 0.725;
+						triple[2] = 0.0875;
+					}
+					else
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+				}
+				else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if (carta_alta == 9 && carta_baja == 6)
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+					else
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+				}
+				else
+				{
+					if ((14 - carta_baja) > 5)
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+			}
+			else if (J.valor_mano == 4.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					triple[0] = 0.2625;
+					triple[1] = 0.675;
+					triple[2] = 0.0625;
+				}
+				else if ((carta_alta - carta_baja) == 1)
+				{
+					triple[0] = 0.2625;
+					triple[1] = 0.675;
+					triple[2] = 0.0625;
+				}
+				else
+				{
+					triple[0] = 0.3;
+					triple[1] = 0.65;
+					triple[2] = 0.05;
+				}
+			}
+			else if (J.valor_mano == 4)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta + carta_baja) == 20)
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+			}
+			else if (J.valor_mano == 3.5)
+			{
+				if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.225;
+						triple[1] = 0.7;
+						triple[2] = 0.075;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
+				else
+				{
+					if ((carta_alta - carta_baja) == 2)
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+					else
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+				}
 			}
 			else
 			{
-				triple[0] = 0.9;
-				triple[1] = 0.1;
-				triple[2] = 0;
+			triple[0] = 0.3;
+			triple[1] = 0.65;
+			triple[2] = 0.05;
 			}
 		}
-		break;
-	case 3:
-		triple[0] = 0.25;
-		triple[1] = 0.7;
-		triple[2] = 0.05;
-		break;
+		else
+		{
+			int value = trunc(J.valor_mano);
+			switch (value)
+			{
+			case 9:
+				triple[0] = 0;
+				triple[1] = 0.85;
+				triple[2] = 0.15;
+				break;
+			case 8:
+				triple[0] = 0.0375;
+				triple[1] = 0.825;
+				triple[2] = 0.1375;
+				break;
+			case 7:
+				triple[0] = 0.075;
+				triple[1] = 0.8;
+				triple[2] = 0.125;
+				break;
+			case 6:
+				triple[0] = 0.1125;
+				triple[1] = 0.775;
+				triple[2] = 0.1125;
+				break;
+			case 5:
+				triple[0] = 0.15;
+				triple[1] = 0.75;
+				triple[2] = 0.1;
+				break;
+			case 4:
+				triple[0] = 0.1875;
+				triple[1] = 0.725;
+				triple[2] = 0.0875;
+				break;
+			case 3:
+				triple[0] = 0.225;
+				triple[1] = 0.7;
+				triple[2] = 0.075;
+				break;
+			case 2:
+				triple[0] = 0.2625;
+				triple[1] = 0.675;
+				triple[2] = 0.0625;
+				break;
+			case 1:
+				triple[0] = 0.3;
+				triple[1] = 0.65;
+				triple[2] = 0.05;
+				break;
+			case 0:
+				triple[0] = 0.3375;
+				triple[1] = 0.625;
+				triple[2] = 0.0375;
+				break;
+			}
+			break;
+		}
 	}
 	}
 }
@@ -655,80 +2269,887 @@ void Algoritmo::obtenerTripleAct(Jugador J, Mesa M, int accionprevia)
 	}
 	else
 	{
+		Carta* mano_aux = new Carta[2];
+		mano_aux = J.getMano();
+		int carta_alta = 0;
+		int carta_baja = 0;
+		if (mano_aux[0].getNumero() > mano_aux[1].getNumero())
+		{
+			carta_alta = mano_aux[0].getNumero();
+			carta_baja = mano_aux[1].getNumero();
+		}
+		else if (mano_aux[0].getNumero() < mano_aux[1].getNumero())
+		{
+			carta_alta = mano_aux[1].getNumero();
+			carta_baja = mano_aux[0].getNumero();
+		}
+		else
+		{
+			carta_alta = mano_aux[0].getNumero();
+			carta_baja = mano_aux[1].getNumero();
+		}
+
+		if (carta_baja == 1)
+		{
+			int aux = carta_alta;
+			carta_alta = carta_baja;
+			carta_baja = aux;
+		}
 		switch (tipo)
 		{
 		case 1:
 			if (M.getIndiceRonda() == 0)
 			{
-				if (J.valor_mano >= 3.5)
+				if (J.valor_mano >= 12)
+				{
+					triple[0] = 0;
+					triple[1] = 0.05;
+					triple[2] = 0.95;
+				}
+				else if (J.valor_mano >= 10)
+				{
+					triple[0] = 0.025;
+					triple[1] = 0.075;
+					triple[2] = 0.9;
+				}
+				else if (J.valor_mano >= 9)
 				{
 					triple[0] = 0.05;
 					triple[1] = 0.1;
 					triple[2] = 0.85;
 				}
+				else if (J.valor_mano == 8)
+				{
+					if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+					{
+						if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+						{
+							triple[0] = 0.05;
+							triple[1] = 0.1;
+							triple[2] = 0.85;
+						}
+						else
+						{
+							triple[0] = 0.075;
+							triple[1] = 0.125;
+							triple[2] = 0.8;
+						}
+
+					}
+					else
+					{
+						triple[0] = 0.075;
+						triple[1] = 0.125;
+						triple[2] = 0.8;
+					}
+
+				}
+				else if (J.valor_mano > 6)
+				{
+					triple[0] = 0.1;
+					triple[1] = 0.15;
+					triple[2] = 0.75;
+				}
+				else if (J.valor_mano == 6)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+						{
+							triple[0] = 0.1;
+							triple[1] = 0.15;
+							triple[2] = 0.75;
+						}
+						else
+						{
+							triple[0] = 0.125;
+							triple[1] = 0.175;
+							triple[2] = 0.7;
+						}
+					}
+					else
+					{
+						triple[0] = 0.125;
+						triple[1] = 0.175;
+						triple[2] = 0.7;
+					}
+
+				}
+				else if (J.valor_mano == 5.5)
+				{
+					triple[0] = 0.125;
+					triple[1] = 0.175;
+					triple[2] = 0.7;
+				}
+				else if (J.valor_mano == 5)
+				{
+					if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+					{
+						if (carta_alta == 5)
+						{
+							triple[0] = 0.125;
+							triple[1] = 0.175;
+							triple[2] = 0.7;
+						}
+						else
+						{
+							triple[0] = 0.15;
+							triple[1] = 0.20;
+							triple[2] = 0.65;
+						}
+					}
+					else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if (carta_alta == 9 && carta_baja == 6)
+						{
+							triple[0] = 0.175;
+							triple[1] = 0.225;
+							triple[2] = 0.60;
+						}
+						else
+						{
+							triple[0] = 0.15;
+							triple[1] = 0.20;
+							triple[2] = 0.65;
+						}
+					}
+					else
+					{
+						if ((14 - carta_baja) > 5)
+						{
+							triple[0] = 0.20;
+							triple[1] = 0.25;
+							triple[2] = 0.55;
+						}
+						else
+						{
+							triple[0] = 0.175;
+							triple[1] = 0.225;
+							triple[2] = 0.60;
+						}
+					}
+				}
+				else if (J.valor_mano == 4.5)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+					else if ((carta_alta - carta_baja) == 1)
+					{
+						triple[0] = 0.175;
+						triple[1] = 0.225;
+						triple[2] = 0.60;
+					}
+					else
+					{
+						triple[0] = 0.20;
+						triple[1] = 0.25;
+						triple[2] = 0.55;
+					}
+				}
+				else if (J.valor_mano == 4)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if ((carta_alta + carta_baja) == 20)
+						{
+							triple[0] = 0.15;
+							triple[1] = 0.20;
+							triple[2] = 0.65;
+						}
+						else
+						{
+							triple[0] = 0.175;
+							triple[1] = 0.225;
+							triple[2] = 0.60;
+						}
+					}
+					else
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.20;
+							triple[1] = 0.25;
+							triple[2] = 0.55;
+						}
+						else
+						{
+							triple[0] = 0.175;
+							triple[1] = 0.225;
+							triple[2] = 0.60;
+						}
+					}
+				}
+				else if (J.valor_mano == 3.5)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.15;
+							triple[1] = 0.20;
+							triple[2] = 0.65;
+						}
+						else
+						{
+							triple[0] = 0.175;
+							triple[1] = 0.225;
+							triple[2] = 0.60;
+						}
+					}
+					else
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.20;
+							triple[1] = 0.25;
+							triple[2] = 0.55;
+						}
+						else
+						{
+							triple[0] = 0.175;
+							triple[1] = 0.225;
+							triple[2] = 0.60;
+						}
+					}
+				}
 				else
 				{
-					triple[0] = 0.2;
+					triple[0] = 0.20;
 					triple[1] = 0.25;
 					triple[2] = 0.55;
 				}
 			}
 			else
 			{
-				triple[0] = 0.05;
-				triple[1] = 0.15;
-				triple[2] = 0.8;
+				int value = trunc(J.valor_mano);
+				switch (value)
+				{
+				case 9:
+					triple[0] = 0;
+					triple[1] = 0.05;
+					triple[2] = 0.95;
+					break;
+				case 8:
+					triple[0] = 0.025;
+					triple[1] = 0.075;
+					triple[2] = 0.9;
+					break;
+				case 7:
+					triple[0] = 0.05;
+					triple[1] = 0.1;
+					triple[2] = 0.85;
+					break;
+				case 6:
+					triple[0] = 0.075;
+					triple[1] = 0.125;
+					triple[2] = 0.8;
+					break;
+				case 5:
+					triple[0] = 0.1;
+					triple[1] = 0.15;
+					triple[2] = 0.75;
+					break;
+				case 4:
+					triple[0] = 0.125;
+					triple[1] = 0.175;
+					triple[2] = 0.7;
+					break;
+				case 3:
+					triple[0] = 0.15;
+					triple[1] = 0.2;
+					triple[2] = 0.65;
+					break;
+				case 2:
+					triple[0] = 0.175;
+					triple[1] = 0.225;
+					triple[2] = 0.6;
+					break;
+				case 1:
+					triple[0] = 0.2;
+					triple[1] = 0.25;
+					triple[2] = 0.55;
+					break;
+				case 0:
+					triple[0] = 0.225;
+					triple[1] = 0.275;
+					triple[2] = 0.5;
+					break;
+				}
+				break;
 			}
-			break;
+
 		case 2:
 			if (M.getIndiceRonda() == 0)
 			{
 				if (J.valor_mano >= 12)
 				{
 					triple[0] = 0;
-					triple[1] = 0.1;
-					triple[2] = 0.9;
+					triple[1] = 0.01;
+					triple[2] = 0.99;
 				}
-				else if (J.valor_mano >= 7)
+				else if (J.valor_mano >= 10)
 				{
-					triple[0] = 0.05;
-					triple[1] = 0.9;
-					triple[2] = 0.05;
+					triple[0] = 0.01546875;
+					triple[1] = 0.2265625;
+					triple[2] = 0.75796875;
+				}
+				else if (J.valor_mano >= 9)
+				{
+					triple[0] = 0.061875;
+					triple[1] = 0.38125;
+					triple[2] = 0.556875;
+				}
+				else if (J.valor_mano == 8)
+				{
+					if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+					{
+						if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+						{
+							triple[0] = 0.061875;
+							triple[1] = 0.38125;
+							triple[2] = 0.556875;
+						}
+						else
+						{
+							triple[0] = 0.13921875;
+							triple[1] = 0.4740625;
+							triple[2] = 0.38671875;
+						}
+
+					}
+					else
+					{
+						triple[0] = 0.13921875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.38671875;
+					}
+
+				}
+				else if (J.valor_mano > 6)
+				{
+					triple[0] = 0.2475;
+					triple[1] = 0.505;
+					triple[2] = 0.2475;
+				}
+				else if (J.valor_mano == 6)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+						{
+							triple[0] = 0.2475;
+							triple[1] = 0.505;
+							triple[2] = 0.2475;
+						}
+						else
+						{
+							triple[0] = 0.38671875;
+							triple[1] = 0.4740625;
+							triple[2] = 0.13921875;
+						}
+					}
+					else
+					{
+						triple[0] = 0.38671875;
+						triple[1] = 0.4740625;
+						triple[2] = 0.13921875;
+					}
+
+				}
+				else if (J.valor_mano == 5.5)
+				{
+					triple[0] = 0.38671875;
+					triple[1] = 0.4740625;
+					triple[2] = 0.13921875;
+				}
+				else if (J.valor_mano == 5)
+				{
+					if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+					{
+						if (carta_alta == 5)
+						{
+							triple[0] = 0.38671875;
+							triple[1] = 0.4740625;
+							triple[2] = 0.13921875;
+						}
+						else
+						{
+							triple[0] = 0.556875;
+							triple[1] = 0.38125;
+							triple[2] = 0.061875;
+						}
+					}
+					else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if (carta_alta == 9 && carta_baja == 6)
+						{
+							triple[0] = 0.75796875;
+							triple[1] = 0.2265625;
+							triple[2] = 0.01546875;
+						}
+						else
+						{
+							triple[0] = 0.556875;
+							triple[1] = 0.38125;
+							triple[2] = 0.061875;
+						}
+					}
+					else
+					{
+						if ((14 - carta_baja) > 5)
+						{
+							triple[0] = 0.99;
+							triple[1] = 0.01;
+							triple[2] = 0;
+						}
+						else
+						{
+							triple[0] = 0.75796875;
+							triple[1] = 0.2265625;
+							triple[2] = 0.01546875;
+						}
+					}
+				}
+				else if (J.valor_mano == 4.5)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+					else if ((carta_alta - carta_baja) == 1)
+					{
+						triple[0] = 0.75796875;
+						triple[1] = 0.2265625;
+						triple[2] = 0.01546875;
+					}
+					else
+					{
+						triple[0] = 0.99;
+						triple[1] = 0.01;
+						triple[2] = 0;
+					}
+				}
+				else if (J.valor_mano == 4)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if ((carta_alta + carta_baja) == 20)
+						{
+							triple[0] = 0.556875;
+							triple[1] = 0.38125;
+							triple[2] = 0.061875;
+						}
+						else
+						{
+							triple[0] = 0.75796875;
+							triple[1] = 0.2265625;
+							triple[2] = 0.01546875;
+						}
+					}
+					else
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.99;
+							triple[1] = 0.01;
+							triple[2] = 0;
+						}
+						else
+						{
+							triple[0] = 0.75796875;
+							triple[1] = 0.2265625;
+							triple[2] = 0.01546875;
+						}
+					}
+				}
+				else if (J.valor_mano == 3.5)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.556875;
+							triple[1] = 0.38125;
+							triple[2] = 0.061875;
+						}
+						else
+						{
+							triple[0] = 0.75796875;
+							triple[1] = 0.2265625;
+							triple[2] = 0.01546875;
+						}
+					}
+					else
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.99;
+							triple[1] = 0.01;
+							triple[2] = 0;
+						}
+						else
+						{
+							triple[0] = 0.75796875;
+							triple[1] = 0.2265625;
+							triple[2] = 0.01546875;
+						}
+					}
 				}
 				else
 				{
-					triple[0] = 0.9;
-					triple[1] = 0.1;
+					triple[0] = 0.99;
+					triple[1] = 0.01;
 					triple[2] = 0;
 				}
 			}
 			else
 			{
-				if (J.valor_mano >= 7)
+				int value = trunc(J.valor_mano);
+				switch (value)
+				{
+				case 9:
+					triple[0] = 0;
+					triple[1] = 0.01;
+					triple[2] = 0.99;
+					break;
+				case 8:
+					triple[0] = 0.01222222;
+					triple[1] = 0.20555556;
+					triple[2] = 0.78222222;
+					break;
+				case 7:
+					triple[0] = 0.04888889;
+					triple[1] = 0.35222222;
+					triple[2] = 0.59888889;
+					break;
+				case 6:
+					triple[0] = 0.11;
+					triple[1] = 0.45;
+					triple[2] = 0.44;
+					break;
+				case 5:
+					triple[0] = 0.19555556;
+					triple[1] = 0.49888889;
+					triple[2] = 0.30555556;
+					break;
+				case 4:
+					triple[0] = 0.30555556;
+					triple[1] = 0.49888889;
+					triple[2] = 0.19555556;
+					break;
+				case 3:
+					triple[0] = 0.44;
+					triple[1] = 0.45;
+					triple[2] = 0.11;
+					break;
+				case 2:
+					triple[0] = 0.59888889;
+					triple[1] = 0.35222222;
+					triple[2] = 0.04888889;
+					break;
+				case 1:
+					triple[0] = 0.78222222;
+					triple[1] = 0.20555556;
+					triple[2] = 0.01222222;
+					break;
+				case 0:
+					triple[0] = 0.99;
+					triple[1] = 0.01;
+					triple[2] = 0;
+					break;
+				}
+				break;
+			}
+		case 3:
+			if (M.getIndiceRonda() == 0)
+			{
+				if (J.valor_mano >= 12)
 				{
 					triple[0] = 0;
-					triple[1] = 0.1;
-					triple[2] = 0.9;
+					triple[1] = 0.85;
+					triple[2] = 0.15;
 				}
-				else if (J.valor_mano >= 2)
+				else if (J.valor_mano >= 10)
 				{
-					triple[0] = 0.05;
-					triple[1] = 0.9;
-					triple[2] = 0.05;
+					triple[0] = 0.0375;
+					triple[1] = 0.825;
+					triple[2] = 0.1375;
+				}
+				else if (J.valor_mano >= 9)
+				{
+					triple[0] = 0.075;
+					triple[1] = 0.8;
+					triple[2] = 0.125;
+				}
+				else if (J.valor_mano == 8)
+				{
+					if (mano_aux[0].getNumero() == 1 || mano_aux[1].getNumero() == 1)
+					{
+						if (mano_aux[0].getPalo() == mano_aux[1].getPalo())
+						{
+							triple[0] = 0.075;
+							triple[1] = 0.8;
+							triple[2] = 0.125;
+						}
+						else
+						{
+							triple[0] = 0.1125;
+							triple[1] = 0.775;
+							triple[2] = 0.1125;
+						}
+
+					}
+					else
+					{
+						triple[0] = 0.1125;
+						triple[1] = 0.775;
+						triple[2] = 0.1125;
+					}
+
+				}
+				else if (J.valor_mano > 6)
+				{
+					triple[0] = 0.15;
+					triple[1] = 0.75;
+					triple[2] = 0.1;
+				}
+				else if (J.valor_mano == 6)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if (mano_aux[1].getNumero() == 12 || mano_aux[0].getNumero() == 12)
+						{
+							triple[0] = 0.15;
+							triple[1] = 0.75;
+							triple[2] = 0.1;
+						}
+						else
+						{
+							triple[0] = 0.1875;
+							triple[1] = 0.725;
+							triple[2] = 0.0875;
+						}
+					}
+					else
+					{
+						triple[0] = 0.1875;
+						triple[1] = 0.725;
+						triple[2] = 0.0875;
+					}
+
+				}
+				else if (J.valor_mano == 5.5)
+				{
+					triple[0] = 0.1875;
+					triple[1] = 0.725;
+					triple[2] = 0.0875;
+				}
+				else if (J.valor_mano == 5)
+				{
+					if (mano_aux[1].getNumero() == mano_aux[0].getNumero())
+					{
+						if (carta_alta == 5)
+						{
+							triple[0] = 0.1875;
+							triple[1] = 0.725;
+							triple[2] = 0.0875;
+						}
+						else
+						{
+							triple[0] = 0.225;
+							triple[1] = 0.7;
+							triple[2] = 0.075;
+						}
+					}
+					else if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if (carta_alta == 9 && carta_baja == 6)
+						{
+							triple[0] = 0.2625;
+							triple[1] = 0.675;
+							triple[2] = 0.0625;
+						}
+						else
+						{
+							triple[0] = 0.225;
+							triple[1] = 0.7;
+							triple[2] = 0.075;
+						}
+					}
+					else
+					{
+						if ((14 - carta_baja) > 5)
+						{
+							triple[0] = 0.3;
+							triple[1] = 0.65;
+							triple[2] = 0.05;
+						}
+						else
+						{
+							triple[0] = 0.2625;
+							triple[1] = 0.675;
+							triple[2] = 0.0625;
+						}
+					}
+				}
+				else if (J.valor_mano == 4.5)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+					else if ((carta_alta - carta_baja) == 1)
+					{
+						triple[0] = 0.2625;
+						triple[1] = 0.675;
+						triple[2] = 0.0625;
+					}
+					else
+					{
+						triple[0] = 0.3;
+						triple[1] = 0.65;
+						triple[2] = 0.05;
+					}
+				}
+				else if (J.valor_mano == 4)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if ((carta_alta + carta_baja) == 20)
+						{
+							triple[0] = 0.225;
+							triple[1] = 0.7;
+							triple[2] = 0.075;
+						}
+						else
+						{
+							triple[0] = 0.2625;
+							triple[1] = 0.675;
+							triple[2] = 0.0625;
+						}
+					}
+					else
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.3;
+							triple[1] = 0.65;
+							triple[2] = 0.05;
+						}
+						else
+						{
+							triple[0] = 0.2625;
+							triple[1] = 0.675;
+							triple[2] = 0.0625;
+						}
+					}
+				}
+				else if (J.valor_mano == 3.5)
+				{
+					if (mano_aux[1].getPalo() == mano_aux[0].getPalo())
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.225;
+							triple[1] = 0.7;
+							triple[2] = 0.075;
+						}
+						else
+						{
+							triple[0] = 0.2625;
+							triple[1] = 0.675;
+							triple[2] = 0.0625;
+						}
+					}
+					else
+					{
+						if ((carta_alta - carta_baja) == 2)
+						{
+							triple[0] = 0.3;
+							triple[1] = 0.65;
+							triple[2] = 0.05;
+						}
+						else
+						{
+							triple[0] = 0.2625;
+							triple[1] = 0.675;
+							triple[2] = 0.0625;
+						}
+					}
 				}
 				else
 				{
-					triple[0] = 0.9;
-					triple[1] = 0.1;
-					triple[2] = 0;
+					triple[0] = 0.3;
+					triple[1] = 0.65;
+					triple[2] = 0.05;
 				}
 			}
-			break;
-		case 3:
-			triple[0] = 0.25;
-			triple[1] = 0.7;
-			triple[2] = 0.05;
-			break;
+			else
+			{
+				int value = trunc(J.valor_mano);
+				switch (value)
+				{
+				case 9:
+					triple[0] = 0;
+					triple[1] = 0.85;
+					triple[2] = 0.15;
+					break;
+				case 8:
+					triple[0] = 0.0375;
+					triple[1] = 0.825;
+					triple[2] = 0.1375;
+					break;
+				case 7:
+					triple[0] = 0.075;
+					triple[1] = 0.8;
+					triple[2] = 0.125;
+					break;
+				case 6:
+					triple[0] = 0.1125;
+					triple[1] = 0.775;
+					triple[2] = 0.1125;
+					break;
+				case 5:
+					triple[0] = 0.15;
+					triple[1] = 0.75;
+					triple[2] = 0.1;
+					break;
+				case 4:
+					triple[0] = 0.1875;
+					triple[1] = 0.725;
+					triple[2] = 0.0875;
+					break;
+				case 3:
+					triple[0] = 0.225;
+					triple[1] = 0.7;
+					triple[2] = 0.075;
+					break;
+				case 2:
+					triple[0] = 0.2625;
+					triple[1] = 0.675;
+					triple[2] = 0.0625;
+					break;
+				case 1:
+					triple[0] = 0.3;
+					triple[1] = 0.65;
+					triple[2] = 0.05;
+					break;
+				case 0:
+					triple[0] = 0.3375;
+					triple[1] = 0.625;
+					triple[2] = 0.0375;
+					break;
+				}
+				break;
+			}
 		}
 	}
 }
@@ -745,15 +3166,19 @@ void Algoritmo::reseteo()
 
 void Algoritmo::pasar(int ronda)
 {
-	CURL* curl = curl_easy_init();
-	CURLcode res;
-	string url_aux;
-	const char* url;
-	url_aux = "http://localhost:8000/pass?r=" + to_string(ronda);
-	url = url_aux.c_str();
-	curl_easy_setopt(curl, CURLOPT_URL, url);
-	res = curl_easy_perform(curl);
-	curl_easy_cleanup(curl);
+	if (tipo == 4)
+	{
+		CURL* curl = curl_easy_init();
+		CURLcode res;
+		string url_aux;
+		const char* url;
+		url_aux = "http://localhost:8000/pass?r=" + to_string(ronda);
+		url = url_aux.c_str();
+		curl_easy_setopt(curl, CURLOPT_URL, url);
+		res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+	}
+	
 }
 
 int Algoritmo::obtenerSubida(float apuesta, float apuesta_ini) 
@@ -763,4 +3188,20 @@ int Algoritmo::obtenerSubida(float apuesta, float apuesta_ini)
 	float n = r.nrandomPorcent();
 	int salida = apuesta + apuesta_ini * (n+1);
 	return salida;
+}
+
+void Algoritmo::actualizaBayes(int ronda)
+{
+	if (tipo == 4)
+	{
+		CURL* curl = curl_easy_init();
+	CURLcode res;
+	string url_aux;
+	const char* url;
+	url_aux = "http://localhost:8000/check?r=" + to_string(ronda);
+	url = url_aux.c_str();
+	curl_easy_setopt(curl, CURLOPT_URL, url);
+	res = curl_easy_perform(curl);
+	curl_easy_cleanup(curl);
+	}
 }

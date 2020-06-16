@@ -38,13 +38,13 @@ pesos<-cargaPesos()
 triple<-cargaTriple()
 pesos<-descartePesosMano(mano,mazo,pesos)
 triple<-descarteTripleMano(mano,mazo,triple)
-pesos<-actualizaPesos(a,pesos,triple)
-triple<-calculoProbabilidadAccion(mesa,mazo,triple,1)
+salida<-calculaProbPreflop(mano,mazo,a)
+triple<-calculoProbabilidadAccion(0,mazo,triple,1)
+pesos<-actualizaPesos_op(a,pesos,triple)
 write.csv(mazo,"deck.csv",row.names = FALSE)
 write.csv(pesos, "data.csv",row.names = TRUE)
 write.csv(triple,"triple.csv",row.names = TRUE)
 write.csv(mano, "mano.csv",row.names = FALSE)
-salida<-calculaProbPreflop(mano,mazo,a)
 return(salida)
 }
 
@@ -59,7 +59,7 @@ function(a){
   mazo<-read.csv("deck.csv",header=TRUE, sep=",", row.names=NULL)
   salida<-calculaProbPreflop(mano,mazo,a)
   triple<-calculoProbabilidadAccion(mesa,mazo, triple,1)
-  pesos<-actualizaPesos(a,pesos,triple)
+  pesos<-actualizaPesos_op(a,pesos,triple)
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
   return(salida)
@@ -86,9 +86,9 @@ mesa<-fijarMesaFlop(mn1,mp1,mn2,mp2,mn3,mp3)
 mazo<-descarteCartas(mesa,mazo)
 pesos<-descartePesosFlop(mesa,mazo,pesos)
 triple<-descarteTripleFlop(mesa,mazo,triple)
-pesos<-actualizaPesos(1,pesos,triple)
-salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,1)
 triple<-calculoProbabilidadAccion(mesa,mazo,triple,2)
+pesos<-actualizaPesos_op(1,pesos,triple)
+salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,1)
 write.csv(mazo,"deck.csv",row.names = FALSE)
 write.csv(pesos, "data.csv",row.names = TRUE)
 write.csv(triple,"triple.csv",row.names = TRUE)
@@ -119,9 +119,9 @@ mesa<-fijarMesaFlop(mn1,mp1,mn2,mp2,mn3,mp3)
 mazo<-descarteCartas(mesa,mazo)
 pesos<-descartePesosFlop(mesa,mazo,pesos)
 triple<-descarteTripleFlop(mesa,mazo,triple)
-pesos<-actualizaPesos(a,pesos,triple)
-salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
 triple<-calculoProbabilidadAccion(mesa,mazo,triple,2)
+pesos<-actualizaPesos_op(a,pesos,triple)
+salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
 write.csv(mazo,"deck.csv",row.names = FALSE)
 write.csv(pesos, "data.csv",row.names = TRUE)
 write.csv(triple,"triple.csv",row.names = TRUE)
@@ -143,7 +143,7 @@ function(a,aa,ao){
   a<-strtoi(a)
   pesos<-cargaPesos()
   triple<-cargaTriple()
-  pesos<-actualizaPesos(a,pesos,triple)
+  pesos<-actualizaPesos_op(a,pesos,triple)
   salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
   write.csv(pesos, "data.csv",row.names = TRUE)
   return(salida)
@@ -168,9 +168,9 @@ function(mn,mp,aa,ao){
   carta<-mesa[4,]
   pesos<-descartePesosCarta(carta,mazo,pesos)
   triple<-descarteTripleCarta(carta,mazo,triple)
-  pesos<-actualizaPesos(1,pesos,triple)
-  salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,1)
   triple<-calculoProbabilidadAccion(mesa,mazo,triple,3)
+  pesos<-actualizaPesos_op(1,pesos,triple)
+  salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,1)
   write.csv(mazo,"deck.csv",row.names = FALSE)
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
@@ -199,9 +199,9 @@ function(mn,mp,aa,ao,a){
   carta<-mesa[4,]
   pesos<-descartePesosCarta(carta,mazo,pesos)
   triple<-descarteTripleCarta(carta,mazo,triple)
-  pesos<-actualizaPesos(a,pesos,triple)
-  salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
   triple<-calculoProbabilidadAccion(mesa,mazo,triple,3)
+  pesos<-actualizaPesos_op(a,pesos,triple)
+  salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
   write.csv(mazo,"deck.csv",row.names = FALSE)
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
@@ -224,9 +224,9 @@ function(mn,mp){
   carta<-mesa[5,]
   pesos<-descartePesosCarta(carta,mazo,pesos)
   triple<-descarteTripleCarta(carta,mazo,triple)
-  pesos<-actualizaPesos(1,pesos,triple)
-  salida<-calculaProbRiver(mano,mesa,mazo,pesos,1)
   triple<-calculoProbabilidadAccion(mesa,mazo,triple,4)
+  pesos<-actualizaPesos_op(1,pesos,triple)
+  salida<-calculaProbRiver(mano,mesa,mazo,pesos,1)
   write.csv(mazo,"deck.csv",row.names = FALSE)
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
@@ -251,9 +251,9 @@ function(mn,mp,a){
   carta<-mesa[5,]
   pesos<-descartePesosCarta(carta,mazo,pesos)
   triple<-descarteTripleCarta(carta,mazo,triple)
-  pesos<-actualizaPesos(a,pesos,triple)
-  salida<-calculaProbRiver(mano,mesa,mazo,pesos,a)
   triple<-calculoProbabilidadAccion(mesa,mazo,triple,4)
+  pesos<-actualizaPesos_op(a,pesos,triple)
+  salida<-calculaProbRiver(mano,mesa,mazo,pesos,a)
   write.csv(mazo,"deck.csv",row.names = FALSE)
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
@@ -272,7 +272,7 @@ function(a){
   a<-strtoi(a)
   pesos<-cargaPesos()
   triple<-cargaTriple()
-  pesos<-actualizaPesos(a,pesos,triple)
+  pesos<-actualizaPesos_op(a,pesos,triple)
   salida<-calculaProbRiver(mano,mesa,mazo,pesos,a)
   write.csv(pesos, "data.csv",row.names = TRUE)
   return(salida)
@@ -283,10 +283,16 @@ function(a){
 #* @get /pass
 function(r){
   r<-strtoi(r)
-  pasar(r)
+  accionBayes(r,1)
 }
 
-
+#* Funcion para comunicar al algoritmo que su adversario ha visto la apuesta
+#* @param r ronda
+#* @get /check
+function(r){
+  r<-strtoi(r)
+  accionBayes(r,2)
+}
 
 #* Funcion para resetar/inicializar los valores de mazo, pesos y triple
 #* @get /reset

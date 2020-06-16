@@ -18,7 +18,7 @@ for (i in 1:n_mazo)
 	}
 
 }
-diferencia=n_mazo-cartamejora
-OddMano=cartamejora/diferencia
+
+OddMano=cartamejora/n_mazo
 return(OddMano)
 }
