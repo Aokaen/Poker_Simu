@@ -426,6 +426,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 						if (Jugadores[0].AllIn == false)
 						{
 							cout << "El jugador ha hecho All in." << endl;
+							T.actualizarApuesta(Jugadores);
 							accion = alg.obtenerAccionAct(Jugadores[1], T, accion_jugador);
 							if (accion == 0)
 							{
@@ -455,6 +456,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					}
 					else
 					{
+						T.actualizarApuesta(Jugadores);
 						accion = alg.obtenerAccionAct(Jugadores[1], T, accion_jugador);
 						if (accion == 0)
 						{
@@ -537,6 +539,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 			{
 				if(Jugadores[0].AllIn==false)
 				{ 
+					T.actualizarApuesta(Jugadores);
 					accion = alg.obtenerAccionAct(Jugadores[1], T, accion_jugador);
 					if (accion == 0)
 					{
@@ -565,6 +568,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 				}
 			}
 				else {
+					T.actualizarApuesta(Jugadores);
 				accion = alg.obtenerAccionAct(Jugadores[1], T, accion_jugador);
 				if (accion == 0)
 				{
@@ -862,6 +866,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					{ 
 						if (Jugadores[1].AllIn == false)
 						{
+							T.actualizarApuesta(Jugadores);
 							accion = alg.obtenerAccionSegundo(Jugadores[1], T, accion);
 							if (accion == 0)
 							{
@@ -891,7 +896,8 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					}
 					else
 					{
-						accion = alg.obtenerAccionSegundo(Jugadores[1], T, accion);
+						T.actualizarApuesta(Jugadores);
+						accion = alg.obtenerAccionSegundo(Jugadores[1], T, accion_jugador);
 						if (accion == 0)
 						{
 							cout << "Algoritmo Pasa" << endl;
@@ -966,7 +972,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 			else
 			{
 				//Accion del algoritmo
-
+				T.actualizarApuesta(Jugadores);
 				accion = alg.obtenerAccion(Jugadores[1], T);
 				if (accion == 0)
 				{
@@ -1349,17 +1355,18 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 	float cantidad_alg = 0;
 	float incremento = 0;
 	int accion1 = -1, accion2 = -1;
+	int conteo_subidas = 0;
 	do {
 
 		if (Jugadores[0].turno == 0)
-		{ 
+		{
 			if (Jugadores[0].getDinero() == 0) //algoritmo no puede apostar
 			{
 				apuestaFin = true;
 				pasar = 0;
 				alg1.accion = 1;
 				acciones_ronda = acciones_ronda + " J1C";
-				
+
 
 			}
 			else if (Jugadores[1].getDinero() == 0 && Jugadores[1].getApuesta() != 0)
@@ -1367,18 +1374,19 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 
 				float diferencia = 0;
 				diferencia = Jugadores[1].getApuesta() - Jugadores[0].getApuesta();
-				
+
 				if (diferencia != 0)
 				{
+					T.actualizarApuesta(Jugadores);
 					alg1.accion = alg1.obtenerAccionAct(Jugadores[0], T, 2);
-					
+
 					if (alg1.accion == 0)
 					{
 						pasar = 1;
 						alg1.pasa = true;
 						apuestaFin = true;
 						acciones_ronda = acciones_ronda + " J1P";
-						
+
 					}
 					else
 					{
@@ -1400,7 +1408,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 
 						apuestaFin = true;
 						acciones_ronda = acciones_ronda + " J1V" + to_string(subidaalg);
-						
+
 					}
 				}
 
@@ -1408,146 +1416,206 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 			}
 			else
 			{
+				T.actualizarApuesta(Jugadores);
 				if (accionprevia == false)
 				{
-					alg1.accion =alg1.obtenerAccion(Jugadores[0],T);
+					alg1.accion = alg1.obtenerAccion(Jugadores[0], T);
 				}
 				else
 				{
-					alg1.accion = alg1.obtenerAccionAct(Jugadores[0],T,alg2.accion);
+					alg1.accion = alg1.obtenerAccionAct(Jugadores[0], T, alg2.accion);
 				}
-
-				if (alg1.accion == 0)
+				if (conteo_subidas<=3)
 				{
-					pasar = 1;
-					alg1.pasa = true;
-					apuestaFin = true;
-					acciones_ronda = acciones_ronda + " J1P";
-					
-				}
-
-				else if (alg1.accion == 1)
-				{
-					acciones_ronda = acciones_ronda + " J1V";
-					
-					if (accionprevia == false)
+					if (alg1.accion == 0)
 					{
-						accionprevia = true;
+						pasar = 1;
+						alg1.pasa = true;
+						apuestaFin = true;
+						acciones_ronda = acciones_ronda + " J1P";
 
+					}
+					else if (alg1.accion == 1)
+					{
+						acciones_ronda = acciones_ronda + " J1V";
+
+						if (accionprevia == false)
+						{
+							accionprevia = true;
+
+
+							//actualizarinfoalg2
+							accion1 = alg1.accion;
+							T.actualizarApuesta(Jugadores);
+							alg2.accion = alg2.obtenerAccionSegundo(Jugadores[1], T, alg1.accion);
+							accion2 = alg2.accion;
+
+							if (accion2 == 0)
+							{
+								pasar = 2;
+								alg2.pasa = true;
+								apuestaFin = true;
+								acciones_ronda = acciones_ronda + " J2P";
+
+
+							}
+							else if (accion2 == 1)
+							{
+								apuestaFin = true;
+
+								acciones_ronda = acciones_ronda + " J2V";
+								alg1.actualizaBayes(T.getIndiceRonda());
+
+							}
+							else if (accion2 == 2)
+							{
+								float cantidad_subida = 0;
+								cantidad_subida = alg2.obtenerSubida(Jugadores[0].getApuesta(), Jugadores[0].getApuestaInicial());
+								incremento = cantidad_subida - Jugadores[1].getApuesta();
+								if (incremento >= Jugadores[1].getDinero())
+								{
+									cantidad_subida = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
+								}
+								acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
+
+								//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
+								Jugadores[1].setApuesta(cantidad_subida);
+								accionprevia = true;
+							}
+
+						}
+						else
+						{
+							verApuestaAlg(T, Jugadores);
+							apuestaFin = true;
+						}
+					}
+					else if (alg1.accion == 2)
+					{
+						conteo_subidas++;
+						float cantidad_subida2 = 0;
+						float apuesta_max = 0;
+
+						if (Jugadores[0].getApuesta() < Jugadores[1].getApuesta())
+						{
+							apuesta_max = Jugadores[1].getApuesta();
+						}
+						else
+						{
+							apuesta_max = Jugadores[0].getApuesta();
+						}
+						cantidad_subida2 = alg1.obtenerSubida(apuesta_max, Jugadores[1].getApuestaInicial());
+						incremento = cantidad_subida2 - Jugadores[1].getApuesta();
+						if (incremento >= Jugadores[0].getDinero())
+						{
+							cantidad_subida2 = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
+						}
+						Jugadores[0].setApuesta(cantidad_subida2);
+						acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida2);
 
 						//actualizarinfoalg2
 						accion1 = alg1.accion;
-
-						alg2.accion = alg2.obtenerAccionSegundo(Jugadores[1],T, alg1.accion);
-						accion2 = alg2.accion;
-
-						if (accion2 == 0)
-						{
-							pasar = 2;
-							alg2.pasa = true;
-							apuestaFin = true;
-							acciones_ronda = acciones_ronda + " J2P";
-							alg1.pasar(T.getIndiceRonda());
-							
-
-						}
-						else if (accion2 == 1)
-						{
-							apuestaFin = true;
-
-							acciones_ronda = acciones_ronda + " J2V";
-							alg1.actualizaBayes(T.getIndiceRonda());
-							
-						}
-						else if (accion2 == 2)
-						{
-							float cantidad_subida = 0;
-							cantidad_subida = alg2.obtenerSubida(Jugadores[0].getApuesta(),Jugadores[0].getApuestaInicial());
-							incremento = cantidad_subida - Jugadores[1].getApuesta();
-							if (incremento >= Jugadores[1].getDinero())
-							{
-								cantidad_subida = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
-							}
-							acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
-							
-							//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
-							Jugadores[1].setApuesta(cantidad_subida);
-							accionprevia = true;
-						}
-
-					}
-					else
-					{
-						verApuestaAlg(T, Jugadores);
-						apuestaFin = true;
-					}
-				}
-				else if (alg1.accion == 2)
-				{
-					float cantidad_subida2 = 0;
-					float apuesta_max = 0;
-					
-					if (Jugadores[0].getApuesta() < Jugadores[1].getApuesta())
-					{
-						apuesta_max = Jugadores[1].getApuesta();
-					}
-					else
-					{
-						apuesta_max = Jugadores[0].getApuesta();
-					}
-					cantidad_subida2 = alg1.obtenerSubida(apuesta_max,Jugadores[1].getApuestaInicial());
-					incremento = cantidad_subida2 - Jugadores[1].getApuesta();
-					if (incremento >= Jugadores[0].getDinero())
-					{
-						cantidad_subida2 = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
-					}
-					Jugadores[0].setApuesta(cantidad_subida2);
-					acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida2);
-					
-					//actualizarinfoalg2
-					accion1 = alg1.accion;
-					if (accionprevia == false)
-						alg2.accion = alg2.obtenerAccionSegundo(Jugadores[1], T, accion1);
-					else
-						alg2.accion = alg2.obtenerAccionAct(Jugadores[1], T, accion1);
-					accionprevia = true;
-					accion2 = alg2.accion;
-
-					if (accion2 == 0)
-					{
-						pasar = 2;
-						alg2.pasa = true;
-						apuestaFin = true;
-						acciones_ronda = acciones_ronda + " J2P";
-						alg1.pasar(T.getIndiceRonda());
-						
-
-					}
-					else if (accion2 == 1)
-					{
-						apuestaFin = true;
-						verApuestaAlg(T, Jugadores);
-						acciones_ronda = acciones_ronda + " J2V";
-						alg1.actualizaBayes(T.getIndiceRonda());
-						
-					}
-					else if (accion2 == 2)
-					{
-						float cantidad_subida = 0;
-						cantidad_subida = alg2.obtenerSubida(Jugadores[0].getApuesta(),Jugadores[0].getApuestaInicial());
-						incremento = cantidad_subida - Jugadores[1].getApuesta();
-						if (incremento >= Jugadores[1].getDinero())
-						{
-							cantidad_subida = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
-						}
-						acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
-						
-						//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
-						Jugadores[1].setApuesta(cantidad_subida);
+						T.actualizarApuesta(Jugadores);
+						if (accionprevia == false)
+							alg2.accion = alg2.obtenerAccionSegundo(Jugadores[1], T, accion1);
+						else
+							alg2.accion = alg2.obtenerAccionAct(Jugadores[1], T, accion1);
 						accionprevia = true;
+						accion2 = alg2.accion;
+						if(conteo_subidas<=3){
+							if (accion2 == 0)
+							{
+								pasar = 2;
+								alg2.pasa = true;
+								apuestaFin = true;
+								acciones_ronda = acciones_ronda + " J2P";
+
+
+							}
+							else if (accion2 == 1)
+							{
+								apuestaFin = true;
+								verApuestaAlg(T, Jugadores);
+								acciones_ronda = acciones_ronda + " J2V";
+								alg1.actualizaBayes(T.getIndiceRonda());
+
+							}
+							else if (accion2 == 2)
+							{
+								conteo_subidas++;
+								float cantidad_subida = 0;
+								cantidad_subida = alg2.obtenerSubida(Jugadores[0].getApuesta(), Jugadores[0].getApuestaInicial());
+								incremento = cantidad_subida - Jugadores[1].getApuesta();
+								if (incremento >= Jugadores[1].getDinero())
+								{
+									cantidad_subida = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
+								}
+								acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
+
+								//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
+								Jugadores[1].setApuesta(cantidad_subida);
+								accionprevia = true;
+							}
+						}
+						else
+						{
+							if (accion2 == 0)
+							{
+								pasar = 2;
+								alg2.pasa = true;
+								apuestaFin = true;
+								acciones_ronda = acciones_ronda + " J2P";
+								
+
+
+							}
+							else if (accion2 == 1)
+							{
+								apuestaFin = true;
+								verApuestaAlg(T, Jugadores);
+								acciones_ronda = acciones_ronda + " J2V";
+								alg1.actualizaBayes(T.getIndiceRonda());
+
+							}
+							else if (accion2 == 2)
+							{
+								apuestaFin = true;
+								verApuestaAlg(T, Jugadores);
+								acciones_ronda = acciones_ronda + " J2VF";
+								alg1.actualizaBayes(T.getIndiceRonda());
+
+							}
+						}
+						
+
+
 					}
 
+				}
+				else
+				{
+					if (alg1.accion == 0)
+					{
+						pasar = 1;
+						alg1.pasa = true;
+						apuestaFin = true;
+						acciones_ronda = acciones_ronda + " J1P";
 
+					}
+					else if (alg1.accion == 1)
+					{
+						acciones_ronda = acciones_ronda + " J1V";
+						verApuestaAlg(T, Jugadores);
+						apuestaFin = true;
+
+					}
+					else if (alg1.accion == 2)
+					{
+
+						acciones_ronda = acciones_ronda + " J1VF";
+						verApuestaAlg(T, Jugadores);
+						apuestaFin = true;
+					}
 				}
 			}
 		}
@@ -1571,6 +1639,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 			
 			if (diferencia != 0)
 			{
+				T.actualizarApuesta(Jugadores);
 				alg2.accion = alg2.obtenerAccionSegundo(Jugadores[1],T,2);
 				if (alg2.accion == 0)
 				{
@@ -1578,7 +1647,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 					alg2.pasa = true;
 					apuestaFin = true;
 					acciones_ronda = acciones_ronda + " J2P";
-					alg1.pasar(T.getIndiceRonda());
+					
 					
 				}
 				else
@@ -1610,6 +1679,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 		}
 		else
 		{
+			T.actualizarApuesta(Jugadores);
 			if (accionprevia == false)
 			{
 				alg2.accion = alg2.obtenerAccion(Jugadores[1],T);
@@ -1618,137 +1688,202 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 			{
 				alg2.accion = alg2.obtenerAccionAct(Jugadores[1],T,alg1.accion);
 			}
+			if(conteo_subidas<=3)
+				{ 
+				if (alg2.accion == 0)
+				{
+					pasar = 2;
+					alg2.pasa = true;
+					apuestaFin = true;
+					acciones_ronda = acciones_ronda + " J2P";
+					
 
+				}
+				else if (alg2.accion == 1)
+				{
+					acciones_ronda = acciones_ronda + " J2V";
+
+					if (accionprevia == false)
+					{
+						accionprevia = true;
+
+
+						//actualizarinfoalg2
+						accion2 = alg2.accion;
+						T.actualizarApuesta(Jugadores);
+						alg1.accion = alg1.obtenerAccionSegundo(Jugadores[0], T, alg2.accion);
+						accion1 = alg1.accion;
+
+						if (accion1 == 0)
+						{
+							pasar = 1;
+							alg1.pasa = true;
+							apuestaFin = true;
+							acciones_ronda = acciones_ronda + " J1P";
+
+
+						}
+						else if (accion1 == 1)
+						{
+							apuestaFin = true;
+
+							acciones_ronda = acciones_ronda + " J1V";
+
+
+						}
+						else if (accion1 == 2)
+						{
+							conteo_subidas++;
+							float cantidad_subida = 0;
+							cantidad_subida = alg1.obtenerSubida(Jugadores[1].getApuesta(), Jugadores[1].getApuestaInicial());
+							incremento = cantidad_subida - Jugadores[0].getApuesta();
+							if (incremento >= Jugadores[0].getDinero())
+							{
+								cantidad_subida = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
+							}
+							acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
+
+							//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
+							Jugadores[0].setApuesta(cantidad_subida);
+							accionprevia = true;
+						}
+
+					}
+					else
+					{
+						verApuestaAlg(T, Jugadores);
+						apuestaFin = true;
+						alg1.actualizaBayes(T.getIndiceRonda());
+					}
+				}
+				else if (alg2.accion == 2)
+				{
+					conteo_subidas++;
+					float cantidad_subida2 = 0;
+					float apuesta_max = 0;
+
+					if (Jugadores[1].getApuesta() < Jugadores[0].getApuesta())
+					{
+						apuesta_max = Jugadores[0].getApuesta();
+					}
+					else
+					{
+						apuesta_max = Jugadores[1].getApuesta();
+					}
+					cantidad_subida2 = alg2.obtenerSubida(apuesta_max, Jugadores[1].getApuestaInicial());
+					incremento = cantidad_subida2 - Jugadores[0].getApuesta();
+					if (incremento >= Jugadores[1].getDinero())
+					{
+						cantidad_subida2 = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
+					}
+					Jugadores[1].setApuesta(cantidad_subida2);
+					acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida2);
+
+					//actualizarinfoalg2
+					accion2 = alg2.accion;
+					T.actualizarApuesta(Jugadores);
+					if (accionprevia == false)
+						alg1.accion = alg1.obtenerAccionSegundo(Jugadores[0], T, accion2);
+					else
+						alg1.accion = alg1.obtenerAccionAct(Jugadores[0], T, accion2);
+
+					accionprevia = true;
+					accion1 = alg1.accion;
+					if(conteo_subidas<=3)
+					{
+						if (accion1 == 0)
+						{
+							pasar = 1;
+							alg1.pasa = true;
+							apuestaFin = true;
+							acciones_ronda = acciones_ronda + " J1P";
+
+
+						}
+						else if (accion1 == 1)
+						{
+							apuestaFin = true;
+							verApuestaAlg(T, Jugadores);
+							acciones_ronda = acciones_ronda + " J1V";
+
+						}
+						else if (accion1 == 2)
+						{
+							conteo_subidas++;
+							float cantidad_subida = 0;
+							cantidad_subida = alg1.obtenerSubida(Jugadores[1].getApuesta(), Jugadores[1].getApuestaInicial());
+							incremento = cantidad_subida - Jugadores[0].getApuesta();
+							if (incremento >= Jugadores[0].getDinero())
+							{
+								cantidad_subida = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
+							}
+							acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
+
+							//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
+							Jugadores[0].setApuesta(cantidad_subida);
+							accionprevia = true;
+						}
+					}
+					else
+					{
+						if (accion1 == 0)
+						{
+							pasar = 1;
+							alg1.pasa = true;
+							apuestaFin = true;
+							acciones_ronda = acciones_ronda + " J1P";
+
+
+						}
+						else if (accion1 == 1)
+						{
+							apuestaFin = true;
+							verApuestaAlg(T, Jugadores);
+							acciones_ronda = acciones_ronda + " J1V";
+
+						}
+						else if (accion1 == 2)
+						{
+							apuestaFin = true;
+							verApuestaAlg(T, Jugadores);
+							acciones_ronda = acciones_ronda + " J1VF";
+
+						}
+
+					}
+
+
+				}
+			}
+			else
+			{
 			if (alg2.accion == 0)
 			{
 				pasar = 2;
 				alg2.pasa = true;
 				apuestaFin = true;
 				acciones_ronda = acciones_ronda + " J2P";
-				alg1.pasar(T.getIndiceRonda());
 				
-			}
 
+			}
 			else if (alg2.accion == 1)
 			{
 				acciones_ronda = acciones_ronda + " J2V";
+				verApuestaAlg(T, Jugadores);
+				apuestaFin = true;
+				alg1.actualizaBayes(T.getIndiceRonda());
 				
-				if (accionprevia == false)
-				{
-					accionprevia = true;
-
-
-					//actualizarinfoalg2
-					accion2 = alg2.accion;
-					
-					alg1.accion = alg1.obtenerAccionSegundo(Jugadores[0],T,alg2.accion);
-					accion1 = alg1.accion;
-
-					if (accion1 == 0)
-					{
-						pasar = 1;
-						alg1.pasa = true;
-						apuestaFin = true;
-						acciones_ronda = acciones_ronda + " J1P";
-						
-
-					}
-					else if (accion1 == 1)
-					{
-						apuestaFin = true;
-
-						acciones_ronda = acciones_ronda + " J1V";
-						
-					}
-					else if (accion1 == 2)
-					{
-						float cantidad_subida = 0;
-						cantidad_subida = alg1.obtenerSubida(Jugadores[1].getApuesta(), Jugadores[1].getApuestaInicial());
-						incremento = cantidad_subida - Jugadores[0].getApuesta();
-						if (incremento >= Jugadores[0].getDinero())
-						{
-							cantidad_subida = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
-						}
-						acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
-						
-						//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
-						Jugadores[0].setApuesta(cantidad_subida);
-						accionprevia = true;
-					}
-
-				}
-				else
-				{
-					verApuestaAlg(T, Jugadores);
-					apuestaFin = true;
-				}
 			}
 			else if (alg2.accion == 2)
 			{
-				float cantidad_subida2 = 0;
-				float apuesta_max = 0;
-				
-				if (Jugadores[1].getApuesta() < Jugadores[0].getApuesta())
-				{
-					apuesta_max = Jugadores[0].getApuesta();
-				}
-				else
-				{
-					apuesta_max = Jugadores[1].getApuesta();
-				}
-				cantidad_subida2 = alg2.obtenerSubida(apuesta_max,Jugadores[1].getApuestaInicial());
-				incremento = cantidad_subida2 - Jugadores[0].getApuesta();
-				if (incremento >= Jugadores[1].getDinero())
-				{
-					cantidad_subida2 = Jugadores[1].getDinero() + Jugadores[1].getApuesta();
-				}
-				Jugadores[1].setApuesta(cantidad_subida2);
-				acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida2);
-				
-				//actualizarinfoalg2
-				accion2 = alg2.accion;
-				if (accionprevia == false)
-					alg1.accion = alg1.obtenerAccionSegundo(Jugadores[0], T, accion2);
-				else
-					alg1.accion = alg1.obtenerAccionAct(Jugadores[0], T, accion2);
-
-				accionprevia = true;
-				accion1 = alg1.accion;
-
-				if (accion1 == 0)
-				{
-					pasar = 1;
-					alg1.pasa = true;
-					apuestaFin = true;
-					acciones_ronda = acciones_ronda + " J1P";
-					
-
-				}
-				else if (accion1 == 1)
-				{
-					apuestaFin = true;
-					verApuestaAlg(T, Jugadores);
-					acciones_ronda = acciones_ronda + " J1V";
-					
-				}
-				else if (accion1 == 2)
-				{
-					float cantidad_subida = 0;
-					cantidad_subida = alg1.obtenerSubida(Jugadores[1].getApuesta(),Jugadores[1].getApuestaInicial());
-					incremento = cantidad_subida - Jugadores[0].getApuesta();
-					if (incremento >= Jugadores[0].getDinero())
-					{
-						cantidad_subida = Jugadores[0].getDinero() + Jugadores[0].getApuesta();
-					}
-					acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
-					
-					//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
-					Jugadores[0].setApuesta(cantidad_subida);
-					accionprevia = true;
-				}
-
+				acciones_ronda = acciones_ronda + " J2VF";
+				verApuestaAlg(T, Jugadores);
+				apuestaFin = true;
+				alg1.actualizaBayes(T.getIndiceRonda());
 
 			}
+			}
+			
 		}
 		}
 

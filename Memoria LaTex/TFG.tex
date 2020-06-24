@@ -1,0 +1,132 @@
+% Plantilla realizada por Alberto Brunete (UPM).
+
+%parametros de tipo libro
+\documentclass[10pt,a4paper]{book}
+
+%idioma español y acentos
+\usepackage[spanish, es-tabla]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+
+%algunos sÌmbolos matem·ticos y paquete para usar subim·genes
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{appendix}
+\usepackage{array}
+\usepackage[table]{xcolor}
+\usepackage{xcolor}
+\usepackage{fdsymbol}
+\usepackage{longtable}
+\usepackage{multirow}
+
+
+
+%M·rgenes
+\usepackage[left=3cm,top=3cm,right=3cm,bottom=3cm]{geometry}
+
+%
+\usepackage{multicol}
+
+
+%para generar índice con hipervínculos
+\usepackage{hyperref}
+
+%parametros del documento (sus propiedades)
+\hypersetup{
+    pdftitle={Álvaro González Maestre - Simulación de juego de póker para la comparación de estrategias de juego - 2020},
+    pdfsubject={Simulación de juego de póker para la comparación de estrategias de juego - 2020},
+    pdfauthor={Álvaro González Maestre},
+    pdfkeywords={poker} {Hold'em} {simulador} {algoritmo} {automatizacion},
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+}
+
+%empieza el documento
+\begin{document}  
+
+%elementos antes del trabajo en sÌ se meten dentro de frontmatter
+\frontmatter
+
+
+%cada incluye referencia a un archivo de tipo .tex
+\include{capitulos/portada}
+
+\include{capitulos/firmas}
+
+%Licencia opcional
+%\include{capitulos/licencia}
+
+\include{capitulos/evaluacion}
+
+\include{capitulos/agradecimientos}
+
+\include{capitulos/resumen}
+
+%genera índice
+\tableofcontents
+\addcontentsline{toc}{chapter}{Índice}
+
+%Índice de figuras.
+\listoffigures
+
+%Índice de tablas.
+\listoftables
+
+%Empieza la parte descriptiva del trabajo
+\mainmatter
+
+\include{capitulos/introduccion}
+  
+  %partes finales del trabajo: conclusiones, bibliografia y anexos
+  
+\include{capitulos/estadoarte}
+
+\include{capitulos/fundamentos_poker}
+
+\include{capitulos/matematica_poker}
+
+\include{capitulos/bases_program}
+
+\include{capitulos/desarrollo_motor}
+
+\include{capitulos/desarrollo_algoritmo}
+
+\include{capitulos/desarrollo_enlace}
+
+\include{capitulos/resultados}
+
+\include{capitulos/gestion}
+
+\include{capitulos/conclusion}
+
+%\include{capitulos/ejemplos}
+\appendix
+
+\include{capitulos/apendice_A}
+
+\include{capitulos/apendice_C}
+
+\backmatter
+%Glosario, lista de símbolos, notas, etc.
+
+%estilo de bibliografía: plana, alfa...
+\bibliographystyle{plain}
+
+%genera doble hoja en blanco
+\cleardoublepage
+
+%apartado de bibliografía
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+%se incluye la bibliografía. Archivo de tipo .bib (bibtex)
+\bibliography{bibliografia/bibliografia}
+
+%fin del documento
+\end{document}

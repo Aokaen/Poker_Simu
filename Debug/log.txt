@@ -1,2 +1,17 @@
-LOG TEST
+Vs Roca (500)
 
+It: 1//Mano Alg: 9P JT Mano patron: QP 8T//R0// J1V J2V//R1// Mesa: JC 3D 8C J1S47.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 2//Mano Alg: TT 2P Mano patron: KC KT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 3//Mano Alg: 9P 7C Mano patron: AC KC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 4//Mano Alg: 5P TD Mano patron: 3P 7C//R0// J2V J1V//R1// Mesa: 6D 4P 4D J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 5//Mano Alg: 2D 9T Mano patron: JP 2P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 6//Mano Alg: 2T 4P Mano patron: 3D 3T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 7//Mano Alg: 8P 3D Mano patron: QD 5C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 8//Mano Alg: 5P 8T Mano patron: KT 3C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 9//Mano Alg: 5C 7P Mano patron: 7C 9C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 10//Mano Alg: AC KD Mano patron: KT 4C//R0// J2V J1S37.000000 J2V//R1// Mesa: QD 5P 2D J2P//Patron Pasa//J1WJ2L//+37.000000
+It: 11//Mano Alg: 8T JC Mano patron: 5C 2P//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 12//Mano Alg: 2C TC Mano patron: 9P 5C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 13//Mano Alg: 4D QP Mano patron: 7T 9D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 14//Mano Alg: 3T 6P Mano patron: AT TD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 15//Mano Alg: JT TT Mano patron: QT 5D//R0// J1V J2V//R1// Mesa: QD 2P TP

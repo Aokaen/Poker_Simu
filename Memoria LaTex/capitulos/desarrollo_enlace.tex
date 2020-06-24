@@ -1,0 +1,229 @@
+\chapter{Desarrollo del proyecto: Desarrollo del REST API}
+
+
+Tal y como se presentó en el planteamiento del diseño, en el apartado \ref{sec:abstracciones}, el diseño va a estar dividido en tres partes: el motor de juego (en c++), el algoritmo (en R) y el enlace entre ambos. 
+
+En este apartado se va a explicar cómo se ha implementado el enlace entre ambas partes del código. Para ello, he decidido establecer un REST API como método de enlace, dado que es un elemento sencillo de programar y permite el enlace entre lenguajes de programación distintos.
+
+Para su funcionamiento. se ha decidido que el algoritmo sea el servidor y el motor de juego el cliente. Esta decisión se toma en base a que es el motor de juego el que solicita la información al algoritmo durante el desarrollo de la partida y es el algoritmo el que devuelve la respuesta.
+Este REST API, como enlace entre ambos, tiene su parte de código en el código del algoritmo y parte de su código en el motor de juego.
+
+\section{Servidor en R: Rplumber}
+\label{sec:rplumber}
+
+Para establecer el servidor API REST en R es necesario utilizar el paquete Plumber  dentro de R. Este paquete incluye todas las funcionalidades necesarias para crear el servidor de un API REST en la dirección http:\textit{//localhost:puerto}, siendo el puerto definido en la llamada a la función de creación del servidor.
+
+Para poder establecer este servidor, es necesario primero crear un nuevo script que va a incluir los Endpoints de la API REST. Este archivo es el \textit{plumber.R}. A la hora de inicializar las funciones dentro de \textit{plumber.R}, primero hay que inicializarlas. Para ello, primero se escribe una breve definición de lo que hace la función, posteriormente se especifica un tipo de salida concreto para esta función (si no se define ninguno, será de tipo \textit{JSON}), los parámetros de entrada $p_i$ (en caso de que haya) y el tipo de endpoit de la función seguido de \textit{/NombredelaFunción}.  Tras esos se define la función usando \textit{function}
+\begin{verbatim}
+#* Definición de la función
+#* tipo de salida (si no se especifica, será JSON)
+#* parámetros pi
+#* endpoint /nombre
+function(pi)
+{
+comandos de la función
+}
+\end{verbatim}
+
+Siendo funciones de ejemplo las siguientes:
+
+\begin{verbatim}
+#* Echo back the input
+#* @param msg The message to echo
+#* @get /echo
+function(msg="")
+{
+list(msg = paste0("The message is: '", msg, "'"))
+}
+
+#* Plot a histogram
+#* @png
+#* @get /plot
+function()
+{
+rand <- rnorm(100)
+hist(rand)
+}
+
+#* Return the sum of two numbers
+#* @param a The first number to add
+#* @param b The second number to add
+#* @post /sum
+function(a, b)
+{
+as.numeric(a) + as.numeric(b)
+}
+\end{verbatim}
+
+\subsection{Contenido de plumber.R}
+Para este proyecto, utilizará un total de 15 funciones dentro de \textit{plumber.R}, todas de endpoint \textit{GET} ya que interactúan con dataframes y, por tanto, no necesitan cookies para trabajar.
+
+Las funciones son las siguientes:
+
+\subsubsection{preflopini(mn1,mp1,mn2,mp2)}
+
+Esta función se ejecuta para determinar la primera acción del algoritmo durante el preflop siendo el jugador inicial. Los parámetros de esta función son los números y palos de las cartas de mano del algoritmo, respectivamente. 
+
+Primero, se usará \textit{fijarMano} con los parámetros de entrada creando así mano, se cargarán los dataframes de mano, pesos y triple con sus respectivas funciones, se descartarán las cartas de mano usando \textit{descarteCartas}. Con esto, se descartan también los pesos y las triples probabilidades de las cartas que impliquen esas cartas con \textit{descartePesosMano} y \textit{descarteTripleMano}. 
+
+Posteriormente, se almacenan los datos de mazo, pesos, triple y mano en sus respectivos dataframes usando \textit{write.csv}. Y, por último, se llama a \textit{calculaProbPreflopIni} para calcular la probabilidad de acción del algoritmo, que se devolverá como salida usando \textit{return}..
+
+\subsubsection{Preflop(mn1,mp1,mn2,mp2,a)}
+
+Esta función se ejecuta para determinar la primera acción del algoritmo durante el preflop cuando no es el jugador inicial, siendo la entrada tanto las cartas, al igual que en preflopini, como la acción a. Esta función funcionará de manera similar a preflopini, pero añadiendo unos métodos.
+Tras crear mano, cargar los dataframes, descartar las cartas, los pesos y los triples de la misma manera que preflopini, se calculará la salida igual que en preflopini, se recalculará las triple probabilidades con \textit{calculoProbabilidadAccio}n y  se actualizan los pesos con la acción a.
+Después se guardan los respectivos dataframes de igual manera que \textit{preflopini}.
+
+
+\subsubsection{Preflopact(a)}
+
+Esta función se ejecuta para determinar posteriores acciones del algoritmo durante el preflop, independientemente de si es jugador inicial o no.
+Primero, cargará los dataframes de pesos, triple y mazo. Tras eso, se llama a \textit{calculaProbPreflopIni}, se actualiza la tabla de pesos con\textit{ actualizaPesos\_op} y se recalcula la tabla de probabilidades triples con\textit{ calculoProbabilidadAccion}. Dado que solo se han modificado en esta función estos dos últimos dataframes, serán los únicos que se guarden con \textit{write.csv}.
+Por último, se devolverá  salida usando \textit{return}.
+
+
+\subsubsection{flopini(mn1,mp1,mn2,mp2,mn3,mp3,aa, ao)}
+
+Esta función se ejecuta para determinar la primera acción del algoritmo durante el flop siendo el jugador inicial. Los parámetros de esta función son los números y palos de las cartas de la mesa en esta ronda, y siendo aa y ao las apuestas del algoritmo y del oponente, respectivamente. 
+Primero, cargará los dataframes de pesos, triple, mano y mazo. Se fijan los valores de las cartas usando \textit{fijarMesaFlop} con las tres cartas, generando la matriz Mesa. Esta matriz Mesa se utiliza con  \textit{descarteCartas} para filtrar las cartas restantes del mazo. 
+Una vez obtenido el mazo filtrado, se descartan los pesos y triple probabilidad con \textit{descartePesosFlop} y \textit{descarteTripleFlop} respectivamente. Se se dan los nuevos valores de triple probabilidad con \textit{calculaProbabilidadAccion} y se  actualizan los pesos con \textit{actualizaPesos\_op}, siendo la acción a introducir la acción de ver la apuesta, ya que es el jugador inicial de la ronda.
+Posteriormente, se calculan el valor de salida usando  \textit{calculaProbFlop} y se sobreescriben los dataframes modificados (deck, pesos, triple y mesa) y se devuelve la salida con un  \textit{return}.
+
+ 
+\subsubsection{Flop(mn1,mp1,mn2,mp2,mn3,mp3,a,aa, ao)}
+
+De manera análoga a lo que ocurría con  \textit{preflopini} y \textit{ preflop}, esta es la función equivalente a  \textit{flopini} cuando el algoritmo no es el jugador inicial. El parámetro adicional a  \textit{flopini} es la acción del oponente.
+El funcionamiento de esta función es idéntico al de la función  \textit{flopini}, únicamente cambiando el valor de \textit{ actualizaPesos\_op} y  \textit{calculaProbFlop} predefinido por el valor a.
+
+\subsubsection{Flopact(a,aa,ao)}
+
+Esta función es la función utilizada para determinar las posteriores acciones del algoritmo durante la ronda de flop. Dado que la actualización de acciones es idéntica en flop y turn, esta función también se utilizará para determinar acciones posteriores a la primera durante la ronda de Turn.
+Primero cargará los 5 dataframes necesarios (mano, deck, mesa, pesos y triple), después actualizará los pesos  con  \textit{actualizaPesos\_op} y calculará la salida con  \textit{calculaProbFlop}. Por último, al igual que pasaba con  \textit{preflopact}, el único dataframe modificado es pesos, por lo que será el único que necesitará ser sobrescrito.
+
+
+\subsubsection{Turnini(mn,mp,aa,ao)}
+
+Tal y como se explicó en el apartado \ref{sec:flopturn}, el procedimiento de la toma de decisiones en Flop y Turn era prácticamente idéntico, por lo que  \textit{turnini} tendrá un funcionamiento muy similar al de flopini.
+Después de cargar los 5 dataframes (mano, deck, mesa, pesos y triple), se fija la nueva mesa con  \textit{fijarMesaPostflop}, se descartan las cartas de mazo, se descarta los valores de las tablas de la carta asociada con descartePesosCarta y descarteTripleCarta, se actualiza la tabla de triple probabilidad con calculoProbabilidadAccion y se actualizan los pesos con  \textit{actualizaPesos\_op}.
+Por último, se calcula la salida con  \textit{calculaProbFlop} y se guardan los 4 dataframes modificados (deck, data, triple, mesa).
+
+
+\subsubsection{Turn(mn,mp,aa,ao,a)}
+
+Esta función es la equivalente a  \textit{turnini} para obtener la primera acción del algoritmo durante la ronda Turn cuando no es el jugador inicial.
+Al igual que pasa con  \textit{flop} y  \textit{flopini}, la única diferencia entre  \textit{turn} y  \textit{turnini} es el valor que se introduce en  \textit{actualizaPesos\_op} y  \textit{calculaProbFlop}, que en esta función es a.
+
+\subsubsection{riverini(mn,mp)}
+
+Esta es la función para obtener la primera acción del algoritmo durante la fase de river cuando es el jugador inicial.
+Se cargan los dataframes necesarios, que son mano, deck, mesa, pesos y triple; se fija la nueva mesa con  \textit{fijarMesaPostflop}, se descartan las cartas de mazo, se descarta los valores de las tablas de la carta asociada con  \textit{descartePesosCarta} y  \textit{descarteTripleCarta},  se actualizan los valores de la tabla de triple probabilidad con  \textit{calculoProbabilidadAccion} y se actualizan los pesos con  \textit{actualizaPesos\_op}.
+Después de eso, se calcula la salida con  \textit{calculaProbRiver} y, se sobrescriben los 4 dataframes modificados y se devuelve la salida.
+
+
+\subsubsection{river(mn,mp,a)}
+
+De igual manera que ocurre en las otras rondas, esta es la función para obtener la primera acción del algoritmo durante la fase de river cuando no es el jugador inicial.
+Su funcionamiento es idéntico al de  \textit{riverini}, cambiando el valor fijo de \textit{actualizaPesos\_op} y  \textit{calculaProbRiver} por el valor de entrada a.
+
+
+
+\subsubsection{riveract(a)}
+
+Esta función sirve para obtener las posteriores acciones del algoritmo durante la ronda de River.
+Primero se cargan los 5 dataframes, se ejecuta la actualización de pesos con  \textit{actualizaPesos\_op} y se calcula la salida con  \textit{calculaProbRiver}.
+Antes de devolver la salida con un return, se sobrescribe la tabla de pesos con  \textit{write.csv}.
+
+\subsubsection{pass(r) y check(r)}
+
+Estas dos funciones tienen la misma función, así como el mísmo funcionamiento. Estas funciones sirven para actualizar el valor del dataframe prob cuando el oponente del algoritmo pasa (usando  \textit{pass(r)}) o cuando ve la apuesta(usando  \textit{check(r)}) en la ronda r.
+
+Ambas funciones llaman a la función  \textit{accionBayes(r,i)}, siendo i=1 en el caso de  \textit{pass()} y i=2 en el caso de  \textit{check()}.
+
+\subsubsection{reset()}
+
+Esta función se utiliza para reiniciar los valores de los dataframes deck, pesos y triple probabilidad.
+Para restaurar los valores de deck, se llama a la función  \textit{crearMazo}.
+Para restaurar los valores de pesos y triple, se cargan los valores de los dataframes base, data\_ini.csv y triple\_csv respectivamente. Con estas tres matrices, se sobrescriben los dataframes de uso con  \textit{write.csv.}
+
+
+\subsubsection{error()}
+
+Esta función tiene como única función el devolver un error en caso de que ocurra un error en la comunicación.
+
+
+\subsection{Puesta en marcha del Servidor de API REST}
+\label{sec:APIrest}
+
+La puesta en marcha del servidor, tal y como se ha programado, es bastante sencilla. 
+Estos comandos se tienen que utilizar desde la consola de R para poder mantener adecuadamente el servidor.
+El primer paso, es inicializar todas las funciones y scripts del código. Ya que he creado la función  \textit{inicializa()} que inicializa todas las funciones, solo es necesario usar los siguientes comandos:
+
+\begin{verbatim}
+source("inicializa.R")
+inicializa()
+\end{verbatim}
+
+Tras esto, se ejecutan los comandos de  \textit{plumber}. Es necesario cargar el archivo \textit{plumber.r} configurado como tubería. Para eso, se utiliza el comando \textit{r$<-$ plumb("plumber.R")}.
+
+Con esto, r será la variable que tiene toda la información del servidor API REST, así como las funciones para cargarlo.
+Por último, se ejecuta el comando r\$run(port:8000) para ejecutar el servidor en la url  \textit{http://localhost:8000/}. Se puede utilizar  \textit{r\$run()} sin asignar un puerto, entonces el programa te lo asigna a uno aleatorio, pero para poder llamarlo sin problemas desde el cliente, es necesario fijarlo a un puerto, por lo que utilizaré el puerto 8000.
+Con esto, el servidor estará en marcha y devolverá al cliente la respuesta acorde a la URL llamada de manera automática. 
+Para salir o interrumpir el funcionamiento del servidor, se pulsa la tecla ESC en el teclado desde la consola de R, haciendo que el funcionamiento de r\$run se detenga.
+
+\subsubsection{Cliente en C++: curl y rapidjson}
+
+Hay varias formas de comunicar un código de C++ y una API REST. Una de las maneras más sencillas es el uso del paquete  \textit{Curl}\cite{curl}, que permite utilizar los comandos que se utilizan en el paquete de MSDOS del mismo nombre para comunicarse con una API. 
+
+Para poder traducir los vectores de números en formato json que devuelve la API REST programada, es necesario instalar otro paquete, que es el paquete Rapidjson\cite{rapidjson}.Se ha elegido estas opciones ya que no necesita una aplicación intermedia para traducir ni conectar con el API. Además, ya que ambos se pueden codificar en C++, facilita mucho el trabajo y es mucho más cómodo trabajar con ellos.
+
+Ambos paquetes se pueden instalar usando vcpkg\cite{vpk}, utilizando el comando  \textit{vcpkg install curl} y  \textit{vcpkg install rapidjson} respectivamente.
+
+Ahora se procede a explicar como he implementado estos paquetes en la clase Algoritmo.
+
+El primer paso es llamar a las librerías instaladas con \textit{\#include $<curl/curl.h>$}y \textit{\#include $<rapidjson/document.h>$} dentro del código de Algoritmo.cpp.
+
+Tras esto, se crea una estructura llamada  \textit{MemoryStruct}, donde se almacenará el json después de ser analizado.
+
+\begin{verbatim}
+struct MemoryStruct
+{
+      char* memory;
+      size_t size;
+};
+\end{verbatim}
+
+El tipo  \textit{size\_t} se define como un valor static. Tras esto, se crea la función que va a ser utilizada para almacenar en la memoria el json:  \textit{WriteMemoryCallback(void* contents, size\_t size, size\_t nmemb, void* userp)}.
+
+Esta función crea un elemento de  \textit{MemoryStruct} usando el contenido de  \textit{userp}, y una variable  \textit{size\_T} que es el valor de  \textit{nmemb}. Reasigna el contenido de la memoria a un char* usando  \textit{realloc} y, si hay suficiente espacio en memoria, copia el valor de  \textit{contents} a la estructura de memoria, actualizando el  \textit{size\_t} creado.
+
+Una vez creados estos dos elementos auxiliares, vamos a la implementación directa. Esta implementación se realiza en las funciones obtenerTriple de la clase ( \textit{obtenerTriple, obtenerTripleAccion} y  \textit{ObtenerTripleAct}) se realizará la implementación de la misma manera, cambiando las urls a las que llamar según corresponda.
+
+Primero se crea un objeto estructura  \textit{MemoryStruct} y se definen los valores de memory (usando \textit{(char*)malloc(1))} y\textit{ size(0)}.
+
+Tras esto, se hacen las inicializaciones de curl. Primero se ejecuta \linebreak
+ curl\_global\_init(CURL\_GLOBAL\_ALL) para iniciar la conexión general, tras eso se crea un elemento del tipo CURL* llamado curl que es el resultado de curl\_easy\_init() y un objeto del tipo CURLcode llamado res.
+ 
+ El siguiente paso es inicializar la parte de rapidjson, que consiste en crear un objeto del tipo rapidjson::Document, llamado document.
+
+Después de las inicializaciones, se crea la url a llamar, en función de la ronda, la mano del algoritmo, las cartas de la mesa, las apuestas y la acción según convenga. Para poder concatenar los valores en un valor char* se utilizan tanto strcpy como strcat para generar la url correspondiente.
+
+Una vez obtenida la url, podemos realizar la petición al servidor. Para esto, se llamarí a la función curl\_easy\_setopt 3 veces, cada una con una inicialización distinta con el objetivo de almacenar en la variable curl los comandos a ejecutar:
+
+\begin{itemize}
+\item \textit{curl\_easy\_setopt(curl, CURLOPT\_URL, url)}: sirve para establecer la conexión en el valor de url.
+\item \textit{curl\_easy\_setopt(curl, CURLOPT\_WRITEFUNCTION, WriteMemoryCallback)}: se utiliza para determinar que se va a utilizar una función de escritura de memoria, llamando a la función WriteMemoryCallback.
+\item \textit{curl\_easy\_setopt(curl, CURLOPT\_WRITEDATA, (void*)\&chunk)}: sirve para definir dónde se va a almacenar los datos del comando WRITEFUNCTION, es decir, donde se almacenará el resultado de WriteMemoryCallback.
+\end{itemize}
+
+Una vez definidos los comandos, se ejecuta curl usando la función curl\_easy\_perform, cuya salida se almacenará en la variable res.
+
+Ahora que ya hemos establecido la conexión y recibido el json, es necesario analizarlo y traducirlo.
+
+Ahora que tenemos el array traducido, se asocian los resultados a la variable triple de la clase algoritmo.
+
+Por último, se implementan las limpiezas de memoria y los cierres de conexiones.
+
+Para la limpieza de memoria, es necesario llamar a la función free(memoria), que vacia la variable memoria de la estructura creada.
+
+Para limpiar las conexiones, es necesario llamar un cleanup por cada conexión hecha. Es decir, es necesario llamar a \textit{curl\_easy\_cleanup(curl) para cerrar curl\_easy\_init()} y \textit{curl\_global\_cleanup()} como cierre de \textit{curl\_global\_init(CURL\_GLOBAL\_ALL)}.
+

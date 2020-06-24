@@ -65,7 +65,4 @@
       <Filter>Archivos de recursos</Filter>
     </ResourceCompile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
 </Project>

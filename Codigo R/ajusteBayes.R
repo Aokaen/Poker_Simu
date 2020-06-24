@@ -16,41 +16,52 @@ if(accion!=0)
 {
 a=accion+1
 pm<-prob[1,1]
+if(is.na(pm))
+{
+  pm=0
+}
 pma<-data[1,a]
 pr<-prob[2,1]
+if(is.na(pr))
+{
+  pr=0
+}
 pra<-data[2,a]
 pc<-prob[3,1]
+if(is.na(pc))
+{
+  pc=0
+}
 pca<-data[3,a]
 maniaco<-(pm*pma)/(pm*pma + (1-pm)*(pra+pca))
 roca<-(pr*pra)/(pr*pra + (1-pr)*(pma+pca))
 calling<-(pc*pca)/(pc*pca + (1-pc)*(pra+pma))
 dif<-0
 sum<-0
-if(maniaco == 1)
+if(pm == 1)
 {
   mb=1
   rb=0
   cb=0
 }
+else if(pr==1)
+{mb=0
+rb=1
+cb=0}
+else if(pc==1)
+{mb=0
+rb=0
+cb=1}
 else if(maniaco>roca && maniaco>calling)
   {
   mb=1
   rb=0
   cb=0
 }
-
-else if(roca==1)
-{mb=0
-rb=1
-cb=0}
 else if(roca>maniaco&&roca>calling)
 {mb=0
 rb=1
 cb=0}
-else if(calling==1)
-{mb=0
-rb=0
-cb=1}
 else if(calling>roca && calling>maniaco)
 {mb=0
 rb=0
@@ -98,7 +109,7 @@ if(rb==1)
       {
         if(ronda==1)
          { 
-          if(jugada>7)
+          if(valorJugada>7)
           {
           p1<-triple[1]*0.6
           p2<-triple[2]+triple[1]*0.2
@@ -113,7 +124,7 @@ if(rb==1)
         }
         else
         {
-          if(jugada>4)
+          if(valorJugada>4)
           {
             p1<-triple[1]*0.6
             p2<-triple[2]+triple[1]*0.2

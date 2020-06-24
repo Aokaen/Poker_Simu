@@ -40,35 +40,101 @@ WriteMemoryCallback(void* contents, size_t size, size_t nmemb, void* userp)
 int Algoritmo::obtenerAccion(Jugador J, Mesa M)
 {
 			obtenerTriple(J, M);
-
-			random r;
 			float p = 0, v = 0, s = 0, n = 0;
-			n = r.nrandomPorcent();
-			//n = rand()%(100+1)*0.01;
+			if (tipo == 4)
+			{
+				bool sub = false, pas = false, ver = false;
 
-			p = triple[0];
-			v = p + triple[1];
-			if (triple[2] != 0)
-			{
-				s =1;
+
+				if (triple[0] > triple[1] && triple[0] > triple[2])
+				{
+					pas = true;
+				}
+				else if (triple[1] > triple[0] && triple[1] > triple[2])
+				{
+					ver = true;
+				}
+				else if (triple[2] > triple[1] && triple[2] > triple[0])
+				{
+					sub = true;
+				}
+
+
+				if (pas == true)
+				{
+					return 0;
+				}
+				else if (ver == true)
+				{
+					return 1;
+				}
+				else if (sub == true)
+				{
+					return 2;
+				}
+				else
+				{
+					random r;
+					n = r.nrandomPorcent();
+					//n = rand()%(100+1)*0.01;
+
+					p = triple[0];
+					v = p + triple[1];
+					if (triple[2] != 0)
+					{
+						s = 1;
+					}
+					else
+					{
+						s = 0;
+					}
+					if (n <= p)
+					{
+						return 0;
+					}
+					else if (n <= v)
+					{
+						return 1;
+					}
+					else
+					{
+						return 2;
+					}
+
+				}
 			}
 			else
 			{
-				s = 0;
-			}
-			if (n <= p)
-			{
-				return 0;
-			}
-			else if (n <= v)
-			{
-				return 1;
-			}
-			else
-			{
-				return 2;
+				random r;
+				n = r.nrandomPorcent();
+				//n = rand()%(100+1)*0.01;
+
+				p = triple[0];
+				v = p + triple[1];
+				if (triple[2] != 0)
+				{
+					s = 1;
+				}
+				else
+				{
+					s = 0;
+				}
+				if (n <= p)
+				{
+					return 0;
+				}
+				else if (n <= v)
+				{
+					return 1;
+				}
+				else
+				{
+					return 2;
+				}
+
 			}
 			
+
 	
 	
 
@@ -190,6 +256,7 @@ void Algoritmo::obtenerTriple(Jugador J, Mesa M)
 		curl_easy_setopt(curl, CURLOPT_URL, url);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&chunk);
+		
 		res = curl_easy_perform(curl);
 
 		document.Parse(chunk.memory);
@@ -1107,32 +1174,98 @@ int Algoritmo::obtenerAccionSegundo(Jugador J, Mesa M,int accionprevia) {
 	
 			obtenerTripleAccion(J, M,accionprevia);
 
-			random r;
 			float p = 0, v = 0, s = 0, n = 0;
-			n = r.nrandomPorcent();
-			//n = rand()%(100+1)*0.01;
+			if (tipo == 4)
+			{
+				bool sub = false, pas = false, ver = false;
 
-			p = triple[0];
-			v = p + triple[1];
-			if (triple[2] != 0)
-			{
-				s = 1;
+
+				if (triple[0] > triple[1] && triple[0] > triple[2])
+				{
+					pas = true;
+				}
+				else if (triple[1] > triple[0] && triple[1] > triple[2])
+				{
+					ver = true;
+				}
+				else if (triple[2] > triple[1] && triple[2] > triple[0])
+				{
+					sub = true;
+				}
+
+
+				if (pas == true)
+				{
+					return 0;
+				}
+				else if (ver == true)
+				{
+					return 1;
+				}
+				else if (sub == true)
+				{
+					return 2;
+				}
+				else
+				{
+					random r;
+					n = r.nrandomPorcent();
+					//n = rand()%(100+1)*0.01;
+
+					p = triple[0];
+					v = p + triple[1];
+					if (triple[2] != 0)
+					{
+						s = 1;
+					}
+					else
+					{
+						s = 0;
+					}
+					if (n <= p)
+					{
+						return 0;
+					}
+					else if (n <= v)
+					{
+						return 1;
+					}
+					else
+					{
+						return 2;
+					}
+
+				}
 			}
 			else
 			{
-				s = 0;
-			}
-			if (n <= p)
-			{
-				return 0;
-			}
-			else if (n <= v)
-			{
-				return 1;
-			}
-			else
-			{
-				return 2;
+				random r;
+				n = r.nrandomPorcent();
+				//n = rand()%(100+1)*0.01;
+
+				p = triple[0];
+				v = p + triple[1];
+				if (triple[2] != 0)
+				{
+					s = 1;
+				}
+				else
+				{
+					s = 0;
+				}
+				if (n <= p)
+				{
+					return 0;
+				}
+				else if (n <= v)
+				{
+					return 1;
+				}
+				else
+				{
+					return 2;
+				}
+
 			}
 	
 }
@@ -1263,6 +1396,7 @@ void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
 		curl_easy_setopt(curl, CURLOPT_URL, url);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&chunk);
+		
 		res = curl_easy_perform(curl);
 
 		document.Parse(chunk.memory);
@@ -2164,33 +2298,98 @@ void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
 int Algoritmo::obtenerAccionAct(Jugador J, Mesa M, int accionprevia)
 {
 	obtenerTripleAct(J, M,  accionprevia);
-
-	random r;
 	float p = 0, v = 0, s = 0, n = 0;
-	n = r.nrandomPorcent();
-	//n = rand()%(100+1)*0.01;
+	if(tipo==4)
+	{ 
+		bool sub = false, pas = false, ver = false;
+		
 
-	p = triple[0];
-	v = p + triple[1];
-	if (triple[2] != 0)
-	{
-		s = 1;
+		if (triple[0] > triple[1] && triple[0] > triple[2])
+		{
+			pas = true;
+		}
+		else if (triple[1] > triple[0] && triple[1] > triple[2])
+		{
+			ver = true;
+		}
+		else if (triple[2] > triple[1] && triple[2] > triple[0])
+		{
+			sub = true;
+		}
+
+
+		if (pas == true)
+		{
+			return 0;
+		}
+		else if (ver == true)
+		{
+			return 1;
+		}
+		else if (sub == true)
+		{
+			return 2;
+		}
+		else
+		{
+			random r;
+			n = r.nrandomPorcent();
+			//n = rand()%(100+1)*0.01;
+
+			p = triple[0];
+			v = p + triple[1];
+			if (triple[2] != 0)
+			{
+				s = 1;
+			}
+			else
+			{
+				s = 0;
+			}
+			if (n <= p)
+			{
+				return 0;
+			}
+			else if (n <= v)
+			{
+				return 1;
+			}
+			else
+			{
+				return 2;
+			}
+
+		}
 	}
 	else
 	{
-		s = 0;
-	}
-	if (n <= p)
-	{
-		return 0;
-	}
-	else if (n <= v)
-	{
-		return 1;
-	}
-	else
-	{
-		return 2;
+		random r;
+		n = r.nrandomPorcent();
+		//n = rand()%(100+1)*0.01;
+
+		p = triple[0];
+		v = p + triple[1];
+		if (triple[2] != 0)
+		{
+			s = 1;
+		}
+		else
+		{
+			s = 0;
+		}
+		if (n <= p)
+		{
+			return 0;
+		}
+		else if (n <= v)
+		{
+			return 1;
+		}
+		else
+		{
+			return 2;
+		}
+
 	}
 
 }
@@ -2256,6 +2455,7 @@ void Algoritmo::obtenerTripleAct(Jugador J, Mesa M, int accionprevia)
 		curl_easy_setopt(curl, CURLOPT_URL, url);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)&chunk);
+		
 		res = curl_easy_perform(curl);
 
 		document.Parse(chunk.memory);
@@ -3158,6 +3358,7 @@ void Algoritmo::reseteo()
 	CURL* curl = curl_easy_init();
 	CURLcode res;
 	curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8000/reset");
+	
 	res = curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
 
@@ -3175,6 +3376,7 @@ void Algoritmo::pasar(int ronda)
 		url_aux = "http://localhost:8000/pass?r=" + to_string(ronda);
 		url = url_aux.c_str();
 		curl_easy_setopt(curl, CURLOPT_URL, url);
+		
 		res = curl_easy_perform(curl);
 		curl_easy_cleanup(curl);
 	}
@@ -3201,6 +3403,7 @@ void Algoritmo::actualizaBayes(int ronda)
 	url_aux = "http://localhost:8000/check?r=" + to_string(ronda);
 	url = url_aux.c_str();
 	curl_easy_setopt(curl, CURLOPT_URL, url);
+	
 	res = curl_easy_perform(curl);
 	curl_easy_cleanup(curl);
 	}

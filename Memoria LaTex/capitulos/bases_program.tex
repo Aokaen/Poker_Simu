@@ -1,0 +1,111 @@
+\chapter{Fundamentos Matemáticos y  de programación}
+
+\section{Aleatorización en programación: Números pseudoaleatorios y Fisher-Yates}
+
+La utilidad de los números generados al azar es innegable, pues sirve de interés en muchos ambitos, tales como la toma de decisiones o la programación. Pero definir un número aleatorio es mucho más dificil de lo que parece,  pues un número cualquiera puede ser aleatorio o no según el contexto. En lugar de eso, es necesario referise a una secuencia de números independendientes aleatorios dentro de una distribución concreta.
+
+Esta secuencia implica que cualquiera de los números de la secuencia puede ser obtenido únicamente por el azar, sin tener ningún tipo de inferencia por parte del resto de los números de esa secuencia y cada número tiene una probabilidad específica de caer dentro de los valores definidos, siendo una distribución uniforme si esta secuencia es finita y todos los números de esa secuencia tienen la misma probabilidad.\cite{knuth} 
+
+Desde el punto de vista de la computación estos números aleatorios se puede agrupar en dos categorías, según su origen:
+
+\begin{itemize}
+\item \textbf{Números aleatorios ''reales''.} Este tipo de números son los que se generan a partir de  de la medida de un fenómeno físico, tal como el tiempo en que se pulsa una tecla, la temperatura exacta, radioactividad....
+
+\item \textbf{Números pseudoaleatorios.} Estos números se generan mediante un algoritmo que parte de un valor base, llamado semilla, para generar una secuencia de números. Si bien esta secuencia parece aleatoria, no lo es pues llega un punto en el que se empiezan a repetir de nuevo (aunque este sea altísimo). Por otro lado, en el caso de tener el algoritmo y conocer la semilla utilizada, se podría recrear esa misma secuencia, cosa que un número aleatorio ''real'' es prácticamente imposible. \cite{pnrg}.
+\end{itemize}
+
+El estudio que interesa desde el punto de vista de la inteligencia artificial y de este proyecto es el de los números pseudoaleatorios, del cual se va a explicar ahora con más detalle.
+
+Las secuencias numéricas pseudoaleatorias se pueden comparar entre ellas y determinar cuál es mejor secuencia de números pseudoaleatoria. Para esto, es necesario comparar el periodo de la secuencia, es decir, cuánto tarda la secuencia en repetirse. Cuanto mayor sea el periodo, más eficiente es dicha secuencia.
+
+Prácticamente, todos los lenguajes de programación tienen una función para generar números pseudoaleatorios (rand(), rnd(), srand()…). Pero debido  al periodo que suelen tener este tipo de funciones, cuando se llama numerosas veces en la misma ejecución a esa función aleatoria,acaban dandose repeticiones de secuencias.\cite{rand}. 
+
+Para poder solventar este problema, es necesario buscar un generador de números pseudoaleatorios con un periodo lo suficientemente grande para que no sea posible que se produzca la repetición.
+
+Se denomina generador de números pseudoaleatorios (GPAN) al algoritmo encargado de generar una secuencia de números pseudoaleatorios, mientras que un Generador hardware de números aleatorios (HRNG) es el encargado de generar los números aleatorios "reales".
+
+Para este proyecto, se ha decidido usar como GPAN el algoritmo Keep It Simple Stupid (KISS) , en concreto la versión la versión de 2009 de 64 bits. Este algoritmo fue presentado por George Marsaglia (matemático y científico computacional) y ha ido mejorando sus versiones desde su primera versión publicada en 1998. El algoritmo KISS combina 3 o 4 (dependiendo de la versión) GPAN distintos para intentar mejorar el factor de aleatoriedad.
+
+La versión que se ha decidido utilizar combina una multiplicación con acarreo (MWC), un Generador Lineal Congruencial (CNG) y un Xorshift (XS) El algoritmo KISS sigue la siguiente formula:\cite{kiss2,kiss1}
+
+\begin{verbatim}
+Siendo xs y carry valores definidos y cng la semilla
+CNG()
+XS()
+Definicion MWC()
+KISS = MWC() + CNG+ XS.
+\end{verbatim}
+
+Con esto se obtendría el valor KISS, en función de la semilla. En el caso del proyecto, se ha implantado una función de calentamiento que ejecute n veces el algoritmo y un modificador de semilla.
+Para producir un número pseudoaleatorio, se ejecutan las siguientes funciones:
+
+\begin{verbatim}
+Dado n.
+inicializa_semilla_inicial()
+.funcion_calentamiento(n)
+s<-valor KISS n+1
+inicializa_semilla(s)
+k<-valor KISS (semilla s)
+\end{verbatim}
+\section{Aprendizaje Automático y Lenguaje R}
+
+Uno de los objetivos iniciales es desarrollar una inteligencia artificial que sea capaz de asimilar esa información y ser capaz de procesarla, dando lugar a una decisión. Esto puede ser recogido como aprendizaje automático. El aprendizaje automático es una rama de la inteligencia artificial centrada en la búsqueda de técnicas para que el rendimiento de una máquina mejore con su funcionamiento (es decir, que “aprendan” a medida que van funcionando). El objetivo de esta rama es encontrar patrones y algoritmos que permitan replicar el comportamiento de la máquina en otro conjunto de datos.
+
+ Este proyecto trata de emular dicho aprendizaje automático y desarrollar un algoritmo que podría ser el resultado del aprendizaje automático, así como hacer las pruebas de este. Para lograr este desarrollo, toda la programación del algoritmo se realizará en lenguaje R.
+R es un lenguaje y entorno de programación para computación estadística y gráfica. Siendo un proyecto GNU, es un software libre que permite su funcionamiento en cualquier sistema operativo. 
+
+R posee una gran capacidad de manejo y almacenamiento de datos, operadores para matrices, una gran colección de herramientas de análisis de datos, así como un lenguaje de programación efectivo que permite realizar bucles, comparaciones condicionales y funciones recursivas, así como una gran cantidad de herramientas tanto estadísticas como gráficas (tales como modelado lineal y no lineal, análisis de series temporales, análisis de grupos y clasificaciones).\cite{r-project}
+
+\section{Optimización y Patrones de juego}
+\label{sec:opti}
+
+Las personas tienden a comportarse siguiendo uno o varios patrones de manera subconsciente, y esto también se aplica en los juegos. 
+Uno de los elementos clave a la hora de optimizar el estilo de juego y, por ello, obtener mejores resultados es la predicción del comportamiento de juego. En otras palabras, ser capaz de identificar patrones de comportamiento de otros jugadores y actuar en consecuencia.
+Los jugadores profesionales de póker intentan mejorar esto y hacer predicciones con la información que van obteniendo de prácticamente cualquier factor posible, tales como las acciones que toman, la rapidez en tomar decisiones, el tiempo que sopesan antes de hacer una jugada, el importe de las apuestas o incluso algún indicio de nerviosismo como tics nerviosos.
+Además de esto, los jugadores profesionales tienden a cambiar constantemente de patrón a la hora de jugar rondas para intentar evitar que sus oponentes sean capaces de predecir sus acciones.
+Por otro lado, hay jugadores que juegan de manera muy pobre en lo que se refiere a la obtención de información, ocultar información y descifrar esta información de los oponentes. Este tipo de jugadores son los que suelen seguir un patrón de juego y son fácilmente de identificar por jugadores profesionales, por lo que es relativamente fácil jugar en torno a ellos. 
+Estos jugadores pueden diferenciarse en numerosos tipos, según sean sus patrones. Además, cada jugador profesional suele hacer sus propias clasificaciones de patrones. 
+
+Este proyecto va a centrarme en algunos de estos patrones, que están explicados en The Mathematics of Póker\cite{chen}, en el capítulo de juego explotador. 
+Estos patrones son:
+
+\begin{itemize}
+\item \textbf{Maniaco}
+
+Este patrón se caracteriza por ser un comportamiento tremendamente agresivo, subiendo manos de manera bastante agresiva, incluso aun no teniendo una mano adecuada para ello. 
+
+Citando la obra de Sklansky-Malmuth, “A maniac is a person who not only plays much more than his appropiate share of hands, but also constantly raises and reraises, even though the hand he holds does not warrant it. Although the maniac eventually will go broke, he does pose a set a problems for you”\cite{sklansky}, traducido como “un maniaco es una persona que no solo juega muchas más manos que las manos adecuadas, sino que también sube y resube, incluso aunque la mano que tenga no lo permitiría. A pesar de que el maniaco eventualente se quedará sin dinero, nos supone una serie de problemas”. 
+En otras palabras, que va a jugar bastantes más manos de lo habitual. Y haciendo subidas de manera mucho más arriesgada. 
+Este patrón consigue beneficios a raíz de forzar subidas de apuestas, y que otros jugadores no puedan seguirle el ritmo apostando y se acaben retirando. Por el contrario, si los jugadores no siguen su ritmo de apuestas, suele perder bastante fuerza. También es débil ante jugadores con buenas manos en la ronda, ya que el maniaco sube su apuesta aunque no tenga una buena jugada.
+
+\item \textbf{Roca}
+
+A diferencia del patrón anterior, este patrón se caracteriza por un comportamiento principalmente pasivo, siendo muy cauto a la hora de actuar. 
+Este tipo de jugadores juegan únicamente en torno a su mano, únicamente jugando manos que saben que son fuertes. Este tipo de jugadores rara vez hacen faroles, así como tienden a valorar únicamente la mano actual sin analizar su potencial. Esto hace que se pierdan manos potencialmente buenas solo para mantener el estado de juego seguro.
+La principal ventaja de este patrón es que el modelo es la fortaleza de sus jugadas, soliendo ganar las pocas manos que juega. Por el contrario, al no jugar muchas manos, suelen acabar perdiendo dinero con las apuestas ciegas y el ante en caso de que lo haya. También, por esa pasividad, suele pasar manos con potencial si el oponente juega agresivo y pueda parecer que tiene mejor mano.
+
+\item \textbf{Calling Station}
+
+Este tipo de jugadores tienen un estilo similar al del maniaco, pero menos agresiva. Se podría considerar una versión intermedia entre Roca y Maniaco. Los jugadores con un patrón calling station ven muchas apuestas, aunque la mano que tienen no deberían hacerlo. Esto hace que tenga peores resultados que Maniaco ya que, al no subir apuestas como un Maniaco, no genera tanta presión a sus adversarios.
+Si bien es cierto que ver manos suele ser de utilidad para extraer información de los demás jugadores, cuando se convierte en un patrón es peligroso, ya que es muy fácil de identificar frente a los otros dos por ser repetitivo y pasivo. 
+\end{itemize}
+
+\section{REST API}
+
+Para este proyecto se utilizará como enlace un planteamiento REST API para conectar el algoritmo con el motor de juego.  Para empezar, se procede a explicar en qué consiste una API.
+
+Una API (del inglés “Application Protramming Interface”, que significa Interfaz de programación de aplicaciones) es una interfaz de computación  que sirve como “intermedario” para  que dos aplicaciones  se comuniquen entre ellas.   
+En otras palabras, es el conjunto de funciones, métodos, subrutinas y procedimientos que permite utilizar un software desde otra aplicación como una abstracción de la implementación ,  creando así una “librería” disponible para ese software.
+Esta interfaz facilita mucho el trabajo a la hora de programar, pues únicamente muestra el código estrictamente necesario, ocultando muchos comandos que se ejecutan implícitamente. \cite{api1}
+
+Dentro de las APIs,  se encuentra un  tipo de API  que permite una manipulación más sencilla de datos que el resto. Se trata de la API REST.
+REST es cualquier API entre sistemas que, mediante el uso del protocolo HTTP, permita obtener datos o generar operaciones sobre estos datos en cualquier formato posible, entre los cuales encontramos XML y JSON. 
+
+Este tipo de API permite la separación total entre el cliente y el servidor, además, es independiente del tipo de plataformas y lenguajes, por lo cual su implementación entre dos lenguajes distintos es posible e, incluso, bastante sencilla. Como tiene esa adaptabilidad de sintaxis, ofrece bastante flexibilidad a la hora de programar un API en múltiples lenguajes. 
+Las características generales de una REST API son las siguientes:\cite{api2}
+\begin{itemize}
+\item Protocolo cliente/servidor sin estado: Cada una de las peticiones del API tiene toda la información necesaria para ejecutarla, por lo que no necesita recordar ningún estado previo para satisfacer esta petición (ni el cliente ni el servidor). Es posible configurarlas para que tengan caché, creando lo que se conoce como protocolo cliente-caché-servidor sin estado.
+\item Operaciones bien definidas: Un REST API tiene un conjunto pequeño de operaciones relacionadas con datos y especificación HTTP. Las más importantes son POST (crear), GET (leer y consultar), PUT (editar) y DELETE (eliminar).
+\item Sintaxis universal: los objetos en una API REST siempre se manipulan a partir de la URI.  Esta UIR es un elemento identificador único para cada recurso en la API REST. Lo cual permite acceder siempre de manera exacta a la información. Esta sintaxis universal a su vez genera una interfaz uniforme, que implica que un sistema REST siempre aplica acciones concretas sobre los \item Uso de hipermedios: tanto para la información de la aplicación como para las transiciones de estado de la aplicación, la representación suele ser en HTML o XML, lo que permite navegar de un recurso REST a muchos otros, simplemente siguiendo los enlaces sin necesidad de una infraestructura adicional.
+\end{itemize}
+

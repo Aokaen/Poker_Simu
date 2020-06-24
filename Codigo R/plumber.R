@@ -62,6 +62,7 @@ function(a){
   pesos<-actualizaPesos_op(a,pesos,triple)
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
+  
   return(salida)
 }
 
@@ -83,9 +84,9 @@ triple<-cargaTriple()
 aa<-strtoi(aa)
 ao<-strtoi(ao)
 mesa<-fijarMesaFlop(mn1,mp1,mn2,mp2,mn3,mp3)
-mazo<-descarteCartas(mesa,mazo)
 pesos<-descartePesosFlop(mesa,mazo,pesos)
 triple<-descarteTripleFlop(mesa,mazo,triple)
+mazo<-descarteCartas(mesa,mazo)
 triple<-calculoProbabilidadAccion(mesa,mazo,triple,2)
 pesos<-actualizaPesos_op(1,pesos,triple)
 salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,1)
@@ -93,6 +94,7 @@ write.csv(mazo,"deck.csv",row.names = FALSE)
 write.csv(pesos, "data.csv",row.names = TRUE)
 write.csv(triple,"triple.csv",row.names = TRUE)
 write.csv(mesa, "mesa.csv",row.names = FALSE)
+
 return(salida)
 }
 
@@ -116,9 +118,9 @@ aa<-strtoi(aa)
 ao<-strtoi(ao)
 a<-strtoi(a)
 mesa<-fijarMesaFlop(mn1,mp1,mn2,mp2,mn3,mp3)
-mazo<-descarteCartas(mesa,mazo)
 pesos<-descartePesosFlop(mesa,mazo,pesos)
 triple<-descarteTripleFlop(mesa,mazo,triple)
+mazo<-descarteCartas(mesa,mazo)
 triple<-calculoProbabilidadAccion(mesa,mazo,triple,2)
 pesos<-actualizaPesos_op(a,pesos,triple)
 salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
@@ -126,6 +128,7 @@ write.csv(mazo,"deck.csv",row.names = FALSE)
 write.csv(pesos, "data.csv",row.names = TRUE)
 write.csv(triple,"triple.csv",row.names = TRUE)
 write.csv(mesa, "mesa.csv",row.names = FALSE)
+
 return(salida)
 }
 
@@ -146,6 +149,7 @@ function(a,aa,ao){
   pesos<-actualizaPesos_op(a,pesos,triple)
   salida<-calculaProbFlop(mano,mesa,mazo,pesos,aa,ao,a)
   write.csv(pesos, "data.csv",row.names = TRUE)
+  
   return(salida)
 }
 
@@ -175,6 +179,7 @@ function(mn,mp,aa,ao){
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
   write.csv(mesa, "mesa.csv",row.names = FALSE)
+  
   return(salida)
 }
 
@@ -206,6 +211,7 @@ function(mn,mp,aa,ao,a){
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
   write.csv(mesa, "mesa.csv",row.names = FALSE)
+  
   return(salida)
 }
 
@@ -231,6 +237,7 @@ function(mn,mp){
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
   write.csv(mesa, "mesa.csv",row.names = FALSE)
+  
   return(salida)
 }
 
@@ -258,6 +265,7 @@ function(mn,mp,a){
   write.csv(pesos, "data.csv",row.names = TRUE)
   write.csv(triple,"triple.csv",row.names = TRUE)
   write.csv(mesa, "mesa.csv",row.names = FALSE)
+  
   return(salida)
 }
 
@@ -275,6 +283,7 @@ function(a){
   pesos<-actualizaPesos_op(a,pesos,triple)
   salida<-calculaProbRiver(mano,mesa,mazo,pesos,a)
   write.csv(pesos, "data.csv",row.names = TRUE)
+  
   return(salida)
 }
 

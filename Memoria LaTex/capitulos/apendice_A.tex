@@ -1,0 +1,76 @@
+\chapter{Anexo A: Fundamentos de probabilidad}
+\label{ch:AxA}
+
+\section{Eventos y Probabilidad}
+
+En el apartado \ref{sec:bayes}, se ha mencionado la probabilidad de que un evento ocurra, que es el número de casos posibles dividido entre el número de casos posibles. Una de las cosas importantes a tener en cuenta son los eventos cuando aparecen varios simultáneamente.
+Hay que distinguir entre:
+\begin{itemize}
+\item Eventos excluyentes: son eventos que no pueden ocurrir simultáneamente. Por ejemplo, “La carta es de Picas” (P=1/4) y “La carta es de Corazones” (P=1/4) son eventos que no pueden ocurrir simultáneamente.
+\item Eventos no excluyentes: son eventos que pueden ocurrir simultáneamente. Aquí tenemos que clasificar estos eventos por la relación que tienen entre ellos.
+\begin{itemize}
+\item Eventos independientes: Son eventos que no tienen efecto uno en el otro. Por ejemplo, “Una carta es del palo de diamantes” (P=1/4) y “una carta es un nueve” (P=1/13) son dos eventos que pueden ocurrir simultáneamente. 
+\item Eventos dependientes: Son eventos que si influyen uno en el otro. Aquí también podemos considerar la probabilidad condicional de A teniendo B, que es la probabilidad de que, si ocurre B, A también ocurriera. 
+\end{itemize} 
+\end{itemize} 
+
+La probabilidad de que ocurran ambos eventos dependientes es igual a la probabilidad de A multiplicado por la probabilidad condicional de B teniendo A, mientras que si los eventos son independientes si la probabilidad condicional de A teniendo B es igual a la probabilidad de A.
+La nomenclatura a usar es la siguiente:
+$p(A \cap B) \equiv$ Probabilidad de que ocurran A y B. Es decir, probabilidad de A y B.
+$p(A \cup B) \equiv$ Probabilidad de que ocurran A o B. Es decir, probabilidad de A o B. 
+p(A | B) $\equiv$ Probabilidad condicional de que ocurra A habiendo ocurrido B. Es decir, probabilidad de A teniendo B.
+Y aquí tenemos algunas fórmulas sobre estas probabilidades:
+\[
+p(A \cup B) = p(A) + p(B) – p(A \cap B)
+\]
+\[
+p(A\cap B) = p(A)*p(B | A)
+\]
+Teniendo en cuenta que los eventos excluyentes no pueden ocurrir simultáneamente ($p(A \cap B)_{excluyentes} = 0)$, podemos simplificar la primera fórmula para los eventos excluyentes:
+$p(A \cup B)_{excluyentes} = p(A) + p(B)$
+Tal y como hemos comentado antes, para eventos independientes, la probabilidad del evento B teniendo A es igual a la probabilidad de B, por lo que podemos simplificar la segunda ecuación:
+$p(A \cap B)_{independientes} = p(A)*p(B)$
+Mientras que para eventos dependientes es:
+Además de estas fórmulas, podemos utilizar las siguientes propiedades de los eventos:
+\[
+0 \leq p(A) \leq 1\text{(para cualquier A)}
+\]
+\[
+p(C) = 1
+\]
+\[
+p(I) = 0
+\]
+\[
+p(A) + p (\tilde{A}) = 1 -> p (\tilde{A}) = 1 - p(A)
+\]
+
+Siendo:
+$p(\tilde{A}) \equiv$ Probabilidad de que A no ocurra.
+C $\equiv$ Evento verdadero
+I $\equiv$ Evento imposible
+
+
+\section{Distribuciones y Varianza}
+
+Una vez tenemos las bases de la probabilidad de un evento o de eventos controlados, es necesario ampliar esta información para considerar diferentes probabilidades simultáneamente, pudiendo englobar los posibles resultados y sus respectivas probabilidades de un evento como una distribución de probabilidad.
+Para el estudio del Texas Hold’em, esta distribución es un elemento que nos ayuda a intentar estimar las posibles manos que puedan tener los oponentes. Si bien al comienzo de la partida, la distribución de probabilidades de cada jugador es idéntica, a medida que avanzan las fases, se van incluyendo nuevos factores a tener en cuenta que permite estimar esa probabilidad de otra manera (tales como las cartas en la mesa, las cartas en nuestra mano, las apuestas…).
+
+Cuando una distribución de probabilidad X tiene valores numéricos asociados a cada uno de los posibles resultados, dichas distribuciones de probabilidad tienen dos valores característicos que, en conjunto, describen la mayor parte de las distribuciones: valor esperado ($<X>$) y varianza ($V_X$).
+Para una distribución de probabilidad X, con n posibles resultados de valor $x_i$ y cada uno con una probabilidad $p_i$, el valor esperado $<X>$ es: 
+\[
+<X> =\sum_{i=1}^ n p_ix_i
+\]
+La varianza, por su parte, es una medida de la desviación de los resultados de lo esperado en una distribución. Este valor siempre es positivo
+
+
+Para una distribución de probabilidad X, con n posibles resultados de valor $x_i$ y cada uno con una probabilidad $p_i$, la varianza $V_x$ es: 
+\[
+V_x= \sum_{i=1}^ n p_i(x_i - <X>)^2
+\]
+La varianza nos ayuda para poder valorar las ganancias, pues una estrategia arriesgada y agresiva tendrá una varianza mucho mayor a una estrategia segura y pasiva, ya que los resultados de las apuestas estarán mucho más alejados de la media (ya que las ganancias serán mayores, pero las cantidades apostadas perdidas también lo serán). 
+Teniendo en cuenta que el valor de la varianza es un valor resultado de un cuadrado, no siempre es fácil comparar dos eventos (y, mucho menos, valor esperado con varianza). Para eso existe la desviación ($\sigma$), que es la raíz cuadrada de la varianza.
+\[
+	\sigma =\sqrt{V}   -> \sigma^2= V
+\]
+A pesar de esto, la varianza y la desviación solo sirven como valor decisivo en caso de tener que estudiar el riesgo de apostar, para el resto de casos serán un valor meramente descriptivo.

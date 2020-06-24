@@ -12,31 +12,56 @@ calculoProbabilidadAccion<-function(mesa,mazo,triple,ronda)
   combina<-combinaMazo(mazo)
   n<-nrow(combina)
   triple_aux<-c(0,0,0,0,0,0,0)
-  if(prob[1,1] == 1)
+  
+  if(is.na(prob[1,1]))
+  {
+    pm=0
+  }
+  else
+  {
+    pm=prob[1,1]
+  }
+  if(is.na(prob[2,1]))
+  {
+    pr=0
+  }
+  else
+  {
+    pr=prob[2,1]
+  }
+  if(is.na(prob[3,1]))
+  {
+    pc=0
+  }
+  else
+  {
+    pc=prob[3,1]
+  }
+  if(pm == 1)
   {
     mb=1
     rb=0
     cb=0
   }
+  else if(pr==1)
+  {mb=0
+  rb=1
+  cb=0}
+  else if(pc==1)
+  {mb=0
+  rb=0
+  cb=1}
   else if(prob[1,1]>prob[2,1] && prob[1,1]>prob[3,1])
   {
     mb=1
     rb=0
     cb=0
   }
-  
-  else if(prob[2,1]==1)
-  {mb=0
-  rb=1
-  cb=0}
   else if(prob[2,1]>prob[1,1]&&prob[2,1]>prob[3,1])
   {mb=0
   rb=1
   cb=0}
-  else if(prob[3,1]==1)
-  {mb=0
-  rb=0
-  cb=1}
+  
   else if(prob[3,1]>prob[2,1] && prob[3,1]>prob[1,1])
   {mb=0
   rb=0

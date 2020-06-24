@@ -1,0 +1,26 @@
+%chapter introduce un nuevo capítulo
+\chapter{Resumen}
+
+El estudio del póker desde el punto de vista de la inteligencia artificial y el aprendizaje automático lleva siendo de gran interés desde varios años pero, debido a la cantidad de factores que influyen en una partida de póker (factores que se tienen que considerar tanto para el juego de una ronda como para la estrategia de la partida  en conjunto), es de una gran complejidad y dificultad. Este proyecto intenta aportar su pequeño grano de arena a este problema que, parece no tener solución aún.
+
+
+Este proyecto tiene como objetivo el desarrollo de un simulador de juego de póker, en concreto usando la versión de Texas Hold'em, así como un algoritmo que sea capaz de tomar decisiones y que pueda jugar contra un jugador o contra uno de los patrones diseñados jugándose la partida de manera autónoma.  Este proyecto sigue una línea de desarrollo y diseño, planteándose cómo debe estar construido un simulador de juego, creando las bases, hasta cómo debe estar acoplada el módulo de aprendizaje automátizado.
+ La otra línea de desarrollo es, precisamente, este módulo de aprendizaje automatizado. ¿Cómo debe funcionar? ¿Qué factores hay que tener en cuenta para su toma de decisiones? ¿Qué factores se pueden despreciar?
+
+A lo largo de este proyecto, se explica cómo se ha ido programando este simulador de juego de poker Texas Hold'em de dos jugadores sin límite de apuestas, construyendo este programa desde cero, cómo se ha desarrollado un algoritmo de aprendizaje automatizado basado en juego estadístico para la toma de decisiones y cómo se han enlazado con una API REST. 
+
+A la hora del desarrollo del software, se crearon todas las clases necesarias, un sistema de aleatorización de mazo usando un generador de números pseudoaleatorios, y se desarrolló un conjunto de funciones tal que pudiera simular el desarrollo de una ronda de apuestas en una partida de Texas Hold'em. Además se han implementado dos modalidades: una modalidad de jugador contra el algoritmo diseñado y otra modalidad para que el algoritmo se enfrente contra uno de los patrones predefinidos, al igual que para enfrentar a uno de los patrones predefinidos con otro de los patrones.
+
+Tanto el algoritmo como los patrones predefinidos se desarrollaron usando aprendizaje automatizado basasado en estudio estadístico y matemático del Texas Hold'em. Estos patrones predefinidos han sido diseñados para mantener un comportamiento fijo, con el fin de representar algunos de los comportamientos habituales que se pueden dar entre jugadores de póker.
+
+Si bien el desarrollo del software (tanto el simulador como el algoritmo de toma de decisiones) son resultado de este proyecto y cumplen los objetivos, los resultados obtenidos no han sido satisfactorios, pues se ha encontrado que la eficacia del algoritmo diseñado no es la esperada.  El algoritmo juega un porcentaje de manos  que se encuentra dentro del rango estimado por criterios de expertos en el estudio matemático y computacional de póker, pero la ganancia media obtenida con las pruebas ha dado un resultado negativo,teniendo una desviación típica lo suficientemente amplía para que haya beneficios, lo cual plantea sobre la mesa que el planteamiento inicial sobre el algoritmo, así como las decisiones iniciales no fueron las adecuadas, pudiendose mejorar tanto el número de manos jugadas, como el beneficio obtenido en el las rondas posteriores al Flop. Tampoco se disponen de variacones del algoritmo para delimitar estos posibles fallos de diseño, así como para comparar si la variación tiene una mejor eficiencia que el algoritmo diseñado. 
+
+De cara a futuro, se plantean ideas para continuar el proyecto en el punto donde se ha dejado, tales como corregir y perfeccionar los parámetros y funciones del algoritmo, cambiar el modelo estadístico por un modelo basado en redes neuronales o aumentar el número de jugadores y estudiar la complejidad del nuevo estado.
+
+
+\paragraph{Palabras clave:} Póker Texas Hold'em, Simulación de juego,Aprendizaje automatizado.
+%\chapter{Abstract}
+
+%In this project...
+
+%\paragraph{Keywo%rds:} keyword1, keyword2, keyword3. 
