@@ -1,0 +1,53 @@
+\chapter{Conclusiones}
+
+Por último, se presentan las conclusiones a las que se ha llegado una vez se ha completado el proyecto.
+
+\section{Conclusión}
+
+Ahora que el proyecto ha finalizado, se pueden extraer varias conclusiones acerca de los resultados del proyecto, así como del proceso en sí. 
+
+Lo primero, es analizar el cumplimiento de objetivos del proyecto.
+Los 3 objetivos del proyecto (desarrollar un motor de juego capaz de ejecutar tanto un modo automático como uno con interacción humana, desarrollar un algoritmo de toma de decisiones capaz de tomar decisiones y la creación de un enlace funcional entre ambos elementos) han sido cumplidos, como se ha podido demostrar a lo largo de este documento.
+
+Si bien el objetivo está cumplido, se considera que el objetivo de desarrollo del algoritmo de toma de decisiones no ha sido desarrollado hasta su máximo potencial, pues los datos obtenidos arrojan que parte del diseño y planteamiento iniciales no son adecuados para obtener un funcionamiento y rendimiento óptimo. 
+La eficiencia del algoritmo es algo que necesita ser probado, ajustado y replanteado con mucha más profundidad, pues con los factores actuales, no termina de ser óptimo (al obtener un beneficio medio de  $-0,19957213\pm1,06969216$$\frac{bb}{partida}$, la tendencia es perder dinero, por lo que no es un resultado adecuado).
+
+Para intentar determinar una de las posibles causas de este rendimiento, se introdujo un cambio que intentaba eliminar parte de la aleatoriedad del algoritmo, lo cual mejoró contra uno de los patrones, mientras que el resto de los patrones o empeoraba parcialmente su resultado o no había cambios significativos.
+Debido a las limitaciones físicas para la toma de datos por los enormes tiempos de ejecución, en concreto del cálculo del potencial, las tomas de mediciones se alargaban durante varias horas solo para obtener 300 datos, no se pudo tomar la cantidad de datos deseados en un principio.
+
+Por esto mismo, el muestreo de datos es limitado, siendo insuficiente para contrastar hipótesis sobre cuál o cuáles pueden ser los fallos en el diseño. Como segunda conclusión, se tendría que es necesario tomar más medidas, y más variadas (alterando valores y variables) con el fin de intentar detectar los errores.
+
+Otra de las conclusiones que se sacan es la complejidad que esconde el proyecto. En las fases iniciales del proyecto no se tenía consciencia de lo compleo que podía llegar a resultar el análisis estadístico del póker y el diseño de un algoritmo de toma de decisiones. También se menospreció la complejidad y la dificultad que planteaba diseñar un simulador de juego funcional desde 0, que resultó ser bastante mayor de lo considerado en el planteamiento del diseño. 
+
+Si bien el sentimiento con el que se acaba este proyecto es de satisfacción por haber cumplido los objetivos del proyecto, tiene un regusto agridulce por el resquemor de no haber sido capaz de lograr optimizar el algoritmo.
+
+En el siguiente apartado, se dejan unos planteamientos futuros para este proyecto, futuras mejoras o posibles cambios de paradigma que puedan, o no, resultar en una mejora del proyecto.
+
+\section{Desarrollos futuros}
+
+Hay varios posibles caminos de acción para el futuro de este proyecto. Algunos de los posibles planteamientos para un desarrollo futuro son los siguientes.
+
+\subsection{Corrección y perfeccionamiento del algoritmo}
+
+El desarrollo más evidente. Dado que es la parte pendiente de este proyecto, el punto inmediato para un posible desarrollo sería proseguir desde este punto para mejorar los datos que ya se tienen. Ejecutar más pruebas para obtener más datos y contrastar la eficiencia del algoritmo actual, plantear los factores que puedan corregirse del diseño del algoritmo, mejorar el rendimiento de ejecución del algoritmo, modelar más tipos de adversarios, cambiar los modelados ya existentes, así como las correcciones del algoritmo actual... Son muchos los caminos de investigación y desarrollo los que se pueden tomar en este punto en pos de perfeccionar el algoritmo.
+
+También sería interesante modelar a un patrón cambiante, e ir viendo como el algoritmo varía sus acciones en función de lo que estiime más cercano a sus acciones de ese momento.
+
+Por otro lado, jugar con los datos filtrados por combinaMazoPot podría ser útil para intentar perfilar más el rango de acción. Actualmente es la media aritmética de $P_r$. ¿Qué pasaría si fuese el 75\% del valor máximo? ¿Cómo afectaría al rendimiento este cambio? ¿Cuánta precisión se pierde a cambio?
+
+\subsection{Alternativas al diseño del algoritmo}
+
+El algoritmo se ha diseñado desde el punto de vista del juego explotador basado en la estadística, intentando valorar las jugadas y posibles jugadas más probables e intentar leer las acciones del adversario para intentar sacar el máximo beneficio. Pero no es la única manera en la que se puede desarrollar el algoritmo.
+
+Se puede plantear también un diseño en otras arquitecturas como las redes neuronales, por ejemplo. Podría ser interesante plantear un desarrollo del algoritmo en otra arquitectura, y comparar el rendimiento de ambos. Se podría llegar a obtener un algoritmo que no solamente tenga un resultado más eficiente, sino que también un rendimiento más alto.
+
+\subsection{Modelado de jugadores adicionales}
+
+El funcionamiento del simulador y el algoritmo se han centrado en la modalida HUNLdel Texas Hold'em, pero sería muy interesante el salirse del HUNL y codifcar otros jugadores. Esto supondría varías ideas y planteamientos sobre los que habría que razonar y plantear con seriedad, como, por ejemplo, cómo se modelaría más de un jugador,  cómo afectaría el modelado de cada jugador al algoritmo, cómo influiría el posicionamiento con respecto al \textit{dealer} al algoritmo, qué baremos cambiarían, cómo se modificarían las probabilidades y la estadísrica en función del número de jugadores totales, cómo se modificaría el modelado de los adversarios en el Flop, influiría el Ante en la toma de decisiones en caso de que haya más de dos jugadores,  se podrían hacer las abstracciones que se hacen, se tendrían que hacer nuevas abstracciones, etc...
+
+\subsection{Mejora gráfica del simulador}
+
+Esta es una de las posibles ideas para seguir adelante.El motor de juego esta programado como una aplicación de consola, sin ningún tipo de elemento gráfico que no sea una combinación de símbolos. Diseñar una nueva versión del simulador de juego, como una aplicación de ventana, programar de una forma mucho más visual y que permita leer con más facilidad toda la información que se calcula para el funcionamiento del simulador.
+
+
+Estas serían algunas de las ideas que se plantean como posibles desarrollos futuros., Si bien no estricos, cualquier otro tema relacionado con el proyecto y no se hayan considerado sería interesante desarrollarlos también.

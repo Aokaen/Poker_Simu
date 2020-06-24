@@ -2,7 +2,7 @@
 #include <time.h>
 #include <random>
 #include <chrono>
-//#include "random.h"
+#include "random.h"
 
 Mazo::Mazo()
 {
@@ -27,14 +27,13 @@ Mazo::Mazo()
 void Mazo::barajar()
 {
 
-	unsigned semilla = std::chrono::system_clock::now().time_since_epoch().count();
-	std::minstd_rand srng(semilla);
+	
 
 	int N = 52;
-//	random j;
+	random j;
 	for (int i = N - 1; i > 0; i--)
 	{
-		int r = srng() % (i + 1);
+		int r = j.randomN(i);
 		//int r = j.nrandom() % (i + 1);
 		std::swap(deck[i], deck[r]);
 	}

@@ -1,33 +1,39 @@
 #Modificar el dataframe Triple Probabilidad
 modificaTriple<-function(mano,datos,valores)
 {
-if(mano[1,1]<mano[2,1])
+n1<-0
+n2<-0
+p1<-0
+n2<-0
+n1=as.numeric(mano[1,1])
+p1=as.numeric(mano[1,2])
+n2=as.numeric(mano[2,1])
+p2=as.numeric(mano[2,2])
+if(p1<p2)
 {
-	Num1<-mano[1,1]
-	Num2<-mano[2,1]
-	Palo1<-mano[1,2]
-	Palo2<-mano[2,2]
+	Num1<-n1
+	Num2<-n2
+	Palo1<-p1
+	Palo2<-p2
 }
-if(mano[1,1]>mano[2,1])
+if(p1>p2)
 {
-	Num2<-mano[1,1]
-	Num1<-mano[2,1]
-	Palo2<-mano[1,2]
-	Palo1<-mano[2,2]
+	Num2<-n1
+	Num1<-n2
+	Palo2<-p1
+	Palo1<-p2
 }
-if(mano[1,1]==mano[2,1])
+if(p1==p2)
 {
-	Num1<-mano[1,1]
-	Num2<-mano[2,1]
-	if(mano[1,2]>mano[2,2])
+  Palo1<-p1
+  Palo2<-p2
+	if(n1>n2)
 	{
-		Palo2<-mano[1,2]
-		Palo1<-mano[2,2]
-	}
-	else
-	{
-		Palo1<-mano[1,2]
-		Palo2<-mano[2,2]
+	  Num2<-n1
+	  Num1<-n2
+	}else	{
+	  Num1<-n1
+	  Num2<-n2
 	}
 }
 

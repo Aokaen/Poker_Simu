@@ -10,7 +10,9 @@ for(i in 1:a)
 {
 for(j in i:b)
 {
-if(jugada[i,1]<jugada[j,1])
+  ni<-as.numeric(jugada[i,1])
+  nj<-as.numeric(jugada[j,1])
+if(ni<nj)
 {
 aux<-jugada[i,]
 jugada[i,]<-jugada[j,]

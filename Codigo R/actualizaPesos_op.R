@@ -1,0 +1,49 @@
+actualizaPesos_op<-function(accion,pesos,triple)
+{
+  columna<-0
+  if(accion==0)
+  {
+    columna=5
+  }
+  if(accion==1)
+  {
+    columna=6
+  }
+  if(accion==2)
+  {
+    columna=7
+  }
+  n_manos=nrow(triple)
+  pesos_aux<-pesos
+  pesos_aux[,]=0
+  for(i in 1:n_manos)
+  {
+    mano<-fijarMano(triple[i,1],triple[i,2],triple[i,3],triple[i,4])
+    if(mano[1,1]<mano[2,1])
+    {
+      Num<-NumtoChar(mano[2,1],mano[1,1])
+      Palo<-PalotoChar(mano[2,2],mano[1,2])
+    }
+    if(mano[1,1]>mano[2,1])
+    {
+      Num<-NumtoChar(mano[1,1],mano[2,1])
+      Palo<-PalotoChar(mano[1,2],mano[2,2])
+    }
+    
+    if(mano[1,1]==mano[2,1])
+    {
+      Num<-NumtoChar(mano[1,1],mano[2,1])
+      if(mano[1,2]>mano[2,2])
+      {
+        Palo<-PalotoChar(mano[2,2],mano[1,2])
+      }
+      else
+      {
+        Palo<-PalotoChar(mano[1,2],mano[2,2])
+      }
+    }
+    pesos_aux[Num,Palo]=triple[i,columna]
+  }
+  pesos=pesos*pesos_aux
+  return(pesos)
+}

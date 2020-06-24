@@ -6,4 +6,5 @@ descartePesosMano<-function(mano,mazo,datos)
 datos<-modificaPesos(mano,datos,0)
 datos<-descartePesosCarta(mano[1,],mazo,datos)
 datos<-descartePesosCarta(mano[2,],mazo,datos)
+return(datos)
 }

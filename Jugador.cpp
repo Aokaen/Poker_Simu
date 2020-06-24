@@ -8,7 +8,7 @@
 
 Jugador::Jugador()
 {
-	//AllIn = false;
+	AllIn = false;
 }
 
 Jugador::~Jugador()
@@ -90,15 +90,6 @@ void Jugador::setApuestaInicial(float ap)
 
 void Jugador::resetBool()
 {
-	escalera_real_posible = true;
-	poker_posible = true;
-	escalera_color_posible = true;
-	full_posible = true;
-	escalera_posible = true;
-	color_posible = true;
-	trio_posible = true;
-	doble_pareja_posible = true;
-	pareja_posible = true;
 	escalera_real_obtenida = false;
 	poker_obtenida = false;
 	escalera_color_obtenida = false;
@@ -459,115 +450,7 @@ float Jugador::calcularValorJugada(Carta* c, int i) //Funcion del calculo del va
 		}
 	}
 
-    // Descartar jugadas posibles
-
-	if (tamano == 5)
-	{
-		if (n_rep_n == 0)
-		{
-			poker_posible = false;
-			full_posible = false;
-		}
-		if (n_rep_p == 2)
-		{
-			color_posible = false;
-			escalera_color_posible = false;
-			escalera_real_posible = false;
-		}
-	}
-	else if (tamano == 6)
-	{
-		if (n_rep_n == 0)
-		{
-			poker_posible = false;
-			full_posible = false;
-			trio_posible = false;
-			doble_pareja_posible = false;
-		}
-		else if (n_rep_n == 1)
-		{
-			if (n_aparicion[0] == 2)
-			{
-				poker_posible = false;
-				full_posible = false;
-			}
-
-		}
-		else if (n_rep_n == 2)
-		{
-			if (n_aparicion[0] == 2 && n_aparicion[1] == 2)
-			{
-				poker_posible = false;
-			}
-		}
-		else if (n_rep_n == 3)
-		{
-			poker_posible = false;
-		}
-		if (n_rep_p >= 2)
-		{
-			color_posible = false;
-			escalera_color_posible = false;
-			escalera_real_posible = false;
-		}
-		else if (n_rep_p == 1 && p_max < 4)
-		{
-			color_posible = false;
-			escalera_color_posible = false;
-			escalera_real_posible = false;
-		}
-	}
-	else if (tamano == 7)
-	{
-		if (seguidos < 5)
-		{
-			escalera_color_posible = false;
-			escalera_posible = false;
-			escalera_real_posible = false;
-		}
-		if (n_rep_n == 0)
-		{
-			pareja_posible = false;
-			doble_pareja_posible = false;
-			trio_posible = false;
-			full_posible = false;
-			poker_posible = false;
-		}
-		else if (n_rep_n == 1)
-		{
-			doble_pareja_posible = false;
-			full_posible = false;
-			if (n_aparicion[0] == 2)
-			{
-				trio_posible = false;
-				full_posible = false;
-				poker_posible = false;
-			}
-			else if (n_aparicion[0] == 3)
-			{
-				poker_posible = false;
-			}
-		}
-		else if (n_rep_n == 3)
-		{
-			poker_posible = false;
-		}
-		if (n_rep_p == 3)
-		{
-			color_posible = false;
-			escalera_color_posible = false;
-			escalera_real_posible = false;
-		}
-		else
-		{
-			if (p_max < 5)
-			{
-				color_posible = false;
-				escalera_color_posible = false;
-				escalera_real_posible = false;
-			}
-		}
-	}
+   
     
 	// Calculo de la puntuacion de la jugada actual
 

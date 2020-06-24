@@ -3,6 +3,6 @@
 
 fijarMesaPostflop<-function(mesa,n1,p1)
 {
-mesa<-rbind(mesa,c(n1,p1))
+mesa<-rbind(mesa,c(as.numeric(n1),as.numeric(p1)))
 return(mesa)
 }

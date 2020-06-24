@@ -1,33 +1,34 @@
 #Funcion para obtener el valor asociado a una mano del dataframe Triple Probabilidad
 leerTriple<-function(mano,datos)
 {
-if(mano[1,1]<mano[2,1])
+  valores<-c(0,0,0)
+if(mano[1,2]<mano[2,2])
 {
 	Num1<-mano[1,1]
 	Num2<-mano[2,1]
 	Palo1<-mano[1,2]
 	Palo2<-mano[2,2]
 }
-if(mano[1,1]>mano[2,1])
+if(mano[1,2]>mano[2,2])
 {
 	Num2<-mano[1,1]
 	Num1<-mano[2,1]
 	Palo2<-mano[1,2]
 	Palo1<-mano[2,2]
 }
-if(mano[1,1]==mano[2,1])
+if(mano[1,2]==mano[2,2])
 {
-	Num1<-mano[1,1]
-	Num2<-mano[2,1]
-	if(mano[1,2]>mano[2,2])
+  Palo1<-mano[1,2]
+  Palo2<-mano[2,2]
+	if(mano[1,1]>mano[2,1])
 	{
-		Palo2<-mano[1,2]
-		Palo1<-mano[2,2]
+	  Num2<-mano[1,1]
+	  Num1<-mano[2,1]
 	}
 	else
 	{
-		Palo1<-mano[1,2]
-		Palo2<-mano[2,2]
+	  Num1<-mano[1,1]
+	  Num2<-mano[2,1]
 	}
 }
 

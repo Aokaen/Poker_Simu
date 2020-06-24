@@ -14,7 +14,7 @@ for(i in 1:n_manos)
 	mano_op<-fijarMano(combinaciones[i,1],combinaciones[i,2],combinaciones[i,3],combinaciones[i,4])
 	jugada_op=ordenarCartas(mano_op,mesa)
 	valor_op<-calcularJugada(jugada_op)
-	peso_mano<-Leer(mano_op,pesos)
+	peso_mano<-leerPesos(mano_op,pesos)
 	if(valor_op>valorjugador)
 	{
 		superiores=superiores+peso_mano

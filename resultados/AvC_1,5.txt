@@ -1,0 +1,34 @@
+vs CS(500)
+It: 1//Mano Alg: 3D 4T Mano patron: KD KT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 2//Mano Alg: KP 7P Mano patron: AC TP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 3//Mano Alg: 9P KT Mano patron: 5C 2T//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 4//Mano Alg: 2P AP Mano patron: 5P 9C//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 5//Mano Alg: QC 7P Mano patron: TC 5T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 6//Mano Alg: KC 6P Mano patron: 5D QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 7//Mano Alg: 4D 7P Mano patron: KD 4T//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 8//Mano Alg: 2C KD Mano patron: TP 3C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 9//Mano Alg: 9D JC Mano patron: 3D 9C//R0// J2V J1S20.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 10//Mano Alg: 7T 6C Mano patron: QC 4D//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 11//Mano Alg: JT KP Mano patron: 3P AC//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 12//Mano Alg: AD 3C Mano patron: 9T 4C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 13//Mano Alg: 5C 9P Mano patron: KT 5D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 14//Mano Alg: AD QD Mano patron: JP 8D//R0// J1S31.000000 J2S54.000000 J1V//R1// Mesa: KT 3T QC J1S72.000000 J2P//Patron Pasa//J1WJ2L//+54.000000
+It: 15//Mano Alg: AT TD Mano patron: 5D 5P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 16//Mano Alg: AD 8C Mano patron: 8P JP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 17//Mano Alg: 7P QC Mano patron: 2T KC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 18//Mano Alg: 8C 7P Mano patron: 3T JP//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 19//Mano Alg: 2C TT Mano patron: AC 8T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 20//Mano Alg: KC 6T Mano patron: JT JP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 21//Mano Alg: 2D 7P Mano patron: 9P 8T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 22//Mano Alg: 5D JC Mano patron: 7C 2P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 23//Mano Alg: 9D AD Mano patron: 2C 3P//R0// J2V J1S25.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 24//Mano Alg: QT 6T Mano patron: JP 2P//R0// J1V J2V//R1// Mesa: 8C AC JC J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 25//Mano Alg: 6C AD Mano patron: 2T 5T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 26//Mano Alg: 7D 8P Mano patron: QC 9P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 27//Mano Alg: 8T 3D Mano patron: 9P KC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 28//Mano Alg: JP 3T Mano patron: QP QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 29//Mano Alg: 3T AT Mano patron: AD 4D//R0// J2V J1V//R1// Mesa: QT JD KD J2V J1V//R2// Mesa: QT JD KD TT J2V J1V//R3// Mesa: QT JD KD TT KT J2V J1S27.000000 J2V//Showdown// J1WJ2L//+27.000000
+It: 30//Mano Alg: TD 5P Mano patron: 8C TC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 31//Mano Alg: 6D 8C Mano patron: JP 5D//R0// J2V J1V//R1// Mesa: 6T 3T JD J2V J1S22.000000 J2V//R2// Mesa: 6T 3T JD TP J2V J1P//Algoritmo Pasa//J1LJ2W//-22.000000
+Numero de Iteraciones alcanzado
+Victorias: 11 Beneficio total: -91

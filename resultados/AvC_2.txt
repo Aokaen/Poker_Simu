@@ -1,0 +1,503 @@
+vs CS(500)
+It: 1//Mano Alg: 5C AT Mano patron: TP JT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 2//Mano Alg: 3P TP Mano patron: 8P 7C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 3//Mano Alg: QC JC Mano patron: JT 6T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 4//Mano Alg: 3T JP Mano patron: QP TC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 5//Mano Alg: 7D 5P Mano patron: KP 7P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 6//Mano Alg: 5C AP Mano patron: TC 6P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 7//Mano Alg: 8T 5C Mano patron: 7T 8C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 8//Mano Alg: 4C 3D Mano patron: 4P 9P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 9//Mano Alg: QD KP Mano patron: TC QT//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 10//Mano Alg: 8C JT Mano patron: 3T KC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 11//Mano Alg: JC AC Mano patron: QD QP//R0// J1S58.000000 J2V//R1// Mesa: QC TD 8T J1V J2P//Patron Pasa//J1WJ2L//+58.000000
+It: 12//Mano Alg: 4T 5T Mano patron: 7D 8D//R0// J2V J1S42.000000 J2V//R1// Mesa: 9T 9D TC J2V J1V//R2// Mesa: 9T 9D TC 6T J2V J1S71.000000 J2V//R3// Mesa: 9T 9D TC 6T 4D J2P//Patron Pasa//J1WJ2L//+71.000000
+It: 13//Mano Alg: TP 2P Mano patron: 4C 2D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 14//Mano Alg: QC 8C Mano patron: 2P 7P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 15//Mano Alg: 3P TD Mano patron: 5D 3C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 16//Mano Alg: 8D 5D Mano patron: 9T 6T//R0// J2V J1V//R1// Mesa: 9P 3P 9C J2V J1V//R2// Mesa: 9P 3P 9C KD J2V J1V//R3// Mesa: 9P 3P 9C KD KT J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 17//Mano Alg: KD 2D Mano patron: 7D 8C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 18//Mano Alg: 7C KP Mano patron: 6P JT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 19//Mano Alg: JT AP Mano patron: 8P 9P//R0// J1V J2V//R1// Mesa: 4T KP TC J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 20//Mano Alg: AC 6P Mano patron: JD 6D//R0// J2V J1V//R1// Mesa: 4D 8D 8P J2V J1S30.000000 J2V//R2// Mesa: 4D 8D 8P JT J2V J1V//R3// Mesa: 4D 8D 8P JT 7P J2V J1P//Algoritmo Pasa//J1LJ2W//-30.000000
+It: 21//Mano Alg: 5C QC Mano patron: TT 4D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 22//Mano Alg: 5P JP Mano patron: 3D KC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 23//Mano Alg: 2C 2T Mano patron: 8D TC//R0// J1V J2V//R1// Mesa: 6D 7C AC J1S44.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 24//Mano Alg: 4T TC Mano patron: QC 6P//R0// J2S49.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 25//Mano Alg: 6P 3T Mano patron: 4C TC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 26//Mano Alg: 9C TT Mano patron: 7C 2T//R0// J2V J1V//R1// Mesa: JC 3D JT J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 27//Mano Alg: 7P AP Mano patron: 8C 9T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 28//Mano Alg: AC KD Mano patron: 2P 3D//R0// J2S57.000000 J1V//R1// Mesa: 8T KC QD J2V J1P//Algoritmo Pasa//J1LJ2W//-57.000000
+It: 29//Mano Alg: AD AP Mano patron: 9C TT//R0// J1S48.000000 J2V//R1// Mesa: KT KP JP J1P//Algoritmo Pasa//J1LJ2W//-48.000000
+It: 30//Mano Alg: AC JT Mano patron: QT 9C//R0// J2V J1V//R1// Mesa: 3D 5T 9P J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 31//Mano Alg: 9C 2T Mano patron: 7D 8C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 32//Mano Alg: 3P JC Mano patron: KD TC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 33//Mano Alg: JT 3T Mano patron: KT KC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 34//Mano Alg: 3T JD Mano patron: JP 7P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 35//Mano Alg: 5D 3T Mano patron: JT JD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 36//Mano Alg: 6C AP Mano patron: AD 3T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 37//Mano Alg: TT KP Mano patron: QC KC//R0// J1V J2V//R1// Mesa: 6T AC 3T J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 38//Mano Alg: QD KD Mano patron: 4P 5T//R0// J2V J1S33.000000 J2V//R1// Mesa: 2C 9T 6T J2V J1P//Algoritmo Pasa//J1LJ2W//-33.000000
+It: 39//Mano Alg: AT 9T Mano patron: KD KT//R0// J1V J2V//R1// Mesa: 7T JD 4C J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 40//Mano Alg: 7D TC Mano patron: TT 3D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 41//Mano Alg: 4T TD Mano patron: 8C JT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 42//Mano Alg: 5D KC Mano patron: 7T KT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 43//Mano Alg: 4D 4C Mano patron: 6C KD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 44//Mano Alg: AT 5D Mano patron: KD 7T//R0// J2V J1V//R1// Mesa: QT KC TC J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 45//Mano Alg: 3P AP Mano patron: TP JT//R0// J1V J2V//R1// Mesa: 9C TD JD J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 46//Mano Alg: JD 7D Mano patron: 8D AP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 47//Mano Alg: TD 4D Mano patron: 6P 5D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 48//Mano Alg: 2C 8C Mano patron: JT 6T//R0// J2S53.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 49//Mano Alg: 5P 4T Mano patron: KP JP//R0// J1V J2V//R1// Mesa: 3D QP AP J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 50//Mano Alg: 9P 5P Mano patron: QD 9C//R0// J2S47.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 51//Mano Alg: TC 5D Mano patron: 7T TT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 52//Mano Alg: JT 9P Mano patron: TC QP//R0// J2V J1V//R1// Mesa: 8P 9T 8C J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 53//Mano Alg: 7C 6T Mano patron: JC JP//R0// J1V J2V//R1// Mesa: 5D AC 2C J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 54//Mano Alg: AT 5T Mano patron: 4D 4P//R0// J2V J1V//R1// Mesa: AP 9C 8D J2V J1S46.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 55//Mano Alg: 9C 8P Mano patron: 9D 3D//R0// J1V J2V//R1// Mesa: 5D 6D 7D J1S40.000000 J2V//R2// Mesa: 5D 6D 7D TC J1S62.000000 J2V//R3// Mesa: 5D 6D 7D TC JC J1S90.000000 J2V//Showdown// J1LJ2W//-90.000000
+It: 56//Mano Alg: QD 5P Mano patron: TT 5C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 57//Mano Alg: 9C KD Mano patron: 9T JD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 58//Mano Alg: JC TD Mano patron: 5T 7P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 59//Mano Alg: 9D 4D Mano patron: 5C 8D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 60//Mano Alg: 5P 7D Mano patron: 6D QP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 61//Mano Alg: AC 6T Mano patron: JC QT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 62//Mano Alg: 5T QP Mano patron: 9D 7T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 63//Mano Alg: 4T 8P Mano patron: 5D 6C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 64//Mano Alg: 7D 9D Mano patron: TP KC//R0// J2V J1V//R1// Mesa: AD 2C 7C J2V J1S31.000000 J2V//R2// Mesa: AD 2C 7C 8D J2P//Patron Pasa//J1WJ2L//+31.000000
+It: 65//Mano Alg: 7P JP Mano patron: 9T AP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 66//Mano Alg: 2T 5C Mano patron: AP 6D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 67//Mano Alg: 7C KP Mano patron: 8T 8D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 68//Mano Alg: QP JD Mano patron: 6D 7C//R0// J2V J1V//R1// Mesa: KT JC 5P J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 69//Mano Alg: JD 5D Mano patron: 3D 7D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 70//Mano Alg: 4P 7T Mano patron: 8D 4C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 71//Mano Alg: 2D QT Mano patron: TD 9P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 72//Mano Alg: 6C 2P Mano patron: 4C AD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 73//Mano Alg: 7T QC Mano patron: AC 6D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 74//Mano Alg: 5P 6P Mano patron: QT AC//R0// J2S48.000000 J1V//R1// Mesa: QP 3P 8D J2V J1V//R2// Mesa: QP 3P 8D JC J2S86.000000 J1P//Algoritmo Pasa//J1LJ2W//-48.000000
+It: 75//Mano Alg: 7T 2C Mano patron: 9C QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 76//Mano Alg: KC 2P Mano patron: TD JC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 77//Mano Alg: 5C KT Mano patron: AD 5P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 78//Mano Alg: KT KD Mano patron: 9T 3C//R0// J2V J1S31.000000 J2V//R1// Mesa: JP 5C 8D J2P//Patron Pasa//J1WJ2L//+31.000000
+It: 79//Mano Alg: 3C 6P Mano patron: AD 7D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 80//Mano Alg: JD KT Mano patron: JC 5T//R0// J2V J1V//R1// Mesa: 8T 5D 7P J2V J1V//R2// Mesa: 8T 5D 7P TC J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 81//Mano Alg: 9D 8C Mano patron: 3D 6T//R0// J1V J2V//R1// Mesa: 6D 5C KD J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 82//Mano Alg: 6T 5D Mano patron: AT TP//R0// J2S49.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 83//Mano Alg: TT 8D Mano patron: 2D 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 84//Mano Alg: 6C JD Mano patron: 7T QD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 85//Mano Alg: 7P TC Mano patron: 7D 8T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 86//Mano Alg: 8P 3D Mano patron: 4T 6D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 87//Mano Alg: QC 9P Mano patron: TT AD//R0// J1V J2V//R1// Mesa: QP 5C JC J1S47.000000 J2V//R2// Mesa: QP 5C JC 3D J1P//Algoritmo Pasa//J1LJ2W//-47.000000
+It: 88//Mano Alg: 4P QP Mano patron: 3C AP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 89//Mano Alg: 7T JC Mano patron: AD 6C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 90//Mano Alg: 2P 4D Mano patron: JT KD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 91//Mano Alg: 3T QT Mano patron: 6T 5C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 92//Mano Alg: AT 3P Mano patron: TP QC//R0// J2V J1V//R1// Mesa: AC QP 5T J2V J1S32.000000 J2V//R2// Mesa: AC QP 5T 6T J2V J1S57.000000 J2V//R3// Mesa: AC QP 5T 6T 3D J2S93.000000 J1V//Showdown// J1WJ2L//+93.000000
+It: 93//Mano Alg: 3P JC Mano patron: 7C TD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 94//Mano Alg: JP 7T Mano patron: AD 2P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 95//Mano Alg: KT 8P Mano patron: 9T JP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 96//Mano Alg: 2P 7D Mano patron: AP TP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 97//Mano Alg: 5C 9T Mano patron: 3P 2D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 98//Mano Alg: 8C 4T Mano patron: AC 9C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 99//Mano Alg: 5T QT Mano patron: 5P 3P//R0// J1V J2V//R1// Mesa: 8C 7D 2C J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 100//Mano Alg: TP JC Mano patron: AC 5C//R0// J2V J1V//R1// Mesa: KC 4P QD J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 101//Mano Alg: 4T QT Mano patron: 8P JP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 102//Mano Alg: 8T 6D Mano patron: JP QC//R0// J2V J1V//R1// Mesa: KT 4T 6C J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 103//Mano Alg: QP 7D Mano patron: TT 5P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 104//Mano Alg: JP 9T Mano patron: QD 6P//R0// J2V J1V//R1// Mesa: 7C 5P 5C J2V J1V//R2// Mesa: 7C 5P 5C KC J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 105//Mano Alg: 6T JP Mano patron: 4C 2P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 106//Mano Alg: 7D 8T Mano patron: 3C 2T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 107//Mano Alg: QC 5D Mano patron: KC QT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 108//Mano Alg: 7D KT Mano patron: AC 3D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 109//Mano Alg: JD KD Mano patron: 3D 4D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 110//Mano Alg: 3D 5D Mano patron: AT 5C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 111//Mano Alg: 2P 6P Mano patron: KC 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 112//Mano Alg: 6D KC Mano patron: 2C 3D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 113//Mano Alg: 8C 4D Mano patron: TC TP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 114//Mano Alg: 5P 3D Mano patron: 2D TC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 115//Mano Alg: KC AC Mano patron: 5T 9C//R0// J1S57.000000 J2V//R1// Mesa: 5P 3D 8T J1P//Algoritmo Pasa//J1LJ2W//-57.000000
+It: 116//Mano Alg: 3P 5D Mano patron: AT QT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 117//Mano Alg: 8T 6C Mano patron: KP 9P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 118//Mano Alg: 5P 3C Mano patron: 8P 6P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 119//Mano Alg: 2C 8T Mano patron: QD 5T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 120//Mano Alg: QP QD Mano patron: 7P 4P//R0// J2V J1S43.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 121//Mano Alg: TC 6D Mano patron: 8C KD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 122//Mano Alg: AP 7T Mano patron: 3D 4T//R0// J2V J1V//R1// Mesa: TP 8T KT J2V J1V//R2// Mesa: TP 8T KT 5D J2V J1V//R3// Mesa: TP 8T KT 5D 3P J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 123//Mano Alg: 6D JT Mano patron: 2C 8P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 124//Mano Alg: TC 4D Mano patron: 9D 6C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 125//Mano Alg: 6P TD Mano patron: 7P 4P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 126//Mano Alg: 7P 7C Mano patron: 6D 2D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 127//Mano Alg: 9T QT Mano patron: 2T 7T//R0// J1S48.000000 J2S58.000000 J1P//Algoritmo Pasa//J1LJ2W//-48.000000
+It: 128//Mano Alg: TT 4D Mano patron: 8C 3P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 129//Mano Alg: TD 5C Mano patron: 8P 8T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 130//Mano Alg: 2T KT Mano patron: JT 3P//R0// J2V J1V//R1// Mesa: QC 7T KD J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 131//Mano Alg: KC 8C Mano patron: 9P KD//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 132//Mano Alg: 5P 5T Mano patron: 5C 3P//R0// J2S56.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 133//Mano Alg: 9T 2P Mano patron: 4T TD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 134//Mano Alg: TC QP Mano patron: 9D 7T//R0// J2V J1V//R1// Mesa: 6P 3C 4C J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 135//Mano Alg: 2C JD Mano patron: QD QP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 136//Mano Alg: 7D 3C Mano patron: 2D AT//R0// J2S46.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 137//Mano Alg: KD KC Mano patron: 6P 8P//R0// J1S52.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 138//Mano Alg: AP TC Mano patron: 7C 8T//R0// J2V J1V//R1// Mesa: TT 5D 4C J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 139//Mano Alg: 8C TD Mano patron: AD 4C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 140//Mano Alg: 8P 9T Mano patron: TT 2D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 141//Mano Alg: TP JP Mano patron: 6P 3D//R0// J1V J2V//R1// Mesa: JT 9T 4T J1S46.000000 J2V//R2// Mesa: JT 9T 4T 2D J1V J2V//R3// Mesa: JT 9T 4T 2D 5C J1P//Algoritmo Pasa//J1LJ2W//-46.000000
+It: 142//Mano Alg: 3T AC Mano patron: 5T KP//R0// J2V J1V//R1// Mesa: 2T 2D AD J2V J1V//R2// Mesa: 2T 2D AD QC J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 143//Mano Alg: QT TD Mano patron: 8D 7T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 144//Mano Alg: 5C 3T Mano patron: KD TP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 145//Mano Alg: QD JP Mano patron: 5C 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 146//Mano Alg: TP QT Mano patron: QD JC//R0// J2V J1V//R1// Mesa: 7D 2C 4D J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 147//Mano Alg: 9T TP Mano patron: 3P QP//R0// J1V J2V//R1// Mesa: 8T TC AC J1V J2S20.000000 J1S59.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 148//Mano Alg: 6C 3C Mano patron: 8D 3P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 149//Mano Alg: QD 9P Mano patron: JC KT//R0// J1V J2V//R1// Mesa: 9D AC 3D J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 150//Mano Alg: QP 7C Mano patron: QC JP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 151//Mano Alg: TC QT Mano patron: 8P 5T//R0// J1V J2V//R1// Mesa: JT 8T KP J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 152//Mano Alg: 6C KC Mano patron: 7T AT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 153//Mano Alg: AD 5P Mano patron: TT 3P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 154//Mano Alg: JD QT Mano patron: KC 2C//R0// J2V J1V//R1// Mesa: 9C AC 2P J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 155//Mano Alg: JT 6P Mano patron: KP 3D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 156//Mano Alg: 5D 9D Mano patron: 2P TT//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 157//Mano Alg: 7C 6P Mano patron: KD QT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 158//Mano Alg: QT AC Mano patron: TT 9P//R0// J2V J1V//R1// Mesa: 7D 7P AT J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 159//Mano Alg: TD 2D Mano patron: QC 8P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 160//Mano Alg: 3T 2C Mano patron: 2T 6D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 161//Mano Alg: AP QC Mano patron: 7C JT//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 162//Mano Alg: 8D 7D Mano patron: 9C 7C//R0// J2V J1V//R1// Mesa: 6D QT 9T J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 163//Mano Alg: QC JT Mano patron: KT 9D//R0// J1V J2V//R1// Mesa: AP 5P 5C J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 164//Mano Alg: QD QP Mano patron: 9P 5D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 165//Mano Alg: AP 3D Mano patron: QD 4D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 166//Mano Alg: JP TD Mano patron: 5P 7T//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 167//Mano Alg: 5D JC Mano patron: 7T TD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 168//Mano Alg: 5P JP Mano patron: 8T 6P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 169//Mano Alg: 8D 4T Mano patron: JT 3D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 170//Mano Alg: 9P TT Mano patron: 3T QD//R0// J2V J1V//R1// Mesa: AC AT 8D J2V J1V//R2// Mesa: AC AT 8D QT J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 171//Mano Alg: 4D 5T Mano patron: 4C TP//R0// J1V J2V//R1// Mesa: 2T TT 6P J1V J2V//R2// Mesa: 2T TT 6P 9C J1S46.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 172//Mano Alg: 2P 2C Mano patron: 7P AT//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 173//Mano Alg: 7T 3T Mano patron: 2D JC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 174//Mano Alg: QC 8T Mano patron: 3C AT//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 175//Mano Alg: 7P 5D Mano patron: 3P KD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 176//Mano Alg: 4D 8T Mano patron: 2P AP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 177//Mano Alg: 3T AD Mano patron: TC KC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 178//Mano Alg: 5D KT Mano patron: 9D AP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 179//Mano Alg: QD 9C Mano patron: AT 3D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 180//Mano Alg: KT 5T Mano patron: JC 9D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 181//Mano Alg: TT 3D Mano patron: AP 5D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 182//Mano Alg: KC JT Mano patron: 3C 8P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 183//Mano Alg: 8D 3D Mano patron: AT 6P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 184//Mano Alg: 2P 8T Mano patron: 5C 9T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 185//Mano Alg: 7T 4T Mano patron: QC 4C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 186//Mano Alg: TP KP Mano patron: 3T 5P//R0// J2V J1V//R1// Mesa: 4T 7P 3P J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 187//Mano Alg: TD 7T Mano patron: 8P TC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 188//Mano Alg: AT 2C Mano patron: 7D KT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 189//Mano Alg: KD AP Mano patron: 4C 5T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 190//Mano Alg: 8P 6D Mano patron: 6C 3P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 191//Mano Alg: 4P 2C Mano patron: QD QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 192//Mano Alg: 8C KP Mano patron: 5D 4P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 193//Mano Alg: 7D 5C Mano patron: TC 6D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 194//Mano Alg: 4D 7D Mano patron: KC 4P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 195//Mano Alg: AC 8P Mano patron: KP 5D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 196//Mano Alg: KC 3C Mano patron: QC 5C//R0// J2V J1V//R1// Mesa: 4T 6T JP J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 197//Mano Alg: 6T 7P Mano patron: 6P 2T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 198//Mano Alg: 7T 5P Mano patron: 6T JC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 199//Mano Alg: 5P 9T Mano patron: 7P 2D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 200//Mano Alg: AP 8D Mano patron: KC JD//R0// J2V J1V//R1// Mesa: 2P 6P 7P J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 201//Mano Alg: KT KD Mano patron: 9C TC//R0// J1S48.000000 J2V//R1// Mesa: 4P 7P JT J1P//Algoritmo Pasa//J1LJ2W//-48.000000
+It: 202//Mano Alg: TP 8T Mano patron: JP KP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 203//Mano Alg: 8D JT Mano patron: 2C QD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 204//Mano Alg: 4T 3D Mano patron: 7P QC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 205//Mano Alg: 9C 5P Mano patron: QC JD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 206//Mano Alg: 3P 8P Mano patron: TC 7P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 207//Mano Alg: 6D 2P Mano patron: QC 6C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 208//Mano Alg: AC 6T Mano patron: 2P TC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 209//Mano Alg: 7P TD Mano patron: AT KT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 210//Mano Alg: 3P 2C Mano patron: 2P AC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 211//Mano Alg: QD 7T Mano patron: JD 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 212//Mano Alg: 9P 2D Mano patron: QT 6C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 213//Mano Alg: 5D 8C Mano patron: 2T QP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 214//Mano Alg: JD 6D Mano patron: 3C JC//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 215//Mano Alg: 5D KC Mano patron: 4D 9C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 216//Mano Alg: TC 9D Mano patron: JP 5D//R0// J2V J1V//R1// Mesa: AT 7C QP J2V J1V//R2// Mesa: AT 7C QP 6C J2V J1V//R3// Mesa: AT 7C QP 6C 8C J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 217//Mano Alg: 9T 3D Mano patron: 4D AD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 218//Mano Alg: 8P AP Mano patron: JC 6C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 219//Mano Alg: TD KP Mano patron: 7D 2P//R0// J1S52.000000 J2S62.000000 J1P//Algoritmo Pasa//J1LJ2W//-52.000000
+It: 220//Mano Alg: 5P 9D Mano patron: AD 5T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 221//Mano Alg: QP 3C Mano patron: 6P JD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 222//Mano Alg: 2T QT Mano patron: 5T AD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 223//Mano Alg: 8T JT Mano patron: 6P QD//R0// J1V J2V//R1// Mesa: 2P JP 7C J1V J2V//R2// Mesa: 2P JP 7C QT J1V J2V//R3// Mesa: 2P JP 7C QT AC J1S42.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 224//Mano Alg: 7C 5D Mano patron: TT 3P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 225//Mano Alg: 3C QC Mano patron: 7D AC//R0// J1V J2V//R1// Mesa: 9D 9T 9C J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 226//Mano Alg: 5P AD Mano patron: 5C 9P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 227//Mano Alg: 7T 4D Mano patron: TC 8T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 228//Mano Alg: 6C 3T Mano patron: 4T 6P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 229//Mano Alg: AP 8T Mano patron: JT 8P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 230//Mano Alg: AC 8C Mano patron: JP 6P//R0// J2V J1V//R1// Mesa: JD 2D AD J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 231//Mano Alg: 8D 9T Mano patron: AC 4D//R0// J1S47.000000 J2V//R1// Mesa: 6D TT 4P J1V J2P//Patron Pasa//J1WJ2L//+47.000000
+It: 232//Mano Alg: 7C 5D Mano patron: KP 6P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 233//Mano Alg: 6T 6C Mano patron: 6P 6D//R0// J1V J2V//R1// Mesa: 2C JD 8C J1S49.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 234//Mano Alg: 7C 3D Mano patron: 3P QD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 235//Mano Alg: 8T 6D Mano patron: 8D JT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 236//Mano Alg: JD 8D Mano patron: 2D KC//R0// J2V J1V//R1// Mesa: QT JC 3C J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 237//Mano Alg: 4P 7T Mano patron: 6D 8D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 238//Mano Alg: 2C QC Mano patron: KP 7D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 239//Mano Alg: 7P 8T Mano patron: 8P AT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 240//Mano Alg: 8D 7T Mano patron: 4C JT//R0// J2V J1V//R1// Mesa: 4P 8T 3T J2V J1V//R2// Mesa: 4P 8T 3T 2T J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 241//Mano Alg: 3C KP Mano patron: TC 7D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 242//Mano Alg: 9C 7T Mano patron: AP 5C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 243//Mano Alg: QP 3T Mano patron: 9C 2C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 244//Mano Alg: TD 3P Mano patron: QD 7T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 245//Mano Alg: 7D 9P Mano patron: TC 9D//R0// J1V J2S23.000000 J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 246//Mano Alg: 2T AT Mano patron: 3D TC//R0// J2V J1V//R1// Mesa: 3C 7C 8D J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 247//Mano Alg: 8D KD Mano patron: 4P 3T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 248//Mano Alg: JD TD Mano patron: 4T 6D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 249//Mano Alg: TC 7P Mano patron: 6P 2T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 250//Mano Alg: JD 3T Mano patron: 6T AC//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 251//Mano Alg: AP KD Mano patron: QD TP//R0// J1V J2V//R1// Mesa: 3T 2P 4C J1V J2V//R2// Mesa: 3T 2P 4C 5P J1S53.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 252//Mano Alg: AT TP Mano patron: 7D 6P//R0// J2V J1V//R1// Mesa: 9P 2T 7P J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 253//Mano Alg: 9C 2T Mano patron: KT 6C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 254//Mano Alg: QC 4P Mano patron: TC TP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 255//Mano Alg: KD 6C Mano patron: 4P 9P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 256//Mano Alg: TT 9T Mano patron: 3C JC//R0// J2V J1S35.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 257//Mano Alg: 3C 4D Mano patron: 8C TT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 258//Mano Alg: 2C 3D Mano patron: 9T 9D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 259//Mano Alg: 3C 4D Mano patron: 6C JT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 260//Mano Alg: TD 8D Mano patron: KC 8T//R0// J2V J1V//R1// Mesa: JP TC 3T J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 261//Mano Alg: 5T QD Mano patron: AP QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 262//Mano Alg: 9P 5D Mano patron: 8T KD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 263//Mano Alg: 9C TT Mano patron: TC QP//R0// J1V J2V//R1// Mesa: 5P 3T 4P J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 264//Mano Alg: 6T JD Mano patron: AC AT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 265//Mano Alg: KC 8C Mano patron: 9T 4P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 266//Mano Alg: KT 5D Mano patron: AP 8C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 267//Mano Alg: TD JC Mano patron: KC 4T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 268//Mano Alg: 3C JT Mano patron: 8P 5P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 269//Mano Alg: 7T 9D Mano patron: 5D TP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 270//Mano Alg: 5C 7T Mano patron: QP 8P//R0// J2V J1V//R1// Mesa: JP TP 6T J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 271//Mano Alg: 5P JT Mano patron: 6D 5T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 272//Mano Alg: KC 2D Mano patron: 9C TD//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 273//Mano Alg: 4P 7D Mano patron: 2C JT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 274//Mano Alg: KC QC Mano patron: TT 8P//R0// J2V J1S34.000000 J2V//R1// Mesa: 3D 2D JC J2P//Patron Pasa//J1WJ2L//+34.000000
+It: 275//Mano Alg: 7T QD Mano patron: 7D 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 276//Mano Alg: 4D 9D Mano patron: 6T 3D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 277//Mano Alg: TP 4C Mano patron: 6C 5D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 278//Mano Alg: QC 9T Mano patron: 5D 5T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 279//Mano Alg: KP 9P Mano patron: TD 2D//R0// J1V J2V//R1// Mesa: 5P 4P 6D J1S55.000000 J2V//R2// Mesa: 5P 4P 6D AD J1P//Algoritmo Pasa//J1LJ2W//-55.000000
+It: 280//Mano Alg: 9P 9D Mano patron: AC 4T//R0// J2V J1S40.000000 J2V//R1// Mesa: JT KC QC J2V J1P//Algoritmo Pasa//J1LJ2W//-40.000000
+It: 281//Mano Alg: AT 6D Mano patron: 2C 6P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 282//Mano Alg: KP 2D Mano patron: 8T TT//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 283//Mano Alg: 9C 7P Mano patron: 9D TP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 284//Mano Alg: 3P 7T Mano patron: QT 5C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 285//Mano Alg: TD AP Mano patron: 2C KT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 286//Mano Alg: 7P 8D Mano patron: KC 2C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 287//Mano Alg: 8D 7C Mano patron: JT KT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 288//Mano Alg: 8C AC Mano patron: 2D 9D//R0// J2V J1V//R1// Mesa: 9C TD AT J2V J1S36.000000 J2V//R2// Mesa: 9C TD AT 5T J2V J1S71.000000 J2V//R3// Mesa: 9C TD AT 5T 7C J2P//Patron Pasa//J1WJ2L//+71.000000
+It: 289//Mano Alg: AT 7D Mano patron: KT 8P//R0// J1S52.000000 J2V//R1// Mesa: JP 8D 7C J1S74.000000 J2V//R2// Mesa: JP 8D 7C KC J1P//Algoritmo Pasa//J1LJ2W//-74.000000
+It: 290//Mano Alg: KD 9D Mano patron: 9P 4P//R0// J2V J1V//R1// Mesa: QP 2T TD J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 291//Mano Alg: 9C 3C Mano patron: 8P 7P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 292//Mano Alg: 5P 8D Mano patron: 2T 7C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 293//Mano Alg: AP 8C Mano patron: JP JC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 294//Mano Alg: 7D KP Mano patron: TD KD//R0// J2S46.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 295//Mano Alg: 6C 5D Mano patron: 9C 8D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 296//Mano Alg: 9P 7C Mano patron: 3D 5P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 297//Mano Alg: 8T 5P Mano patron: TD KD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 298//Mano Alg: QD AT Mano patron: 5P 5C//R0// J2V J1V//R1// Mesa: KT 9D TT J2V J1V//R2// Mesa: KT 9D TT 6T J2V J1V//R3// Mesa: KT 9D TT 6T KP J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 299//Mano Alg: 5P 7T Mano patron: TC TT//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 300//Mano Alg: TD 6P Mano patron: QD JT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 301//Mano Alg: QT 5C Mano patron: 4P 6C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 302//Mano Alg: 8P 4D Mano patron: 9C 7P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 303//Mano Alg: 8T TP Mano patron: 6D 2T//R0// J1V J2S28.000000 J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 304//Mano Alg: KC 2T Mano patron: 5D 4T//R0// J2S55.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 305//Mano Alg: TD AP Mano patron: 4C 6T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 306//Mano Alg: 2T JT Mano patron: QD 4D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 307//Mano Alg: QP QC Mano patron: 2T 9C//R0// J1S45.000000 J2V//R1// Mesa: AT 2D QT J1S68.000000 J2V//R2// Mesa: AT 2D QT AC J1S92.000000 J2V//R3// Mesa: AT 2D QT AC 3T J1S112.000000 J2V//Showdown// J1WJ2L//+112.000000
+It: 308//Mano Alg: 5D QP Mano patron: 5C TD//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 309//Mano Alg: TP 8C Mano patron: 5D QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 310//Mano Alg: QP JP Mano patron: 5C 5D//R0// J2V J1V//R1// Mesa: TP 4D 4P J2S46.000000 J1V//R2// Mesa: TP 4D 4P 6D J2V J1V//R3// Mesa: TP 4D 4P 6D JT J2V J1S84.000000 J2V//Showdown// J1WJ2L//+84.000000
+It: 311//Mano Alg: 8T JC Mano patron: TT 7T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 312//Mano Alg: TT JT Mano patron: 4C 9T//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 313//Mano Alg: 9C KT Mano patron: 7D 2P//R0// J1V J2V//R1// Mesa: 3P 2C 4D J1S41.000000 J2V//R2// Mesa: 3P 2C 4D TD J1P//Algoritmo Pasa//J1LJ2W//-41.000000
+It: 314//Mano Alg: 8T 8C Mano patron: 4C JT//R0// J2V J1V//R1// Mesa: 5D 7P JD J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 315//Mano Alg: TP 7D Mano patron: 5C KT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 316//Mano Alg: TD 7C Mano patron: 9P 6C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 317//Mano Alg: 8D AD Mano patron: QT JD//R0// J1V J2V//R1// Mesa: KC 9T 2D J1V J2V//R2// Mesa: KC 9T 2D 2C J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 318//Mano Alg: 3C 3D Mano patron: 3T KD//R0// J2S59.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 319//Mano Alg: KT 3T Mano patron: 2D 3C//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 320//Mano Alg: AC 2D Mano patron: 2T 7C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 321//Mano Alg: AP 7P Mano patron: 8P AC//R0// J1V J2S28.000000 J1V//R1// Mesa: QD 9T 6T J1P//Algoritmo Pasa//J1LJ2W//-28.000000
+It: 322//Mano Alg: TP JP Mano patron: KC 8D//R0// J2V J1V//R1// Mesa: TC AD 3P J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 323//Mano Alg: 2T JC Mano patron: 9P QT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 324//Mano Alg: 2P TT Mano patron: AD 2D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 325//Mano Alg: 5D JC Mano patron: 4D AC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 326//Mano Alg: AT 6T Mano patron: 6C 9T//R0// J2V J1V//R1// Mesa: QD 9D 3D J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 327//Mano Alg: QC TD Mano patron: 9P KT//R0// J1V J2V//R1// Mesa: AP 7D 8T J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 328//Mano Alg: 2P KD Mano patron: KC 6T//R0// J2S50.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 329//Mano Alg: 7C JP Mano patron: JC KP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 330//Mano Alg: 2P 7T Mano patron: 5C 8C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 331//Mano Alg: 2D 6P Mano patron: 3D JD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 332//Mano Alg: 2C 7T Mano patron: 3C 7P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 333//Mano Alg: KT JP Mano patron: KC 3T//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 334//Mano Alg: 4D 5T Mano patron: 9D TD//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 335//Mano Alg: AP 6T Mano patron: 4P AD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 336//Mano Alg: 5P QD Mano patron: 3D KC//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 337//Mano Alg: JC 6C Mano patron: AC 9T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 338//Mano Alg: 5P 7P Mano patron: 9C 6P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 339//Mano Alg: JC AD Mano patron: 6P 2T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 340//Mano Alg: 7T 3P Mano patron: 5D TT//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 341//Mano Alg: AP 5P Mano patron: JP TD//R0// J1V J2V//R1// Mesa: JD TP TC J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 342//Mano Alg: JC 5D Mano patron: 5P TP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 343//Mano Alg: 8C AT Mano patron: QT 4T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 344//Mano Alg: 9D 2D Mano patron: QD 7P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 345//Mano Alg: 3T 2P Mano patron: QT KD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 346//Mano Alg: JD JC Mano patron: KT 5P//R0// J2V J1S44.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 347//Mano Alg: TC 9T Mano patron: 8T AT//R0// J1S49.000000 J2V//R1// Mesa: 2P 9C TP J1P//Algoritmo Pasa//J1LJ2W//-49.000000
+It: 348//Mano Alg: 3T AC Mano patron: KC QT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 349//Mano Alg: KD 3C Mano patron: 3P 2D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 350//Mano Alg: 9C 4D Mano patron: TD 7C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 351//Mano Alg: AT 7T Mano patron: 2D KC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 352//Mano Alg: 6D 6P Mano patron: 5T 3C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 353//Mano Alg: KC 6T Mano patron: KP 8T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 354//Mano Alg: 9D 8T Mano patron: QT 9C//R0// J2V J1S30.000000 J2V//R1// Mesa: 6C 2P JP J2P//Patron Pasa//J1WJ2L//+30.000000
+It: 355//Mano Alg: 7C TD Mano patron: 6C 5D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 356//Mano Alg: 6P 5C Mano patron: QT 2C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 357//Mano Alg: KP AT Mano patron: 7D QP//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 358//Mano Alg: 9C 2C Mano patron: 6P 7T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 359//Mano Alg: QT 7T Mano patron: 6C 7C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 360//Mano Alg: 8C QC Mano patron: TD KT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 361//Mano Alg: JC AC Mano patron: 7D 8P//R0// J1S48.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 362//Mano Alg: QP TC Mano patron: 6D 4C//R0// J2V J1V//R1// Mesa: TD JT AP J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 363//Mano Alg: 2P 5P Mano patron: 4C TP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 364//Mano Alg: 3T JP Mano patron: 8C 7P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 365//Mano Alg: 2D 5D Mano patron: 6T JC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 366//Mano Alg: 4C 2T Mano patron: QD 8C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 367//Mano Alg: JC JD Mano patron: TC 7P//R0// J1S44.000000 J2V//R1// Mesa: 4D TT 5P J1S67.000000 J2P//Patron Pasa//J1WJ2L//+44.000000
+It: 368//Mano Alg: 7C 3D Mano patron: 8P 5T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 369//Mano Alg: 8T 7D Mano patron: 4P 5C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 370//Mano Alg: AT 6C Mano patron: 6P TP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 371//Mano Alg: AD 3C Mano patron: 4D 2P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 372//Mano Alg: 4P 4D Mano patron: 9P JP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 373//Mano Alg: AD TC Mano patron: 4T 6D//R0// J1S44.000000 J2S62.000000 J1P//Algoritmo Pasa//J1LJ2W//-44.000000
+It: 374//Mano Alg: 3P 9P Mano patron: TC 3C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 375//Mano Alg: 7C AP Mano patron: 2C 9C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 376//Mano Alg: 9P 4P Mano patron: KT 6T//R0// J2S40.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 377//Mano Alg: 6C 6T Mano patron: 3C 6D//R0// J1V J2V//R1// Mesa: 3D 9T 4P J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 378//Mano Alg: 4D 6P Mano patron: TT 7C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 379//Mano Alg: 7D AD Mano patron: 5T 4C//R0// J1S58.000000 J2V//R1// Mesa: 4D 7T TP J1S91.000000 J2P//Patron Pasa//J1WJ2L//+58.000000
+It: 380//Mano Alg: 6P 7P Mano patron: 7C AP//R0// J2V J1V//R1// Mesa: 2T 3T 9D J2V J1V//R2// Mesa: 2T 3T 9D 8T J2V J1S31.000000 J2V//R3// Mesa: 2T 3T 9D 8T KP J2V J1P//Algoritmo Pasa//J1LJ2W//-31.000000
+It: 381//Mano Alg: AD 3T Mano patron: 5T 3C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 382//Mano Alg: KP 6D Mano patron: 2D 9P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 383//Mano Alg: QC AP Mano patron: 7C 7D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 384//Mano Alg: 4P 7C Mano patron: 2D AC//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 385//Mano Alg: TT JP Mano patron: 7T 4D//R0// J1V J2V//R1// Mesa: TC 8P QP J1S40.000000 J2V//R2// Mesa: TC 8P QP 6C J1V J2V//R3// Mesa: TC 8P QP 6C 5D J1S75.000000 J2P//Patron Pasa//J1WJ2L//+40.000000
+It: 386//Mano Alg: 8P 5C Mano patron: JC JT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 387//Mano Alg: JP AT Mano patron: AP 3C//R0// J1V J2V//R1// Mesa: 4C 9P 3T J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 388//Mano Alg: AP JD Mano patron: 9D 3T//R0// J2V J1S45.000000 J2V//R1// Mesa: 5D 2P 7C J2V J1P//Algoritmo Pasa//J1LJ2W//-45.000000
+It: 389//Mano Alg: JT JP Mano patron: 5D 4P//R0// J1S42.000000 J2V//R1// Mesa: 4D TT AP J1P//Algoritmo Pasa//J1LJ2W//-42.000000
+It: 390//Mano Alg: 9T 2C Mano patron: 4T 9D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 391//Mano Alg: 2T 7P Mano patron: TC 8P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 392//Mano Alg: 6C AT Mano patron: 3C 3P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 393//Mano Alg: QD 3T Mano patron: TT 6P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 394//Mano Alg: 9P KC Mano patron: 3T TP//R0// J2S53.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 395//Mano Alg: TD 3D Mano patron: JP JD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 396//Mano Alg: 9D 8T Mano patron: QT KP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 397//Mano Alg: 7D 6P Mano patron: KT JC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 398//Mano Alg: 4P 5C Mano patron: JT AT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 399//Mano Alg: 2D 9P Mano patron: 6D 8D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 400//Mano Alg: KT 6T Mano patron: AC TC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 401//Mano Alg: 9C 7T Mano patron: QT 5D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 402//Mano Alg: 9D 4T Mano patron: 5C 8C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 403//Mano Alg: KP KD Mano patron: KT 5T//R0// J1V J2V//R1// Mesa: 8C TC AP J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 404//Mano Alg: 8P 3P Mano patron: 8C 5D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 405//Mano Alg: TP 8C Mano patron: 7T 4C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 406//Mano Alg: 4C 2P Mano patron: 6T 9T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 407//Mano Alg: TD 2D Mano patron: AC QP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 408//Mano Alg: 7P 2C Mano patron: TD 5P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 409//Mano Alg: 2C KT Mano patron: 3D 8C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 410//Mano Alg: 9T 5D Mano patron: 5T AC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 411//Mano Alg: QC TT Mano patron: 6D 2C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 412//Mano Alg: TD 8C Mano patron: QP 9P//R0// J2S54.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 413//Mano Alg: 2C 6P Mano patron: 5C QD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 414//Mano Alg: JD 8T Mano patron: TT 6C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 415//Mano Alg: 2P 9D Mano patron: 5P 3D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 416//Mano Alg: JC 6T Mano patron: 6P AP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 417//Mano Alg: JP AP Mano patron: 7P KC//R0// J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 418//Mano Alg: TC 2D Mano patron: 4P AC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 419//Mano Alg: 9T 6D Mano patron: 3P 8C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 420//Mano Alg: 6D QD Mano patron: 2T 2D//R0// J2S52.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 421//Mano Alg: TC TP Mano patron: JC 9T//R0// J1S52.000000 J2V//R1// Mesa: 9D 9P KP J1S72.000000 J2P//Patron Pasa//J1WJ2L//+52.000000
+It: 422//Mano Alg: 5D 9T Mano patron: 6D 2D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 423//Mano Alg: 9C KT Mano patron: 9P 4C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 424//Mano Alg: TC 9C Mano patron: KT 8C//R0// J2V J1V//R1// Mesa: 9D 3P 2C J2V J1S38.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 425//Mano Alg: JD AD Mano patron: 2P 9T//R0// J1S40.000000 J2V//R1// Mesa: 2C 5T AP J1S64.000000 J2P//Patron Pasa//J1WJ2L//+40.000000
+It: 426//Mano Alg: AD AT Mano patron: 5T TP//R0// J2V J1S48.000000 J2V//R1// Mesa: 4T 8T 8D J2V J1S73.000000 J2V//R2// Mesa: 4T 8T 8D 6C J2P//Patron Pasa//J1WJ2L//+73.000000
+It: 427//Mano Alg: 9P TT Mano patron: 5P 2P//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 428//Mano Alg: 7C 7D Mano patron: 5C 4P//R0// J2V J1V//R1// Mesa: 4D 8C AC J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 429//Mano Alg: JT QP Mano patron: 9P QT//R0// J1V J2V//R1// Mesa: AP 7C QD J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 430//Mano Alg: QD 8C Mano patron: AC 8D//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 431//Mano Alg: JP 8D Mano patron: JC 5C//R0// J1V J2V//R1// Mesa: 4C 5D KT J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 432//Mano Alg: JD 2T Mano patron: 6D 3P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 433//Mano Alg: 6D 6C Mano patron: 8D 4P//R0// J1S48.000000 J2V//R1// Mesa: AC 7D 2T J1S82.000000 J2V//R2// Mesa: AC 7D 2T JD J1P//Algoritmo Pasa//J1LJ2W//-82.000000
+It: 434//Mano Alg: TP JP Mano patron: 3D 9C//R0// J2V J1V//R1// Mesa: TC KC 9D J2S43.000000 J1S68.000000 J2S90.000000 J1V//R2// Mesa: TC KC 9D 3C J2S120.000000 J1S154.000000 J2P//Patron Pasa//J1WJ2L//+120.000000
+It: 435//Mano Alg: QP 2C Mano patron: JC 2D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 436//Mano Alg: 6P 4T Mano patron: 7P 3C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 437//Mano Alg: KD AT Mano patron: TC 8C//R0// J1S58.000000 J2V//R1// Mesa: JT 6T 4T J1V J2P//Patron Pasa//J1WJ2L//+58.000000
+It: 438//Mano Alg: 6T 3C Mano patron: KD 7T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 439//Mano Alg: 9C QT Mano patron: QC 2T//R0// J1V J2V//R1// Mesa: 3C AP 3P J1V J2V//R2// Mesa: 3C AP 3P 6T J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 440//Mano Alg: TD 9D Mano patron: 2P QD//R0// J2V J1V//R1// Mesa: 9C 4C 6C J2V J1S32.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 441//Mano Alg: 2D JP Mano patron: KC QC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 442//Mano Alg: 5P QD Mano patron: 3D AP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 443//Mano Alg: AC 7P Mano patron: 6T JP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 444//Mano Alg: QT QD Mano patron: 2C 8P//R0// J2V J1S45.000000 J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 445//Mano Alg: 2D 9T Mano patron: 6D 7C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 446//Mano Alg: TD JP Mano patron: 3P JC//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 447//Mano Alg: 8C 4P Mano patron: 2C 5C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 448//Mano Alg: KC TT Mano patron: QP 3P//R0// J2V J1V//R1// Mesa: 9C QT 7P J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 449//Mano Alg: QT 4D Mano patron: 5D 6D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 450//Mano Alg: 3T 9P Mano patron: 8C TP//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 451//Mano Alg: 2T KC Mano patron: 9T 5T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 452//Mano Alg: 7T KD Mano patron: KT 9T//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 453//Mano Alg: 4T 4C Mano patron: 4P 2T//R0// J1S56.000000 J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 454//Mano Alg: 7P JP Mano patron: AP 2C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 455//Mano Alg: 2P JT Mano patron: JD TP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 456//Mano Alg: AC 5C Mano patron: 7D QP//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 457//Mano Alg: 8P QT Mano patron: 9T KD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 458//Mano Alg: 8D 6T Mano patron: KP QP//R0// J2S49.000000 J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 459//Mano Alg: 6D 6P Mano patron: TD JC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 460//Mano Alg: 9D 6T Mano patron: 3D KC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 461//Mano Alg: AC QD Mano patron: 9D 2P//R0// J1V J2V//R1// Mesa: TP 4D QT J1V J2V//R2// Mesa: TP 4D QT JC J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 462//Mano Alg: 6T 5T Mano patron: AC 5C//R0// J2V J1V//R1// Mesa: QT 6P 6D J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 463//Mano Alg: 7P 8D Mano patron: AP TT//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 464//Mano Alg: QC 5P Mano patron: JC 6P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 465//Mano Alg: TD 8D Mano patron: AT 7D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 466//Mano Alg: TC 4T Mano patron: 6T 9P//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 467//Mano Alg: 6P 4P Mano patron: 8T KC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 468//Mano Alg: 4T 4C Mano patron: 8C 5D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 469//Mano Alg: JD 7C Mano patron: JC QD//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 470//Mano Alg: AT JT Mano patron: TD QT//R0// J2V J1S32.000000 J2V//R1// Mesa: AC AD KC J2P//Patron Pasa//J1WJ2L//+32.000000
+It: 471//Mano Alg: KT 4T Mano patron: 3T 4D//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 472//Mano Alg: 4P 7D Mano patron: TD 5C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 473//Mano Alg: TT KP Mano patron: 6D 7T//R0// J1V J2V//R1// Mesa: 3D 4T 8D J1V J2V//R2// Mesa: 3D 4T 8D 7D J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 474//Mano Alg: 5D QT Mano patron: QP 3C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 475//Mano Alg: 4P QD Mano patron: AT AC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 476//Mano Alg: 3D KP Mano patron: KC QC//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 477//Mano Alg: 7C 3T Mano patron: QP 3C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 478//Mano Alg: 9T 2T Mano patron: KT 2P//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 479//Mano Alg: AP JP Mano patron: 5P 6P//R0// J1S53.000000 J2V//R1// Mesa: 7T TP JT J1V J2V//R2// Mesa: 7T TP JT 7C J1V J2V//R3// Mesa: 7T TP JT 7C 8C J1P//Algoritmo Pasa//J1LJ2W//-53.000000
+It: 480//Mano Alg: QD 2P Mano patron: AP 9T//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 481//Mano Alg: 2D KD Mano patron: AC 9C//R0// J1V J2V//R1// Mesa: 6C KP JP J1V J2P//Patron Pasa//J1WJ2L//+20.000000
+It: 482//Mano Alg: 2T 3P Mano patron: 7C QT//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 483//Mano Alg: AD 7D Mano patron: QT 7T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 484//Mano Alg: JC 7C Mano patron: 8C 8D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 485//Mano Alg: 7C 3D Mano patron: TP 9C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 486//Mano Alg: 2T 8T Mano patron: 8D 5C//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 487//Mano Alg: TD 7T Mano patron: 7P 3T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 488//Mano Alg: AD AP Mano patron: 5P 5T//R0// J2V J1S48.000000 J2V//R1// Mesa: 3P 6C 8T J2V J1P//Algoritmo Pasa//J1LJ2W//-48.000000
+It: 489//Mano Alg: 9C 4T Mano patron: AD 2C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 490//Mano Alg: KP JD Mano patron: 5T AP//R0// J2V J1V//R1// Mesa: 3C KD 4T J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 491//Mano Alg: 5P 6D Mano patron: 9T AT//R0// J1V J2S28.000000 J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 492//Mano Alg: QT 6C Mano patron: 5C 3D//R0// J2V J1P//Algoritmo Pasa//J1LJ2W//-20.000000
+It: 493//Mano Alg: 5P QC Mano patron: 7T JP//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 494//Mano Alg: 3T 9T Mano patron: AC 6C//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 495//Mano Alg: 5T JC Mano patron: TD 6T//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 496//Mano Alg: 2T KD Mano patron: KP QD//R0// J2P//Patron Pasa//J1WJ2L//+10.000000
+It: 497//Mano Alg: 5P 3C Mano patron: 4D 2C//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 498//Mano Alg: 2T 2P Mano patron: 3D AP//R0// J2S57.000000 J1S90.000000 J2P//Patron Pasa//J1WJ2L//+57.000000
+It: 499//Mano Alg: 9P 4P Mano patron: 9D JC//R0// J1P//Algoritmo Pasa//J1LJ2W//-10.000000
+It: 500//Mano Alg: 6C 6T Mano patron: AD KC//R0// J2V J1V//R1// Mesa: TT KD 6P J2P//Patron Pasa//J1WJ2L//+10.000000
+Numero de Iteraciones alcanzado
+Victorias: 144 Beneficio total: -3150

@@ -83,9 +83,3 @@ void Carta::imprimirCarta()
 	cout << "La carta es " << numero_escrito << " de " << palo_escrito << "." << endl;
 }
 
-//Sobrecarga de operador << para imprimir una carta
-
-void Carta::operator<<(Carta c) 
-{
-	c.imprimirCarta();
-}

@@ -15,17 +15,7 @@ protected:
 	float apuestaInicial = 0;
 	float valor_num_mano = 0;
     
-	bool escalera_real_posible;
-	bool poker_posible;
-	bool escalera_color_posible;
-	bool full_posible;
-	bool escalera_posible;
-	bool color_posible;
-	bool trio_posible;
-	bool doble_pareja_posible;
-	bool pareja_posible;
-
-
+	
 	bool escalera_real_obtenida;
 	bool poker_obtenida;
 	bool escalera_color_obtenida;
@@ -36,7 +26,7 @@ protected:
 	bool doble_pareja_obtenida;
 	bool pareja_obtenida;
 
-	//bool AllIn;
+	
     
 public:
     
@@ -49,7 +39,7 @@ public:
 
 	float dinero = 0;
 	int turno = 0;
-	
+	bool AllIn;
 	Jugador();
 	~Jugador();
     
@@ -85,5 +75,6 @@ public:
 	void imprimirMano();
 
 	friend class Mesa;
+	friend class Algoritmo;
 
 };
