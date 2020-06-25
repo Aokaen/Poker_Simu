@@ -9,6 +9,7 @@
 
 using namespace std;
 struct MemoryStruct {
+	//Inicialización de la estructura para el almacenamiento de memoria de JSON
 	char* memory;
 	size_t size;
 };
@@ -16,13 +17,13 @@ struct MemoryStruct {
 static size_t
 WriteMemoryCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
+	//Función para almacenar los datos recibidos en un MemoryStruct
 	size_t realsize = size * nmemb;
 	struct MemoryStruct* mem = (struct MemoryStruct*)userp;
 
 	char* ptr;
 	ptr = (char*)realloc(mem->memory, mem->size + realsize + 1);
 	if (ptr == NULL) {
-		/* out of memory! */
 		printf("not enough memory (realloc returned NULL)\n");
 		return 0;
 	}
@@ -39,6 +40,7 @@ WriteMemoryCallback(void* contents, size_t size, size_t nmemb, void* userp)
 
 int Algoritmo::obtenerAccion(Jugador J, Mesa M)
 {
+	//Función para obtener la accion sin haber acciones previas
 			obtenerTriple(J, M);
 			float p = 0, v = 0, s = 0, n = 0;
 			if (tipo == 4)
@@ -141,12 +143,13 @@ int Algoritmo::obtenerAccion(Jugador J, Mesa M)
 }
 void Algoritmo::obtenerTriple(Jugador J, Mesa M)
 {
+	//Función para Obtener la triple probabilidad sin haber acciones previas
 	if (tipo == 4)
 	{
 		struct MemoryStruct chunk;
 
-		chunk.memory = (char*)malloc(1);  /* will be grown as needed by the realloc above */
-		chunk.size = 0;    /* no data at this point */
+		chunk.memory = (char*)malloc(1);  
+		chunk.size = 0;   
 
 		curl_global_init(CURL_GLOBAL_ALL);
 
@@ -179,46 +182,16 @@ void Algoritmo::obtenerTriple(Jugador J, Mesa M)
 
 		if (M.getIndiceRonda() == 0)
 		{
-		/*	strcpy(url_aux, "http://localhost:8000/preflopini?mn1=");
-			char* numero = &n1;
-			strcat(url_aux,numero);
-			strcat(url_aux, "&mp1=");
-			strcat(url_aux, (char*)mano_aux[0].getPalo());
-			strcat(url_aux, "&mn2=");
-			strcat(url_aux, (char*)mano_aux[1].getNumero());
-			strcat(url_aux, "&mp2=");
-			strcat(url_aux, (char*)mano_aux[1].getPalo());
-			url = url_aux;*/
+		
 			url_aux = "http://localhost:8000/preflopini?mn1=" + to_string(mano_aux[0].getNumero()) + "&mp1=" + to_string(mano_aux[0].getPalo()) + "&mn2=" + to_string(mano_aux[1].getNumero()) + "&mp2=" + to_string(mano_aux[1].getPalo());
-			//url = url_aux.c_str();
+			
 		}
 		else if (M.getIndiceRonda() == 1)
 		{
 			int aa = J.getApuesta();
 			int ao = M.apuesta - aa;
 			url_aux = "http://localhost:8000/flopini?mn1=" + to_string(mesa_aux[0].getNumero()) + "&mp1=" + to_string(mesa_aux[0].getPalo()) + "&mn2=" + to_string(mesa_aux[1].getNumero()) + "&mp2=" + to_string(mesa_aux[1].getPalo()) + "&mn3=" + to_string(mesa_aux[2].getNumero()) + "&mp3=" + to_string(mesa_aux[2].getPalo()) + "&aa=" + to_string(aa) + "&ao=" + to_string(ao);
-			/*strcpy(url_aux, "http://localhost:8000/flopini?mn1=");
-			strcat(url_aux, (char*)mesa_aux[0].getNumero());
-			strcat(url_aux, "&mp1=");
-			strcat(url_aux, (char*)mesa_aux[0].getPalo());
-			strcat(url_aux, "&mn2=");
-			strcat(url_aux, (char*)mesa_aux[1].getNumero());
-			strcat(url_aux, "&mp2=");
-			strcat(url_aux, (char*)mesa_aux[1].getPalo());
-			strcat(url_aux, "&mn3=");
-			strcat(url_aux, (char*)mesa_aux[2].getNumero());
-			strcat(url_aux, "&mp3=");
-			strcat(url_aux, (char*)mesa_aux[2].getPalo());
-			strcat(url_aux, "&aa=");
-			char fln[15];
-			sprintf_s(fln, "%f", J.getApuesta());
-			strcat(url_aux, fln);
-			strcat(url_aux, "&ao=");
-			char fln2[15];
-			double apuestaopo = M.apuesta - J.getApuesta();
-			sprintf_s(fln2, "%f", J.getApuesta());
-			strcat(url_aux, fln2);
-			url = url_aux;*/
+		
 		}
 		else if (M.getIndiceRonda() == 2)
 		{
@@ -226,30 +199,11 @@ void Algoritmo::obtenerTriple(Jugador J, Mesa M)
 			int ao = M.apuesta - aa;
 			url_aux = "http://localhost:8000/turnini?mn=" + to_string(mesa_aux[3].getNumero()) + "&mp=" + to_string(mesa_aux[3].getPalo()) +"&aa=" + to_string(aa) + "&ao=" + to_string(ao);
 
-			/*strcpy(url_aux, "http://localhost:8000/turnini?mn=");
-			strcat(url_aux, (char*)mesa_aux[3].getNumero());
-			strcat(url_aux, "&mp=");
-			strcat(url_aux, (char*)mesa_aux[3].getPalo());
-			strcat(url_aux, "&aa=");
-			char fln[15];
-			sprintf_s(fln, "%f", J.getApuesta());
-			strcat(url_aux, fln);
-			strcat(url_aux, "&ao=");
-			char fln2[15];
-			double apuestaopo = M.apuesta - J.getApuesta();
-			sprintf_s(fln2, "%f", J.getApuesta());
-			strcat(url_aux, fln2);
-			url = url_aux;
-			*/
+			
 		}
 		else if (M.getIndiceRonda() == 3)
 		{
 			url_aux = "http://localhost:8000/riverini?mn=" + to_string(mesa_aux[4].getNumero()) + "&mp=" + to_string(mesa_aux[4].getPalo());
-			/*strcpy(url_aux, "http://localhost:8000/riverini?mn=");
-			strcat(url_aux, (char*)mesa_aux[4].getNumero());
-			strcat(url_aux, "&mp=");
-			strcat(url_aux, (char*)mesa_aux[4].getPalo());
-			url = url_aux;*/
 
 		}
 		url = url_aux.c_str();
@@ -1155,23 +1109,9 @@ void Algoritmo::obtenerTriple(Jugador J, Mesa M)
 	}
 }
 
-//char Algoritmo::conversorAccion()
-//{
-//	switch (accion)
-//	{
-//	case 0:
-//		return 'P';
-//	case 1:
-//		return 'V';
-//	case 2: 
-//		return 'S';
-//	default:
-//		break;
-//	}
-//}
 
 int Algoritmo::obtenerAccionSegundo(Jugador J, Mesa M,int accionprevia) {
-	
+	//Función para Obtener la acción siendo segundo jugador sin haber actuado antes
 			obtenerTripleAccion(J, M,accionprevia);
 
 			float p = 0, v = 0, s = 0, n = 0;
@@ -1210,7 +1150,7 @@ int Algoritmo::obtenerAccionSegundo(Jugador J, Mesa M,int accionprevia) {
 				{
 					random r;
 					n = r.nrandomPorcent();
-					//n = rand()%(100+1)*0.01;
+				
 
 					p = triple[0];
 					v = p + triple[1];
@@ -1241,7 +1181,7 @@ int Algoritmo::obtenerAccionSegundo(Jugador J, Mesa M,int accionprevia) {
 			{
 				random r;
 				n = r.nrandomPorcent();
-				//n = rand()%(100+1)*0.01;
+			
 
 				p = triple[0];
 				v = p + triple[1];
@@ -1271,12 +1211,13 @@ int Algoritmo::obtenerAccionSegundo(Jugador J, Mesa M,int accionprevia) {
 }
 
 void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
+	//Función para Obtener la triple probabilidad siendo segundo sin haber actuado antes
 	if (tipo == 4)
 	{
 		struct MemoryStruct chunk;
 
-		chunk.memory = (char*)malloc(1);  /* will be grown as needed by the realloc above */
-		chunk.size = 0;    /* no data at this point */
+		chunk.memory = (char*)malloc(1);
+		chunk.size = 0;   
 
 		curl_global_init(CURL_GLOBAL_ALL);
 
@@ -1308,47 +1249,11 @@ void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
 
 		if (M.getIndiceRonda() == 0)
 		{
-			/*strcpy(url_aux, "http://localhost:8000/preflop?mn1=");
-			strcat(url_aux, (char*)mano_aux[0].getNumero());
-			strcat(url_aux, "&mp1=");
-			strcat(url_aux, (char*)mano_aux[0].getPalo());
-			strcat(url_aux, "&mn2=");
-			strcat(url_aux, (char*)mano_aux[1].getNumero());
-			strcat(url_aux, "&mp2=");
-			strcat(url_aux, (char*)mano_aux[1].getPalo());
-			strcat(url_aux, "&a=");
-			strcat(url_aux, (char*)accionprevia);*/
 			url_aux = "http://localhost:8000/preflop?mn1=" + to_string(mano_aux[0].getNumero()) + "&mp1=" + to_string(mano_aux[0].getPalo()) + "&mn2=" + to_string(mano_aux[1].getNumero()) + "&mp2=" + to_string(mano_aux[1].getPalo())+ "&a="+to_string(accionprevia);
 
-			//url = url_aux;
 		}
 		else if (M.getIndiceRonda() == 1)
-		{/*-
-			strcpy(url_aux, "http://localhost:8000/flop?mn1=");
-			strcat(url_aux, (char*)mesa_aux[0].getNumero());
-			strcat(url_aux, "&mp1=");
-			strcat(url_aux, (char*)mesa_aux[0].getPalo());
-			strcat(url_aux, "&mn2=");
-			strcat(url_aux, (char*)mesa_aux[1].getNumero());
-			strcat(url_aux, "&mp2=");
-			strcat(url_aux, (char*)mesa_aux[1].getPalo());
-			strcat(url_aux, "&mn3=");
-			strcat(url_aux, (char*)mesa_aux[2].getNumero());
-			strcat(url_aux, "&mp3=");
-			strcat(url_aux, (char*)mesa_aux[2].getPalo());
-			strcat(url_aux, "&a=");
-			strcat(url_aux, (char*)accionprevia);
-			strcat(url_aux, "&aa=");
-			char fln[15];
-			sprintf_s(fln, "%f", J.getApuesta());
-			strcat(url_aux, fln);
-			strcat(url_aux, "&ao=");
-			char fln2[15];
-			double apuestaopo = M.apuesta - J.getApuesta();
-			sprintf_s(fln2, "%f", J.getApuesta());
-			strcat(url_aux, fln2);
-
-			url = url_aux;*/
+		{
 
 			int aa = J.getApuesta();
 			int ao = M.apuesta - aa;
@@ -1357,40 +1262,14 @@ void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
 		}
 		else if (M.getIndiceRonda() == 2)
 		{
-			/*strcpy(url_aux, "http://localhost:8000/turn?mn=");
-			strcat(url_aux, (char*)mesa_aux[3].getNumero());
-			strcat(url_aux, "&mp=");
-			strcat(url_aux, (char*)mesa_aux[3].getPalo());
-			strcat(url_aux, "&aa=");
-			char fln[15];
-			sprintf_s(fln, "%f", J.getApuesta());
-			strcat(url_aux, fln);
-			strcat(url_aux, "&ao=");
-			char fln2[15];
-			float apuestaopo = M.apuesta - J.getApuesta();
-			sprintf_s(fln2, "%f", J.getApuesta());
-			strcat(url_aux, fln2);
-			strcat(url_aux, "&a=");
-			strcat(url_aux, (char*)accionprevia);
-			url = url_aux;*/
+			
 			int aa = J.getApuesta();
 			int ao = M.apuesta - aa;
 			url_aux = "http://localhost:8000/turn?mn=" + to_string(mesa_aux[3].getNumero()) + "&mp=" + to_string(mesa_aux[3].getPalo()) + "&aa=" + to_string(aa) + "&ao=" + to_string(ao) + "&a=" + to_string(accionprevia);
-
-
 		}
 		else if (M.getIndiceRonda() == 3)
 		{
-			/*
-			strcpy(url_aux, "http://localhost:8000/river?mn=");
-			strcat(url_aux, (char*)mesa_aux[4].getNumero());
-			strcat(url_aux, "&mp=");
-			strcat(url_aux, (char*)mesa_aux[4].getPalo());
-			strcat(url_aux, "&a=");
-			strcat(url_aux, (char*)accionprevia);
-			url = url_aux;*/
 			url_aux = "http://localhost:8000/river?mn=" + to_string(mesa_aux[4].getNumero()) + "&mp=" + to_string(mesa_aux[4].getPalo()) + "&a=" + to_string(accionprevia);
-
 		}
 		url = url_aux.c_str();
 		curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -2297,6 +2176,7 @@ void Algoritmo::obtenerTripleAccion(Jugador J, Mesa M, int accionprevia) {
 
 int Algoritmo::obtenerAccionAct(Jugador J, Mesa M, int accionprevia)
 {
+	//Función para obtener acción después de haber actuado
 	obtenerTripleAct(J, M,  accionprevia);
 	float p = 0, v = 0, s = 0, n = 0;
 	if(tipo==4)
@@ -2334,7 +2214,7 @@ int Algoritmo::obtenerAccionAct(Jugador J, Mesa M, int accionprevia)
 		{
 			random r;
 			n = r.nrandomPorcent();
-			//n = rand()%(100+1)*0.01;
+	
 
 			p = triple[0];
 			v = p + triple[1];
@@ -2365,7 +2245,7 @@ int Algoritmo::obtenerAccionAct(Jugador J, Mesa M, int accionprevia)
 	{
 		random r;
 		n = r.nrandomPorcent();
-		//n = rand()%(100+1)*0.01;
+	
 
 		p = triple[0];
 		v = p + triple[1];
@@ -2396,12 +2276,14 @@ int Algoritmo::obtenerAccionAct(Jugador J, Mesa M, int accionprevia)
 
 void Algoritmo::obtenerTripleAct(Jugador J, Mesa M, int accionprevia)
 {
+	//Función para obtener acción después de haber actuado
+
 	if (tipo == 4)
 	{
 		struct MemoryStruct chunk;
 
-		chunk.memory = (char*)malloc(1);  /* will be grown as needed by the realloc above */
-		chunk.size = 0;    /* no data at this point */
+		chunk.memory = (char*)malloc(1); 
+		chunk.size = 0;  
 
 		curl_global_init(CURL_GLOBAL_ALL);
 
@@ -2410,32 +2292,16 @@ void Algoritmo::obtenerTripleAct(Jugador J, Mesa M, int accionprevia)
 
 		rapidjson::Document document;
 		const char* url = "http://localhost:8000/error";
-		//char url_aux[110];
+		
 		string url_aux;
 
 		if (M.getIndiceRonda() == 0)
 		{
-			/*strcpy(url_aux, "http://localhost:8000/preflopact?a=");
-			strcat(url_aux, (char*)accionprevia);
-
-			url = url_aux;*/
+			
 			url_aux = "http://localhost:8000/preflopact?a=" + to_string(accionprevia);
 		}
 		else if (M.getIndiceRonda() == 1 || M.getIndiceRonda() == 2)
 		{
-			/*strcpy(url_aux, "http://localhost:8000/flopact?a=");
-			strcat(url_aux, (char*)accionprevia);
-			strcat(url_aux, "&aa=");
-			char fln[15];
-			sprintf_s(fln, "%f", J.getApuesta());
-			strcat(url_aux, fln);
-			strcat(url_aux, "&ao=");
-			char fln2[15];
-			float apuestaopo = M.apuesta - J.getApuesta();
-			sprintf_s(fln2, "%f", J.getApuesta());
-			strcat(url_aux, fln2);
-
-			url = url_aux;*/
 			int aa = J.getApuesta();
 			int ao = M.apuesta - aa;
 			url_aux = "http://localhost:8000/flopact?a=" + to_string(accionprevia) + "&aa=" + to_string(aa) + "&ao=" + to_string(ao);
@@ -2443,12 +2309,7 @@ void Algoritmo::obtenerTripleAct(Jugador J, Mesa M, int accionprevia)
 		}
 		else if (M.getIndiceRonda() == 3)
 		{
-			/*
-			strcpy(url_aux, "http://localhost:8000/riveract?a=");
-			strcat(url_aux, (char*)accionprevia);
-			url = url_aux;*/
 			url_aux = "http://localhost:8000/riveract?a=" + to_string(accionprevia);
-
 		}
 
 		url = url_aux.c_str();
@@ -3355,6 +3216,7 @@ void Algoritmo::obtenerTripleAct(Jugador J, Mesa M, int accionprevia)
 }
 void Algoritmo::reseteo()
 {
+	//Función para reiniciar una ronda en el algoritmo
 	CURL* curl = curl_easy_init();
 	CURLcode res;
 	curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:8000/reset");
@@ -3367,6 +3229,7 @@ void Algoritmo::reseteo()
 
 void Algoritmo::pasar(int ronda)
 {
+	//Funcion para enviar que el oponente ha pasado al algoritmo
 	if (tipo == 4)
 	{
 		CURL* curl = curl_easy_init();
@@ -3385,7 +3248,7 @@ void Algoritmo::pasar(int ronda)
 
 int Algoritmo::obtenerSubida(float apuesta, float apuesta_ini) 
 {
-	//Editar
+	//Función para calcular la subida del algoritmo
 	random r;
 	float n = r.nrandomPorcent();
 	int salida = apuesta + apuesta_ini * (n+1);
@@ -3394,6 +3257,8 @@ int Algoritmo::obtenerSubida(float apuesta, float apuesta_ini)
 
 void Algoritmo::actualizaBayes(int ronda)
 {
+	//Función para transmitir al algoritmo que el oponente ha visto la apuesta.
+
 	if (tipo == 4)
 	{
 		CURL* curl = curl_easy_init();

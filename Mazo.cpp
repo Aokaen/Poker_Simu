@@ -6,6 +6,7 @@
 
 Mazo::Mazo()
 {
+	//Función constructora de mazo, que inicializa las 52 cartas
 	int p = 1;
 	int n = 1;
 
@@ -26,7 +27,7 @@ Mazo::Mazo()
 
 void Mazo::barajar()
 {
-
+	//Función para aleatorizar las posiciones de los elementos Carta en Mazo
 	
 
 	int N = 52;
@@ -43,7 +44,7 @@ void Mazo::barajar()
 
 void Mazo::repartirCartas(Mesa T, Jugador* J)
 {
-
+	//Función para realizar el reparto de cartas a jugadores, Mesa y a Quemadas
 	for (int i = 0; i < 2; i++)
 	{
 		J[i].setMano(deck[indiceMazo], deck[indiceMazo + 1]);
@@ -66,5 +67,6 @@ void Mazo::repartirCartas(Mesa T, Jugador* J)
 }
 void Mazo::resetIndiceMazo()
 {
+	//Función para reiniciar el índice del mazo
 	indiceMazo = 0;
 }

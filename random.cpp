@@ -20,11 +20,10 @@ static u64 cng;
 
 int func()
 {
+	//función para crear un número pseudoaleatorio con bajo periodo con el fin
+	//de determinar cuantas veces se hace el warm up antes de obtener el número pseudoaleatorio deseado
 	struct timespec ts;
-	if (timespec_get(&ts, TIME_UTC) == 0) {
-		/* Handle error */
-	}
-	else {
+	if (timespec_get(&ts, TIME_UTC) != 0) {
 		srand(ts.tv_nsec ^ ts.tv_sec);
 		return rand();
 	}
@@ -33,6 +32,7 @@ int func()
 
 void randk_reset(void)
 {
+	//Función para reiniciar la semilla a la semilla por defecto.
 	j = QSIZE - 1;
 	carry = 0;
 	xs = 362436362436362436ULL;
@@ -41,6 +41,7 @@ void randk_reset(void)
 
 u64 B64MWC(void)
 {
+	//Función para calcular la multiplicación con acarreo
 	u64 t, x;
 	j = (j + 1) & (QSIZE - 1);
 	x = QARY[j];
@@ -49,39 +50,41 @@ u64 B64MWC(void)
 	return (QARY[j] = t - x);
 }
 
-/* Initialize PRNG with default seed */
+
 void randk_seed(void)
 {
+	//Función para inicializar el generador KISS con la semilla por defecto
 	u64 i;
-	/* Seed QARY[] with CNG+XS: */
 	for (i = 0; i < QSIZE; i++)
 		QARY[i] = CNG + XS;
 }
 
 void randk_seed_manual(u64 seed)
 {
+	//Función para asignar una semilla manualmente
 	cng ^= seed;
 	xs ^= cng;
 	randk_seed();
 }
 
-/* Generate a pseudorandom 64-bit unsigned integer. */
 u64 randk(void)
 {
+	//Función para generar un número pseudoaleatorio usando el generador KISS
 	return KISS;
 }
 
 
 void randk_warmup(int rounds)
 {
+	//Función para ejecutar rounds veces el KISS
 	int i;
-	/* Run through several rounds to warm up the state */
 	for (i = 0; i < rounds; i++)
 		randk();
 }
 
 float random::nrandomPorcent()
 {
+	//función para obtener un número decimal entre 0 y 1
 	float a = 0;
 	static unsigned long long h,j;
 	randk_seed();
@@ -97,6 +100,7 @@ float random::nrandomPorcent()
 
 int random::randomN(int n)
 {
+	//Función para obtener un número entre 0 y n
 	static unsigned long long h,j;
 	randk_seed();
 	j = func();

@@ -50,8 +50,6 @@ public:
 	void setDinero(float d);
     
 	float getValor();
-	//void setValorInicial(); una vez implementada la heuristica
-	//void setValor(float i); una vez implementada la heuristica
     
 	float getApuesta();
 	void setApuesta(float ap);
@@ -59,8 +57,6 @@ public:
     float getApuestaInicial();
 	void setApuestaInicial(float ap);
     
-   // bool getAllIn();
-   // void setAllIn(bool b);
     
     void resetBool();
 	void resetApuesta();

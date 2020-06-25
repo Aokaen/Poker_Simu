@@ -134,6 +134,8 @@ void verApuesta(Mesa T, Jugador* Jugadores) {
 }
 void registro(string acciones, bool fin_linea)
 {
+	//Función para almacenar la información en el archivo .txt
+
 	fstream registro;
 	int k = 0;
 	string lineaFinal;
@@ -218,7 +220,7 @@ void verApuestaAlg(Mesa T, Jugador* Jugadores) {
 				Jugadores[1].setApuesta(Jugadores[0].getApuesta());
 			}
 		}
-		else
+		else if (Jugadores[1].getApuesta() > Jugadores[0].getApuesta())
 		{
 			diffAlg = Jugadores[1].getApuesta() - Jugadores[0].getApuesta();
 			if (Jugadores[0].getDinero() <= diffAlg)
@@ -236,7 +238,7 @@ void verApuestaAlg(Mesa T, Jugador* Jugadores) {
 
 int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 {
-	// Función que gestiona la ronda de apuestas y el funcionamiento de las apuestas
+	// Función que gestiona la ronda de apuestas y el funcionamiento de las apuestas en el modo Jugador vs Máquina
 
 	char entrada, entrada_apuesta;
 	bool pasar=false;
@@ -285,7 +287,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					
 					apuestaFin = true;
 					accion_jugador = 1;
-					//pasar = false;
+					
 				}
 				else if (Jugadores[1].getDinero() == 0)
 				{
@@ -309,7 +311,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 							if (entrada == 'V')
 							{
 								verApuesta(T, Jugadores);
-								//pasar = false;
+								
 								accion_jugador = 1;
 								Jugadores[1].AllIn = true;
 								alg.actualizaBayes(T.getIndiceRonda());
@@ -331,7 +333,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					{
 						cout << "El Algoritmo ha hecho All in y el jugador ha visto el All In." << endl;
 						accion_jugador = 1;
-					//	pasar = false;
+					
 					}
 					apuestaFin = true;
 				}
@@ -350,7 +352,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 						}
 						else if (entrada == 'A')
 						{
-							//pasar = false;
+						
 							do {
 								cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
 								cin >> entrada_apuesta;
@@ -419,7 +421,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 
 						apuestaFin = true;
 						accion =1;
-					//	pasar = false;
+					
 					}
 					else if (Jugadores[0].getDinero() == 0)
 					{
@@ -449,7 +451,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 						{ 
 							cout << "El jugador ha hecho All in y el algoritmo ha visto el All In." << endl;
 							accion = 1;
-							//pasar = false;
+							
 							system("PAUSE");
 						}
 						apuestaFin = true;
@@ -486,14 +488,14 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 							{
 								cout << "All In Algoritmo" << endl;
 								float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
-								//subirApuestaAlg(qty, T, Jugadores[1]);
+						
 								Jugadores[1].setApuesta(qty);
 							}
 							else
 							{
 								cout << "La nueva apuesta del algoritmo es: " << cantidad_alg << endl;
 
-								//subirApuestaAlg(cantidad_alg, T, Jugadores[1]);
+							
 								Jugadores[1].setApuesta(cantidad_alg);
 							}
 							cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
@@ -519,7 +521,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 				{
 					cout << "El algoritmo no puede apostar, ya que ha hecho All In" << endl;
 					apuestaFin = true;
-					//pasar = false;
+					
 					accion = 1;
 					system("PAUSE");
 				}
@@ -532,7 +534,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 				cout << "El algoritmo no puede apostar, ya que ha hecho All In" << endl;
 				apuestaFin = true;
 				accion = 1;
-				//pasar = false;
+				
 				system("PAUSE");
 			}
 				else if (Jugadores[0].getDinero() == 0)
@@ -599,14 +601,13 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					{
 						cout << "All In Algoritmo" << endl;
 						float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
-						//subirApuestaAlg(qty, T, Jugadores[1]);
+						
 						Jugadores[1].setApuesta(qty);
 					}
 					else
 					{
 						cout << "La nueva apuesta es:  " << cantidad_alg << endl;
 
-						//subirApuestaAlg(cantidad_alg, T, Jugadores[1]);
 						Jugadores[1].setApuesta(cantidad_alg);
 					}
 					cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
@@ -764,7 +765,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					{
 					cout << "El jugador no puede apostar, ya que ha hecho All In" << endl;
 					apuestaFin = true;
-					//pasar = false;
+					
 					accion_jugador = 1;
 					}
 			}
@@ -860,7 +861,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 						cout << "El algoritmo no puede apostar, ya que ha hecho All In" << endl;
 						apuestaFin = true;
 						accion = 1;
-						//pasar = false;
+						
 					}
 					else if(Jugadores[0].getDinero()==0)
 					{ 
@@ -891,7 +892,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 							cout << "El jugador ha hecho el All in y el algoritmo lo ha visto" << endl;
 							apuestaFin = true;
 							accion = 1;
-							//pasar = false;
+							
 						}
 					}
 					else
@@ -942,14 +943,14 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 							{
 								cout << "All In Algoritmo" << endl;
 								float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
-								//subirApuestaAlg(qty, T, Jugadores[1]);
+							
 								Jugadores[1].setApuesta(qty);
 							}
 							else
 							{
 								cout << "La nueva apuesta del algoritmmo es: " << cantidad_alg << endl;
 								Jugadores[1].setApuesta(cantidad_alg);
-								//subirApuestaAlg(cantidad_alg, T, Jugadores[1]);
+								
 							}
 							cout << "Apuesta actual jugador:" << Jugadores[0].getApuesta() << endl;
 							if (Jugadores[0].getDinero() == 0)
@@ -1008,14 +1009,13 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 					{
 						cout << "All In Algoritmo" << endl;
 						float qty = Jugadores[1].getApuesta() + Jugadores[1].getDinero();
-						//subirApuestaAlg(qty, T, Jugadores[1]);
+						
 						Jugadores[1].setApuesta(qty);
 					}
 					else
 					{
 						cout << "La nueva apuesta es: " << cantidad_alg << endl;
-						
-						//subirApuestaAlg(cantidad_alg, T, Jugadores[1]);
+					
 						Jugadores[1].setApuesta(cantidad_alg);
 					}
 
@@ -1114,7 +1114,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 							char inside;
 							cin >> inside;
 							apuestaFin = true;
-							//pasar = false;
+							
 						}
 						else if (Jugadores[1].getDinero() == 0)
 						{
@@ -1136,7 +1136,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 								if (entrada == 'V')
 								{
 									verApuesta(T, Jugadores);
-								//	pasar = false;
+								
 									accion_jugador = 1;
 									alg.actualizaBayes(T.getIndiceRonda());
 
@@ -1170,7 +1170,7 @@ int apostar(Mesa T, Jugador* Jugadores, Algoritmo alg)
 								}
 								else if (entrada == 'A')
 								{
-									//pasar = false;
+									
 									do {
 										cout << "¿Desea ver la apuesta (V) o subir la apuesta (S)?" << endl;
 										cin >> entrada_apuesta;
@@ -1283,7 +1283,7 @@ void calcularValorjugador(Mesa T, Jugador* J, int Ronda)
 
 }
 int ronda(Mesa T, Mazo c, Jugador* J,Algoritmo alg) {
-	// Funcionamiento de cada Ronda, modifica el tablero y lanza la funcion apostar
+	// Funcionamiento de cada Ronda, modifica el tablero y lanza la funcion apostar en el modo Jugador vs Maquina
 	int salida = 10;
 	bool jugador_gana;
 	int auxRonda = T.getIndiceRonda();
@@ -1304,7 +1304,7 @@ int ronda(Mesa T, Mazo c, Jugador* J,Algoritmo alg) {
 bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, int pasa, int n_actual, int n_total)
 {
 
-	//Funcion que efectua la accion de "Pasar" la apuesta en el modo Algoritmo
+	//Funcion que efectua la accion de "Pasar" la apuesta en el modo Máquina vs Máquina
 
 	bool continuar;
 	float money = 0;
@@ -1346,6 +1346,7 @@ bool pasarApuestaAlg(Mesa T, Jugador* Jugadores, Mazo c, int pasa, int n_actual,
 }
 int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 {
+	//Función que controla toda la ronda de apuestas en el modo Maquina vs Maquina
 	int pasar = 0;
 	float total = 0;
 	bool apuesta_ok = false;
@@ -1401,7 +1402,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 						else
 						{
 							cantidad_alg = Jugadores[0].getDinero();
-							//subirApuestaAlg(cantidad_alg, T, Jugadores[0]);
+							
 							Jugadores[0].setApuesta(cantidad_alg);
 							subidaalg = cantidad_alg;
 						}
@@ -1462,7 +1463,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 							else if (accion2 == 1)
 							{
 								apuestaFin = true;
-
+								verApuestaAlg(T, Jugadores);
 								acciones_ronda = acciones_ronda + " J2V";
 								alg1.actualizaBayes(T.getIndiceRonda());
 
@@ -1478,7 +1479,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 								}
 								acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
 
-								//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
+								
 								Jugadores[1].setApuesta(cantidad_subida);
 								accionprevia = true;
 							}
@@ -1552,7 +1553,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 								}
 								acciones_ronda = acciones_ronda + " J2S" + to_string(cantidad_subida);
 
-								//subirApuestaAlg(cantidad_subida, T, Jugadores[1]);
+								
 								Jugadores[1].setApuesta(cantidad_subida);
 								accionprevia = true;
 							}
@@ -1663,7 +1664,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 					else
 					{
 						cantidad_alg = Jugadores[1].getDinero();
-						//subirApuestaAlg(cantidad_alg, T, Jugadores[1]);
+			
 						Jugadores[1].setApuesta(cantidad_alg);
 						subidaalg = cantidad_alg;
 					}
@@ -1726,7 +1727,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 						else if (accion1 == 1)
 						{
 							apuestaFin = true;
-
+							verApuestaAlg(T, Jugadores);
 							acciones_ronda = acciones_ronda + " J1V";
 
 
@@ -1743,7 +1744,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 							}
 							acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
 
-							//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
+						
 							Jugadores[0].setApuesta(cantidad_subida);
 							accionprevia = true;
 						}
@@ -1819,7 +1820,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 							}
 							acciones_ronda = acciones_ronda + " J1S" + to_string(cantidad_subida);
 
-							//subirApuestaAlg(cantidad_subida, T, Jugadores[0]);
+							
 							Jugadores[0].setApuesta(cantidad_subida);
 							accionprevia = true;
 						}
@@ -1893,7 +1894,7 @@ int apostarAlg(Mesa T, Jugador* Jugadores, Algoritmo alg1, Algoritmo alg2)
 }
 int rondaAlg(Mesa T, Mazo c, Jugador* J, Algoritmo alg1, Algoritmo alg2)
 {
-	// Funcionamiento de cada Ronda para el modo Algoritmo y lanza la funcion apostar del modo Algoritmo
+	// Funcionamiento de cada Ronda para el modo Máquina vs Máquina y lanza la funcion apostar del modo Máquina vs Máquina
 	int pasar = 0;
 	bool jugador_gana;
 	int auxRonda = T.getIndiceRonda();
@@ -1912,7 +1913,7 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 	bool continuar = true;
 	int pasar = 15;
 	int jugador_gana=-1; //1 jugador gana, 2 oponente gana, 0 empate
-	//char entrada;
+	
 	float money = 0;
 	float apuestainicialjugador0 = Jugadores[0].getApuestaInicial();
 	float apuestainicialjugador1 = Jugadores[1].getApuestaInicial();
@@ -2114,7 +2115,7 @@ void jugarPartida(Mesa T, Mazo c, Jugador* Jugadores, bool jugador, int elegido,
 			n = n + 1;
 			
 			fin_linea = false;
-			//system("cls");
+			
 			T.resetIndiceRonda();
 			c.resetIndiceMazo();
 			c.barajar();

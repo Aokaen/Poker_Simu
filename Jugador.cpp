@@ -74,18 +74,6 @@ void Jugador::setApuestaInicial(float ap)
     apuestaInicial = ap;
 }
 
-// AllIn
-
-//bool Jugador::getAllIn()
-//{
-//    return AllIn;
-//}
-//
-//void Jugador::setAllIn(bool v)
-//{
-//    AllIn = v;
-//}
-
 // Resets
 
 void Jugador::resetBool()

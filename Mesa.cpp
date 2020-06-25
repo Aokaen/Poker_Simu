@@ -56,23 +56,6 @@ int Mesa::getIndiceTablero()
 	return indiceTablero;
 }
 
-/*// IndiceMazo
-
-void Mesa::resetIndiceMazo()
-{
-	indiceMazo = 0;
-}
-
-void Mesa::upIndiceMazo()
-{
-	indiceMazo++;
-}
-
-int Mesa::getIndiceMazo()
-{
-	return indiceMazo;
-}
-*/
 // IndiceQuemada
 
 void Mesa::resetIndiceQuemada()
@@ -89,81 +72,6 @@ int Mesa::getIndiceQuemada()
 {
 	return indiceQuemada;
 }
-
-// Funciones del mazo de cartas
-/*
-// Crea un array de 52 elementos y les asigna un Numero y un Palo
-Carta* Mesa::crearMazo()
-{
-	static Carta mazo[52];
-
-	srand(time(NULL));
-	int p = 1;
-	int n = 1;
-
-	for (int i = 0; i < 52; i++)
-	{
-		mazo[i].setPalo(p);
-		mazo[i].setNumero(n);
-		n++;
-		if (n == 14)
-		{
-			p++;
-			n = 1;
-		}
-	}
-
-	return mazo;
-}
-
-// Aleatorizacion del array Mazo, mediante el teorema de Fisher - Yates. Para el numero aleatorio
-// se ha utilizado un Generador lineal congruencial,  uno de los generadores de numeros pseudoaleatorios
-// incluidos en las librerías de C++
-
-Carta* Mesa::barajar(Carta* mazo)
-{
-	unsigned semilla = std::chrono::system_clock::now().time_since_epoch().count();
-	std::minstd_rand srng(semilla);
-
-	int N = 52;
-	for (int i = N - 1; i > 0; i--)
-	{
-		int r = srng() % (i + 1);
-		std::swap(mazo[i], mazo[r]);
-	}
-
-	return mazo;
-}
-
-// Reparto de cartas a cada jugador y a los arrays de cartas quemadas y al Mazo
-
-void Mesa::repartirCartas(Jugador* J, Carta* Mazo, Carta* tablero, Carta* Quemada)
-{
-	int aux = 0;
-	aux = getIndiceMazo();
-	for (int i = 0; i < 2; i++)
-	{
-		J[i].setMano(Mazo[aux], Mazo[aux + 1]);
-		aux = aux + 2;
-	}
-	Quemada[0] = Mazo[aux];
-	aux++;
-	for (int i = 0; i < 3; i++)
-	{
-		tablero[i] = Mazo[aux];
-		aux++;
-	}
-	Quemada[1] = Mazo[aux];
-	aux++;
-	tablero[3] = Mazo[aux];
-	aux++;
-	Quemada[2] = Mazo[aux];
-	aux++;
-	tablero[4] = Mazo[aux];
-}
-
-*/
-
 
 
 // Funciones de representacion gráfica del tablero
@@ -330,26 +238,9 @@ bool Mesa::continuar()
 }
 
 // Funciones de modificacion del valor Apuesta
-/**/
-void Mesa::actualizarApuesta(Jugador* Jugadores)
-{ // Funcion a EDITAR cuando se implemente el algoritmo
-	/*if (indiceRonda != 0 && indiceRonda != 4)
-	{
-		if (Jugadores[1].getDinero() > 50)
-		{
-			float apuesta = Jugadores[1].getApuesta();
-			apuesta = apuesta + 50;
-			Jugadores[1].setApuesta(apuesta);
-		}
-		else if (Jugadores[1].getDinero() <= 50)
-		{
-			float apuesta = Jugadores[1].getApuesta();
-			apuesta = apuesta + Jugadores[1].getDinero();
-			Jugadores[1].setApuesta(apuesta);
-		}
 
-	}
-	*/
+void Mesa::actualizarApuesta(Jugador* Jugadores)
+{ 
 	float apuestaTotal = Jugadores[0].getApuesta() + Jugadores[1].getApuesta();
 	apuesta = apuestaTotal;
 

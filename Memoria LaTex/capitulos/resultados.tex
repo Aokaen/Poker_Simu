@@ -18,6 +18,7 @@ Lo primero, se va a declarar las especificaciones del entorno en que se han toma
 \item Para cada combinación del modo Patrón vs Patrón: 500 iteraciones.
 \end{itemize} 
 \item La principal medida de valoración de los datos es el beneficio medio por partida. La unidad establecida \cite{chen} para esta medida es ciega grande (\textit{Big blind, bb}por partida $\left[\frac{bb}{partida}\right]$.
+\item Los valores de beneficio serán representados usando histogramas. \footnote{Un histograma \cite{histo} es un tipo de representación gráfica que agrupa los datos usando intervalos. Para esta representación, se utilizan barras rectangulares verticales cuya altura es proporcional a las frecuencias de dichos intervalos (puede ser tanto frecuencias absolutas,como frecuencias relativas y frecuencias relativas porcentuales).}
 \item Adicionalmente, se ha hecho el estudio del victorias y derrotas, así como su desglose a lo largo de las rondas jugadas, para los datos del modo Algoritmo vs Patrón.
 \item Se realiza el estudio de los Cuartiles para el modo Algoritmo vs Patrón.
 \end{itemize} 
@@ -76,27 +77,25 @@ Este patrón, caracterizado por la agresividad a la hora de jugar y como acción
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/MvR.png}   
+\includegraphics[width=1\textwidth]{figuras/MvR.png}   
 \caption{Gráfica Maniaco vs Roca}
 \label{fig:MvR}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/MvC.png}   
+\includegraphics[width=1\textwidth]{figuras/MvC.png}   
 \caption{Gráfica Maniaco vs Calling Station}
 \label{fig:MvC}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/MG.png}   
+\includegraphics[width=1\textwidth]{figuras/MG.png}   
 \caption{Gráfica de Resultados de Maniaco Patrón vs Patrón}
 \label{fig:MGR}
 \end{figure}
 
-\vspace{5mm} %5mm vertical space
-\vspace{5mm} %5mm vertical space
 \begin{longtable}[c]{lrrr}
 \hline
 Maniaco & Vs Roca & Vs Calling & General \\ \hline
@@ -118,21 +117,21 @@ Estos son los resultados del patrón Roca, el más pasivo que los demás, tenien
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/RvM.png}   
+\includegraphics[width=1\textwidth]{figuras/RvM.png}   
 \caption{Gráfica Roca vs Maniaco}
 \label{fig:RvM}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/RvC.png}   
+\includegraphics[width=1\textwidth]{figuras/RvC.png}   
 \caption{Gráfica Roca vs Calling Station}
 \label{fig:RvC}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/RG.png}   
+\includegraphics[width=1\textwidth]{figuras/RG.png}   
 \caption{Gráfica de Resultados de Roca  Patrón vs Patrón}
 \label{fig:RGR}
 \end{figure}
@@ -153,7 +152,7 @@ El resultado final del patrón Roca es $-0,3814\pm1,03868325$ $\frac{bb}{partida
 
 Observando estos datos, se puede deducir que este patrón es el que ha obtenido el peor valor de media de los 3 (siendo el único que tiene una media general negativa).También es el patrón con la desviación más pequeña de los tres, lo que significa que es el patrón que presenta los datos más compactos.
 
-\newpage
+\clearpage
 
 \subsection{Calling Station}
 
@@ -161,21 +160,21 @@ Aquí se presentan los datos del patrón Calling station, un patrón intermedio 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/CvM.png}   
+\includegraphics[width=1\textwidth]{figuras/CvM.png}   
 \caption{Gráfica Calling Station vs Maniaco}
 \label{fig:CvM}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/CvR.png}   
+\includegraphics[width=1\textwidth]{figuras/CvR.png}   
 \caption{Gráfica Calling Station vs Roca}
 \label{fig:CvR}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.65\textwidth]{figuras/CG.png}   
+\includegraphics[width=1\textwidth]{figuras/CG.png}   
 \caption{Gráfica de Resultados de Calling Station Patrón vs Patrón}
 \label{fig:CGR}
 \end{figure}
@@ -195,7 +194,8 @@ El resultado final del patrón Calling Station es $ 0,14685\pm1,4983817$  $\frac
 \smallskip
 
 Observando estos datos, se puede razonar que este patrón tiene unos resultados mixtos, pues si bien tiene una media posivita, su media es menor que la de Maniaco, y su desviación media es menor que la de Maniaco también, pero bastante cercana, lo cual no convierte sus datos en un conjunto tan compacto como lo sería un jugador más defensivo.
-\newpage
+
+\clearpage
 
 \subsection{Discusión sobre los datos obtenidos en el modo Patrón vs Patrón}
 
@@ -269,14 +269,14 @@ $Q_3$ & -0,248029557 & -0,46696275 & 9,77254902 & 0,07475166 \\ \hline
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvMG1.png}   
+\includegraphics[width=1\textwidth]{figuras/AvMG1.png}   
 \caption{Gráfica Algoritmo vs Maniaco (G1)}
 \label{fig:AvMG1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvMG2.png}   
+\includegraphics[width=1\textwidth]{figuras/AvMG2.png}   
 \caption{Gráfica Algoritmo vs Maniaco (G2)}
 \label{fig:AvMG2}
 \end{figure}
@@ -284,14 +284,14 @@ $Q_3$ & -0,248029557 & -0,46696275 & 9,77254902 & 0,07475166 \\ \hline
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvMGE.png}   
+\includegraphics[width=1\textwidth]{figuras/AvMGE.png}   
 \caption{Gráfica Algoritmo vs Maniaco (GE)}
 \label{fig:AvMGE}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvMT.png}   
+\includegraphics[width=1\textwidth]{figuras/AvMT.png}   
 \caption{Gráfica Algoritmo vs Maniaco (T)}
 \label{fig:AvMGT}
 \end{figure}
@@ -348,7 +348,7 @@ Teniendo todos los datos de los enfrentamientos contra Maniaco, se puede encontr
 Lo último reseñable de estos datos es el análisis de las victorias. 
 Si bien es cierto que las victorias totales no se han incrementado, en concreto son peores que G2, lo que si se ha visto un incremento significativo es el número de las partidas que llegan hasta el showdown, ganando 9 de las 14 partidas. 
 
-Adicionalmente, hay q
+\clearpage
 
 \subsubsection{Algoritmo vs Roca}
 
@@ -372,14 +372,14 @@ $Q_3$ & 0,37567568 & 0,37068966 & 0,31245614 & 0,345837 \\ \hline
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvRG1.png}   
+\includegraphics[width=1\textwidth]{figuras/AvRG1.png}   
 \caption{Gráfica Algoritmo vs Roca(G1)}
 \label{fig:AvRG1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvRG2.png}   
+\includegraphics[width=1\textwidth]{figuras/AvRG2.png}   
 \caption{Gráfica Algoritmo vs Roca (G2)}
 \label{fig:AvRG2}
 \end{figure}
@@ -387,14 +387,14 @@ $Q_3$ & 0,37567568 & 0,37068966 & 0,31245614 & 0,345837 \\ \hline
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvRGE.png}   
+\includegraphics[width=1\textwidth]{figuras/AvRGE.png}   
 \caption{Gráfica Algoritmo vs Roca (GE)}
 \label{fig:AvRGE}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvRT.png}   
+\includegraphics[width=1\textwidth]{figuras/AvRT.png}   
 \caption{Gráfica Algoritmo vs Roca (T)}
 \label{fig:AvRGT}
 \end{figure}
@@ -449,6 +449,9 @@ Cabe destacar que en la segunda toma de datos, no se llegó al Showdown en ningu
 Si bien en el caso del Maniaco se encontraba con una reseñable mejora de GE con respecto de G1 y G2, no ocurre lo mismo en el caso contra Roca. En este caso se tiene, tanto una bajada de la media como de $Q_2$. Si bien es cierto estos datos por separado no tienen por qué ser un mal indicio, nos encontramos un descenso de la desviación (centralizando más los datos en torno a la media) y un descenso de las victorias de la ronda (al igual que no se encuentra ninguna mejoría de rondas que se llega hasta el Showdown). 
 
 
+\clearpage
+
+
 \subsubsection{Algoritmo vs Calling Station}
 
 Se procede a desarrollar el resultado de las dos iteracciones contra Calling Station, empezando por los resultados de beneficio
@@ -470,29 +473,29 @@ Q3 & 0,13241758 & 0,29922222 & 0,25288889 & 0,19530387 \\ \hline
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvCG1.png}   
-\caption{Gráfica Algoritmo vs Calling Station(G1)}
+\includegraphics[width=1\textwidth]{figuras/AvCG1.png}   
+\caption{Gráfica Algoritmo vs Calling Station (G1)}
 \label{fig:AvRC1}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvCG2.png}   
-\caption{Gráfica Algoritmo vs Calling Station(G2)}
+\includegraphics[width=1\textwidth]{figuras/AvCG2.png}   
+\caption{Gráfica Algoritmo vs Calling Station (G2)}
 \label{fig:AvRC2}
 \end{figure}
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvCGE.png}   
-\caption{Gráfica Algoritmo vs Calling Station(GE)}
+\includegraphics[width=1\textwidth]{figuras/AvCGE.png}   
+\caption{Gráfica Algoritmo vs Calling Station (GE)}
 \label{fig:AvRCE}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=.6\textwidth]{figuras/AvCT.png}   
+\includegraphics[width=1\textwidth]{figuras/AvCT.png}   
 \caption{Gráfica Algoritmo vs Calling Station (T)}
 \label{fig:AvRCT}
 \end{figure}
@@ -546,7 +549,7 @@ El resultado final del enfrentamiento contra el patrón Calling Station es $-0.2
 Aquí cabe destacar los valores de Showdown de G1, en el que hay 8 partidas que han llegado a Showdown, pero hay 5 victorias y 2 derrotas. Estos datos con correctos, pues la partida faltante resultó en empate, por lo que no hay ningún error en el procesado de datos.
 
 Tras esta curiosidad sobre el empate, se procede a estudiar el conjunto de los datos de Calling Station. Siguiendo el hilo de resultados que se encontró en el apartado \ref{sec:pvp}, los resultados de los enfrentamientos con Calling Station son mixtos, aunque con tendencia positiva. Se aumenta ligeramente la media, se disminuye ligeramente la desviación y se puede apreciar una mejoría considerable de la mediana ($Q_2$), si bien los otros dos percentiles no se obtiene una mejora, pero tampoco se tiene un empeoramiento.
-Por último, se observa que GE siene un ligero menor número de victorias.
+Por último, se observa que GE tiene un ligero menor número de victorias.
 
 \clearpage
 
@@ -578,11 +581,12 @@ El resultado final de los datos de G1 y G2 es $-0,29861621\pm1,26776522$ $\frac{
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.3\textwidth, angle=90]{figuras/AGP.png}   
+\includegraphics[width=1\textwidth]{figuras/AGP.png}   
 \caption{Gráfica resultados Algoritmo G1 y G2}
 \label{fig:AGP}
 \end{figure}
 
+\newpage
 
 \subsubsection{Datos posteriores a la modificación (GE)}
 
@@ -608,7 +612,7 @@ El resultado final de los datos de GE es $ -0,28346667\pm1,57791845$$\frac{bb}{p
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.3\textwidth, angle=90]{figuras/AGC.png}   
+\includegraphics[width=1\textwidth]{figuras/AGC.png}   
 \caption{Gráfica resultados Algoritmo GE}
 \label{fig:AGC}
 \end{figure}
@@ -630,18 +634,17 @@ $Q_3$ & 0,10397661 \\ \hline
 \label{tab:AGT}
 \end{longtable}
 
-\vspace{5mm} %5mm vertical space
-
 El resultado final de los datos de T es  $-0,19957213\pm1,06969216$$\frac{bb}{partida}$.
 
-\vspace{5mm} %5mm vertical space
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.3\textwidth, angle=90]{figuras/AGT.png}   
+\includegraphics[width=1\textwidth]{figuras/AGT.png}   
 \caption{Gráfica resultados Algoritmo T}
 \label{fig:AGT}
 \end{figure}
+
+\newpage
 
 \subsection{Tasa de victorias de los conjuntos}
 
@@ -683,6 +686,8 @@ Showdown & 59,0909\% & 70,8333\% & 65,2174\% \\ \hline
 \label{tab:winrateT}
 \end{longtable}
 
+\newpage
+
 \section{Discusión preliminar de los datos}
 
 En vista a estos resultados, salta a la vista que no se han obtenido los resultados esperados. Una cosa que estos resultados plantean sobre la mesa es que el diseño no funciona como se esperaba, por lo que es necesario analizar el diseño inicial y ver posibles causas del error.
@@ -693,7 +698,7 @@ Una vez analizados los tres conjuntos de datos, la principal conclusión de los 
 
 A falta de más datos, no se puede afirmar que la causa de los malos resultados (o, al menos, la única causa) fuese la aleatoriedad de las tomas de decisiones del algoritmo. Por lo que es necesario replantearse cuál o cuáles pueden ser los otros elementos que pueden fallar.
 
-Un factor que ha resultado llamativo ha sido la cantidad de manos que han acabado en la ronda del preflop, que ha sido tremendamente alta. Considerando que el 79,37\% de las manos han acabado en esta fase, es necesario considerar que el problema puede venir de esta fase.
+Un factor que ha resultado llamativo ha sido la cantidad de manos que han acabado en la ronda del preflop, que ha sido tremendamente alta. Considerando que el 79,37\% de las manos han acabado en esta fase, es necesario considerar que el problema puede venir de esta fase. Este problema puede estar causado por algún error algorítmico a la hora de determinar las acciones durante el preflop.
 
  El problema no viene de que se hayan jugado solo el 20,62\% (pues, considerando los critrios de Sklansky-Malmuth y la fórmula de Chen, se estima que el número aproximado de manos que se pueden llegar a jugar son cerca del 24\%), sino que tan solo 8 de las 3572 rondas han tenido un beneficio absoluto mayor de 1. Es decir, que solo 8 de las 3572 manos que han acabado en interacción entre los jugadores. Lo que significa que de 4500 datos en los registros, el 79,2\% de esas manos tienen un beneficio de $\pm0.5$ o $\pm1$ $bb$.
 
@@ -748,7 +753,9 @@ $\bar{x}_-$& -2,27421875 & -2,315 & -3,05714286 \\ \hline
 \label{tab:DPFAvM}
 \end{longtable}
 
-Siendo estos los cálculos totales
+Siendo estos los cálculos totales:
+
+\vspace{5mm} %5mm vertical space
 
 \begin{longtable}[c]{lr}
 \hline 
@@ -801,7 +808,8 @@ $\sigma$ & 0,92695045 \\  \hline
 
 El resultado final de los datos de Algoritmo vs Roca en el postflop es  $ 0,68318318\pm 0,92695045 $$\frac{bb}{partida}$.
 
-\vspace{5mm} %5mm vertical space
+%\vspace{10mm} %5mm vertical space
+\newpage
 
 \subsubsection{Algoritmo vs Calling Station}
 
@@ -854,6 +862,8 @@ $\bar{x}_-$& -1,32569444 & -1,26350365 & -1,11900826 \\ \hline
 \label{tab:DPFT}
 \end{longtable}
 
+\vspace{5mm} %5mm vertical space
+
 \begin{longtable}[c]{lr}
 \hline 
 Medida & Valor \\ \hline 
@@ -897,7 +907,7 @@ Esto tiene una interpretación clara: los resultados, una vez se alcanza el flop
 \label{sec:discusion}
 
 Con el estudio hecho en el apartado anterior, se ha detectado que un punto de inflexión: hay un gran salto de la eficacia del algoritmo del preflop a las rondas posteriores (Flop, Turn y River), llegando a obtener una ganancia media de $0,16610991\pm 2,67572078 $$\frac{bb}{partida}$. 
-Pero,considerando que la ganancia media del algoritmo en una partida en general es de $-0,19957213\pm1,06969216$$\frac{bb}{partida}$, se puede deducir que el rendimiento no es el esperado ni el adecuado. Si bien estos datos pueden deberse a mero azar, se puede asumir también que el planteamiento inicial no era del todo adecuado.
+Pero, considerando que la ganancia media del algoritmo en una partida en general es de $-0,19957213\pm1,06969216$$\frac{bb}{partida}$, se puede deducir que el rendimiento no es el esperado ni el adecuado. Si bien estos datos pueden deberse a mero azar, se puede asumir también que el planteamiento inicial no era del todo adecuado.
 
 Después del análisis de los datos (tanto a nivel general como a nivel del postflop), se pueden delimitar los focos de los fallos de diseño que causan que, a nivel general, el rendimiento no sea el esperado:
 

@@ -21,14 +21,7 @@ public:
 
 	Mesa();
 	~Mesa();
-	/*
-	Carta* crearMazo();
-	Carta* barajar(Carta* c);
-	void repartirCartas(Jugador* j, Carta* mazo, Carta* tablero, Carta* Quemada);
-	void resetIndiceMazo();
-	void upIndiceMazo();
-	int getIndiceMazo();
-	*/
+
 	bool modoJ;
 
 	void creaTablero();
